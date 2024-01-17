@@ -8,6 +8,9 @@ class Pages(ft.UserControl):
     def __init__(self, elements: Elements) -> None:
         self.elements = elements
 
+        # login page elements
+        # =====================================================================
+
         self.login_page = ft.Column(
             [
                 ft.Row(
@@ -33,6 +36,9 @@ class Pages(ft.UserControl):
             ]
         )
 
+        # logout page elements
+        # =====================================================================
+
         self.logout_page = ft.Column(
             [
                 ft.Row(
@@ -52,4 +58,4 @@ class Pages(ft.UserControl):
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
             ]
-        )
+        )  #
