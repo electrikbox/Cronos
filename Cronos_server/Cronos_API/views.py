@@ -2,13 +2,14 @@
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.shortcuts import get_object_or_404
 from .serializers import CronsSerializer, LogsSerializer
 from Cronos_core import models
 from datetime import datetime
 from rest_framework import status
 
 
-# CRONS
+# CRONS Show all
 # ======================================================
 
 @api_view(['GET'])
@@ -18,6 +19,8 @@ def list_crons(request):
     serializer = CronsSerializer(crons, many=True)
     return Response(serializer.data)
 
+# CRONS Create
+# ======================================================
 
 @api_view(['POST'])
 def add_cron(request) -> Response:
@@ -33,7 +36,7 @@ def add_cron(request) -> Response:
             "user": request.data.get('user'),
             "cron": cron_instance.id,
         }
-        
+
         log_serializer = LogsSerializer(data=log_data)
 
         if log_serializer.is_valid():
@@ -44,3 +47,14 @@ def add_cron(request) -> Response:
             return Response(log_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(cron_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# CRONS Show one cron
+# ======================================================
+
+@api_view(['GET'])
+def show_cron(request, cron_id):
+    """ Show one cron by its id """
+    cron_instance = get_object_or_404(models.Crons, pk=cron_id)
+    serializer = CronsSerializer(cron_instance)
+    return Response(serializer.data)
