@@ -1,18 +1,24 @@
 """ Views for Cronos_API """
 
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from django.shortcuts import get_object_or_404
 from .serializers import CronsSerializer, LogsSerializer
 from Cronos_core import models
 from rest_framework import status
 from django.utils import timezone
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+
 
 
 # CRONS Show all
 # =============================================================================
 
 @api_view(['GET'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
 def list_crons(request) -> Response:
     """ List all crons in database """
     crons = models.Crons.objects.all()
@@ -24,6 +30,8 @@ def list_crons(request) -> Response:
 # =============================================================================
 
 @api_view(['GET'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
 def show_cron(request, cron_id) -> Response:
     """ Show one cron by its id """
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
@@ -35,6 +43,8 @@ def show_cron(request, cron_id) -> Response:
 # =============================================================================
 
 @api_view(['POST'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
 def add_cron(request) -> Response:
     """ Add a new cron to database """
     cron_serializer = CronsSerializer(data=request.data)
@@ -65,6 +75,8 @@ def add_cron(request) -> Response:
 # =============================================================================
 
 @api_view(['PUT'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
 def update_cron(request, cron_id) -> Response:
     """ Update a cron by its id """
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
@@ -96,6 +108,8 @@ def update_cron(request, cron_id) -> Response:
 # =============================================================================
 
 @api_view(['DELETE'])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
 def delete_cron(request, cron_id) -> Response:
     """ Delete a cron by its id """
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
