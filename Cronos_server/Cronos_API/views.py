@@ -12,7 +12,6 @@ from Cronos_core import models
 from .serializers import CronsSerializer, LogsSerializer, UserSerializer
 
 
-
 # CRONS Show all
 # =============================================================================
 
@@ -117,21 +116,12 @@ def delete_cron(request, cron_id) -> Response:
     return Response({"message": "Cron deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(["POST"])
-def login(request) -> Response:
-    user = get_object_or_404(User, username=request.data["username"])
-
-    if not user.check_password(request.data["password"]):
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
-
-    token, created = Token.objects.get_or_create(user=user)
-    serializer = UserSerializer(instance=user)
-
-    return Response({"token": token.key, "user": serializer.data})
-
+# USER SIGNUP
+# =============================================================================
 
 @api_view(["POST"])
 def signup(request) -> Response:
+    """ User Signup """
     serializer = UserSerializer(data=request.data)
 
     if serializer.is_valid():
@@ -147,3 +137,23 @@ def signup(request) -> Response:
         return Response({"token": token.key, "user": serializer.data})
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# USER LOGIN
+# =============================================================================
+
+@api_view(["POST"])
+def login(request) -> Response:
+    """ Login User """
+    user = get_object_or_404(User, username=request.data["username"])
+
+    if not user.check_password(request.data["password"]):
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+    user.last_login = timezone.now()
+    user.save()
+
+    token, created = Token.objects.get_or_create(user=user)
+    serializer = UserSerializer(instance=user)
+
+    return Response({"token": token.key, "user": serializer.data})
