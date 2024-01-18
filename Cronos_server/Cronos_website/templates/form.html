@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+{% block title %}CronTab Form{% endblock %}
+{% block content %}
+	<h1>Form</h1>
+	<form method="post" action="{% {% url "TEST" %} %}">
+		{% csrf_token %}
+		{{ form.name.errors }}
+		<div>
+			{{ form.minute.label_tag }}
+			{{ form.minute }}
+		</div>
+		<div>
+			{{ form.hour.label_tag }}
+			{{ form.hour }}
+		</div>
+		<div>
+			{{ form.day_of_month.label_tag }}
+			{{ form.day_of_month }}
+		</div>
+		<div>
+			{{ form.month.label_tag }}
+			{{ form.month }}
+		</div>
+		<div>
+			{{ form.day_of_week.label_tag }}
+			{{ form.day_of_week }}
+		</div>
+		<div>
+			{{ form.command.label_tag }}
+			{{ form.command }}
+		</div>
+		<button type='submit'>Submit</button>
+	</form>
+{% endblock %}
