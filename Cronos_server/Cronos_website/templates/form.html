@@ -1,17 +1,19 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
+
 {% block title %}CronTab Form{% endblock %}
+
 {% block content %}
 	<h1>Form</h1>
-	<form method="post" action="{% {% url "TEST" %} %}">
+	<form method="post" action="{% {% url 'cronform' %} %}">
 		{% csrf_token %}
-		{{ form.name.errors }}
+		{{ cronform.name.errors }}
 		<div>
-			{{ form.minute.label_tag }}
-			{{ form.minute }}
+			{{ cronform.minute.label_tag }}
+			{{ cronform.minute }}
 		</div>
 		<div>
-			{{ form.hour.label_tag }}
-			{{ form.hour }}
+			{{ cronform.hour.label_tag }}
+			{{ cronform.hour }}
 		</div>
 		<div>
 			{{ form.day_of_month.label_tag }}
