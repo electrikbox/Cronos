@@ -1,15 +1,15 @@
 """ Views for Cronos_API """
-
+from django.utils import timezone
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from django.shortcuts import get_object_or_404
-from .serializers import CronsSerializer, LogsSerializer
-from Cronos_core import models
 from rest_framework import status
-from django.utils import timezone
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.authtoken.models import Token
+from Cronos_core import models
+from .serializers import CronsSerializer, LogsSerializer, UserSerializer
 
 
 
@@ -21,7 +21,7 @@ from rest_framework.permissions import IsAuthenticated
 @permission_classes([IsAuthenticated])
 def list_crons(request) -> Response:
     """ List all crons in database """
-    crons = models.Crons.objects.all()
+    crons = models.Crons.objects.filter(user=request.user)
     serializer = CronsSerializer(crons, many=True)
     return Response(serializer.data)
 
@@ -115,3 +115,35 @@ def delete_cron(request, cron_id) -> Response:
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
     cron_instance.delete()
     return Response({"message": "Cron deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["POST"])
+def login(request) -> Response:
+    user = get_object_or_404(User, username=request.data["username"])
+
+    if not user.check_password(request.data["password"]):
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+    token, created = Token.objects.get_or_create(user=user)
+    serializer = UserSerializer(instance=user)
+
+    return Response({"token": token.key, "user": serializer.data})
+
+
+@api_view(["POST"])
+def signup(request) -> Response:
+    serializer = UserSerializer(data=request.data)
+
+    if serializer.is_valid():
+        user = User(
+            username=request.data["username"],
+            email=request.data["email"]
+        )
+        user.set_password(request.data["password"])
+        user.save()
+
+        token, created = Token.objects.get_or_create(user=user)
+
+        return Response({"token": token.key, "user": serializer.data})
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
