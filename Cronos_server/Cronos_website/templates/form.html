@@ -4,33 +4,9 @@
 
 {% block content %}
 	<h1>Form</h1>
-	<form method="post" action="{% {% url 'cronform' %} %}">
+	<form method="post">
 		{% csrf_token %}
-		{{ cronform.name.errors }}
-		<div>
-			{{ cronform.minute.label_tag }}
-			{{ cronform.minute }}
-		</div>
-		<div>
-			{{ cronform.hour.label_tag }}
-			{{ cronform.hour }}
-		</div>
-		<div>
-			{{ form.day_of_month.label_tag }}
-			{{ form.day_of_month }}
-		</div>
-		<div>
-			{{ form.month.label_tag }}
-			{{ form.month }}
-		</div>
-		<div>
-			{{ form.day_of_week.label_tag }}
-			{{ form.day_of_week }}
-		</div>
-		<div>
-			{{ form.command.label_tag }}
-			{{ form.command }}
-		</div>
+		{{ form.minutes }}
 		<button type='submit'>Submit</button>
 	</form>
 {% endblock %}
