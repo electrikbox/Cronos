@@ -5,23 +5,34 @@ from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
 from .serializers import CronsSerializer, LogsSerializer
 from Cronos_core import models
-from datetime import datetime
 from rest_framework import status
+from django.utils import timezone
 
 
 # CRONS Show all
-# ======================================================
+# =============================================================================
 
 @api_view(['GET'])
-def list_crons(request):
+def list_crons(request) -> Response:
     """ List all crons in database """
     crons = models.Crons.objects.all()
     serializer = CronsSerializer(crons, many=True)
     return Response(serializer.data)
 
 
+# CRONS Show one cron
+# =============================================================================
+
+@api_view(['GET'])
+def show_cron(request, cron_id) -> Response:
+    """ Show one cron by its id """
+    cron_instance = get_object_or_404(models.Crons, pk=cron_id)
+    serializer = CronsSerializer(cron_instance)
+    return Response(serializer.data)
+
+
 # CRONS Create
-# ======================================================
+# =============================================================================
 
 @api_view(['POST'])
 def add_cron(request) -> Response:
@@ -33,7 +44,7 @@ def add_cron(request) -> Response:
 
         log_data = {
             "log": "Creation OK",
-            "create_date": datetime.now(),
+            "create_date": timezone.now(),
             "user": request.data.get('user'),
             "cron": cron_instance.id,
         }
@@ -50,32 +61,22 @@ def add_cron(request) -> Response:
     return Response(cron_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# CRONS Show one cron
-# ======================================================
-
-@api_view(['GET'])
-def show_cron(request, cron_id):
-    """ Show one cron by its id """
-    cron_instance = get_object_or_404(models.Crons, pk=cron_id)
-    serializer = CronsSerializer(cron_instance)
-    return Response(serializer.data)
-
-
 # CRONS Update one cron
-# ======================================================
+# =============================================================================
+
 @api_view(['PUT'])
-def update_cron(request, cron_id):
+def update_cron(request, cron_id) -> Response:
     """ Update a cron by its id """
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
     cron_serializer = CronsSerializer(
         cron_instance, data=request.data, partial=True)
 
     if cron_serializer.is_valid():
-        cron_serializer.save(updated_date=datetime.now())
+        cron_serializer.save(updated_date=timezone.now())
 
         log_data = {
             "log": "Update OK",
-            "create_date": datetime.now(),
+            "create_date": timezone.now(),
             "user": cron_instance.user.id if cron_instance.user else None,
             "cron": cron_instance.id,
         }
@@ -92,10 +93,10 @@ def update_cron(request, cron_id):
 
 
 # CRONS Delete
-# ======================================================
+# =============================================================================
 
 @api_view(['DELETE'])
-def delete_cron(request, cron_id):
+def delete_cron(request, cron_id) -> Response:
     """ Delete a cron by its id """
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
     cron_instance.delete()
