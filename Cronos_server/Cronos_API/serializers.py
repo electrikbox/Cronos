@@ -2,6 +2,7 @@
 
 from rest_framework import serializers
 from Cronos_core.models import Logs, Crons
+from django.contrib.auth.models import User
 
 
 # LOG
@@ -22,3 +23,12 @@ class CronsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Crons
         fields = ["cron", "user", "is_paused", "validated"]
+
+
+# USER
+# ====================================================
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta(object):
+        model = User
+        fields = ['id', 'username', 'password', 'email']
