@@ -35,7 +35,7 @@ def main(page: ft.Page) -> None:
 
     elements.login_button.on_click = lambda e: login(elements, page, pages)
     elements.logout_button.on_click = lambda e: logout(elements, page, pages)
-    
+
     page.add(pages.login_page)
 
 
