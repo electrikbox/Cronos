@@ -1,15 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.http import HttpResponse
 from .form import CronForm
 
 
 def form(request):
     if request.method == "POST":
         form = CronForm(request.POST)
-
-        if form.is_valid():
-            print(f"form is valid")
-            return redirect("/cronform/")
+        return HttpResponse(form.data['minutes'])
     else:
         form = CronForm()
+    
+    context = {"form": form}
 
-    return render(request, "base.html", {"title": "michel"})
+    return render(request, "form.html", context)
