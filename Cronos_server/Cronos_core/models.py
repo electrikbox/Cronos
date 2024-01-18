@@ -33,3 +33,9 @@ class Crons(models.Model):
     validated = models.BooleanField(default=False)
     is_paused = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    @classmethod
+    def get_minutes_choices(cls):
+        choices = [(str(i), str(i).zfill(2)) for i in range(0, 60)]
+        choices.extend((f'*/{i}', f'every {i}') for i in range(5, 60, 5))
+        return choices
