@@ -6,5 +6,5 @@ from.views import form
 app_name = 'Cronos_website'
 
 urlpatterns = [
-    path('cronform/', form, name='cronform'),
+    path('cronform/', form, name='form'),
 ]
