@@ -23,6 +23,12 @@ class CronsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Crons
         fields = ["cron", "user", "is_paused", "validated"]
+        
+    def validate_cron(self, value: str) -> str:
+        if value.split(" ")[0] == "rm":
+            raise serializers.ValidationError("command not allowed")
+        else:
+            return value
 
 
 # USER
