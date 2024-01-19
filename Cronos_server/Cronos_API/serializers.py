@@ -22,7 +22,7 @@ class CronsSerializer(serializers.ModelSerializer):
     """ Serializer for Crons """
     class Meta:
         model = Crons
-        fields = ["cron", "user", "is_paused", "validated"]
+        fields = ["cron", "user", "minutes", "is_paused", "validated"]
 
 
 # USER

@@ -28,12 +28,13 @@ class Logs(models.Model):
 class Crons(models.Model):
     """ Class Crons """
     cron = models.CharField(max_length=64)
+    minutes = models.CharField(max_length=64)
     create_date = models.DateTimeField(default=timezone.now)
     updated_date = models.DateTimeField(default=timezone.now)
     validated = models.BooleanField(default=False)
     is_paused = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+
     @classmethod
     def get_minutes_choices(cls):
         choices = [(str(i), str(i).zfill(2)) for i in range(0, 60)]

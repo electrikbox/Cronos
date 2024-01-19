@@ -6,4 +6,4 @@ class CronForm(forms.ModelForm):
 
     class Meta:
         model = Crons
-        fields = ['user']
+        fields = ['minutes']
