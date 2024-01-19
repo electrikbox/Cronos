@@ -3,6 +3,7 @@ from Cronos_core.models import Crons
 
 
 class CronForm(forms.ModelForm):
+    """Crons form class"""
     minutes = forms.ChoiceField(choices=Crons.get_minutes_choices())
     hours = forms.ChoiceField(choices=Crons.get_hours_choices())
     day_of_month = forms.ChoiceField(choices=Crons.get_day_of_month_choices())
