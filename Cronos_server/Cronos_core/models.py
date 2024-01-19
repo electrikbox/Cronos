@@ -45,8 +45,6 @@ class Crons(models.Model):
         """ Minutes choices for cron creation """
         choices = [(str(minutes), str(minutes).zfill(2))
                    for minutes in range(0, 60)]
-        choices.extend((f'*/{minutes}', f'every {minutes}')
-                       for minutes in range(5, 60, 5))
         choices.append(('*', 'every minutes'))
         return choices
 
@@ -54,8 +52,6 @@ class Crons(models.Model):
     def get_hours_choices(cls):
         """ Hours choices for cron creation """
         choices = [(str(hours), str(hours).zfill(2)) for hours in range(0, 24)]
-        choices.extend((f'*/{hours}', f'every {hours}')
-                       for hours in range(5, 24, 5))
         choices.append(('*', 'every hours'))
         return choices
 
@@ -63,7 +59,6 @@ class Crons(models.Model):
     def get_day_of_month_choices(cls):
         """ Day of the month choice for cron creation """
         choices = [(str(day), str(day).zfill(2)) for day in range(1, 32)]
-        choices.extend((f'*/{day}', f'every {day}') for day in range(5, 32, 5))
         choices.append(('*', 'every day of month'))
         return choices
 
@@ -73,8 +68,6 @@ class Crons(models.Model):
         months_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May',
                         'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         choices = [(str(month), month) for month in months_names]
-        choices.extend((f'*/{month}', f'every {month}')
-                       for month in months_names)
         choices.append(('*', 'every month'))
         return choices
 
@@ -84,8 +77,6 @@ class Crons(models.Model):
         days_of_week = ['Monday', 'Tuesday', 'Wednesday',
                         'Thursday', 'Friday', 'Saturday', 'Sunday']
         choices = [(day[:3], day[:3].capitalize()) for day in days_of_week]
-        choices.extend((f'*/{day[:3]}', f'every {day[:3]}')
-                       for day in days_of_week)
         choices.append(('*', 'every day of the week'))
         return choices
 
