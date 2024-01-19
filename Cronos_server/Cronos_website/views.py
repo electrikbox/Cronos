@@ -17,7 +17,7 @@ def form(request) -> HttpResponse:
     if request.method == "POST":
         form = CronForm(request.POST)
         if form.is_valid():
-            return HttpResponse([form.data[key] for key in fields])
+            return HttpResponse(' '.join([(form.data[key]) for key in fields]))
         else:
             return HttpResponse("Error Form")
     else:

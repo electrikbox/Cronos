@@ -70,7 +70,7 @@ class Crons(models.Model):
             'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'
         ]
-        choices = [(str(month[:3]), month) for month in MONTH_NAME]
+        choices = [(str(month[:3].lower()), month) for month in MONTH_NAME]
         choices.append(('*', 'every month'))
         return choices
 
@@ -81,7 +81,7 @@ class Crons(models.Model):
             'Monday', 'Tuesday', 'Wednesday',
             'Thursday', 'Friday', 'Saturday', 'Sunday'
         ]
-        choices = [(day[:3], day.capitalize()) for day in DAYS_OF_WEEK]
+        choices = [(str(day[:3].lower()), day) for day in DAYS_OF_WEEK]
         choices.append(('*', 'every day of the week'))
         return choices
 
