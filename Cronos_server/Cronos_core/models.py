@@ -7,6 +7,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from Cronos_API import COMMANDS
 
 
 class Profiles(models.Model):
@@ -29,9 +30,9 @@ class Crons(models.Model):
     """ Class Crons """
     minutes = models.CharField(max_length=64)
     hours = models.CharField(max_length=64)
+    day_of_month = models.CharField(max_length=64)
     months = models.CharField(max_length=64)
     day_of_week = models.CharField(max_length=64)
-    day_of_month = models.CharField(max_length=64)
     command = models.CharField(max_length=64)
 
     create_date = models.DateTimeField(default=timezone.now)
@@ -42,6 +43,46 @@ class Crons(models.Model):
 
     @classmethod
     def get_minutes_choices(cls):
-        choices = [(str(i), str(i).zfill(2)) for i in range(0, 60)]
-        choices.extend((f'*/{i}', f'every {i}') for i in range(5, 60, 5))
+        """ Minutes choices for cron creation """
+        choices = [(str(minutes), str(minutes).zfill(2))
+                   for minutes in range(0, 60)]
+        choices.append(('*', 'every minutes'))
+        return choices
+
+    @classmethod
+    def get_hours_choices(cls):
+        """ Hours choices for cron creation """
+        choices = [(str(hours), str(hours).zfill(2)) for hours in range(0, 24)]
+        choices.append(('*', 'every hours'))
+        return choices
+
+    @classmethod
+    def get_day_of_month_choices(cls):
+        """ Day of the month choice for cron creation """
+        choices = [(str(day), str(day).zfill(2)) for day in range(1, 32)]
+        choices.append(('*', 'every day of month'))
+        return choices
+
+    @classmethod
+    def get_months_choices(cls):
+        """ Months choices for cron creation """
+        months_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May',
+                        'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        choices = [(str(month), month) for month in months_names]
+        choices.append(('*', 'every month'))
+        return choices
+
+    @classmethod
+    def get_day_of_week_choices(cls):
+        """ Day of the week choice for cron creation """
+        days_of_week = ['Monday', 'Tuesday', 'Wednesday',
+                        'Thursday', 'Friday', 'Saturday', 'Sunday']
+        choices = [(day[:3], day[:3].capitalize()) for day in days_of_week]
+        choices.append(('*', 'every day of the week'))
+        return choices
+
+    @classmethod
+    def get_command_choices(cls):
+        """ Command choices for cron creation """
+        choices = [(cmd, cmd_form) for cmd, cmd_form in COMMANDS.items()]
         return choices
