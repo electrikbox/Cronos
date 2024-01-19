@@ -1,0 +1,1 @@
+allowed_commands = ['open', 'ls']
