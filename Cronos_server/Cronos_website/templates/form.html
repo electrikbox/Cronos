@@ -1,12 +1,31 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %}CronTab Form{% endblock %} {% block
+head %}
+<script>
+  $(document).ready(function () {
+    $('#id_day_of_week').change(function () {
+      var selectedDayOfWeek = $(this).val();
+      var dayOfMonthField = $('#id_day_of_month');
 
-{% block title %}CronTab Form{% endblock %}
+      if (selectedDayOfWeek !== '*') {
+        dayOfMonthField.val('*');
+      }
+    });
+  });
+  $(document).ready(function () {
+    $('#id_day_of_month').change(function () {
+      var selectedDayOfMonth = $(this).val();
+      var dayOfWeekField = $('#id_day_of_week');
 
-{% block content %}
-	<h1>Form</h1>
-	<form method="post">
-		{% csrf_token %}
-		{{ form.minutes }}
-		<button type='submit'>Submit</button>
-	</form>
+      if (selectedDayOfMonth !== '*') {
+        dayOfWeekField.val('*');
+      }
+    });
+  });
+</script>
+{% endblock %} {% block content %}
+<h1>Form</h1>
+<form method="post">
+  {% csrf_token %} {{ form }}
+  <button type="submit">Submit</button>
+</form>
 {% endblock %}
