@@ -3,11 +3,21 @@ from django.http import HttpResponse
 from .form import CronForm
 
 
-def form(request):
+def form(request) -> HttpResponse:
+    """render form page"""
+    fields = [
+        'minutes',
+        'hours',
+        'day_of_month',
+        'months',
+        'day_of_week',
+        'command'
+    ]
+    
     if request.method == "POST":
         form = CronForm(request.POST)
         if form.is_valid():
-            return HttpResponse([form.data[key] for key in ['minutes', 'hours', 'day_of_month', 'months', 'day_of_week', 'command']])
+            return HttpResponse([form.data[key] for key in fields])
         else:
             return HttpResponse("Error Form")
     else:
