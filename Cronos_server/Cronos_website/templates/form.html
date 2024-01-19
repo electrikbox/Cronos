@@ -3,29 +3,8 @@
 {% block title %}CronTab Form{% endblock %}
 
 {% block head %}
-<script>
-  $(document).ready(function () {
-    $('#id_day_of_week').change(function () {
-      var selectedDayOfWeek = $(this).val();
-      var dayOfMonthField = $('#id_day_of_month');
-
-      if (selectedDayOfWeek !== '*') {
-        dayOfMonthField.val('*');
-      }
-    });
-  });
-  $(document).ready(function () {
-    $('#id_day_of_month').change(function () {
-      var selectedDayOfMonth = $(this).val();
-      var dayOfWeekField = $('#id_day_of_week');
-
-      if (selectedDayOfMonth !== '*') {
-        dayOfWeekField.val('*');
-      }
-    });
-  });
-</script>
-
+{% load static %}
+<script src="{% static '/script_cron_form.js' %}"></script>
 {% endblock %}
 
 {% block content %}
