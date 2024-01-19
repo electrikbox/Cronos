@@ -43,5 +43,9 @@ DAY_OF_WEEK_ERROR_MSG = "You set '{day_of_week}' to 'day_of_week', then 'months'
 # Command
 # =============================================================================
 
-COMMANDS = ['open', 'ls']
-COMMANDS_ALLOWED_MSG = f"Command allowed : {' - '.join(COMMANDS)}"
+COMMANDS = {
+    "echo 'Hello World !'": "echo 'Hello World !'",
+    "ls": "ls",
+    "pwd": "pwd",
+}
+COMMANDS_ALLOWED_MSG = f"Command allowed : {' - '.join(COMMANDS.keys())}"
