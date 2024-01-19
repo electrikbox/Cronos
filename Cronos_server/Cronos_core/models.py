@@ -29,7 +29,6 @@ class Crons(models.Model):
     """ Class Crons """
     minutes = models.CharField(max_length=64)
     hours = models.CharField(max_length=64)
-    days = models.CharField(max_length=64)
     months = models.CharField(max_length=64)
     day_of_week = models.CharField(max_length=64)
     day_of_month = models.CharField(max_length=64)
