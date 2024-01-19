@@ -66,18 +66,22 @@ class Crons(models.Model):
     @classmethod
     def get_months_choices(cls):
         """ Months choices for cron creation """
-        months_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May',
-                        'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        choices = [(str(month), month) for month in months_names]
+        MONTH_NAME = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ]
+        choices = [(str(month[:3]), month) for month in MONTH_NAME]
         choices.append(('*', 'every month'))
         return choices
 
     @classmethod
     def get_day_of_week_choices(cls):
         """ Day of the week choice for cron creation """
-        days_of_week = ['Monday', 'Tuesday', 'Wednesday',
-                        'Thursday', 'Friday', 'Saturday', 'Sunday']
-        choices = [(day[:3], day[:3].capitalize()) for day in days_of_week]
+        DAYS_OF_WEEK = [
+            'Monday', 'Tuesday', 'Wednesday',
+            'Thursday', 'Friday', 'Saturday', 'Sunday'
+        ]
+        choices = [(day[:3], day.capitalize()) for day in DAYS_OF_WEEK]
         choices.append(('*', 'every day of the week'))
         return choices
 
