@@ -46,21 +46,21 @@ class Crons(models.Model):
         """ Minutes choices for cron creation """
         choices = [(str(minutes), str(minutes).zfill(2))
                    for minutes in range(0, 60)]
-        choices.append(('*', 'every minutes'))
+        choices.append(('*', 'each/any'))
         return choices
 
     @classmethod
     def get_hours_choices(cls):
         """ Hours choices for cron creation """
         choices = [(str(hours), str(hours).zfill(2)) for hours in range(0, 24)]
-        choices.append(('*', 'every hours'))
+        choices.append(('*', 'each/any'))
         return choices
 
     @classmethod
     def get_day_of_month_choices(cls):
         """ Day of the month choice for cron creation """
         choices = [(str(day), str(day).zfill(2)) for day in range(1, 32)]
-        choices.append(('*', 'every day of month'))
+        choices.append(('*', "each/any"))
         return choices
 
     @classmethod
@@ -71,7 +71,7 @@ class Crons(models.Model):
             'July', 'August', 'September', 'October', 'November', 'December'
         ]
         choices = [(str(month[:3].lower()), month) for month in MONTH_NAME]
-        choices.append(('*', 'every month'))
+        choices.append(('*', 'each/any'))
         return choices
 
     @classmethod
@@ -82,7 +82,7 @@ class Crons(models.Model):
             'Thursday', 'Friday', 'Saturday', 'Sunday'
         ]
         choices = [(str(day[:3].lower()), day) for day in DAYS_OF_WEEK]
-        choices.append(('*', 'every day of the week'))
+        choices.append(('*', "each/any"))
         return choices
 
     @classmethod
