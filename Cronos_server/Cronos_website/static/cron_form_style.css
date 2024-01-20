@@ -1,0 +1,79 @@
+form {
+	position:relative;
+	display: flex;
+	justify-content: space-around;
+	align-items: end;
+	background-color:rgb(37, 43, 46);
+	border-radius: 2px;
+	box-sizing: border-box;
+	width: 730px;
+	height: 65px;
+	padding: 10px;
+	margin: auto;
+	box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+	border-top: 2px solid #30444b;
+	margin-top: 200px;
+
+}
+
+.element {
+	font-family: Arial, Helvetica, sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border-radius: 2px;
+}
+
+.element .label{
+	margin-top: 2px;
+	color: #799ca7;
+	font-size: 14px;
+}
+
+.element .select > *{
+	width: 100px;
+	background-color: #335258;
+	border-style: none;
+	height: 27px;
+	border-radius: 2px;
+	color: aliceblue;
+	padding-left: 10px;
+	font-size: 13px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.element .select > *:hover{
+	color: rgb(236, 169, 24);
+}
+
+.submit {
+	background-color: #08d;
+	border-radius: 2px;
+	border: 0;
+	box-sizing: border-box;
+	color: #eee;
+	cursor: pointer;
+	font-size: 14px;
+	height: 27px;
+	margin-top: 15px;
+	text-align: center;
+	width: 80px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.submit:hover {
+	background-color: rgb(0, 93, 151);
+}
+
+.submit:active {
+	background-color: #06b;
+}
+
+.blur {
+    backdrop-filter: blur(5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
