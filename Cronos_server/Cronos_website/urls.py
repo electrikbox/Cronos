@@ -1,7 +1,7 @@
-""" URLs for Cronos_API """
+""" URLs for Cronos_website """
 
 from django.urls import path
-from.views import form
+from .views import form
 
 app_name = 'Cronos_website'
 
