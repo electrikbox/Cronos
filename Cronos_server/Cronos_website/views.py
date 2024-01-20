@@ -1,10 +1,11 @@
+""" Views """
 from django.shortcuts import render
 from django.http import HttpResponse
 from .form import CronForm
 
 
 def form(request) -> HttpResponse:
-    """render form page"""
+    """ Render Form page """
     fields = [
         'minutes',
         'hours',
@@ -13,7 +14,7 @@ def form(request) -> HttpResponse:
         'day_of_week',
         'command'
     ]
-    
+
     if request.method == "POST":
         form = CronForm(request.POST)
         if form.is_valid():

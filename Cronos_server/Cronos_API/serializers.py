@@ -11,7 +11,7 @@ from Cronos_API import *
 
 
 class UserSerializer(serializers.ModelSerializer):
-    """Serializer for Users"""
+    """ Serializer for Users """
     class Meta(object):
         model = User
         fields = ["id", "username", "password", "email"]
@@ -22,8 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class LogsSerializer(serializers.ModelSerializer):
-    """Serializer for Logs"""
-
+    """ Serializer for Logs """
     class Meta:
         model = Logs
         fields = ["log", "create_date", "user", "cron"]
@@ -34,8 +33,7 @@ class LogsSerializer(serializers.ModelSerializer):
 
 
 class CronsSerializer(serializers.ModelSerializer):
-    """Serializer for Crons"""
-
+    """ Serializer for Crons """
     class Meta:
         model = Crons
         fields = [
@@ -51,22 +49,22 @@ class CronsSerializer(serializers.ModelSerializer):
         ]
 
     def validate_minutes(self, value: str) -> str:
-        """validate minutes (0 to 59 or *)"""
-        if value not in(MINUTES_RANGE + ["*"]):
+        """ Validate minutes (0 to 59 or *) """
+        if value not in (MINUTES_RANGE + ["*"]):
             raise serializers.ValidationError(MINUTES_ALLOWED_MSG)
         else:
             return value
 
     def validate_hours(self, value: str) -> str:
-        """validate hours  (0 to 23 or *)"""
-        if value not in(HOURS_RANGE + ["*"]):
+        """ Validate hours (0 to 23 or *) """
+        if value not in (HOURS_RANGE + ["*"]):
             raise serializers.ValidationError(HOURS_ALLOWED_MSG)
         else:
             return value
 
     def validate_day_of_month(self, value: str) -> str:
-        """validate day of month  (1 to 31 or *)"""
-        if value not in(DAY_OF_MONTH_RANGE + ["*"]):
+        """ Validate day of month (1 to 31 or *) """
+        if value not in (DAY_OF_MONTH_RANGE + ["*"]):
             raise serializers.ValidationError(DAY_OF_MONTH_ALLOWED_MSG)
 
         elif (
@@ -80,14 +78,14 @@ class CronsSerializer(serializers.ModelSerializer):
             return value
 
     def validate_months(self, value: str) -> str:
-        """validate months  (1 to 12 or *)"""
+        """ Validate months (1 to 12 or *) """
         if value not in (MONTHS_RANGE + ["*"]):
             raise serializers.ValidationError(MONTHS_ALLOWED_MSG)
         else:
             return value
 
     def validate_day_of_week(self, value: str) -> str:
-        """validate day of week  (mon, tue, wed, thu, fri, sat, sun or *)"""
+        """ Validate day of week (mon, tue, wed, thu, fri, sat, sun or *) """
         if value not in (DAY_OF_WEEK_RANGE + ["*"]):
             raise serializers.ValidationError(DAY_OF_WEEK_ALLOWED_MSG)
 
@@ -102,7 +100,7 @@ class CronsSerializer(serializers.ModelSerializer):
             return value
 
     def validate_command(self, value: str) -> str:
-        """validate commands"""
+        """ Validate commands """
         if not value.split(" ")[0] in COMMANDS:
             raise serializers.ValidationError(COMMANDS_ALLOWED_MSG)
         else:
