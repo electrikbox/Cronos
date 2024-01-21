@@ -9,7 +9,7 @@ from rest_framework.authentication import TokenAuthentication, SessionAuthentica
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from Cronos_core import models
-from .serializers import CronsSerializer, LogsSerializer, UserSerializer
+from .serializers import CronsSerializer, LogsSerializer, UserSerializer, ProfileSerializer
 
 
 # CRONS Show all
@@ -125,12 +125,14 @@ def signup(request) -> Response:
     serializer = UserSerializer(data=request.data)
 
     if serializer.is_valid():
-        user = User(
-            username=request.data["username"],
-            email=request.data["email"]
-        )
+        user = serializer.save()
         user.set_password(request.data["password"])
         user.save()
+
+        profile_serializer = ProfileSerializer(data=request.data)
+        
+        if profile_serializer.is_valid():
+            profile_serializer.save(user=user)
 
         token, created = Token.objects.get_or_create(user=user)
 
