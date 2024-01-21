@@ -1,7 +1,7 @@
 """ Serializers for Cronos_API """
 
 from rest_framework import serializers
-from Cronos_core.models import Logs, Crons
+from Cronos_core.models import Logs, Crons, Profiles
 from django.contrib.auth.models import User
 from Cronos_API import *
 
@@ -15,6 +15,17 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = User
         fields = ["id", "username", "password", "email"]
+
+
+# Profiles
+# =============================================================================
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    """ Serializer for Users """
+    class Meta(object):
+        model = Profiles
+        fields = ["id", "first_name", "last_name"]
 
 
 # LOGS
