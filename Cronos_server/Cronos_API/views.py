@@ -1,25 +1,38 @@
 """ Views for Cronos_API """
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework import status
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.decorators import (
+    api_view,
+    authentication_classes,
+    permission_classes,
+)
+from rest_framework.authentication import (
+    TokenAuthentication,
+    SessionAuthentication,
+)
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
+from rest_framework import status
 from Cronos_core import models
-from .serializers import CronsSerializer, LogsSerializer, UserSerializer, ProfileSerializer
+from .serializers import (
+    CronsSerializer,
+    LogsSerializer,
+    UserSerializer,
+    ProfileSerializer,
+)
 
 
 # CRONS Show all
 # =============================================================================
 
-@api_view(['GET'])
+
+@api_view(["GET"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def list_crons(request) -> Response:
-    """ List all crons in database """
+    """ List all user's crons """
     crons = models.Crons.objects.filter(user=request.user)
     serializer = CronsSerializer(crons, many=True)
     return Response(serializer.data)
@@ -28,134 +41,153 @@ def list_crons(request) -> Response:
 # CRONS Show one cron
 # =============================================================================
 
-@api_view(['GET'])
+
+@api_view(["GET"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def show_cron(request, cron_id) -> Response:
-    """ Show one cron by its id """
+    """ Show one user's cron by its id """
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
-    serializer = CronsSerializer(cron_instance)
-    return Response(serializer.data)
+    cron_serializer = CronsSerializer(cron_instance)
+    return Response(cron_serializer.data)
 
 
 # CRONS Create
 # =============================================================================
 
-@api_view(['POST'])
+
+@api_view(["POST"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def add_cron(request) -> Response:
     """ Add a new cron to database """
     cron_serializer = CronsSerializer(data=request.data)
 
-    if cron_serializer.is_valid():
-        cron_instance = cron_serializer.save()
+    if not cron_serializer.is_valid():
+        return Response(cron_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        log_data = {
-            "log": "Creation OK",
-            "create_date": timezone.now(),
-            "user": request.data.get('user'),
-            "cron": cron_instance.id,
-        }
+    cron_instance = cron_serializer.save()
 
-        log_serializer = LogsSerializer(data=log_data)
+    log_data = {
+        "log": "Creation OK",
+        "create_date": timezone.now(),
+        "user": request.data.get("user"),
+        "cron": cron_instance.id,
+    }
 
-        if log_serializer.is_valid():
-            log_serializer.save()
-            return Response(cron_serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            cron_instance.delete()
-            return Response(log_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    log_serializer = LogsSerializer(data=log_data)
 
-    return Response(cron_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if not log_serializer.is_valid():
+        return Response(cron_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    log_serializer.save()
+    return Response(cron_serializer.data, status=status.HTTP_201_CREATED)
 
 
 # CRONS Update one cron
 # =============================================================================
 
-@api_view(['PUT'])
+
+@api_view(["PUT"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def update_cron(request, cron_id) -> Response:
     """ Update a cron by its id """
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
-    cron_serializer = CronsSerializer(
-        cron_instance, data=request.data, partial=True)
+    cron_serializer = CronsSerializer(cron_instance, data=request.data, partial=True)
 
-    if cron_serializer.is_valid():
-        cron_serializer.save(updated_date=timezone.now())
+    if not cron_serializer.is_valid():
+        return Response(cron_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    cron_serializer.save(updated_date=timezone.now())
 
-        log_data = {
-            "log": "Update OK",
-            "create_date": timezone.now(),
-            "user": cron_instance.user.id if cron_instance.user else None,
-            "cron": cron_instance.id,
-        }
+    log_data = {
+        "log": "Update OK",
+        "create_date": timezone.now(),
+        "user": cron_instance.user.id if cron_instance.user else None,
+        "cron": cron_instance.id,
+    }
 
-        log_serializer = LogsSerializer(data=log_data)
+    log_serializer = LogsSerializer(data=log_data)
 
-        if log_serializer.is_valid():
-            log_serializer.save()
-            return Response(cron_serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(log_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    return Response(cron_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if not log_serializer.is_valid():
+        return Response(cron_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    log_serializer.save()
+    return Response(cron_serializer.data, status=status.HTTP_200_OK)
 
 
 # CRONS Delete
 # =============================================================================
 
-@api_view(['DELETE'])
+
+@api_view(["DELETE"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def delete_cron(request, cron_id) -> Response:
     """ Delete a cron by its id """
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
     cron_instance.delete()
-    return Response({"message": "Cron deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+    return Response(
+        {"message": "Cron deleted successfully"},
+        status=status.HTTP_204_NO_CONTENT,
+    )
 
 
 # USER SIGNUP
 # =============================================================================
 
+
 @api_view(["POST"])
 def signup(request) -> Response:
     """ User Signup """
-    serializer = UserSerializer(data=request.data)
+    user_serializer = UserSerializer(data=request.data)
 
-    if serializer.is_valid():
-        user = serializer.save()
-        user.set_password(request.data["password"])
-        user.save()
+    if not user_serializer.is_valid():
+        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        profile_serializer = ProfileSerializer(data=request.data)
-        
-        if profile_serializer.is_valid():
-            profile_serializer.save(user=user)
+    user_instance = user_serializer.save()
 
-        token, created = Token.objects.get_or_create(user=user)
+    profile_serializer = ProfileSerializer(data=request.data)
 
-        return Response({"token": token.key, "user": serializer.data})
+    if profile_serializer.is_valid():
+        profile_serializer.save(user=user_instance)
 
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    token, created = Token.objects.get_or_create(user=user_instance)
+
+    return Response({"token": token.key, "user": user_serializer.data})
+    return Response(
+        {"message": "Signup successful"},
+        headers={'Authorization': f'Token {token.key}'}
+    )
 
 
 # USER LOGIN
 # =============================================================================
 
+
 @api_view(["POST"])
 def login(request) -> Response:
-    """ Login User """
-    user = get_object_or_404(User, username=request.data["username"])
+    """ User Login """
+    username = request.data.get("username")
+    password = request.data.get("password")
 
-    if not user.check_password(request.data["password"]):
+    if not username or not password:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+    user = authenticate(username=username, password=password)
+
+    if not user:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
     user.last_login = timezone.now()
     user.save()
 
     token, created = Token.objects.get_or_create(user=user)
-    serializer = UserSerializer(instance=user)
+    user_serializer = UserSerializer(instance=user)
 
-    return Response({"token": token.key, "user": serializer.data})
+    return Response({"token": token.key, "user": user_serializer.data})
+    return Response(
+        {"message": "Login successful"},
+        headers={'Authorization': f'Token {token.key}'}
+    )
