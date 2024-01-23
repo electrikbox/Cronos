@@ -1,7 +1,8 @@
 """ Serializers for Cronos_API """
 
 from rest_framework import serializers
-from Cronos_core.models import Logs, Crons
+from rest_framework.validators import UniqueValidator
+from Cronos_core.models import Logs, Crons, Profiles
 from django.contrib.auth.models import User
 from Cronos_API import *
 
@@ -12,9 +13,37 @@ from Cronos_API import *
 
 class UserSerializer(serializers.ModelSerializer):
     """ Serializer for Users """
+    email = serializers.EmailField(
+        validators = [
+            UniqueValidator(
+                queryset=User.objects.all(),
+                message="This email already exists."
+            )
+        ]
+    )
     class Meta(object):
         model = User
         fields = ["id", "username", "password", "email"]
+
+    def create(self, validated_data) -> User:
+        user = User(
+            username=validated_data['username'],
+            email=validated_data['email']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+
+# Profiles
+# =============================================================================
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    """ Serializer for Users """
+    class Meta(object):
+        model = Profiles
+        fields = ["id", "first_name", "last_name"]
 
 
 # LOGS
