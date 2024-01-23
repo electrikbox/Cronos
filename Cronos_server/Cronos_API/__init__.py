@@ -47,5 +47,6 @@ COMMANDS = {
     "echo 'Hello World !'": "echo 'Hello World !'",
     "ls": "ls",
     "pwd": "pwd",
+    "cal": "cal",
 }
 COMMANDS_ALLOWED_MSG = f"Command allowed : {' - '.join(COMMANDS.keys())}"
