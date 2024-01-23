@@ -17,7 +17,7 @@ def login(elements: Elements, page: ft.Page, pages: Pages) -> None:
     elements.username_field.value = ""
     elements.password_field.value = ""
 
-    # Check if the user exist in server datas
+    # Check if the user exists in server datas
     # =========================================================================
 
     try:
@@ -30,27 +30,28 @@ def login(elements: Elements, page: ft.Page, pages: Pages) -> None:
         page.update()
         return
 
-    # if not cron_scraper.authenticated:
-    #     elements.login_info_text.value = WRONG_CREDENTIALS_MSG
-    #     elements.login_info_text.color = INFOS_TEXT_COLOR
-    #     page.update()
-    #     return
+    if not cron_scraper.authenticated:
+        elements.login_info_text.value = WRONG_CREDENTIALS_MSG
+        elements.login_info_text.color = INFOS_TEXT_COLOR
+        page.update()
+        return
 
     print("Authentification réussie.")
 
-    # Check if the commands exist on computer
+    # Check if the commands exists on computer
     # =========================================================================
 
     crons_list = cron_scraper.get_crons_list()
+    # print(crons_list)
 
     for cron in crons_list:
-        cron_split = str(cron["cron"]).split(" ")
+        command = str(cron["command"]).split(" ")[0]
+        cmd_validated = CheckCommand.is_command_available_unix(command)
 
-        if len(cron_split) > 1:
-            validated = CheckCommand.is_command_available_unix(cron_split[1])
-            print(f"{cron['cron']} : {'added' if validated else '*NOT ADDED*'}")
+        if not cmd_validated:
+            print(f"{command} : *NOT ADDED*")
         else:
-            print(NOT_ENOUGH_ELEMENTS_MSG)
+            print(f"{command} : ADDED")
 
     # Change app page if user exist
     # =========================================================================

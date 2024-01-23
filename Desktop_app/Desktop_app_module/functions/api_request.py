@@ -6,13 +6,13 @@ from typing import Any
 
 
 class CronScraper:
-    LOGIN_URL = "http://localhost:8000/user/login"
-    CRONS_URL = "http://localhost:8000/crons/list/"
+    LOGIN_URL = "http://localhost:8000/api/login/"
+    CRONS_URL = "http://localhost:8000/api/crons/"
 
     def __init__(self, username, password) -> None:
         self.username = username
         self.password = password
-        # self.authenticated = False
+        self.authenticated = False
         self.token = None
 
     # Function to log in and get the token
@@ -28,21 +28,21 @@ class CronScraper:
 
         if login_response.status_code == 200:
             self.token = login_response.json().get("token", "")
-            # self.authenticated = True
+            self.authenticated = True
             return self.token
         else:
             print(
                 f"Échec de la connexion. Code d'état : {login_response.status_code}"
             )
-            # self.authenticated = False
+            self.authenticated = False
             return None
 
     # Get user crons list
     # =========================================================================
 
     def get_crons_list(self) -> Any | None:
-        # if not self.authenticated:
-        #     self.user_auth()
+        if not self.authenticated:
+            self.user_auth()
 
         crons_headers = {
             "Content-Type": "application/json",
