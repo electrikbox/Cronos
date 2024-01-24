@@ -1,11 +1,16 @@
 """ Views """
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import CronForm
-import requests
-from rest_framework.authtoken.models import Token
-from Cronos_API import CRON_CREATE_API_URL
 from django.contrib.auth.decorators import login_required
+from rest_framework.authtoken.models import Token
+from .forms import CronForm
+from Cronos_API import CRON_CREATE_API_URL
+import requests
+
+
+def home(request) -> HttpResponse:
+    """ Render home page """
+    return render(request, "home.html")
 
 
 @login_required
@@ -41,7 +46,8 @@ def cron_create_form(request) -> HttpResponse:
         response = requests.post(CRON_CREATE_API_URL, headers=header, json=data)
 
         if response.status_code == 201:
-            return HttpResponse("Cron created successfully")
+            context = {"cron_create_form": cron_create_form}
+            return render(request, "cron_create_success.html", context)
         else:
             return HttpResponse(response.status_code)
     
@@ -51,5 +57,4 @@ def cron_create_form(request) -> HttpResponse:
         cron_create_form = CronForm()
 
     context = {"cron_create_form": cron_create_form}
-
     return render(request, "cron_create_form.html", context)
