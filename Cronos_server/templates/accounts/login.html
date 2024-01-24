@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/login_form.css' %}" />
+{% endblock %}
+
+{% block main %}
+<h2>Login</h2>
+
+{% for message in messages %}
+    <p class="error_msg">{{ message }}</p>
+{% endfor %}
+<div class="blur">
+    <form class="login_form" method="POST">
+        {% csrf_token %}
+        {{ login_form }}
+        <input type="submit" value="Login">
+    </form>
+</div>
+{% endblock %}
