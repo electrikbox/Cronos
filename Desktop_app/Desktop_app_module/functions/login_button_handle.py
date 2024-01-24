@@ -2,6 +2,7 @@ import flet as ft
 from Desktop_app_module import Elements, Pages
 from Desktop_app_module.functions.api_request import CronScraper
 from Desktop_app_module.functions.check_command import CheckCommand
+from Desktop_app_module.functions.cron_handler import CronHandler
 
 
 WRONG_CREDENTIALS_MSG = "Wrong username or password"
@@ -38,20 +39,26 @@ def login(elements: Elements, page: ft.Page, pages: Pages) -> None:
 
     print("Authentification réussie.")
 
-    # Check if the commands exists on computer
+
+    # Add crons if commands is executable on computer
     # =========================================================================
 
-    crons_list = cron_scraper.get_crons_list()
-    # print(crons_list)
+    remote_crons = cron_scraper.get_crons_list()
+    local_crons = CronHandler()
+    
+    # print(type(local_crons))
+    # print(type(remote_crons))
 
-    for cron in crons_list:
+    # add if cmd is executable on computer
+    for cron in remote_crons:
         command = str(cron["command"]).split(" ")[0]
         cmd_validated = CheckCommand.is_command_available_unix(command)
 
         if not cmd_validated:
             print(f"{command} : *NOT ADDED*")
         else:
-            print(f"{command} : ADDED")
+            local_crons.add_cron(cron)
+            
 
     # Change app page if user exist
     # =========================================================================
