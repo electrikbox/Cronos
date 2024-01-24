@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Default title{% endblock %}</title>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    {% block head %}{% endblock %}
+  </head>
+  
+  <body>
+    <header class="header">
+      {% block header %}
+
+      <div class="login_signup">
+      {% csrf_token %}
+      {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}! | <a href="{% url 'accounts:logout' %}">Logout</a></p>
+      {% else%}
+        <p><a href="{% url 'accounts:login' %}">Login</a></p>
+      {% endif %}
+      </div>
+      
+      <h1>BASE</h1>
+
+      {% endblock %}
+      {% comment %} <nav>
+        <ul>
+          <li class="dropdown">
+            <a href="#" class="dropbtn">Services</a>
+            <div class="dropdown-content">
+              <a href="#">Service 1</a>
+              <a href="#">Service 2</a>
+            </div>
+          </li>
+        </ul>
+      </nav> {% endcomment %}
+    </header>
+
+    <main>
+      {% block main %}
+      <h2>main</h2>
+      {% endblock %}
+    </main>
+
+    <footer>
+      <h2>footer</h2>
+    </footer>
+
+  </body>
+
+  </html>

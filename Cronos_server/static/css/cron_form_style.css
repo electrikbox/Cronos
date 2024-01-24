@@ -1,0 +1,23 @@
+.element .label, .success_msg p{
+	font-family: sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.element .select > *{
+	width: 100%;
+	font-size: 16px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 5px;
+    margin: 0 auto;
+}
+
+.success_msg p{
+    color: rgb(91, 196, 81);
+    text-align: center;
+}
