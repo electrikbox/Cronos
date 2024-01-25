@@ -18,7 +18,7 @@ class CronScraper:
     # Function to log in and get the token
     # =========================================================================
 
-    def user_auth(self) -> Any | None:
+    def user_auth(self):
         login_headers = {"Content-Type": "application/json"}
         login_data = {"username": self.username, "password": self.password}
 
@@ -40,7 +40,7 @@ class CronScraper:
     # Get user crons list
     # =========================================================================
 
-    def get_crons_list(self) -> Any | None:
+    def get_crons_list(self):
         if not self.authenticated:
             self.user_auth()
 
