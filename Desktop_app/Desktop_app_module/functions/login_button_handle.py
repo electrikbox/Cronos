@@ -37,17 +37,14 @@ def login(elements: Elements, page: ft.Page, pages: Pages) -> None:
         page.update()
         return
 
-    print("Authentification réussie.")
-
+    print("Authentification réussie")
 
     # Add crons if commands is executable on computer
     # =========================================================================
 
     remote_crons = cron_scraper.get_crons_list()
-    local_crons = CronHandler()
-    
-    # print(type(local_crons))
-    # print(type(remote_crons))
+    local_crons = CronHandler.get_local_crons()
+    cron_handler = CronHandler()
 
     # add if cmd is executable on computer
     for cron in remote_crons:
@@ -57,8 +54,23 @@ def login(elements: Elements, page: ft.Page, pages: Pages) -> None:
         if not cmd_validated:
             print(f"{command} : *NOT ADDED*")
         else:
-            local_crons.add_cron(cron)
-            
+            cron_handler.add_cron(cron)
+
+    # Update cron
+    # =========================================================================
+
+    # Delete if cron is not in DB
+    # =========================================================================
+
+    remote_list = []
+
+    for r_cron in remote_crons:
+        schedule, cmd = cron_handler.cron_to_str(r_cron)
+        remote_list.append(f"{schedule} {cmd} # {cron_handler.COMMENT}")
+
+    for cron in local_crons:
+        if str(cron) not in remote_list:
+            cron_handler.del_cron(cron)
 
     # Change app page if user exist
     # =========================================================================
