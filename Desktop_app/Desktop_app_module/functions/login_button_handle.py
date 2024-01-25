@@ -39,25 +39,12 @@ def login(elements: Elements, page: ft.Page, pages: Pages) -> None:
 
     print("Authentification réussie")
 
-    # Add crons if commands is executable on computer
+    # Crons lists settings
     # =========================================================================
 
     remote_crons = cron_scraper.get_crons_list()
     local_crons = CronHandler.get_local_crons()
     cron_handler = CronHandler()
-
-    # add if cmd is executable on computer
-    for cron in remote_crons:
-        command = str(cron["command"]).split(" ")[0]
-        cmd_validated = CheckCommand.is_command_available_unix(command)
-
-        if not cmd_validated:
-            print(f"{command} : *NOT ADDED*")
-        else:
-            cron_handler.add_cron(cron)
-
-    # Update cron
-    # =========================================================================
 
     # Delete if cron is not in DB
     # =========================================================================
@@ -65,12 +52,28 @@ def login(elements: Elements, page: ft.Page, pages: Pages) -> None:
     remote_list = []
 
     for r_cron in remote_crons:
-        schedule, cmd = cron_handler.cron_to_str(r_cron)
+        schedule, cmd = cron_handler.remote_cron_json_to_str(r_cron)
         remote_list.append(f"{schedule} {cmd} # {cron_handler.COMMENT}")
 
     for cron in local_crons:
         if str(cron) not in remote_list:
             cron_handler.del_cron(cron)
+
+    # Add crons if commands is executable on computer
+    # =========================================================================
+
+    # add if cmd is executable on computer
+    for cron in remote_crons:
+        command = str(cron["command"]).split(" ")[0]
+        cmd_validated = CheckCommand.is_command_available_unix(command)
+        # cron_scraper.send_validation(cron)
+
+        if not cmd_validated:
+            print(f"{command} : *NOT ADDED*")
+        else:
+            if cron['is_paused']:
+                cron_handler.pause_cron(cron)
+            cron_handler.add_cron(cron)
 
     # Change app page if user exist
     # =========================================================================

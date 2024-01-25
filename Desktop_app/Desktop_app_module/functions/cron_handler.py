@@ -1,5 +1,4 @@
 from crontab import CronTab
-import sys
 
 
 class CronHandler:
@@ -19,7 +18,7 @@ class CronHandler:
     # Cron to string
     # =========================================================================
 
-    def cron_to_str(self, cron: dict):
+    def remote_cron_json_to_str(self, cron: dict):
         cmd = cron['command']
         schedule = " ".join([
             cron['minutes'],
@@ -30,12 +29,21 @@ class CronHandler:
         ])
         return (schedule, cmd)
 
+    # DELETE
+    # =========================================================================
+
+    def del_cron(self, cron_to_delete):
+
+        self.crons.remove(cron_to_delete)
+        self.crons.write()
+        print(f"Cron '{cron_to_delete}' removed")
+
     # ADD
     # =========================================================================
 
     def add_cron(self, received_cron):
 
-        schedule, cmd = self.cron_to_str(received_cron)
+        schedule, cmd = self.remote_cron_json_to_str(received_cron)
         cron_to_check = f"{schedule} {cmd} # {self.COMMENT}"
 
         if not any(str(cron) == cron_to_check for cron in self.crons):
@@ -46,14 +54,19 @@ class CronHandler:
         else:
             print(f"Cron ({schedule} {cmd}) already exist")
 
-    # DELETE
+    # PAUSE
     # =========================================================================
 
-    def del_cron(self, cron_to_delete):
+    def pause_cron(self, cron_to_pause):
+        schedule, cmd = self.remote_cron_json_to_str(cron_to_pause)
+        cron_to_check = f"{schedule} {cmd} # {self.COMMENT}"
+        cron_test = self.crons.find_command(cmd)
 
-        self.crons.remove(cron_to_delete)
+        for cron_t in cron_test:
+            print(f"{cron_t} : {type(cron_t)}")
+
         self.crons.write()
-        print(f"Cron '{cron_to_delete}' removed")
+        print(f"Cron '{cron_to_pause}' paused")
 
 
 if __name__ == "__main__":
