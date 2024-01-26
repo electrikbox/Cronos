@@ -4,7 +4,7 @@ import flet as ft
 from Desktop_app_module import Elements
 
 
-class Pages(ft.UserControl):
+class AppPages(ft.UserControl):
     def __init__(self, elements: Elements) -> None:
         self.elements = elements
 
