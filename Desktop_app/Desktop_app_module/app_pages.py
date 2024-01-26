@@ -57,5 +57,9 @@ class AppPages(ft.UserControl):
                     [self.elements.logged_text],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
+                ft.Row(
+                    [self.elements.fetch_button],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                )
             ]
-        )  #
+        )

@@ -13,8 +13,8 @@ LOGO = "logo.gif"
 
 class Elements(ft.UserControl):
     def __init__(self) -> None:
-        
-        # logo
+
+        # Logo
         # =====================================================================
 
         self.logo = Image(
@@ -24,7 +24,7 @@ class Elements(ft.UserControl):
             fit=ImageFit.CONTAIN
         )
 
-        # username field
+        # Username field
         # =====================================================================
 
         self.username_field = TextField(
@@ -34,7 +34,7 @@ class Elements(ft.UserControl):
             height=45,
         )
 
-        # password field
+        # Password field
         # =====================================================================
 
         self.password_field = TextField(
@@ -45,7 +45,7 @@ class Elements(ft.UserControl):
             password=True,
         )
 
-        # login button
+        # Login button
         # =====================================================================
 
         self.login_button = ElevatedButton(
@@ -57,7 +57,19 @@ class Elements(ft.UserControl):
             color=ft.colors.TEAL_400,
         )
 
-        # logout button
+        # Fetch button
+        # =====================================================================
+
+        self.fetch_button = ElevatedButton(
+            text="Fetch",
+            width=200,
+        )
+        self.fetch_info_text = Text(
+            INFO_TEXT,
+            color=ft.colors.TEAL_400,
+        )
+
+        # Logout button
         # =====================================================================
 
         self.logout_button = ElevatedButton(

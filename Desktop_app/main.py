@@ -33,10 +33,11 @@ def main(page: ft.Page) -> None:
 
     # Set functions for button click
     # =========================================================================
-    
+
     app_logic = AppHandler(elements, page, app_pages)
 
     elements.login_button.on_click = lambda e: app_logic.login(page, app_pages)
+    elements.fetch_button.on_click = lambda e: app_logic.fetch_remote_crons(page, app_pages)
     elements.logout_button.on_click = lambda e: logout(elements, page, app_pages)
 
     page.add(app_pages.login_page)
