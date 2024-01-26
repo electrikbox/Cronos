@@ -37,7 +37,7 @@ def login(elements: Elements, page: ft.Page, pages: Pages) -> None:
         page.update()
         return
 
-    print("Authentification réussie")
+    print("Successful authentication")
 
     # Crons lists settings
     # =========================================================================
