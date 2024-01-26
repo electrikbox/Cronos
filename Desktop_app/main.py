@@ -1,7 +1,8 @@
 """Desktop app main, script that launch the app"""
 
 import flet as ft
-from Desktop_app_module import Elements, Pages, login, logout, validate
+from Desktop_app_module import Elements, AppPages, logout, validate
+from Desktop_app_module.functions.login_button_handle import AppHandler
 
 
 def main(page: ft.Page) -> None:
@@ -22,7 +23,7 @@ def main(page: ft.Page) -> None:
 
     elements = Elements()
     elements.login_button.disabled = True
-    pages = Pages(elements)
+    app_pages = AppPages(elements)
 
     # Validate there's something in username and password fields
     # =========================================================================
@@ -32,11 +33,13 @@ def main(page: ft.Page) -> None:
 
     # Set functions for button click
     # =========================================================================
+    
+    app_logic = AppHandler(elements, page, app_pages)
 
-    elements.login_button.on_click = lambda e: login(elements, page, pages)
-    elements.logout_button.on_click = lambda e: logout(elements, page, pages)
+    elements.login_button.on_click = lambda e: app_logic.login(page, app_pages)
+    elements.logout_button.on_click = lambda e: logout(elements, page, app_pages)
 
-    page.add(pages.login_page)
+    page.add(app_pages.login_page)
 
 
 if __name__ == "__main__":
