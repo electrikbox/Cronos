@@ -2,7 +2,6 @@
 
 import sys
 import requests
-from typing import Any
 
 
 class CronScraper:
@@ -40,9 +39,8 @@ class CronScraper:
     # Get user crons list
     # =========================================================================
 
-    def get_crons_list(self):
-        if not self.authenticated:
-            self.user_auth()
+    def get_remote_crons(self, token):
+        self.token = token
 
         crons_headers = {
             "Content-Type": "application/json",
@@ -77,7 +75,7 @@ if __name__ == "__main__":
 
     if cron_scraper.authenticated:
         print("Successful authentication")
-        crons_list = cron_scraper.get_crons_list()
+        crons_list = cron_scraper.get_remote_crons()
 
         if crons_list:
             print(crons_list)
