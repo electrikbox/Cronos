@@ -33,7 +33,7 @@ class AppHandler():
         self.elements = elements
         self.page = page
         self.app_pages = app_pages
-        
+
         self.username = ""
         self.password = ""
         self.token = None
@@ -52,7 +52,7 @@ class AppHandler():
         ])
         remote_cron_str = f"{schedule} {cmd} # {self.COMMENT}"
         return remote_cron_str
-    
+
     def local_cron_to_str(self, cron: CronItem) -> str:
         cmd = cron.command
         schedule = " ".join([
@@ -64,7 +64,7 @@ class AppHandler():
         ])
         local_cron_str = f"{schedule} {cmd} # {cron.comment}"
         return local_cron_str
-    
+
     def update_page(self):
         self.page.clean()
         self.page.add(self.app_pages.logout_page)
@@ -76,11 +76,11 @@ class AppHandler():
     def authenticate(self):
         self.username = self.elements.username_field.value
         self.password = self.elements.password_field.value
-        
+
         self.elements.login_button.disabled = True
         self.elements.username_field.value = ""
         self.elements.password_field.value = ""
-        
+
         try:
             cron_scraper = CronScraper(self.username, self.password)
             self.token = cron_scraper.user_auth()
@@ -106,7 +106,7 @@ class AppHandler():
     def add_remote_crons_to_local(self):
         remote_crons = CronScraper(self.username, self.password).get_remote_crons(self.token)
         local_crons = CronTab(user=True)
-        
+
         for r_cron in remote_crons:
 
             command = str(r_cron["command"]).split(" ")[0]
@@ -117,16 +117,16 @@ class AppHandler():
             if not cmd_validated:
                 print(f"{command} : can't be process on this computer")
                 continue
-            
+
             if any(r_cron_str == self.local_cron_to_str(l_cron) for l_cron in local_crons):
                 print(f"Cron ({r_cron_str}) already exist")
                 continue
-   
+
             new_cron = local_crons.new(command=command, comment=self.COMMENT)
             new_cron.setall(r_cron_str.split(" ")[:5])
             local_crons.write()
             print(f"Cron '{new_cron}' added")
-            
+
             # cron_scraper.send_validation(cron)
             # ajouter message pour l'utilisateur
             # self.update_page()
@@ -147,5 +147,5 @@ class AppHandler():
         self.add_remote_crons_to_local()
 
 
-    def fetch_remote_crons(self):
+    def fetch_remote_crons(self, page: ft.Page, app_pages: AppPages) -> None:
         self.add_remote_crons_to_local()
