@@ -146,10 +146,10 @@ class AppHandler():
     # MAIN METHODS
     # =========================================================================
 
-    def login(self, page: ft.Page, app_pages: AppPages) -> None:
+    def login(self) -> None:
         self.authenticate()
         self.add_remote_crons_to_local()
         self.del_local_crons()
 
-    def fetch_remote_crons(self, page: ft.Page, app_pages: AppPages) -> None:
+    def fetch_remote_crons(self) -> None:
         self.add_remote_crons_to_local()
