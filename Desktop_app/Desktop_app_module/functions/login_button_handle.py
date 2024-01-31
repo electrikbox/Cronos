@@ -10,7 +10,7 @@ NOT_ENOUGH_ELEMENTS_MSG = "Not enough elements in cron data to check"
 INFOS_TEXT_COLOR = "red"
 
 
-class AppHandler():
+class AppHandler:
     COMMENT = "Cronos"
 
     def __init__(self, elements: Elements, page: ft.Page, app_pages: AppPages) -> None:
@@ -26,26 +26,30 @@ class AppHandler():
     # =========================================================================
 
     def remote_cron_to_str(self, cron: dict) -> str:
-        cmd = cron['command']
-        schedule = " ".join([
-            cron['minutes'],
-            cron['hours'],
-            cron['day_of_month'],
-            cron['months'],
-            cron['day_of_week'],
-        ])
+        cmd = cron["command"]
+        schedule = " ".join(
+            [
+                cron["minutes"],
+                cron["hours"],
+                cron["day_of_month"],
+                cron["months"],
+                cron["day_of_week"],
+            ]
+        )
         remote_cron_str = f"{schedule} {cmd} # {self.COMMENT}"
         return remote_cron_str
 
     def local_cron_to_str(self, cron: CronItem) -> str:
         cmd = cron.command
-        schedule = " ".join([
-            str(cron.minute),
-            str(cron.hour),
-            str(cron.dom),
-            str(cron.month),
-            str(cron.dow),
-        ])
+        schedule = " ".join(
+            [
+                str(cron.minute),
+                str(cron.hour),
+                str(cron.dom),
+                str(cron.month),
+                str(cron.dow),
+            ]
+        )
         local_cron_str = f"{schedule} {cmd} # {cron.comment}"
         return local_cron_str
 
@@ -96,7 +100,6 @@ class AppHandler():
         remote_crons, local_crons = self.crons_lists()
 
         for r_cron in remote_crons:
-
             command = str(r_cron["command"]).split(" ")[0]
             cmd_validated = CheckCommand.is_command_available_unix(command)
             r_cron_str = self.remote_cron_to_str(r_cron)
@@ -136,7 +139,6 @@ class AppHandler():
             local_crons.remove(l_cron)
             local_crons.write()
             print(f"{l_cron_str} : removed")
-
 
     # PAUSE CRON
     # =========================================================================
