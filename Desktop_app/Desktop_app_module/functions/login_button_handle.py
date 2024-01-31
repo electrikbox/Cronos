@@ -141,7 +141,54 @@ class AppHandler():
     # PAUSE CRON
     # =========================================================================
 
+    def toggle_pause_local_crons(self) -> None:
+        remote_crons, local_crons = self.crons_lists()
 
+        for r_cron in remote_crons:
+            r_cron_str = self.remote_cron_to_str(r_cron)
+
+            for l_cron in local_crons:
+                l_cron_str = self.local_cron_to_str(l_cron)
+
+                if r_cron_str != l_cron_str:
+                    continue
+
+                is_paused = r_cron["is_paused"]
+                is_enabled = l_cron.is_enabled()
+
+                if is_paused and is_enabled:
+                    l_cron.enable(False)
+                    print(f"{l_cron} : paused")
+                elif not is_paused and not is_enabled:
+                    l_cron.enable(True)
+                    print(f"{l_cron} : enabled")
+
+        local_crons.write()
+
+
+            # if r_cron["is_paused"]:
+            #     for l_cron in local_crons:
+            #         l_cron_str = self.local_cron_to_str(l_cron)
+
+            #         if r_cron_str == l_cron_str and l_cron.is_enabled():
+            #             l_cron.enable(False)
+            #             print(f"{l_cron} : paused")
+            # else:
+            #     for l_cron in local_crons:
+            #         l_cron_str = self.local_cron_to_str(l_cron)
+
+            #         if r_cron_str == l_cron_str and not l_cron.is_enabled():
+            #             l_cron.enable(True)
+            #             print(f"{l_cron} : enabled")
+
+            # for l_cron in local_crons:
+            #     l_cron_str = self.local_cron_to_str(l_cron)
+            #     if r_cron["is_paused"] and r_cron_str == l_cron_str and l_cron.is_enabled():
+            #         l_cron.enable(False)
+            #         print(f"{l_cron} : paused")
+            #     elif not r_cron["is_paused"] and r_cron_str == l_cron_str and not l_cron.is_enabled():
+            #         l_cron.enable(True)
+            #         print(f"{l_cron} : enabled")
 
     # MAIN METHODS
     # =========================================================================
@@ -150,6 +197,9 @@ class AppHandler():
         self.authenticate()
         self.add_remote_crons_to_local()
         self.del_local_crons()
+        self.toggle_pause_local_crons()
 
     def fetch_remote_crons(self) -> None:
         self.add_remote_crons_to_local()
+        self.del_local_crons()
+        self.toggle_pause_local_crons()
