@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.forms import AuthenticationForm
 from Cronos_website.forms import SignUpForm
 from django.contrib.auth import authenticate, login, logout
@@ -35,9 +35,9 @@ def signup_user(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('accounts:login')
+            return redirect(reverse('accounts:login') + '?success=true')
         else:
-            messages.error(request, "Invalid information. Please, try again.")
+            messages.error(request, "Invalid information. Please, try again")
             return render(request, 'accounts/signup.html', {'signup_form': form})
     else:
         form = SignUpForm()
