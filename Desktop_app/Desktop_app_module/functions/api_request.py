@@ -1,8 +1,7 @@
-# """Scrapper to get user's crons list"""
+""" Scrapper to get user's crons list """
 
 import sys
 import requests
-from typing import Any
 
 
 class CronScraper:
@@ -32,7 +31,7 @@ class CronScraper:
             return self.token
         else:
             print(
-                f"Échec de la connexion. Code d'état : {login_response.status_code}"
+                f"Connection failed. Status code: {login_response.status_code}"
             )
             self.authenticated = False
             return None
@@ -40,9 +39,8 @@ class CronScraper:
     # Get user crons list
     # =========================================================================
 
-    def get_crons_list(self):
-        if not self.authenticated:
-            self.user_auth()
+    def get_remote_crons(self, token):
+        self.token = token
 
         crons_headers = {
             "Content-Type": "application/json",
@@ -55,7 +53,7 @@ class CronScraper:
             return response.json()
         else:
             print(
-                f"Impossible d'obtenir la liste des crons. Code d'état : {response.status_code}"
+                f"Unable to obtain list of crons. Status code: {response.status_code}"
             )
             return None
 
@@ -65,7 +63,7 @@ class CronScraper:
 if __name__ == "__main__":
     if len(sys.argv) < 3:
         print(
-            "Veuillez fournir un nom d'utilisateur et un mot de passe en argument."
+            "Please provide a username and password in argument"
         )
         sys.exit(1)
 
@@ -76,10 +74,10 @@ if __name__ == "__main__":
     cron_scraper.user_auth()
 
     if cron_scraper.authenticated:
-        print("Authentification réussie.")
-        crons_list = cron_scraper.get_crons_list()
+        print("Successful authentication")
+        crons_list = cron_scraper.get_remote_crons()
 
         if crons_list:
             print(crons_list)
     else:
-        print("Authentification échouée.")
+        print("Authentication failed")

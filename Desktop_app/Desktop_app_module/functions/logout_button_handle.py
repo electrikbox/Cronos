@@ -1,10 +1,10 @@
 """Logout function call when hiting logout button"""
 
 import flet as ft
-from Desktop_app_module import Elements, Pages
+from Desktop_app_module import Elements, AppPages
 
 
-def logout(elements: Elements, page: ft.Page, pages: Pages) -> None:
+def logout(elements: Elements, page: ft.Page, pages: AppPages) -> None:
     elements.login_info_text.value = "Please login"
     elements.login_info_text.color = ft.colors.TEAL_400
     elements.login_button.disabled = True

@@ -4,7 +4,7 @@ import flet as ft
 from Desktop_app_module import Elements
 
 
-class Pages(ft.UserControl):
+class AppPages(ft.UserControl):
     def __init__(self, elements: Elements) -> None:
         self.elements = elements
 
@@ -57,5 +57,9 @@ class Pages(ft.UserControl):
                     [self.elements.logged_text],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
+                ft.Row(
+                    [self.elements.fetch_button],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                )
             ]
-        )  #
+        )

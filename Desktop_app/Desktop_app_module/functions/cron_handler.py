@@ -1,77 +1,23 @@
-from crontab import CronTab
-import sys
 
+# DELETE
+# =========================================================================
 
-class CronHandler:
-    COMMENT = "Cronos"
+def del_cron(self, cron_to_delete):
 
-    def __init__(self) -> None:
-        self.crons = CronTab(user=True)
+    self.crons.remove(cron_to_delete)
+    self.crons.write()
+    print(f"Cron '{cron_to_delete}' removed")
 
-    # ADD
-    # =========================================================================
+# PAUSE
+# =========================================================================
 
-    def add_cron(self, received_cron):
-        cmd = received_cron['command']
-        schedule = " ".join([
-            received_cron['minutes'],
-            received_cron['hours'],
-            received_cron['day_of_month'],
-            received_cron['months'],
-            received_cron['day_of_week'],
-        ])
+def pause_cron(self, cron_to_pause):
+    schedule, cmd = self.remote_cron_json_to_str(cron_to_pause)
+    cron_to_check = f"{schedule} {cmd} # {self.COMMENT}"
+    cron_test = self.crons.find_command(cmd)
 
-        if not any(
-            cron.command == cmd and cron.comment == self.COMMENT
-            for cron in self.crons
-        ):
-            new_cron = self.crons.new(command=cmd, comment=self.COMMENT)
-            new_cron.setall(schedule)
-            self.crons.write()
-            print(f"Cron '{new_cron}' added")
-        else:
-            print("Cron already exist")
-            sys.exit(1)
+    for cron_t in cron_test:
+        print(f"{cron_t} : {type(cron_t)}")
 
-
-    # DELETE
-    # =========================================================================
-        
-    def del_cron(self, cmd):
-        cron_to_delete = next(
-            (
-                cron for cron in self.crons
-                if cron.command == cmd and cron.comment == self.COMMENT
-            ),
-            None,
-        )
-
-        if cron_to_delete:
-            self.crons.remove(cron_to_delete)
-            self.crons.write()
-            print(f"Cron '{cron_to_delete}' deleted")
-        else:
-            print("Cron not found")
-            sys.exit(1)
-
-
-
-
-
-if __name__ == "__main__":
-    
-    RECEIVED_CRON = {
-    'minutes': '0',
-    'hours': '10',
-    'day_of_month': '22',
-    'months': 'jul',
-    'day_of_week': '*',
-    'command': 'pwd',
-    'user': 1,
-    'is_paused': False,
-    'validated': False
-    }
-
-    my_crons = CronHandler()
-    # my_crons.add_cron(RECEIVED_CRON)
-    # my_crons.del_cron("pwd")
+    self.crons.write()
+    print(f"Cron '{cron_to_pause}' paused")
