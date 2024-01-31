@@ -1,3 +1,5 @@
+@import url('variables.css');
+
 .login_form {
     display: flex;
     flex-direction: column;
@@ -7,13 +9,13 @@
 }
 
 .login_form label{
-    font-family: sans-serif;
+    font-family: var(--main-font-family);
     font-size: 16px;
     color: white;
 }
 
 .error_msg {
-    color: rgb(199, 66, 66);
+    color: var(--error-color);
     text-align: center;
-    font-family: sans-serif;
+    font-family: var(--main-font-family);
 }
