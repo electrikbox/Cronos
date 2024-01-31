@@ -165,31 +165,6 @@ class AppHandler():
 
         local_crons.write()
 
-
-            # if r_cron["is_paused"]:
-            #     for l_cron in local_crons:
-            #         l_cron_str = self.local_cron_to_str(l_cron)
-
-            #         if r_cron_str == l_cron_str and l_cron.is_enabled():
-            #             l_cron.enable(False)
-            #             print(f"{l_cron} : paused")
-            # else:
-            #     for l_cron in local_crons:
-            #         l_cron_str = self.local_cron_to_str(l_cron)
-
-            #         if r_cron_str == l_cron_str and not l_cron.is_enabled():
-            #             l_cron.enable(True)
-            #             print(f"{l_cron} : enabled")
-
-            # for l_cron in local_crons:
-            #     l_cron_str = self.local_cron_to_str(l_cron)
-            #     if r_cron["is_paused"] and r_cron_str == l_cron_str and l_cron.is_enabled():
-            #         l_cron.enable(False)
-            #         print(f"{l_cron} : paused")
-            #     elif not r_cron["is_paused"] and r_cron_str == l_cron_str and not l_cron.is_enabled():
-            #         l_cron.enable(True)
-            #         print(f"{l_cron} : enabled")
-
     # MAIN METHODS
     # =========================================================================
 
