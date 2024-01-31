@@ -11,6 +11,12 @@
 {% block main %}
 <h2>Login</h2>
 
+{% if request.GET.success %}
+    <div class="success_signup">
+        <p class="success_signup_text">Account created successfully</p>
+    </div>
+{% endif %}
+
 {% for message in messages %}
     <p class="error_msg">{{ message }}</p>
 {% endfor %}

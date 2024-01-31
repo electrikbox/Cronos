@@ -12,6 +12,12 @@
     color: white;
 }
 
+.success_signup {
+    color: rgb(91, 196, 81);
+    text-align: center;
+    font-family: sans-serif;
+}
+
 .error_msg {
     color: rgb(199, 66, 66);
     text-align: center;
