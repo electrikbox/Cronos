@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,9 +22,9 @@
       {% block header %}
 
       <div class="header_logo_text_and_menu">
-        
+
         <div class="logo"></div>
-        
+
         <div class="content__container">
           <ul class="content__container__list">
             <li class="content__container__list__item">Our service simplifies computer automations</li>
@@ -52,14 +52,16 @@
               </li>
             </ul></nav>
           </div>
-          
+
           {% else%}
+          <p><a href="{% url 'accounts:signup' %}">Register</a></p>
+          <br>
           <p><a href="{% url 'accounts:login' %}">Login</a></p>
           {% endif %}
         </div>
       </div>
     </div>
-      
+
       <h1>BASE</h1>
       {% endblock %}
     </header>
