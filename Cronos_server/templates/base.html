@@ -43,12 +43,12 @@
               <li class="dropdown">
                 <p><class="dropbtn">{{ user.username }} ▾</p>
                 <div class="dropdown-content">
-                  <a href="{% url 'Cronos_website:home'%}">Home</a>
-                  <a href="#">Account</a>
-                  <a href="{% url 'Cronos_website:cron_create_form'%}">Crons dashboard</a>
-                  <a href="#">FAQ</a>
-                  <a href="#">Contact us</a>
-                  <a href="{% url 'accounts:logout' %}" id="logout">Logout</a>
+                  <li><a href="{% url 'Cronos_website:home'%}">Home</a></li>
+                  <li><a href="#">Account</a></li>
+                  <li><a href="{% url 'Cronos_website:cron_create_form'%}">Crons dashboard</a></li>
+                  <li><a href="#">FAQ</a></li>
+                  <li><a href="#">Contact us</a></li>
+                  <li><a href="{% url 'accounts:logout' %}" id="logout">Logout</a></li>
                 </div>
               </li>
             </ul></nav>
