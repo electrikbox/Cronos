@@ -54,9 +54,10 @@ nav ul {
 }
 
 .auth_menu_list p:hover,
-.auth_menu_list a:hover,
-nav ul:hover{
+.auth_menu_list li:hover a,
+nav ul:hover {
     color: var(--link-color);
+    display: block;
 }
 
 .dropdown {
