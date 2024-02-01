@@ -73,14 +73,14 @@ nav ul:hover{
     z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-content li {
     text-decoration: none;
     text-align: end;
     width: 170px;
-    padding: 10px 30px 10px 25px;
+    padding: 7px 30px 7px 0px;
 }
 
-.dropdown-content a:hover {
+.dropdown-content li:hover {
     background-color: rgba(0, 0, 0, 0.26);
 }
 
