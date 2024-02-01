@@ -22,7 +22,6 @@
       {% block header %}
 
       <div class="header_logo_text_and_menu">
-
         <div class="logo">
           <img src="{% static '/img/Cron0S_03.png' %}" alt="logo">
         </div>
@@ -56,6 +55,8 @@
           </div>
 
           {% else%}
+          <p><a href="{% url 'accounts:signup' %}">Register</a></p>
+          <br>
           <p><a href="{% url 'accounts:login' %}">Login</a></p>
           {% endif %}
         </div>

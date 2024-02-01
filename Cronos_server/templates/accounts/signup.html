@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static '/css/signup_form.css' %}"/>
+{% endblock %}
+
+{% block main %}
+<h2>Sign Up</h2>
+
+{% for message in messages %}
+    <p class="error_msg">{{ message }}</p>
+{% endfor %}
+<div>
+    <form class="signup_form" method="POST">
+        {% csrf_token %}
+        <label for="id_username">Username</label>
+        {{ signup_form.username }}
+        <span class="helptext">Required. Max 15 characters</span>
+
+        <label for="id_email">Email</label>
+        {{ signup_form.email }}
+        <span class="helptext">Enter a valid email</span>
+
+        <label for="id_password1">Password</label>
+        {{ signup_form.password1 }}
+        <span class="helptext">Must contain at least 8 characters</span>
+
+        <label for="id_password2">Confirm Password</label>
+        {{ signup_form.password2 }}
+        <span class="helptext">Please, enter the same password again</span>
+
+        <input type="submit" value="Sign Up">
+    </form>
+</div>
+{% endblock %}

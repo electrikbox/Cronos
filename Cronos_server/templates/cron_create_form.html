@@ -14,32 +14,32 @@
   <form method="post">
 
     {% csrf_token %}
-    
+
     <div class="element">
       <div class="label">{{ cron_create_form.minutes.label }}</div>
       <div class="select">{{ cron_create_form.minutes }}</div>
     </div>
-    
+
     <div class="element">
       <div class="label">{{ cron_create_form.hours.label }}</div>
       <div class="select">{{ cron_create_form.hours }}</div>
     </div>
-    
+
     <div class="element">
       <div class="label">{{ cron_create_form.day_of_month.label }}</div>
       <div class="select">{{ cron_create_form.day_of_month }}</div>
     </div>
-    
+
     <div class="element">
       <div class="label">{{ cron_create_form.months.label }}</div>
       <div class="select">{{ cron_create_form.months }}</div>
     </div>
-    
+
     <div class="element">
       <div class="label">{{ cron_create_form.day_of_week.label }}</div>
       <div class="select">{{ cron_create_form.day_of_week }}</div>
     </div>
-    
+
     <div class="element">
       <div class="label">{{ cron_create_form.command.label }}</div>
       <div class="select">{{ cron_create_form.command }}</div>
