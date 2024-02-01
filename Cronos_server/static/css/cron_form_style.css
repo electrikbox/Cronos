@@ -1,5 +1,7 @@
+@import url('variables.css');
+
 .element .label, .success_msg p{
-	font-family: sans-serif;
+	font-family: var(--main-font-family);
     font-size: 16px;
     color: white;
 }
@@ -18,6 +20,6 @@ form {
 }
 
 .success_msg p{
-    color: rgb(91, 196, 81);
+    color: var(--success-color);
     text-align: center;
 }
