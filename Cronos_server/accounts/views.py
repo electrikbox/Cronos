@@ -33,8 +33,7 @@ def signup_user(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            form.save()
             return redirect(reverse('accounts:login') + '?success=true')
         else:
             messages.error(request, "Invalid information. Please, try again")
