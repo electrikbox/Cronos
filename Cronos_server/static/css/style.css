@@ -1,32 +1,39 @@
+@import url('variables.css');
+
 header, footer {
-	background-color: rgb(37, 52, 66);
+	background-color: var(--bg-color_);
 }
 
 body
 {
 	display: flex;
 	flex-direction: column;
-	background-color:rgb(34, 39, 41);
+	background-color: var(--bg-color_2);
 	margin: 0%;
 	min-height: 100vh;
 }
 
 footer {
 	margin-top: auto;
+	background-color: var(--bg-color_1);
 }
 
-h1 {
+h1, h2, h3 {
 	text-align: center;
-	font-family: sans-serif;
-	color: #799ca7;
-	font-size: 40px;
+	font-family: var(--main-font-family);
 	margin: 0%;
+}
+h1 {
+	color: var(--title-color);
+	font-size: 40px;
 }
 
 h2 {
-	text-align: center;
-	font-family: sans-serif;
-	color: #547d8a;
+	color: var(--title-color);
 	font-size: 26px;
-	margin: 0%;
+}
+
+h3 {
+	color: var(--text-color);
+	font-size: 20px;
 }
