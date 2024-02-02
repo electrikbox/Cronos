@@ -5,6 +5,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
+# CLASS CRON FORM
+# =============================================================================
+
 class CronForm(forms.ModelForm):
     """ Crons form class """
     minutes = forms.ChoiceField(
@@ -44,7 +47,7 @@ class CronForm(forms.ModelForm):
                   'months', 'day_of_week', 'command']
 
 
-# CLASS SIGNUPFORM
+# CLASS SIGNUP FORM
 # =============================================================================
 
 class SignUpForm(UserCreationForm):
@@ -84,4 +87,25 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name',
+                  'email', 'password1', 'password2')
+
+
+# CLASS LOGIN FORM
+# =============================================================================
+class LoginFormCustom(forms.Form):
+    """ Login form """
+    username = forms.CharField(
+        label="username",
+        max_length=15,
+        widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
+    )
+    password = forms.CharField(
+        label="password",
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Enter your password'}),
+    )
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')
