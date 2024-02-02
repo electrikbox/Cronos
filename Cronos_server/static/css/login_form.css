@@ -29,6 +29,7 @@
 	box-sizing: border-box;
 	font-family: Arial, sans-serif;
 	font-size: 16px;
+	border-radius: 8px;
 	outline: none;
 }
 
@@ -41,7 +42,7 @@
 	background-color: rgb(51, 132, 98);
 	color: white;
 	border: none;
-	border-radius: 5px;
+	border-radius: 8px;
 	cursor: pointer;
 }
 
