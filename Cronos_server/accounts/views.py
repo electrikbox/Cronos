@@ -68,6 +68,7 @@ def login_user(request):
         form = LoginFormCustom()
         return render(request, 'accounts/login.html', {'login_form': form})
 
+
 # LOGOUT USER
 # =============================================================================
 
