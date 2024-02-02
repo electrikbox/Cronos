@@ -4,6 +4,8 @@ from Cronos_website.forms import SignUpForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from Cronos_core.models import Profiles
+from django.contrib.auth.models import User
 
 
 def login_user(request):
@@ -33,7 +35,23 @@ def signup_user(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            username = form.cleaned_data.get('username')
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password1')
+
+            user = User.objects.create_user(username=username, password=password, email=email)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+
+            profile = Profiles.objects.create(user=user)
+            if first_name and last_name:
+                profile.first_name = first_name
+                profile.last_name = last_name
+                profile.save()
+
             return redirect(reverse('accounts:login') + '?success=true')
         else:
             messages.error(request, "Invalid information. Please, try again")
