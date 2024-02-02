@@ -29,10 +29,10 @@ def signup_user(request):
 
             profile = Profiles.objects.create(user=user)
 
-            if first_name and last_name:
-                profile.first_name = first_name
-                profile.last_name = last_name
-                profile.save()
+
+            profile.first_name = first_name
+            profile.last_name = last_name
+            profile.save()
 
             return redirect(reverse('accounts:login') + '?success=true')
         else:
