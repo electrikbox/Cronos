@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from Cronos_core.models import Profiles
 from django.contrib.auth.models import User
 from Cronos_website.forms import LoginFormCustom
+from rest_framework.authtoken.models import Token
 
 
 # SIGNUP USER
@@ -26,6 +27,8 @@ def signup_user(request):
             user.first_name = first_name
             user.last_name = last_name
             user.save()
+
+            Token.objects.get_or_create(user=user)
 
             profile = Profiles.objects.create(user=user)
 
