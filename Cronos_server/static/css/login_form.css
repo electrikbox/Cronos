@@ -30,6 +30,8 @@
 	font-family: Arial, sans-serif;
 	font-size: 16px;
 	outline: none;
+	border-radius: 4px;
+	border: 1px solid #ccc;
 }
 
 .login_form input[type="submit"] {
