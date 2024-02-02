@@ -10,6 +10,11 @@
     background-color: var(--bg-color_1);
 }
 
+#toggle_mode {
+    position: relative;
+    margin-left: auto;
+}
+
 .logo {
     height: 25px;
     width: 25px;
@@ -33,6 +38,10 @@
     align-items: end;
     font-size: 18px;
     font-family: var(--main-font-family);
+}
+
+.auth_menu p a:hover {
+    color: var(--link-color);
 }
 
 .auth_menu_list {
@@ -78,7 +87,13 @@ nav ul:hover {
     text-decoration: none;
     text-align: end;
     width: 170px;
-    padding: 7px 30px 7px 0px;
+    padding-right: 30px;
+}
+
+.dropdown-content li a {
+    margin-top: 7px;
+    margin-bottom: 7px;
+    display: block;
 }
 
 .dropdown-content li:hover {
@@ -92,9 +107,6 @@ nav ul:hover {
 
 #logout {
     color: white;
-    margin: 0px;
-    padding-bottom: 0px;
-    height: 30px;
     border-radius: 0px 0px 5px 5px;
 }
 
@@ -103,7 +115,7 @@ nav ul:hover {
 .content__container {
     position: absolute;
     height: 20px;
-    width: 70%;
+    width: 400px;
     overflow: hidden;
     color: var(--text-color);
     font-family: sans-serif;
