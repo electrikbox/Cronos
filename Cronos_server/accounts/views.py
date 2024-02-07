@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect, reverse
+from Cronos_server.mail import welcome_mail
 from Cronos_website.forms import SignUpForm
+from django.shortcuts import render, redirect, reverse
+from Cronos_core.models import Profiles
+from Cronos_website.forms import LoginFormCustom
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from Cronos_core.models import Profiles
 from django.contrib.auth.models import User
-from Cronos_website.forms import LoginFormCustom
 from rest_framework.authtoken.models import Token
 
 
@@ -31,11 +32,11 @@ def signup_user(request):
             Token.objects.get_or_create(user=user)
 
             profile = Profiles.objects.create(user=user)
-
-
             profile.first_name = first_name
             profile.last_name = last_name
             profile.save()
+
+            welcome_mail(email)
 
             return redirect(reverse('accounts:login') + '?success=true')
         else:
