@@ -101,6 +101,10 @@ nav ul:hover {
     background-color: rgba(0, 0, 0, 0.26);
 }
 
+.dropdown-content li a:hover {
+    color: var(--link-color);
+}
+
 .dropdown:hover .dropdown-content {
     display: flex;
     flex-direction: column;
