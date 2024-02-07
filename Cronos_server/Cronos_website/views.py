@@ -12,6 +12,18 @@ def home(request) -> HttpResponse:
     """ Render home page """
     return render(request, "home.html")
 
+def contact(request) -> HttpResponse:
+    """ Render contact page """
+    return render(request, "contact.html")
+
+def downloads(request) -> HttpResponse:
+    """ Render downloads page """
+    return render(request, "downloads.html")
+
+def FAQ(request) -> HttpResponse:
+    """ Render FAQ page """
+    return render(request, "FAQ.html")
+
 
 @login_required
 def cron_create_form(request) -> HttpResponse:
@@ -34,7 +46,7 @@ def cron_create_form(request) -> HttpResponse:
         # api request =====================================================
 
         token = Token.objects.get(user=request.user).key
-        header = {                
+        header = {
             "Content-Type": "application/json",
             "Authorization": f"Token {token}"
         }
@@ -42,7 +54,7 @@ def cron_create_form(request) -> HttpResponse:
         data["user"] = request.user.id
         data["is_paused"] = False
         data["validated"] = False
-        
+
         response = requests.post(CRON_CREATE_API_URL, headers=header, json=data)
 
         if response.status_code == 201:
@@ -50,9 +62,9 @@ def cron_create_form(request) -> HttpResponse:
             return render(request, "cron_create_success.html", context)
         else:
             return HttpResponse(response.status_code)
-    
+
         # =================================================================
-        
+
     else:
         cron_create_form = CronForm()
 

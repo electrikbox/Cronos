@@ -75,3 +75,27 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('accounts:login')
+
+
+# ACCOUNT
+# =============================================================================
+
+def account(request):
+    """ Render account page """
+    return render(request, 'accounts/account.html')
+
+
+# CHANGE PASSWORD
+# =============================================================================
+
+def change_password(request):
+    """ Render change password page """
+    return render(request, 'accounts/change_password.html')
+
+
+# FORGET PASSWORD
+# =============================================================================
+
+def forget_password(request):
+    """ Render forget password page """
+    return render(request, 'accounts/forget_password.html')
