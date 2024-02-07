@@ -8,15 +8,16 @@ from django.utils.html import strip_tags
 # WELCOME MAIL
 # =============================================================================
 
-def welcome_mail(email):
+def welcome_mail(email, username):
     """ Send welcome mail to new user after successful registration """
-    
+
     # login_url = reverse('accounts:login') + '?success=true'
 
     login_url = 'http://localhost:8000/accounts/login/?success=true'
 
     context = {
 		'login_url': login_url,
+  		'username': username,
 	}
 
     email_html_message = render_to_string('mails/welcome_mail.html', context)

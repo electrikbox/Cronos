@@ -36,7 +36,7 @@ def signup_user(request):
             profile.last_name = last_name
             profile.save()
 
-            welcome_mail(email)
+            welcome_mail(email, username)
 
             return redirect(reverse('accounts:login') + '?success=true')
         else:
