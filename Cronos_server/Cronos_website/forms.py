@@ -5,6 +5,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
+# CLASS CRON FORM
+# =============================================================================
+
 class CronForm(forms.ModelForm):
     """ Crons form class """
     minutes = forms.ChoiceField(
@@ -44,7 +47,7 @@ class CronForm(forms.ModelForm):
                   'months', 'day_of_week', 'command']
 
 
-# CLASS SIGNUPFORM
+# CLASS SIGNUP FORM
 # =============================================================================
 
 class SignUpForm(UserCreationForm):
@@ -54,21 +57,55 @@ class SignUpForm(UserCreationForm):
         max_length=15,
         widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
     )
+    first_name = forms.CharField(
+        label="First_name",
+        max_length=64,
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Enter your firstname'}),
+    )
+    last_name = forms.CharField(
+        label="Last_name",
+        max_length=64,
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Enter your lastname'}),
+    )
     email = forms.EmailField(
         label="Email",
         max_length=50,
-        widget=forms.EmailInput(attrs={'placeholder': 'my-email@mail.com'}),
+        widget=forms.EmailInput(attrs={'placeholder': 'Enter a valid email'}),
     )
-
     password1 = forms.CharField(
         label="Password",
-        widget=forms.PasswordInput(attrs={'placeholder': 'Choose a complex password'}),
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Choose a complex password'}),
     )
     password2 = forms.CharField(
         label="Confirm your password",
-        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm your password'}),
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Confirm your password'}),
     )
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name',
+                  'email', 'password1', 'password2')
+
+
+# CLASS LOGIN FORM
+# =============================================================================
+class LoginFormCustom(forms.Form):
+    """ Login form """
+    username = forms.CharField(
+        label="username",
+        max_length=15,
+        widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
+    )
+    password = forms.CharField(
+        label="password",
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Enter your password'}),
+    )
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')
