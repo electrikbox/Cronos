@@ -38,12 +38,16 @@
 	font-size: 18px;
 	font-weight: bold;
 	text-align: center;
-	margin: 15px 0 10px 0;
+	margin: 10px 0 10px 0;
 	background-color: rgb(51, 132, 98);
 	color: white;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
+}
+.signup_form label[for="id_password2"] {
+	margin-top: -10px;
+	padding-top: 0px;
 }
 
 .login_form input[type="text"]:focus,
@@ -83,4 +87,16 @@
     color: rgb(91, 196, 81);
     text-align: center;
     font-family: sans-serif;
+}
+.showPwd {
+	font-family: var(--main-font-family);
+	color: var(--text-color);
+	font-size: 11px;
+	cursor: pointer;
+	text-align: right;
+	margin-right: 5px;
+	margin-top: -3px;
+}
+.showPwd:hover {
+	color: var(--link-color);
 }
