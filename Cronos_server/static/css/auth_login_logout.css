@@ -10,11 +10,6 @@
     background-color: var(--bg-color_1);
 }
 
-#toggle_mode {
-    position: relative;
-    margin-left: auto;
-}
-
 .logo {
     height: 25px;
     width: 25px;
