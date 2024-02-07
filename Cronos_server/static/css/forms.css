@@ -1,0 +1,86 @@
+.signup_form,
+.login_form {
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	gap: 8px;
+	margin: 0 auto;
+}
+
+.signup_form label,
+.login_form label {
+	padding-top: 10px;
+	font-family: sans-serif;
+	font-size: 16px;
+	color: white;
+}
+
+.login_form input[type="text"],
+.login_form input[type="password"],
+.signup_form input[type="text"],
+.signup_form input[type="email"],
+.signup_form input[type="password"],
+.signup_form input[type="submit"] {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 5px;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	outline: none;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+}
+
+.login_form input[type="submit"],
+.signup_form input[type="submit"] {
+	padding: 15px 20px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	margin: 15px 0 10px 0;
+	background-color: rgb(51, 132, 98);
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.login_form input[type="text"]:focus,
+.login_form input[type="password"]:focus,
+.signup_form input[type="text"]:focus,
+.signup_form input[type="email"]:focus,
+.signup_form input[type="password"]:focus {
+	border-color: #66afe9;
+}
+
+.login_form input[type="submit"]:hover,
+.signup_form input[type="submit"]:hover {
+	background-color: #45a049;
+}
+
+.login_form .helptext,
+.signup_form .helptext {
+	display: flex;
+	padding-top: 3px;
+	padding-bottom: 10px;
+	font-family: sans-serif;
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.771);
+}
+
+.error_msg {
+	color: rgb(199, 66, 66);
+	text-align: center;
+	font-family: sans-serif;
+}
+
+.signup_form input[type="password"]:last-child {
+	margin-bottom: 50px;
+}
+
+.success_signup {
+    color: rgb(91, 196, 81);
+    text-align: center;
+    font-family: sans-serif;
+}

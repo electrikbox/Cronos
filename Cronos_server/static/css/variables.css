@@ -1,10 +1,41 @@
 :root {
-    --bg-color_1: rgb(34, 34, 34);
-    --bg-color_2: rgb(44, 44, 44);
-    --error-color : rgb(199, 66, 66);
-    --success-color : rgb(91, 196, 81);
-    --link-color : rgb(250, 150, 0);
-    --text-color : #799ca7;
-    --title-color : var(--bg-color_1);
+    --bg-color_1-light: rgb(97, 146, 140);
+    --bg-color_2-light: rgb(221, 221, 221);
+    --error-color-light: rgb(199, 66, 66);
+    --success-color-light: rgb(91, 196, 81);
+    --link-color-light: rgb(250, 150, 0);
+    --text-color-light: #333;
+    --title-color-light: var(--bg-color_1-light);
+
+    --bg-color_1-dark: rgb(34, 34, 34);
+    --bg-color_2-dark: rgb(44, 44, 44);
+    --error-color-dark: rgb(199, 66, 66);
+    --success-color-dark: rgb(91, 196, 81);
+    --link-color-dark: rgb(250, 150, 0);
+    --text-color-dark: #a9b2b3;
+    --title-color-dark: var(--bg-color_1-dark);
+
     --main-font-family: 'Roboto', sans-serif;
 }
+
+.light-mode {
+    --bg-color_1: var(--bg-color_1-light);
+    --bg-color_2: var(--bg-color_2-light);
+    --error-color: var(--error-color-light);
+    --success-color: var(--success-color-light);
+    --link-color: var(--link-color-light);
+    --text-color: var(--text-color-light);
+    --title-color: var(--title-color-light);
+}
+
+.dark-mode {
+    --bg-color_1: var(--bg-color_1-dark);
+    --bg-color_2: var(--bg-color_2-dark);
+    --error-color: var(--error-color-dark);
+    --success-color: var(--success-color-dark);
+    --link-color: var(--link-color-dark);
+    --text-color: var(--text-color-dark);
+    --title-color: var(--title-color-dark);
+}
+
+/* Appliquez la classe 'light-mode' ou 'dark-mode' au body pour changer le mode */
