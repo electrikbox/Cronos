@@ -1,18 +1,12 @@
 $(document).ready(function () {
-  $('#id_day_of_week').change(function () {
-    var selectedDayOfWeek = $(this).val();
-    var dayOfMonthField = $('#id_day_of_month');
+  $('#id_day_of_week, #id_day_of_month').change(function () {
+    const selectedValue = $(this).val();
+    const dayOfWeek = $('#id_day_of_week');
+    const dayOfMonth = $('#id_day_of_month');
+    const otherField = $(this).is(dayOfWeek) ? dayOfMonth : dayOfWeek;
 
-    if (selectedDayOfWeek !== '*') {
-      dayOfMonthField.val('*');
-    }
-  });
-  $('#id_day_of_month').change(function () {
-    var selectedDayOfMonth = $(this).val();
-    var dayOfWeekField = $('#id_day_of_week');
-
-    if (selectedDayOfMonth !== '*') {
-      dayOfWeekField.val('*');
+    if (selectedValue !== '*') {
+      otherField.val('*');
     }
   });
 });

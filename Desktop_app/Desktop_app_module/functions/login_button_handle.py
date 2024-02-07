@@ -54,7 +54,10 @@ class AppHandler:
         return local_cron_str
 
     def crons_lists(self) -> tuple[list[dict], CronTab]:
-        remote_crons = CronScraper(self.username, self.password).get_remote_crons(self.token)
+        remote_crons = CronScraper(
+            self.username,
+            self.password
+        ).get_remote_crons(self.token)
         local_crons = CronTab(user=True)
         return remote_crons, local_crons
 
@@ -100,18 +103,22 @@ class AppHandler:
         remote_crons, local_crons = self.crons_lists()
 
         for r_cron in remote_crons:
+            r_cron_str = self.remote_cron_to_str(r_cron)
+
+            if any(
+                r_cron_str == self.local_cron_to_str(l_cron)
+                for l_cron in local_crons
+            ):
+                continue
+
             command = str(r_cron["command"]).split(" ")[0]
             cmd_validated = CheckCommand.is_command_available_unix(command)
-            r_cron_str = self.remote_cron_to_str(r_cron)
 
             if not cmd_validated:
                 print(f"{command} : can't be process on this computer")
                 continue
 
             # cron_scraper.send_validation(cron)
-
-            if any(r_cron_str == self.local_cron_to_str(l_cron) for l_cron in local_crons):
-                continue
 
             new_cron = local_crons.new(command=command, comment=self.COMMENT)
             new_cron.setall(r_cron_str.split(" ")[:5])
@@ -126,6 +133,7 @@ class AppHandler:
 
     def del_local_crons(self) -> None:
         remote_crons, local_crons = self.crons_lists()
+        crons_to_remove = []
 
         for l_cron in local_crons:
             l_cron_str = self.local_cron_to_str(l_cron)
@@ -133,12 +141,20 @@ class AppHandler:
             if l_cron.comment != self.COMMENT:
                 continue
 
-            if any(l_cron_str == self.remote_cron_to_str(r_cron) for r_cron in remote_crons):
+            if any(
+                l_cron_str == self.remote_cron_to_str(r_cron)
+                for r_cron in remote_crons
+            ):
                 continue
 
-            local_crons.remove(l_cron)
-            local_crons.write()
-            print(f"{l_cron_str} : removed")
+            crons_to_remove.append(l_cron)
+
+        for cron in crons_to_remove:
+            local_crons.remove(cron)
+            print(f"{cron} : removed")
+
+        local_crons.write()
+
 
     # PAUSE CRON
     # =========================================================================
@@ -146,15 +162,17 @@ class AppHandler:
     def toggle_pause_local_crons(self) -> None:
         remote_crons, local_crons = self.crons_lists()
 
+        local_crons_dict = {
+            self.local_cron_to_str(cron): cron
+            for cron in local_crons
+            if cron.comment == self.COMMENT
+        }
+
         for r_cron in remote_crons:
             r_cron_str = self.remote_cron_to_str(r_cron)
 
-            for l_cron in local_crons:
-                l_cron_str = self.local_cron_to_str(l_cron)
-
-                if r_cron_str != l_cron_str:
-                    continue
-
+            if r_cron_str in local_crons_dict:
+                l_cron = local_crons_dict[r_cron_str]
                 is_paused = r_cron["is_paused"]
                 is_enabled = l_cron.is_enabled()
 
