@@ -10,11 +10,6 @@
     background-color: var(--bg-color_1);
 }
 
-#toggle_mode {
-    position: relative;
-    margin-left: auto;
-}
-
 .logo {
     height: 25px;
     width: 25px;
@@ -99,6 +94,10 @@ nav ul:hover {
 
 .dropdown-content li:hover {
     background-color: rgba(0, 0, 0, 0.26);
+}
+
+.dropdown-content li a:hover {
+    color: var(--link-color);
 }
 
 .dropdown:hover .dropdown-content {

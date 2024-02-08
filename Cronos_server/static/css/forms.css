@@ -7,6 +7,7 @@
 	margin: 0 auto;
 }
 
+.cron_form label,
 .signup_form label,
 .login_form label {
 	padding-top: 10px;
@@ -46,6 +47,7 @@
 	cursor: pointer;
 }
 
+.cron_form select:focus,
 .login_form input[type="text"]:focus,
 .login_form input[type="password"]:focus,
 .signup_form input[type="text"]:focus,
@@ -54,6 +56,7 @@
 	border-color: #66afe9;
 }
 
+.cron_form button[type="submit"]:hover,
 .login_form input[type="submit"]:hover,
 .signup_form input[type="submit"]:hover {
 	background-color: #45a049;

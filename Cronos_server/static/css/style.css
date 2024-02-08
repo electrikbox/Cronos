@@ -2,15 +2,18 @@
 
 header, footer {
 	background-color: var(--bg-color_);
+	width: 100%;
 }
 
 body
 {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    height: 100vh;
+    margin: 0;
 	background-color: var(--bg-color_2);
-	margin: 0%;
-	min-height: 100vh;
 }
 
 footer {
@@ -22,6 +25,7 @@ h1, h2, h3 {
 	text-align: center;
 	font-family: var(--main-font-family);
 	margin: 0%;
+	margin-bottom: 10px;
 }
 h1 {
 	color: var(--title-color);
