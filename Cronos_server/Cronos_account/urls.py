@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = "accounts"
+app_name = "Cronos_account"
 
 urlpatterns = [
     path('login/', views.login_user, name='login'),

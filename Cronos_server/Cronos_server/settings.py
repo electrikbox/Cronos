@@ -51,12 +51,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Cronos_website',
+    'Cronos_account',
     'Cronos_API',
     'Cronos_core',
+    'Cronos_website',
     'rest_framework',
     'rest_framework.authtoken',
-    'accounts',
 ]
 
 MIDDLEWARE = [

@@ -38,7 +38,7 @@ def signup_user(request):
 
             welcome_mail(email, username)
 
-            return redirect(reverse('accounts:login') + '?success=true')
+            return redirect(reverse('Cronos_account:login') + '?success=true')
         else:
             messages.error(request, "Invalid information. Please, try again")
             return render(request, 'accounts/signup.html', {'signup_form': form})
@@ -75,7 +75,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('accounts:login')
+    return redirect('Cronos_account:login')
 
 
 # ACCOUNT

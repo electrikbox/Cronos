@@ -11,7 +11,7 @@ from django.utils.html import strip_tags
 def welcome_mail(email, username):
     """ Send welcome mail to new user after successful registration """
 
-    # login_url = reverse('accounts:login') + '?success=true'
+    # login_url = reverse('Cronos_account:login') + '?success=true'
 
     login_url = 'http://localhost:8000/accounts/login/?success=true'
 

@@ -44,21 +44,21 @@
                 <p><class="dropbtn">{{ user.username }} ▾</p>
                 <div class="dropdown-content">
                   <li><a href="{% url 'Cronos_website:home'%}">Home</a></li>
-                  <li><a href="{% url 'accounts:account' %}">Account</a></li>
+                  <li><a href="{% url 'Cronos_account:account' %}">Account</a></li>
                   <li><a href="{% url 'Cronos_website:cron_create_form'%}">Crons dashboard</a></li>
                   <li><a href="{% url 'Cronos_website:downloads'%}">Downloads</a></li>
                   <li><a href="{% url 'Cronos_website:FAQ'%}">FAQ</a></li>
                   <li><a href="{% url 'Cronos_website:contact'%}">Contact us</a></li>
-                  <li><a href="{% url 'accounts:logout' %}" id="logout">Logout</a></li>
+                  <li><a href="{% url 'Cronos_account:logout' %}" id="logout">Logout</a></li>
                 </div>
               </ul>
             </nav>
           </div>
 
           {% else%}
-          <p><a href="{% url 'accounts:signup' %}">Register</a></p>
+          <p><a href="{% url 'Cronos_account:signup' %}">Register</a></p>
           <p>|</p>
-          <p><a href="{% url 'accounts:login' %}">Login</a></p>
+          <p><a href="{% url 'Cronos_account:login' %}">Login</a></p>
           {% endif %}
         </div>
       </div>
