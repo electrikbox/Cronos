@@ -46,10 +46,6 @@
 	border-radius: 5px;
 	cursor: pointer;
 }
-.signup_form label[for="id_password2"] {
-	margin-top: -10px;
-	padding-top: 0px;
-}
 
 .login_form input[type="text"]:focus,
 .login_form input[type="password"]:focus,
@@ -92,11 +88,15 @@
 .showPwd {
 	font-family: var(--main-font-family);
 	color: var(--text-color);
+	width: auto;
+	font-weight: bold;
 	font-size: 11px;
 	cursor: pointer;
-	text-align: right;
-	margin-right: 5px;
-	margin-top: -3px;
+	margin-right: 10px;
+	margin-top: -38px;
+	margin-left: auto;
+	margin-bottom: 15px;
+
 }
 .showPwd:hover {
 	color: var(--link-color);
