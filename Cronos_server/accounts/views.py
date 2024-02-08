@@ -64,7 +64,7 @@ def login_user(request):
                 return HttpResponseRedirect(request.GET.get('next', '/'))
             else:
                 messages.error(request, "Invalid username or password.")
-                return HttpResponseRedirect(request.GET.get('next', '/'))
+                return render(request, 'accounts/login.html', {'login_form': form})
     else:
         form = LoginFormCustom()
         return render(request, 'accounts/login.html', {'login_form': form})
