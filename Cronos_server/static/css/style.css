@@ -5,6 +5,10 @@ header, footer {
 	width: 100%;
 }
 
+main {
+	margin-bottom: 50px;
+}
+
 body
 {
 	display: flex;
@@ -17,6 +21,7 @@ body
 }
 
 footer {
+	padding-top: 10px;
 	margin-top: auto;
 	background-color: var(--bg-color_1);
 }
