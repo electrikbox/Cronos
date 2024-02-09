@@ -82,7 +82,13 @@ def activate_account(request, uidb64, token_key):
         user.save()
         return HttpResponseRedirect(reverse('Cronos_account:login') + '?success=true')
     else:
-        return render(request, 'activation_error.html')
+        return render(request, 'accounts/activation_error.html')
+
+# ACTIVATION ERROR
+# =============================================================================
+def activation_error(request):
+    """ Render activation error page """
+    return render(request, 'accounts/activation_error.html')
 
 
 # LOGIN USER
