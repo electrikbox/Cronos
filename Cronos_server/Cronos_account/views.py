@@ -59,6 +59,7 @@ def signup_user(request):
 
 # PENDING ACTIVATION
 # =============================================================================
+
 def pending_activation(request):
     """ Render pending account page """
     return render(request, 'accounts/pending_activation.html')
@@ -84,8 +85,10 @@ def activate_account(request, uidb64, token_key):
     else:
         return render(request, 'accounts/activation_error.html')
 
+
 # ACTIVATION ERROR
 # =============================================================================
+
 def activation_error(request):
     """ Render activation error page """
     return render(request, 'accounts/activation_error.html')
