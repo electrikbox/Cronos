@@ -119,7 +119,7 @@ class AppHandler:
                 continue
 
             validated_cron = CronScraper(self.username, self.password)
-            validated_cron.send_validation(r_cron["id"])
+            validated_cron.send_cron_validation(r_cron["id"])
 
             new_cron = local_crons.new(command=command, comment=self.COMMENT)
             new_cron.setall(r_cron_str.split(" ")[:5])

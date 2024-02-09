@@ -60,7 +60,7 @@ class CronScraper:
     # Send cron validation
     # =========================================================================
 
-    def send_validation(self, cron_id):
+    def send_cron_validation(self, cron_id):
         self.user_auth()
 
         cron_data = {"validated": True}
