@@ -148,6 +148,9 @@ STATICFILES_DIRS = [BASE_DIR / 'static',]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# REST framework settings
+# =============================================================================
+
 REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -164,3 +167,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = MAIL_CRONOS
 EMAIL_HOST_PASSWORD = MAIL_PASS
+
+
+# Allows authenticate to check if user is active or not
+# Doc link : https://itecnote.com/tecnote/django-user-is_active/
+# =============================================================================
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.AllowAllUsersModelBackend'
+]
