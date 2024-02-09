@@ -12,4 +12,5 @@ urlpatterns = [
     path('forget_password/', views.forget_password, name='forget_password'),
     path('signup/pending/', views.pending_activation, name='pending_activation'),
     path('activate/<uidb64>/<token_key>/', views.activate_account, name='activate_account'),
+    path('signup/activation_error', views.activation_error, name='activation_error'),
 ]
