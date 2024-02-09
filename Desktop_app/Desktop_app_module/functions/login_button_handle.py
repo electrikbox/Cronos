@@ -118,7 +118,8 @@ class AppHandler:
                 print(f"{command} : can't be process on this computer")
                 continue
 
-            # cron_scraper.send_validation(cron)
+            validated_cron = CronScraper(self.username, self.password)
+            validated_cron.send_validation(r_cron["id"])
 
             new_cron = local_crons.new(command=command, comment=self.COMMENT)
             new_cron.setall(r_cron_str.split(" ")[:5])
