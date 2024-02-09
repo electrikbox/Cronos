@@ -12,7 +12,6 @@ from django.shortcuts import render, redirect, reverse
 from rest_framework.authtoken.models import Token
 
 
-
 # SIGNUP USER
 # =============================================================================
 
@@ -98,6 +97,7 @@ def activation_error(request):
 # =============================================================================
 
 def login_user(request):
+    """ Render login page and authenticate user """
     if request.method == 'POST':
         form = LoginFormCustom(request.POST)
         if form.is_valid():
@@ -128,6 +128,7 @@ def login_user(request):
 # =============================================================================
 
 def logout_user(request):
+    """ Logout user """
     logout(request)
     return redirect('Cronos_account:login')
 
