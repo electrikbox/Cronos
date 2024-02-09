@@ -15,7 +15,7 @@ def activation_mail(email, username, uidb64, token):
     # login_url = 'http://localhost:8000/accounts/login/?success=true'
 
     activation_link = reverse('Cronos_account:activate_account', args=[uidb64, token])
-    activation_url = 'http://localhost:8000' + activation_link + '?success=true'
+    activation_url = 'http://localhost:8000' + activation_link + '?activate=true'
 
     context = {
 		'login_url': activation_url,

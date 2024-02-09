@@ -80,7 +80,7 @@ def activate_account(request, uidb64, token_key):
     if user and token and token.user == user:
         user.is_active = True
         user.save()
-        return HttpResponseRedirect(reverse('Cronos_account:login') + '?success=true')
+        return HttpResponseRedirect(reverse('Cronos_account:login') + '?activate=true')
     else:
         return render(request, 'accounts/activation_error.html')
 
