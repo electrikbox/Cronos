@@ -55,7 +55,7 @@ class SignUpForm(UserCreationForm):
     username = forms.CharField(
         label="Username",
         max_length=15,
-        widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
+        # widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
     )
     first_name = forms.CharField(
         label="First_name",
@@ -98,12 +98,11 @@ class LoginFormCustom(forms.Form):
     username = forms.CharField(
         label="username",
         max_length=15,
-        widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
+        # widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
     )
     password = forms.CharField(
         label="password",
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Enter your password'}),
+        widget=forms.PasswordInput()
     )
 
     class Meta:

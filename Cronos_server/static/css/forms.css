@@ -5,18 +5,19 @@
 	width: 400px;
 	gap: 8px;
 	margin: 0 auto;
+	align-items: center;
 }
 
-.cron_form label,
+/* .cron_form label,
 .signup_form label,
 .login_form label {
 	padding-top: 10px;
 	font-family: sans-serif;
 	font-size: 16px;
 	color: white;
-}
+} */
 
-.login_form input[type="text"],
+/* .login_form input[type="text"],
 .login_form input[type="password"],
 .signup_form input[type="text"],
 .signup_form input[type="email"],
@@ -31,20 +32,22 @@
 	outline: none;
 	border-radius: 4px;
 	border: 1px solid #ccc;
-}
+} */
 
 .login_form input[type="submit"],
 .signup_form input[type="submit"] {
-	padding: 15px 20px;
 	font-size: 18px;
 	font-weight: bold;
 	text-align: center;
 	margin: 10px 0 10px 0;
-	background-color: rgb(51, 132, 98);
-	color: white;
+	background-color: #31373b;
+	color: #66afe9;
 	border: none;
-	border-radius: 5px;
+	border-radius: 30px;
 	cursor: pointer;
+	width: 130px;
+	height: 40px;
+	transition: all 0.3s ease;
 }
 
 .cron_form select:focus,
@@ -56,13 +59,13 @@
 	border-color: #66afe9;
 }
 
-.cron_form button[type="submit"]:hover,
+/* .cron_form button[type="submit"]:hover,
 .login_form input[type="submit"]:hover,
 .signup_form input[type="submit"]:hover {
-	background-color: #45a049;
-}
+	background-color: #2f4152;
+} */
 
-.login_form .helptext,
+/* .login_form .helptext,
 .signup_form .helptext {
 	display: flex;
 	padding-top: 3px;
@@ -70,7 +73,7 @@
 	font-family: sans-serif;
 	font-size: 14px;
 	color: rgba(255, 255, 255, 0.771);
-}
+} */
 
 .error_msg {
 	color: rgb(199, 66, 66);
@@ -89,15 +92,14 @@
 }
 .showPwd {
 	font-family: var(--main-font-family);
-	color: var(--text-color);
-	width: auto;
+	color: rgb(100, 100, 100);
 	font-weight: bold;
-	font-size: 11px;
+	font-size: 12px;
 	cursor: pointer;
-	margin-right: 10px;
-	margin-top: -40px;
-	margin-left: auto;
-	margin-bottom: 15px;
+	right: 0;
+	margin-top: 16px;
+	margin-right: 16px;
+	position: absolute;
 
 }
 .showPwd:hover {
@@ -115,5 +117,52 @@
 .cron_form button[type="submit"]:hover,
 .login_form input[type="submit"]:hover,
 .signup_form input[type="submit"]:hover {
-	background-color: #45a049;
+	background-color: #2d4861;
+	transition: all 0.3s ease;
 }
+
+
+/* ============ new styles ============ */
+
+
+.inputGroup {
+	font-family: 'Segoe UI', sans-serif;
+	margin: .5em 0 .5em 0;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+  }
+
+  .login_form input[type="text"],
+  .login_form input[type="password"] {
+	font-size: 100%;
+	padding: 0.8em;
+	outline: none;
+	border: 2px solid rgb(0, 0, 0);
+	background-color: transparent;
+	border-radius: 5px;
+	width: 30vh;
+	color: white;
+  }
+
+.inputGroup label {
+	font-size: 100%;
+	position: absolute;
+	padding: 0.8em;
+	margin-left: 0.5em;
+	pointer-events: none;
+	transition: all 0.2s ease;
+	color: rgb(175, 175, 175);
+  }
+
+  .inputGroup :is(input:focus, input:valid)~label {
+	transform: translateY(-50%) scale(.9);
+	margin: 0em;
+	margin-left: 0.8em;
+	padding: 0.3em;
+	background-color: var(--bg-color_2);
+  }
+
+  .inputGroup :is(input:focus, input:valid)~label {
+	color: var(--link-color);
+  }

@@ -21,14 +21,17 @@
 {% for message in messages %}
     <p class="error_msg">{{ message }}</p>
 {% endfor %}
-<div>
+<div class="login">
     <form class="login_form" method="POST">
         {% csrf_token %}
-
-        <label for="username">Username</label>
-        {{ login_form.username }}
-        <label for="password">Password</label>
-        {{ login_form.password }}
+        <div class="inputGroup">
+            {{ login_form.username }}
+            <label for="username">Username</label>
+        </div>
+        <div class="inputGroup">
+            {{ login_form.password }}
+            <label for="password">Password</label>
+        </div>
 
         <input type="submit" value="Login">
     </form>
