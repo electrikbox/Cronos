@@ -42,7 +42,7 @@
     z-index: 0;
 }
 #navbar:hover {
-    width: 16em;
+    width: 13em;
 }
 .navbar-items {
     margin: 0;
@@ -101,58 +101,4 @@
     opacity: 0.5;
     filter: invert(100%); /* Inverse la couleur de l'image */
     -webkit-filter: invert(100%); /* Pour une compatibilité avec certains navigateurs basés sur WebKit */
-}
-
-
-@media only screen and (max-width: 1660px) {
-    :root {
-        --heading-large: 5.4rem;
-        --heading-medium: 3.4rem;
-        --heading-small: 2.2rem;
-    }
-}
-@media only screen and (max-width: 1456px) {
-    :root {
-        --heading-large: 5.2rem;
-        --heading-medium: 3.2rem;
-        --heading-small: 2rem;
-    }
-    .view-width {
-        width: 80%;
-    }
-}
-@media only screen and (max-width: 1220px) {
-    .view-width {
-        width: 70%;
-    }
-}
-@media only screen and (max-width: 1024px) {
-    :root {
-        --heading-large: 5rem;
-        --heading-medium: 3rem;
-        --heading-small: 1.8rem;
-    }
-    .view-width {
-        width: 75%;
-    }
-}
-@media only screen and (max-width: 756px) {
-    :root {
-        --heading-large: 4rem;
-        --heading-medium: 2.6rem;
-        --heading-small: 1.6rem;
-        --paragraph: 1rem;
-        --navbar-buttons: 2.2rem;
-    }
-    .view-width {
-        width: calc(100% - 5em);
-    }
-}
-@media only screen and (max-width: 576px) {
-    .view-width {
-        width: calc(100% - 3em);
-    }
-}
-@media only screen and (max-width: 496px) {
-
 }
