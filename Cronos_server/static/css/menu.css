@@ -14,6 +14,10 @@
     --transition-main: .175, .685, .32;
 }
 
+aside {
+    z-index: 1;
+}
+
 .flexbox {
     display: flex;
     justify-content: center;

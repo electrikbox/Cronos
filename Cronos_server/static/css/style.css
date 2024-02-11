@@ -22,6 +22,8 @@ section {
     width: 95%;
     display: flex;
     flex-direction: column;
+	justify-content: center;
+	align-items: center;
     margin: 0;
 	margin-left: auto;
     z-index: 0; /* Assurez-vous que la section est en dessous de l'aside */

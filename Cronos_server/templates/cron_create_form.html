@@ -12,7 +12,6 @@
 
 {% block section %}
 <h2>Create cron</h2>
-<div>
   <form class="cron_form" method="post">
 
     {% csrf_token %}
@@ -48,7 +47,6 @@
 
     <button type="submit">create</button>
   </form>
-</div>
 <div>
 {% block success %}{% endblock %}
 </div>
