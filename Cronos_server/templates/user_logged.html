@@ -7,12 +7,14 @@
 
 {% block main %}
 <div class="user_logged">
-  <aside class="transition-element">
+
+  <aside>
     {% include "menu.html" %}
   </aside>
 
   <section class="section-content">
     {% block section %}{% endblock %}
   </section>
+
 </div>
 {% endblock %}
