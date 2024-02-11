@@ -3,10 +3,28 @@
 header, footer {
 	background-color: var(--bg-color_);
 	width: 100%;
+	margin: 0;
 }
 
 main {
-	margin-bottom: 50px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+.user_logged {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+
+section {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+	margin-left: auto;
+    z-index: 0; /* Assurez-vous que la section est en dessous de l'aside */
 }
 
 body
