@@ -61,3 +61,13 @@
     66.64%,81.30% {transform:translateY(-50%)}
     83.30%,97.96% {transform:translateY(-25%)}
 }
+
+@media only screen and (max-width: 660px) {
+    .messages_container {
+        display: none;
+    }
+    .header_auth {
+        flex-direction: column;
+        align-items: end;
+    }
+}
