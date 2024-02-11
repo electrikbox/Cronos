@@ -33,12 +33,13 @@
 #navbar {
     padding: 0;
     width: 5em;
-    height: calc(100vh - 83px);
+    height: 100vh;
     position: fixed;
     background-color: var(--background-secondary);
     transition: width .35s cubic-bezier(var(--transition-main), 1);
     overflow-y: auto;
     overflow-x: hidden;
+    z-index: 0;
 }
 #navbar:hover {
     width: 16em;
@@ -102,7 +103,7 @@
     -webkit-filter: invert(100%); /* Pour une compatibilité avec certains navigateurs basés sur WebKit */
 }
 
-/*
+
 @media only screen and (max-width: 1660px) {
     :root {
         --heading-large: 5.4rem;
@@ -154,4 +155,4 @@
 }
 @media only screen and (max-width: 496px) {
 
-} */
+}

@@ -19,7 +19,7 @@ main {
 }
 
 section {
-    width: 90%;
+    width: 95%;
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -42,6 +42,7 @@ footer {
 	padding-top: 10px;
 	margin-top: auto;
 	background-color: var(--bg-color_1);
+	z-index: 1;
 }
 
 h1, h2, h3 {
