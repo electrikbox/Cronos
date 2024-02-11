@@ -1,0 +1,22 @@
+<div class="header_auth">
+  <div class="messages_container">
+    <ul class="messages_list">
+      <li>Our service simplifies computer automations</li>
+      <li>Personalized automations on your computer</li>
+      <li>Easy computer automations with our reliable service</li>
+      <li>Trust in our security for your computer automations</li>
+    </ul>
+  </div>
+
+  <div class="user_auth">
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'Cronos_account:account'%}">Welcome {{ user.username | capfirst}} !</a></p>
+    <p>|</p>
+    <p><a href="{% url 'Cronos_account:logout'%}">Logout</a></p>
+    {% else%}
+    <p><a href="{% url 'Cronos_account:signup' %}">Register</a></p>
+    <p>|</p>
+    <p><a href="{% url 'Cronos_account:login' %}">Login</a></p>
+    {% endif %}
+  </div>
+</div>

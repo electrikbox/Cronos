@@ -1,0 +1,80 @@
+{% comment %} <nav>
+  <ul>
+    <div class="menu-content">
+      <li><a href="{% url 'Cronos_website:home'%}">Home</a></li>
+      <li><a href="{% url 'Cronos_account:account'%}">Account</a></li>
+      <li><a href="{% url 'Cronos_website:cron_create_form'%}">Crons dashboard</a></li>
+      <li><a href="{% url 'Cronos_website:downloads'%}">Downloads</a></li>
+      <li><a href="{% url 'Cronos_website:FAQ'%}">FAQ</a></li>
+      <li><a href="{% url 'Cronos_website:contact'%}">Contact us</a></li>
+    </div>
+  </ul>
+</nav> {% endcomment %}
+{% load static %}
+<!-- Navbar -->
+<nav id="navbar">
+  <div class="logo">
+    <img src="{% static '/img/Cron0S_03.png' %}" alt="logo">
+  </div>
+  <ul class="navbar-items flexbox-col">
+    <li id="" class="navbar-item flexbox-left">
+      <a class="navbar-item-inner flexbox-left">
+        <div class="navbar-item-inner-icon-wrapper flexbox">
+          <ion-icon name="home-outline"></ion-icon>
+        </div>
+        <span class="link-text">Home</span>
+      </a>
+    </li>
+    <li id="accounts/account" class="navbar-item flexbox-left">
+      <a class="navbar-item-inner flexbox-left">
+        <div class="navbar-item-inner-icon-wrapper flexbox">
+          <ion-icon name="person-outline"></ion-icon>
+        </div>
+        <span class="link-text">Account</span>
+      </a>
+    </li>
+    <li id="cronform" class="navbar-item flexbox-left">
+      <a class="navbar-item-inner flexbox-left">
+        <div class="navbar-item-inner-icon-wrapper flexbox">
+          <ion-icon name="timer-outline"></ion-icon>
+        </div>
+        <span class="link-text">Dashboard</span>
+      </a>
+    </li>
+    <li id="downloads" class="navbar-item flexbox-left">
+      <a class="navbar-item-inner flexbox-left">
+        <div class="navbar-item-inner-icon-wrapper flexbox">
+          <ion-icon name="arrow-down-circle-outline"></ion-icon>
+        </div>
+        <span class="link-text">Downloads</span>
+      </a>
+    </li>
+    <li id="FAQ" class="navbar-item flexbox-left">
+      <a class="navbar-item-inner flexbox-left">
+        <div class="navbar-item-inner-icon-wrapper flexbox">
+          <ion-icon name="help-outline"></ion-icon>
+        </div>
+        <span class="link-text">FAQ</span>
+      </a>
+    </li>
+    <li id="contact" class="navbar-item flexbox-left">
+      <a class="navbar-item-inner flexbox-left">
+        <div class="navbar-item-inner-icon-wrapper flexbox">
+          <ion-icon name="mail-outline"></ion-icon>
+        </div>
+        <span class="link-text">Contact Us</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<script>
+  const navbarItems = document.querySelectorAll('.navbar-item');
+
+  navbarItems.forEach(item => {
+    item.addEventListener('click', function() {
+      const itemId = item.getAttribute('id');
+      window.location.href = 'http://localhost:8000/' + itemId;
+    });
+  });
+</script>

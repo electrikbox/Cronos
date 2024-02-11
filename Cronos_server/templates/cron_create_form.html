@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'user_logged.html' %}
 
 {% block title %}CronTab Form{% endblock %}
 
@@ -7,9 +7,10 @@
 <script src="{% static '/js/script_cron_form.js' %}"></script>
 <link rel="stylesheet" href="{% static '/css/forms.css' %}"/>
 <link rel="stylesheet" href="{% static '/css/cron_form_style.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/menu.css' %}"/>
 {% endblock %}
 
-{% block main %}
+{% block section %}
 <h2>Create cron</h2>
 <div>
   <form class="cron_form" method="post">
@@ -45,7 +46,7 @@
       <div class="select">{{ cron_create_form.command }}</div>
     </div>
 
-      <button type="submit">create</button>
+    <button type="submit">create</button>
   </form>
 </div>
 <div>

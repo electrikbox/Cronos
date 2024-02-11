@@ -6,69 +6,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %}Default title{% endblock %}</title>
-
     <link rel="stylesheet" href="{% static '/css/style.css' %}"/>
-    <link rel="stylesheet" href="{% static '/css/auth_login_logout.css' %}"/>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="{% static '/css/header_auth.css' %}"/>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     {% block head %}{% endblock %}
   </head>
 
   <body class="dark-mode">
 
-    <!-- ============== header ============== -->
-
-    <header class="header">
-      {% block header %}
-
-      <div class="header_logo_text_and_menu">
-        <div class="logo">
-          <img src="{% static '/img/Cron0S_03.png' %}" alt="logo">
-        </div>
-
-        <div class="content__container">
-          <ul class="content__container__list">
-            <li class="content__container__list__item">Our service simplifies computer automations</li>
-            <li class="content__container__list__item">Personalized automations on your computer</li>
-            <li class="content__container__list__item">Easy computer automations with our reliable service</li>
-            <li class="content__container__list__item">Trust in our security for your computer automations</li>
-          </ul>
-        </div>
-
-        <div class="auth_menu">
-          {% csrf_token %}
-          <div class="auth_menu_list">
-            {% if user.is_authenticated %}
-            <nav>
-              <ul class="dropdown">
-                <p><class="dropbtn">{{ user.username }} ▾</p>
-                <div class="dropdown-content">
-                  <li><a href="{% url 'Cronos_website:home'%}">Home</a></li>
-                  <li><a href="{% url 'Cronos_account:account' %}">Account</a></li>
-                  <li><a href="{% url 'Cronos_website:cron_create_form'%}">Crons dashboard</a></li>
-                  <li><a href="{% url 'Cronos_website:downloads'%}">Downloads</a></li>
-                  <li><a href="{% url 'Cronos_website:FAQ'%}">FAQ</a></li>
-                  <li><a href="{% url 'Cronos_website:contact'%}">Contact us</a></li>
-                  <li><a href="{% url 'Cronos_account:logout' %}" id="logout">Logout</a></li>
-                </div>
-              </ul>
-            </nav>
-          </div>
-
-          {% else%}
-          <p><a href="{% url 'Cronos_account:signup' %}">Register</a></p>
-          <p>|</p>
-          <p><a href="{% url 'Cronos_account:login' %}">Login</a></p>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-
-      <h1>BASE</h1>
-      {% endblock %}
-    </header>
-
-    <!-- ============== main ============== -->
+    <header class="header">{% include 'header.html'%}</header>
 
     <main>
       {% block main %}
@@ -76,11 +24,7 @@
       {% endblock %}
     </main>
 
-    <!-- ============== footer ============== -->
-
-    <footer>
-      <h3>Footer</h3>
-    </footer>
+    <footer><h3>Footer</h3></footer>
 
   </body>
 </html>

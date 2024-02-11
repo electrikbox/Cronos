@@ -1,0 +1,63 @@
+@import url('variables.css');
+
+.header_auth {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    background-color: var(--bg-color_1);
+}
+
+.user_auth {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    gap: 7px;
+}
+
+.user_auth p,
+.user_auth a {
+    color: var(--text-color);
+    font-family: var(--main-font-family);
+    margin: 0%;
+    text-decoration: none;
+}
+
+.user_auth p:hover,
+.user_auth a:hover {
+    color: var(--link-color);
+}
+
+/* ================= animation ================= */
+
+.messages_container {
+    position: relative;
+    height: 20px;
+    width: 500px;
+    overflow: hidden;
+    color: var(--text-color);
+    font-family: sans-serif;
+    left: 10px;
+}
+
+.messages_list {
+    position: absolute;
+    list-style-type: none;
+    animation-name: trans;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    margin-top: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+@keyframes trans {
+    0%, 14.66%{transform:translateY(0%)}
+    16.66%, 31.32% {transform:translateY(-25%)}
+    33.32%,47.98% {transform:translateY(-50%)}
+    49.98%,64.64% {transform:translateY(-75%)}
+    66.64%,81.30% {transform:translateY(-50%)}
+    83.30%,97.96% {transform:translateY(-25%)}
+}
