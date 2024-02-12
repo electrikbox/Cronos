@@ -12,7 +12,10 @@
 
 {% block section %}
 <h2>Create cron</h2>
+<div class="cron_form_div">
+  <h3><p>Create a cron</p></h3>
   <form class="cron_form" method="post">
+
 
     {% csrf_token %}
     <div class="element">
@@ -47,6 +50,14 @@
 
     <button type="submit">create</button>
   </form>
+</div>
+<div class="cron_form_div">
+  <h3><p>Your crons</p></h3>
+  {% for cron in crons %}
+  <div class="cron">
+    <p>{{ cron.minutes }} {{ cron.hours }} {{ cron.day_of_month }} {{ cron.months }} {{ cron.day_of_week }} {{ cron.command }}</p>
+  </div>
+  {% endfor %}
 <div>
 {% block success %}{% endblock %}
 </div>
