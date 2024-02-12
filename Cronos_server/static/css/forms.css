@@ -1,4 +1,4 @@
-@import url('variables.css');
+/* @import url('variables.css');
 
 .login {
 	display: flex;
@@ -25,32 +25,6 @@
 	align-items: center;
 }
 
-/* .cron_form label,
-.signup_form label,
-.login_form label {
-	padding-top: 10px;
-	font-family: sans-serif;
-	font-size: 16px;
-	color: white;
-} */
-
-/* .login_form input[type="text"],
-.login_form input[type="password"],
-.signup_form input[type="text"],
-.signup_form input[type="email"],
-.signup_form input[type="password"],
-.signup_form input[type="submit"] {
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 5px;
-	box-sizing: border-box;
-	font-family: Arial, sans-serif;
-	font-size: 16px;
-	outline: none;
-	border-radius: 4px;
-	border: 1px solid #ccc;
-} */
-
 .login_form input[type="submit"],
 .signup_form input[type="submit"] {
 	font-size: 18px;
@@ -75,22 +49,6 @@
 .signup_form input[type="password"]:focus {
 	border-color: #66afe9;
 }
-
-/* .cron_form button[type="submit"]:hover,
-.login_form input[type="submit"]:hover,
-.signup_form input[type="submit"]:hover {
-	background-color: #2f4152;
-} */
-
-/* .login_form .helptext,
-.signup_form .helptext {
-	display: flex;
-	padding-top: 3px;
-	padding-bottom: 10px;
-	font-family: sans-serif;
-	font-size: 14px;
-	color: rgba(255, 255, 255, 0.771);
-} */
 
 .error_msg {
 	color: rgb(199, 66, 66);
@@ -139,9 +97,6 @@
 }
 
 
-/* ============ new styles ============ */
-
-
 .inputGroup {
 	font-family: 'Segoe UI', sans-serif;
 	margin: .5em 0 .5em 0;
@@ -182,4 +137,130 @@
 
   .inputGroup :is(input:focus, input:valid)~label {
 	color: var(--link-color);
-  }
+  } */
+
+.signup_form,
+.login_form {
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	gap: 8px;
+	margin: 0 auto;
+	/* margin: 0; */
+	margin-top: 40px;
+	background-color: rgb(226, 226, 226);
+	padding: 20px;
+	border-radius: 4px;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cron_form label,
+.signup_form label,
+.login_form label {
+	padding-top: 10px;
+	font-family: var(--main-font-family);
+	font-size: 16px;
+	color: rgb(78, 78, 78);
+}
+
+.login_form input[type="text"],
+.login_form input[type="password"],
+.signup_form input[type="text"],
+.signup_form input[type="email"],
+.signup_form input[type="password"],
+.signup_form input[type="submit"] {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 5px;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	outline: none;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+}
+
+.login_form input[type="submit"],
+.signup_form input[type="submit"] {
+	padding: 15px 20px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px 0 10px 0;
+	background-color: rgb(51, 132, 98);
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.cron_form select:focus,
+.login_form input[type="text"]:focus,
+.login_form input[type="password"]:focus,
+.signup_form input[type="text"]:focus,
+.signup_form input[type="email"]:focus,
+.signup_form input[type="password"]:focus {
+	border-color: #66afe9;
+}
+
+.cron_form button[type="submit"]:hover,
+.login_form input[type="submit"]:hover,
+.signup_form input[type="submit"]:hover {
+	background-color: #45a049;
+}
+
+.login_form .helptext,
+.signup_form .helptext {
+	display: flex;
+	padding-top: 3px;
+	padding-bottom: 10px;
+	font-family: sans-serif;
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.771);
+}
+
+.error_msg {
+	color: rgb(199, 66, 66);
+	text-align: center;
+	font-family: sans-serif;
+}
+
+.signup_form input[type="password"]:last-child {
+	margin-bottom: 50px;
+}
+
+.success_signup {
+    color: rgb(91, 196, 81);
+    text-align: center;
+    font-family: sans-serif;
+}
+.showPwd {
+	font-family: var(--main-font-family);
+	color: var(--text-color);
+	width: auto;
+	font-weight: bold;
+	font-size: 11px;
+	cursor: pointer;
+	margin-right: 10px;
+	margin-top: -40px;
+	margin-left: auto;
+	margin-bottom: 15px;
+
+}
+.showPwd:hover {
+	color: var(--link-color);
+}
+
+.cron_form select:focus,
+.login_form input[type="text"]:focus,
+.login_form input[type="password"]:focus,
+.signup_form input[type="text"]:focus,
+.signup_form input[type="email"]:focus,
+.signup_form input[type="password"]:focus {
+	border-color: #66afe9;
+}
+.cron_form button[type="submit"]:hover,
+.login_form input[type="submit"]:hover,
+.signup_form input[type="submit"]:hover {
+	background-color: #45a049;
+}
