@@ -1,10 +1,10 @@
 """ Views """
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from rest_framework.authtoken.models import Token
 from .forms import CronForm
-from Cronos_API import CRON_CREATE_API_URL
+from Cronos_API import CRON_CREATE_API_URL, CRON_LIST_API_URL
 import requests
 
 
@@ -26,8 +26,7 @@ def FAQ(request) -> HttpResponse:
 
 
 @login_required
-def cron_create_form(request) -> HttpResponse:
-    """ Render cron_create_form page """
+def dashboard(request):
     fields = [
         "minutes",
         "hours",
@@ -41,16 +40,14 @@ def cron_create_form(request) -> HttpResponse:
         cron_create_form = CronForm(request.POST)
 
         if not cron_create_form.is_valid():
-            return HttpResponse("Error Form")
-
-        # api request =====================================================
+            return JsonResponse({'error': cron_create_form.errors}, status=400)  # Retourne les erreurs de validation au format JSON
 
         token = Token.objects.get(user=request.user).key
         header = {
             "Content-Type": "application/json",
             "Authorization": f"Token {token}"
         }
-        data = {field: cron_create_form.data[field] for field in fields}
+        data = {field: cron_create_form.cleaned_data[field] for field in fields}  # Utilisez cleaned_data pour accéder aux données validées
         data["user"] = request.user.id
         data["is_paused"] = False
         data["validated"] = False
@@ -58,15 +55,22 @@ def cron_create_form(request) -> HttpResponse:
         response = requests.post(CRON_CREATE_API_URL, headers=header, json=data)
 
         if response.status_code == 201:
-            context = {"cron_create_form": cron_create_form}
-            return render(request, "cron_create_success.html", context)
+            crons = requests.get(CRON_LIST_API_URL, headers=header).json()
+            return render(request, "dashboard.html", {"cron_create_form": cron_create_form, "crons": crons})
         else:
-            return HttpResponse(response.status_code)
-
-        # =================================================================
+            return JsonResponse({'error': 'Failed to create cron'}, status=500)  # Gère les erreurs de création de cron
 
     else:
         cron_create_form = CronForm()
+        token = Token.objects.get(user=request.user).key
+        header = {
+            "Content-Type": "application/json",
+            "Authorization": f"Token {token}"
+        }
+        crons = requests.get(CRON_LIST_API_URL, headers=header)
 
-    context = {"cron_create_form": cron_create_form}
-    return render(request, "cron_create_form.html", context)
+        if crons.status_code == 200:
+            context = {"cron_create_form": cron_create_form, "crons": crons.json()}
+            return render(request, "dashboard.html", context)
+        else:
+            return HttpResponse(crons.status_code)
