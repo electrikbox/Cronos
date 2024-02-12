@@ -33,3 +33,29 @@ def activation_mail(email, username, uidb64, token):
         html_message=email_html_message,
         fail_silently=False,
     )
+
+
+# FORGET PASSWORD MAIL
+# =============================================================================
+def forget_password_mail(email, username, uidb64, token_temp_key):
+    """ Send forget password mail to user """
+
+    forget_password_link = reverse('Cronos_account:reset_password', args=[uidb64, token_temp_key])
+    forget_password_url = 'http://localhost:8000' + forget_password_link
+
+    context = {
+		'forget_password_url': forget_password_url,
+        'username': username,
+	}
+
+    email_html_message = render_to_string('mails/forget_password_mail.html', context)
+    email_plain_message = strip_tags(email_html_message)
+
+    send_mail(
+        'Reset your password',
+        email_plain_message,
+        'Team Cronos',
+        [email],
+        html_message=email_html_message,
+        fail_silently=False,
+    )
