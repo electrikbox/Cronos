@@ -187,7 +187,7 @@
 	font-weight: bold;
 	text-align: center;
 	margin: 10px 0 10px 0;
-	background-color: rgb(51, 132, 98);
+	background-color: rgb(51, 106, 132);
 	color: white;
 	border: none;
 	border-radius: 5px;
@@ -206,7 +206,7 @@
 .cron_form button[type="submit"]:hover,
 .login_form input[type="submit"]:hover,
 .signup_form input[type="submit"]:hover {
-	background-color: #45a049;
+	background-color: rgb(14, 150, 212);
 }
 
 .login_form .helptext,
@@ -258,9 +258,4 @@
 .signup_form input[type="email"]:focus,
 .signup_form input[type="password"]:focus {
 	border-color: #66afe9;
-}
-.cron_form button[type="submit"]:hover,
-.login_form input[type="submit"]:hover,
-.signup_form input[type="submit"]:hover {
-	background-color: #45a049;
 }
