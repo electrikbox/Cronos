@@ -114,12 +114,14 @@ class AppHandler:
             command = str(r_cron["command"]).split(" ")[0]
             cmd_validated = CheckCommand.is_command_available_unix(command)
 
+            checked_cron = CronScraper(self.username, self.password)
+
             if not cmd_validated:
-                print(f"{command} : can't be process on this computer")
+                deleted_cron = checked_cron.unvalideted_cron_delete(r_cron["id"])
+                # send message for user on website
                 continue
 
-            validated_cron = CronScraper(self.username, self.password)
-            validated_cron.send_cron_validation(r_cron["id"])
+            checked_cron.send_cron_validation(r_cron["id"])
 
             new_cron = local_crons.new(command=command, comment=self.COMMENT)
             new_cron.setall(r_cron_str.split(" ")[:5])
