@@ -5,8 +5,37 @@
     flex-direction: row;
     align-items:end;
     justify-content: center;
-    gap: 8px;
-    margin-top: 50px;
+    gap: 5px;
+    margin-top: 5px;
+}
+.cron_form label {
+	font-family: var(--main-font-family);
+	font-size: 16px;
+	color: rgb(78, 78, 78);
+}
+.element {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.cron_form_div {
+	margin: 0;
+	margin-top: 40px;
+	padding: 0;
+	background-color: rgb(226, 226, 226);
+	padding: 20px;
+	border-radius: 4px;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+	min-width: 80vh;
+}
+.cron_form_div p {
+	margin: 0;
+	padding: 5px 0px 5px 0px;
+	font-family: var(--main-font-family);
+	color: rgb(22, 124, 184);
+	background-color: rgb(189, 208, 216);
+	border-radius: 3px;
 }
 .cron_form select {
 	min-width: 100px;
@@ -16,8 +45,10 @@
 	font-size: 16px;
 	outline: none;
 	border-radius: 4px;
-	border: 1px solid #ccc;
+	border: 1px solid transparent;
     margin-top: 5px;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+	background-color: rgb(255, 255, 255);
 }
 .cron_form button[type="submit"] {
 	padding: 5px;
@@ -26,7 +57,7 @@
     width: 70px;
 	font-weight: bold;
 	text-align: center;
-	background-color: rgb(51, 132, 98);
+	background-color: rgb(51, 106, 132);
 	color: white;
 	border: none;
 	border-radius: 4px;

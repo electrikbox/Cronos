@@ -102,8 +102,7 @@ class LoginFormCustom(forms.Form):
     )
     password = forms.CharField(
         label="password",
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Enter your password'}),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password'})
     )
 
     class Meta:

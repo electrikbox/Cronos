@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/menu.css' %}"/>
+{% endblock %}
+
+{% block main %}
+<div class="user_logged">
+
+  <aside>
+    {% include "menu.html" %}
+  </aside>
+
+  <section class="section-content">
+    {% block section %}{% endblock %}
+  </section>
+
+</div>
+{% endblock %}

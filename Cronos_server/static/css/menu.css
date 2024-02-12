@@ -1,0 +1,108 @@
+@import url('variables.css');
+
+:root {
+    --background-secondary: rgb(27, 27, 27);
+    --background-secondary-dark: rgb(0, 0, 0);
+    --background-secondary-light: rgb(44, 44, 44);
+    /* Colors */
+    --black: 0, 0%, 0%;
+    --white: 0, 0%, 100%;
+    --quite-gray: 0, 0%, 50%;
+    /* Sizes */
+    --navbar-buttons: 2.4rem;
+    /* misc */
+    --transition-main: .175, .685, .32;
+}
+
+aside {
+    z-index: 1;
+}
+
+.flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flexbox-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.flexbox-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#navbar {
+    padding: 0;
+    width: 5em;
+    height: 100vh;
+    position: fixed;
+    background-color: var(--background-secondary);
+    transition: width .35s cubic-bezier(var(--transition-main), 1);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 0;
+}
+#navbar:hover {
+    width: 13em;
+}
+.navbar-items {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.navbar-item {
+    padding: 0 .5em;
+    width: 100%;
+    cursor: pointer;
+}
+.navbar-item-inner {
+    padding: 1em 0;
+    width: 100%;
+    position: relative;
+    color: hsl(var(--quite-gray));
+    border-radius: .25em;
+    text-decoration: none;
+    transition: all .2s cubic-bezier(var(--transition-main), 1);
+    font-family: var(--main-font-family);
+}
+.navbar-item-inner:hover {
+    color: var(--link-color);
+    background: var(--background-secondary-light);
+    box-shadow: 0 17px 30px -10px hsla(var(--black), .25);
+}
+.navbar-item-inner-icon-wrapper {
+    width: calc(5rem - 1em - 8px);
+    position: relative;
+}
+.navbar-item-inner-icon-wrapper ion-icon {
+    position: absolute;
+    font-size: calc(var(--navbar-buttons) - 1rem);
+}
+.link-text {
+    margin: 0;
+    width: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all .35s cubic-bezier(var(--transition-main), 1);
+    overflow: hidden;
+    opacity: 0;
+}
+#navbar:hover .link-text {
+    width: calc(100% - calc(5rem - 8px));
+    opacity: 1;
+}
+
+.logo, .logo img{
+    width: 40px;
+    height: 40px;
+    margin: 9px 9px 15px 9px;
+}
+
+.logo img {
+    opacity: 0.5;
+    filter: invert(100%); /* Inverse la couleur de l'image */
+    -webkit-filter: invert(100%); /* Pour une compatibilité avec certains navigateurs basés sur WebKit */
+}
