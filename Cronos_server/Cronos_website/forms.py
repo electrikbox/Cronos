@@ -108,3 +108,32 @@ class LoginFormCustom(forms.Form):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+
+# CLASS FORGET PASSWORD FORM
+# =============================================================================
+class ForgetPasswordForm(forms.Form):
+    email = forms.EmailField(
+        label='Your email',
+        widget=forms.EmailInput(
+            attrs={'placeholder': 'Enter the email associated with your account'}),
+    )
+
+    class Meta:
+        model = User
+        fields = ('email')
+
+
+# CLASS SET NEW PASSWORD FORM
+# =============================================================================
+class SetNewPasswordForm(forms.Form):
+    """  """
+    new_password = forms.CharField(
+        label="password",
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Choose a new complex password'}),
+    )
+    new_password_confirm = forms.CharField(
+        label="Confirm your password",
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm your password'}),
+    )
