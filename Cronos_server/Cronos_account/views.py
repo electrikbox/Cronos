@@ -100,24 +100,25 @@ def login_user(request):
     """ Render login page and authenticate user """
     if request.method == 'POST':
         form = LoginFormCustom(request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
 
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponseRedirect(request.GET.get('next', '/'))
-                else:
-                    messages.error(request, "Your account is not active. Please, check your email for activation link.")
-                    return render(request, 'accounts/login.html', {'login_form': form})
-            else:
-                messages.error(request, "Invalid username or password.")
-                return render(request, 'accounts/login.html', {'login_form': form})
-        else:
+        if form.is_valid() == False:
             return render(request, 'accounts/login.html', {'login_form': form})
+
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is None:
+            messages.error(request, "Invalid username or password.")
+            return render(request, 'accounts/login.html', {'login_form': form})
+        
+        if user.is_active:
+            login(request, user)
+            return HttpResponseRedirect(request.GET.get('next', '/'))
+
+        messages.error(request, "Your account is not active. Please, check your email for activation link.")
+
     else:
         form = LoginFormCustom()
 
