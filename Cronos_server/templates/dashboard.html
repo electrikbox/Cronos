@@ -1,16 +1,30 @@
 {% extends 'user_logged.html' %}
 
+<!-- ================= TITLE ================= -->
+
+
 {% block title %}CronTab Form{% endblock %}
 
+
+<!-- ================= HEAD ================= -->
+
+
 {% block head %}
+
 {% load static %}
 <script src="{% static '/js/script_cron_form.js' %}"></script>
 <link rel="stylesheet" href="{% static '/css/forms.css' %}"/>
 <link rel="stylesheet" href="{% static '/css/cron_form_style.css' %}"/>
 <link rel="stylesheet" href="{% static '/css/menu.css' %}"/>
+
 {% endblock %}
 
+
+<!-- ================= SECTION ================= -->
+
+
 {% block section %}
+
 <h2>Create cron</h2>
 <div class="cron_form_div">
   <h3><p>Create a cron</p></h3>
@@ -51,6 +65,7 @@
     <button type="submit">create</button>
   </form>
 </div>
+
 <div class="cron_form_div">
   <h3><p>Your crons</p></h3>
   {% for cron in crons %}
@@ -59,8 +74,6 @@
     <button class="delete-cron" data-cron-id="{{ cron.id }}">Delete</button>
   </div>
   {% endfor %}
-<div>
-{% block success %}{% endblock %}
 </div>
 
 {% endblock %}
