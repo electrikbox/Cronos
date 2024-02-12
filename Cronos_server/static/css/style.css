@@ -37,14 +37,28 @@ body
 	align-items: center;
     min-height: 100vh;
     margin: 0;
-	background-color: var(--bg-color_2);
+	/* background-color: var(--bg-color_2); */
+	background-color: rgb(197, 197, 197);
 }
 
 footer {
-	padding-top: 10px;
+	/* padding-top: 10px; */
 	margin-top: auto;
 	background-color: var(--bg-color_1);
 	z-index: 1;
+	opacity: 0.8;
+}
+
+footer p{
+	color: var(--text-color);
+	font-family: var(--main-font-family);
+	text-align: center;
+	font-size: 12px;
+	opacity: 0.7;
+}
+footer a{
+	text-decoration: none;
+	color: var(--text-color);
 }
 
 h1, h2, h3 {
