@@ -259,3 +259,17 @@
 .signup_form input[type="password"]:focus {
 	border-color: #66afe9;
 }
+
+.pwd_forget, .pwd_forget a {
+	font-family: var(--main-font-family);
+	font-size: 12px;
+	text-align: right;
+	margin-top: 0;
+	margin-bottom: 0;
+	color: var(--text-color);
+	text-decoration: none;
+}
+.pwd_forget a:hover {
+	color: var(--link-color);
+	font-weight: bold;
+}
