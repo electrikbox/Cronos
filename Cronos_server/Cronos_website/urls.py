@@ -1,7 +1,7 @@
 """ URLs for Cronos_website """
 
 from django.urls import path
-from .views import cron_create_form, home, contact, downloads, FAQ
+from .views import dashboard, home, contact, downloads, FAQ
 
 app_name = 'Cronos_website'
 
@@ -10,5 +10,5 @@ urlpatterns = [
     path('contact', contact, name='contact'),
     path('downloads', downloads, name='downloads'),
     path('FAQ', FAQ, name='FAQ'),
-    path('cronform/', cron_create_form, name='cron_create_form'),
+    path('dashboard/', dashboard, name='dashboard'),
 ]
