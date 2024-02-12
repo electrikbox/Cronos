@@ -2,6 +2,7 @@
 # =============================================================================
 
 CRON_CREATE_API_URL = "http://localhost:8000/api/crons/create/"
+CRON_LIST_API_URL = "http://localhost:8000/api/crons/"
 
 
 # Minutes
