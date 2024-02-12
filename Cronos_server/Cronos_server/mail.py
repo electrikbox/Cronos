@@ -5,22 +5,24 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 
-# WELCOME MAIL
+# ACTIVATION MAIL
 # =============================================================================
 
-def welcome_mail(email, username):
+def activation_mail(email, username, uidb64, token):
     """ Send welcome mail to new user after successful registration """
 
     # login_url = reverse('Cronos_account:login') + '?success=true'
+    # login_url = 'http://localhost:8000/accounts/login/?success=true'
 
-    login_url = 'http://localhost:8000/accounts/login/?success=true'
+    activation_link = reverse('Cronos_account:activate_account', args=[uidb64, token])
+    activation_url = 'http://localhost:8000' + activation_link + '?activate=true'
 
     context = {
-		'login_url': login_url,
+		'login_url': activation_url,
   		'username': username,
 	}
 
-    email_html_message = render_to_string('mails/welcome_mail.html', context)
+    email_html_message = render_to_string('mails/activation_mail.html', context)
     email_plain_message = strip_tags(email_html_message)
 
     send_mail(

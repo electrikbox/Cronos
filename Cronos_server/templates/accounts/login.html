@@ -18,6 +18,12 @@
     </div>
 {% endif %}
 
+{% if request.GET.activate %}
+    <div class="success_activate">
+        <p class="success_activate">Account activated, please log in</p>
+    </div>
+{% endif %}
+
 {% for message in messages %}
     <p class="error_msg">{{ message }}</p>
 {% endfor %}
