@@ -75,6 +75,7 @@ class CronsSerializer(serializers.ModelSerializer):
             "user",
             "is_paused",
             "validated",
+            "id",
         ]
 
     def validate_minutes(self, value: str) -> str:

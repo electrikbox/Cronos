@@ -26,7 +26,7 @@ class CronScraper:
         )
 
         if login_response.status_code == 200:
-            self.token = login_response.json().get("token", "")
+            self.token = login_response.headers.get("Authorization", "").split(" ")[1]
             self.authenticated = True
             return self.token
         else:
@@ -56,6 +56,33 @@ class CronScraper:
                 f"Unable to obtain list of crons. Status code: {response.status_code}"
             )
             return None
+
+    # Send cron validation
+    # =========================================================================
+
+    def send_cron_validation(self, cron_id):
+        self.user_auth()
+
+        cron_data = {"validated": True}
+        crons_headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Token {self.token}",
+        }
+
+        validation_url = f"{self.CRONS_URL}{cron_id}/update/"
+
+        response = requests.put(
+            validation_url, headers=crons_headers, json=cron_data
+        )
+
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(
+                f"Failed to send validation for cron {cron_id}. Status code: {response.status_code}"
+            )
+            return None
+
 
 
 # =================================================================
