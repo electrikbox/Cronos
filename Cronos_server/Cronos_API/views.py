@@ -93,7 +93,7 @@ def add_cron(request) -> Response:
 # =============================================================================
 
 
-@api_view(["PUT"])
+@api_view(["PUT", "POST"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def update_cron(request, cron_id) -> Response:
