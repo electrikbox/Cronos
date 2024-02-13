@@ -39,7 +39,7 @@ aside {
     /* width: 5em; */
     width: 13em;
     height: 100vh;
-    position: fixed;
+    /* position: absolute; */
     background-color: var(--background-secondary);
     /* transition: width .35s cubic-bezier(var(--transition-main), 1); */
     overflow-y: auto;
@@ -55,7 +55,6 @@ aside {
     list-style-type: none;
 }
 .navbar-item {
-    padding: 0 .5em;
     width: 100%;
     cursor: pointer;
 }
