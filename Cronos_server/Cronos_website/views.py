@@ -36,11 +36,19 @@ def dashboard(request):
         "command",
     ]
 
+    # token = Token.objects.get(user=request.user).key
+    token = request.COOKIES.get('user_token')
+    print(token)
+    header = {
+        "Content-Type": "application/json",
+        "Authorization": f"Token {token}"
+    }
+
     if request.method == "POST":
         cron_create_form = CronForm(request.POST)
 
         if not cron_create_form.is_valid():
-            messages.error(request, 'Please correct the errors below.')
+            # messages.error(request, 'Please correct the errors below.')
             return redirect('/dashboard')
 
         data = {field: cron_create_form.cleaned_data[field] for field in fields}
@@ -48,30 +56,13 @@ def dashboard(request):
         data["is_paused"] = False
         data["validated"] = False
 
-        token = Token.objects.get(user=request.user).key
-        header = {
-            "Content-Type": "application/json",
-            "Authorization": f"Token {token}"
-        }
-        data = {field: cron_create_form.cleaned_data[field] for field in fields}
-        data["user"] = request.user.id
-        data["is_paused"] = False
-        data["validated"] = False
-
         response = requests.post(CRON_CREATE_API_URL, headers=header, json=data)
-
-        messages.success(request, 'Cron added successfully.')
-
+        # messages.success(request, 'Cron added successfully.')
         return redirect('/dashboard')
 
     else:
         cron_create_form = CronForm()
 
-    token = Token.objects.get(user=request.user).key
-    header = {
-        "Content-Type": "application/json",
-        "Authorization": f"Token {token}"
-    }
     crons = requests.get(CRON_LIST_API_URL, headers=header)
 
     context = {"cron_create_form": cron_create_form, "crons": crons.json()}
