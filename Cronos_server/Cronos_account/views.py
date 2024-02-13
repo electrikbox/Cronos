@@ -119,7 +119,11 @@ def login_user(request):
 
         if user.is_active:
             login(request, user)
-            return HttpResponseRedirect(request.GET.get('next', '/'))
+            token = Token.objects.get(user=request.user).key
+            response = HttpResponseRedirect(request.GET.get('next', '/'))
+            response.set_cookie('user_token', token, httponly=True)  # Stockez le token dans un cookie sécurisé
+            return response
+            # return HttpResponseRedirect(request.GET.get('next', '/'))
 
         messages.error(request, "Your account is not active. Please, check your email for activation link.")
 
