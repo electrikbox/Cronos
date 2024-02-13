@@ -8,13 +8,13 @@ from django.utils.html import strip_tags
 # ACTIVATION MAIL
 # =============================================================================
 
-def activation_mail(email, username, uidb64, token):
+def activation_mail(email, username, uidb64, temp_token_key):
     """ Send welcome mail to new user after successful registration """
 
     # login_url = reverse('Cronos_account:login') + '?success=true'
     # login_url = 'http://localhost:8000/accounts/login/?success=true'
 
-    activation_link = reverse('Cronos_account:activate_account', args=[uidb64, token])
+    activation_link = reverse('Cronos_account:activate_account', args=[uidb64, temp_token_key])
     activation_url = 'http://localhost:8000' + activation_link + '?activate=true'
 
     context = {
