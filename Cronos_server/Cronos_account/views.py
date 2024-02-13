@@ -120,10 +120,9 @@ def login_user(request):
         if user.is_active:
             login(request, user)
             token = Token.objects.get(user=request.user).key
-            response = HttpResponseRedirect(request.GET.get('next', '/'))
-            response.set_cookie('user_token', token, httponly=True)  # Stockez le token dans un cookie sécurisé
+            response = HttpResponseRedirect(request.GET.get('next', '/home'))
+            response.set_cookie('user_token', token, httponly=True)
             return response
-            # return HttpResponseRedirect(request.GET.get('next', '/'))
 
         messages.error(request, "Your account is not active. Please, check your email for activation link.")
 
@@ -170,17 +169,17 @@ def forget_password(request):
             email = form.cleaned_data.get('email')
 
             try:
-               user = User.objects.get(email=email)
-               username = user.username
+                user = User.objects.get(email=email)
+                username = user.username
 
-               token_temp = PasswordTemporaryToken.objects.create(user=user)
-               token_temp.save()
-               uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
-               token_temp_key = token_temp.change_pwd_token
+                token_temp = PasswordTemporaryToken.objects.create(user=user)
+                token_temp.save()
+                uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+                token_temp_key = token_temp.change_pwd_token
 
-               forget_password_mail(email, username, uidb64, token_temp_key)
+                forget_password_mail(email, username, uidb64, token_temp_key)
 
-               return HttpResponseRedirect(reverse('Cronos_account:forget_password') + '?pending=true')
+                return HttpResponseRedirect(reverse('Cronos_account:forget_password') + '?pending=true')
 
             except User.DoesNotExist:
                 messages.error(request, "User with this email doesn't exist.")
