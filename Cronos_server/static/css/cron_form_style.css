@@ -2,12 +2,37 @@
 
 .cron_form {
     display: flex;
-    flex-direction: row;
-    align-items:end;
+    flex-direction: column;
+    align-items:center;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
     margin-top: 5px;
+	min-width: 80vh;
 }
+.cron_form_date_cmd {
+	display: flex;
+	flex-direction: row;
+	align-items: end;
+	justify-content: space-between;
+	gap: 5px;
+	width: 100%;
+
+}
+.url_field {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+#id_url {
+	width: 100%;
+	padding: 7px;
+	border: none;
+	border-radius: 4px;
+	outline: none;
+	font-family: var(--main-font-family);
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
 .cron_form label {
 	font-family: var(--main-font-family);
 	font-size: 16px;
@@ -24,6 +49,11 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	gap: 5px;
+	width: 100%;
+}
+.select {
+	width: 100%;
 }
 .cron_form_div {
 	margin: 0;
@@ -47,16 +77,15 @@
 	text-align: left;
 	font-family: ubuntu;
 }
+
 .cron_form select {
-	min-width: 100px;
+	width: 100%;
 	padding: 5px;
-	box-sizing: border-box;
 	font-family: var(--main-font-family);
 	font-size: 16px;
 	outline: none;
 	border-radius: 4px;
 	border: 1px solid transparent;
-    margin-top: 5px;
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 	background-color: rgb(255, 255, 255);
 }
@@ -64,7 +93,8 @@
 	padding: 5px;
 	font-size: 16px;
     height: 32px;
-    width: 70px;
+    /* width: 70px; */
+	width: 30%;
 	font-weight: bold;
 	text-align: center;
 	background-color: rgb(51, 106, 132);
@@ -72,6 +102,7 @@
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
+	/* align-self: end; */
 }
 .pause-cron {
 	color: rgb(21, 82, 122);

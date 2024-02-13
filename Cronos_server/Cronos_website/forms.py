@@ -38,7 +38,12 @@ class CronForm(forms.ModelForm):
     command = forms.ChoiceField(
         choices=Crons.get_command_choices(),
         label='Command',
-        initial='ls'
+        initial='open_url'
+    )
+    url = forms.URLField(
+        label='Url',
+        required=False,
+        widget=forms.URLInput(attrs={'placeholder': 'Enter a valid url (ex: https://www.google.com)'}),
     )
 
     class Meta:
