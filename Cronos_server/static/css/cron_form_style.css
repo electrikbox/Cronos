@@ -35,13 +35,17 @@
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 	min-width: 80vh;
 }
-.cron_form_div p {
+.cron_form_div h3 {
 	margin: 0;
-	padding: 5px 0px 5px 0px;
+	margin-bottom: 20px;
+	padding: 5px 0px 5px 10px;
 	font-family: var(--main-font-family);
-	color: rgb(22, 124, 184);
-	background-color: rgb(189, 208, 216);
+	color: rgb(255, 255, 255);
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+	background-color: var(--link-color);
 	border-radius: 3px;
+	text-align: left;
+	font-family: ubuntu;
 }
 .cron_form select {
 	min-width: 100px;
@@ -68,4 +72,49 @@
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
+}
+.pause-cron {
+	color: rgb(21, 82, 122);
+}
+.delete-cron {
+	color: rgb(136, 15, 15);
+}
+.pause-cron > *, .delete-cron > * {
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+}
+
+.pause-cron, .delete-cron {
+	border-radius: 3px;
+	margin: 4px 0px 4px 0px;
+	padding: 2px;
+}
+.pause-cron:hover, .delete-cron:hover {
+	cursor: pointer;
+}
+.cron-option {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0;
+	gap: 5px;
+}
+.cron {
+	background-color: rgb(247, 247, 247);
+	margin-top: 15px;
+	padding: 0px 10px;
+	border-radius: 3px;
+	font-family: var(--main-font-family);
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+	font-size: 16px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+.cron p {
+	margin: 0;
 }

@@ -70,7 +70,6 @@ class CronScraper:
         }
 
         validation_url = f"{self.CRONS_URL}{cron_id}/update/"
-
         response = requests.put(
             validation_url, headers=crons_headers, json=cron_data
         )
@@ -81,6 +80,27 @@ class CronScraper:
             print(
                 f"Failed to send validation for cron {cron_id}. Status code: {response.status_code}"
             )
+            return None
+
+    # Delete unvalideted cron
+    # =========================================================================
+
+    def unvalideted_cron_delete(self, cron_id):
+        self.user_auth()
+
+        crons_headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Token {self.token}",
+        }
+
+        validation_url = f"{self.CRONS_URL}{cron_id}/delete/"
+        response = requests.delete(validation_url, headers=crons_headers)
+
+        if response.status_code == 204:
+            print(f"{cron_id} deleted : not executable on this computer")
+            return f"{cron_id} deleted : not executable on this computer"
+        else:
+            print(f"Failed to delete {cron_id}. {response.status_code}")
             return None
 
 

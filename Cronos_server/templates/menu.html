@@ -1,9 +1,9 @@
 {% load static %}
 <!-- Navbar -->
 <nav id="navbar">
-  <div class="logo">
+  {% comment %} <div class="logo">
     <img src="{% static '/img/Cron0S_03.png' %}" alt="logo">
-  </div>
+  </div> {% endcomment %}
   <ul class="navbar-items flexbox-col">
     <li id="" class="navbar-item flexbox-left">
       <a class="navbar-item-inner flexbox-left">
@@ -21,7 +21,7 @@
         <span class="link-text">Account</span>
       </a>
     </li>
-    <li id="cronform" class="navbar-item flexbox-left">
+    <li id="dashboard" class="navbar-item flexbox-left">
       <a class="navbar-item-inner flexbox-left">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <ion-icon name="timer-outline"></ion-icon>

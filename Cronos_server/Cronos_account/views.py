@@ -1,5 +1,5 @@
 from Cronos_server.mail import activation_mail, forget_password_mail
-from Cronos_core.models import PasswordTemporaryToken, Profiles
+from Cronos_core.models import ActivationTemporaryToken, PasswordTemporaryToken, Profiles
 from Cronos_website.forms import SignUpForm, LoginFormCustom, ForgetPasswordForm, SetNewPasswordForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -36,15 +36,19 @@ def signup_user(request):
             user.last_name = last_name
             user.save()
 
+            Token.objects.get_or_create(user=user)
+
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
-            token, _ = Token.objects.get_or_create(user=user)
+            activation_token = ActivationTemporaryToken.objects.create(user=user)
+            activation_token.save()
+            temp_token_key = activation_token.activation_token
 
             profile = Profiles.objects.create(user=user)
             profile.first_name = first_name
             profile.last_name = last_name
             profile.save()
 
-            activation_mail(email, username, uidb64, token)
+            activation_mail(email, username, uidb64, temp_token_key)
 
             return redirect('Cronos_account:pending_activation')
         else:
@@ -66,19 +70,20 @@ def pending_activation(request):
 # ACTIVATE ACCOUNT
 # =============================================================================
 
-def activate_account(request, uidb64, token_key):
+def activate_account(request, uidb64, temp_token_key):
     """ Activate account after user clicks on activation link """
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = User.objects.get(pk=uid)
-        token = Token.objects.get(key=token_key)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist, Token.DoesNotExist):
+        temp_token = ActivationTemporaryToken.objects.get(user=user, activation_token=temp_token_key)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist, ActivationTemporaryToken.DoesNotExist):
         user = None
-        token = None
+        temp_token = None
 
-    if user and token and token.user == user:
+    if user and temp_token and temp_token.is_valid():
         user.is_active = True
         user.save()
+        temp_token.delete()
         return HttpResponseRedirect(reverse('Cronos_account:login') + '?activate=true')
     else:
         return render(request, 'accounts/activation_error.html')
@@ -114,7 +119,11 @@ def login_user(request):
 
         if user.is_active:
             login(request, user)
-            return HttpResponseRedirect(request.GET.get('next', '/'))
+            token = Token.objects.get(user=request.user).key
+            response = HttpResponseRedirect(request.GET.get('next', '/'))
+            response.set_cookie('user_token', token, httponly=True)  # Stockez le token dans un cookie sécurisé
+            return response
+            # return HttpResponseRedirect(request.GET.get('next', '/'))
 
         messages.error(request, "Your account is not active. Please, check your email for activation link.")
 
