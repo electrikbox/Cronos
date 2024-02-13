@@ -9,18 +9,26 @@ from Cronos_API import CRON_CREATE_API_URL, CRON_LIST_API_URL
 import requests
 
 
+def landing_page(request) -> HttpResponse:
+    """ Render FAQ page """
+    return render(request, "landing-page.html")
+
+@login_required
 def home(request) -> HttpResponse:
     """ Render home page """
     return render(request, "home.html")
 
+@login_required
 def contact(request) -> HttpResponse:
     """ Render contact page """
     return render(request, "contact.html")
 
+@login_required
 def downloads(request) -> HttpResponse:
     """ Render downloads page """
     return render(request, "downloads.html")
 
+@login_required
 def FAQ(request) -> HttpResponse:
     """ Render FAQ page """
     return render(request, "FAQ.html")
