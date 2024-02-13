@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  // Gestion du changement des sélecteurs
+  // Change day field to * when the other is selected
   $('#id_day_of_week, #id_day_of_month').change(function () {
     const selectedValue = $(this).val();
     const dayOfWeek = $('#id_day_of_week');
@@ -11,6 +11,7 @@ $(document).ready(function () {
     }
   });
 
+  // Delete cron
   $('.delete-cron').click(function () {
     const cronId = $(this).data('cron-id');
     const confirmation = confirm('Are you sure you want to delete this cron?');
@@ -34,28 +35,83 @@ $(document).ready(function () {
     }
   });
 
-  $('.pause-cron').click(function () {
-    // Select p from nearest .cron class
-    var paragraph = $(this).closest('.cron').find('p');
-
-    // Check if color is not saved
-    if (!paragraph.data('previous-color')) {
-      paragraph.data('previous-color', paragraph.css('color'));
-    }
-
-    // Change color to grey if it's not grey, else restore previous color
-    if (paragraph.css('color') === 'rgb(128, 128, 128)') {
-      paragraph.css('color', paragraph.data('previous-color'));
-    } else {
-      paragraph.css('color', 'grey');
-    }
-
-    var icon = $(this).find('ion-icon');
-
-    if (icon.attr('name') === 'pause-circle-outline') {
-      icon.attr('name', 'play-circle-outline');
-    } else {
+  // Update pause cron button
+  function updateButtonIcon(button, isPaused) {
+    const icon = button.find('ion-icon');
+    if (!isPaused) {
       icon.attr('name', 'pause-circle-outline');
+    } else {
+      icon.attr('name', 'play-circle-outline');
     }
+  }
+
+  // Update cron status in database
+  function updateCronStatus(button, cronId, isPaused) {
+    $.ajax({
+      url: `/api/crons/${cronId}/update/`,
+      type: 'POST',
+      data: {
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        is_paused: isPaused
+      },
+      success: function (response) {
+        console.log('Cron status updated successfully, is_paused:', isPaused);
+      },
+      error: function (xhr) {
+        console.error('Failed to update cron status:', xhr.status, xhr.responseText);
+        alert('Failed to update cron status');
+      }
+    });
+  }
+
+  // Update buttons on page load
+  function updateButtonsOnLoad() {
+    $('.pause-cron').each(function () {
+      const button = $(this);
+      const cronId = button.data('cron-id');
+
+      $.ajax({
+        url: `/api/crons/${cronId}/`,
+        type: 'GET',
+        data: {
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        },
+        success: function (response) {
+          console.log('Cron status retrieved successfully');
+          updateButtonIcon(button, response.is_paused);
+        },
+        error: function (xhr) {
+          console.error('Failed to retrieve cron status:', xhr.status, xhr.responseText);
+          alert('Failed to retrieve cron status');
+        }
+      });
+    });
+  }
+
+  updateButtonsOnLoad();
+
+  // Pause cron
+  $('.pause-cron').click(function () {
+    const button = $(this);
+    const cronId = button.data('cron-id');
+
+    $.ajax({
+      url: `/api/crons/${cronId}/`,
+      type: 'GET',
+      data: {
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function (response) {
+        console.log('Cron status retrieved successfully');
+        const newIsPaused = !response.is_paused;
+        updateCronStatus(button, cronId, newIsPaused);
+        updateButtonIcon(button, newIsPaused);
+      },
+      error: function (xhr) {
+        console.error('Failed to retrieve cron status:', xhr.status, xhr.responseText);
+        alert('Failed to retrieve cron status');
+      }
+    });
   });
+
 });
