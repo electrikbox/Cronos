@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
-{% block head %}
 {% load static %}
+
+{% block head %}
+<script src="{% static '/js/script_cron_form.js' %}"></script>
+<script src="{% static '/js/menu.js' %}"></script>
+
+<link rel="stylesheet" href="{% static '/css/cron_form_style.css' %}"/>
 <link rel="stylesheet" href="{% static '/css/menu.css' %}"/>
 {% endblock %}
 
