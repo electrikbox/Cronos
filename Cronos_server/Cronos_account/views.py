@@ -3,6 +3,7 @@ from Cronos_core.models import ActivationTemporaryToken, PasswordTemporaryToken,
 from Cronos_website.forms import SignUpForm, LoginFormCustom, ForgetPasswordForm, SetNewPasswordForm, UserAccountForm, UserAccountPwdForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -164,11 +165,14 @@ def user_account(request):
             return HttpResponseRedirect(reverse('Cronos_account:user_account') + '?updated=true')
 
         if password_form.is_valid():
+            if not user.check_password(password_form.cleaned_data['old_password']):
+                messages.error(request, "Invalid old password")
+                return HttpResponseRedirect(reverse('Cronos_account:user_account'))
+
             user.set_password(password_form.cleaned_data['new_password'])
             user.save()
-            password_form.save()
-
-            return HttpResponseRedirect(reverse('Cronos_account:user_account') + '?updated=true')
+            update_session_auth_hash(request, user)
+            return HttpResponseRedirect(reverse('Cronos_account:user_account') + '?updatedPWD=true')
     else:
         initial_data = {
             'username': user.username,
@@ -180,13 +184,6 @@ def user_account(request):
         password_form = UserAccountPwdForm()
 
     return render(request, 'accounts/user_account.html', {'user_account_form': personal_form, 'user_pwd_form': password_form})
-
-# CHANGE PASSWORD
-# =============================================================================
-
-def change_password(request):
-    """ Render change password page """
-    return render(request, 'accounts/change_password.html')
 
 
 # FORGET PASSWORD
