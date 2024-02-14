@@ -8,7 +8,12 @@
 
 {% if request.GET.updated %}
 <div class="success_msg">
-  <p class="success_updated">Update OK</p>
+  <p class="success_updated">Your personal details have been successfully modified</p>
+</div>
+{% endif %}
+{% if request.GET.updatedPWD %}
+<div class="success_msg">
+  <p class="success_updated">Your password has been successfully changed</p>
 </div>
 {% endif %}
 
@@ -40,7 +45,7 @@
 
 <div class="security">
 	<h3>Security</h3>
-	<form class="user_pwd_form">
+	<form class="user_pwd_form" method="POST">
 		{% csrf_token %}
 		<label for="old_password">Your old password</label>
         {{ user_pwd_form.old_password }}
