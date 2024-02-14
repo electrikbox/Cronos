@@ -23,6 +23,11 @@
     font-family: var(--main-font-family);
     margin: 0%;
     text-decoration: none;
+    text-align: end;
+}
+
+#username {
+    min-width: 140px;
 }
 
 .user_auth p:hover,
