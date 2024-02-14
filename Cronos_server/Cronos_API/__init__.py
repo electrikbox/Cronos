@@ -49,8 +49,7 @@ DAY_OF_WEEK_ERROR_MSG = "You set '{day_of_week}' to 'day_of_week', then 'months'
 # =============================================================================
 
 COMMANDS = {
-    "echo 'Hello World !'": "echo 'Hello World !'",
-    "ls": "ls",
+    "open": "open url",
     "pwd": "pwd",
     "cal": "cal",
 }
