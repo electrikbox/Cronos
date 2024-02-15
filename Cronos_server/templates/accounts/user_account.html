@@ -1,0 +1,63 @@
+{% extends 'user_logged.html' %}
+{% load static %}
+
+{% block title %}Cronos User Account{% endblock %}
+
+{% block section %}
+<h2>Your account</h2>
+
+{% if request.GET.updated %}
+<div class="success_msg">
+  <p class="success_updated">Your personal details have been successfully modified</p>
+</div>
+{% endif %}
+{% if request.GET.updatedPWD %}
+<div class="success_msg">
+  <p class="success_updated">Your password has been successfully changed</p>
+</div>
+{% endif %}
+
+{% for message in messages %}
+    <p class="error_msg">{{ message }}</p>
+{% endfor %}
+
+<div class="user_form_container">
+<div class="personal">
+	<h3>Your personal details</h3>
+
+	<form class="user_account_form" method="POST">
+		{% csrf_token %}
+		<label for="username">Your username</label>
+        {{ user_account_form.username }}
+
+		<label for="email">Your email</label>
+		{{ user_account_form.email }}
+
+		<label for="first_name">Your first name</label>
+		{{ user_account_form.first_name }}
+
+		<label for="last_name">Your last name</label>
+		{{ user_account_form.last_name }}
+
+         <input type="submit" value="Save your changes">
+	</form>
+</div>
+
+<div class="security">
+	<h3>Security</h3>
+	<form class="user_pwd_form" method="POST">
+		{% csrf_token %}
+		<label for="old_password">Your old password</label>
+        {{ user_pwd_form.old_password }}
+
+		<label for="new_password">Your new password</label>
+		{{ user_pwd_form.new_password }}
+
+		<label for="new_password2">Confirm your new password</label>
+		{{ user_pwd_form.new_password2 }}
+
+		<input type="submit" value="Change your password">
+	</form>
+</div>
+</div>
+{% endblock %}
