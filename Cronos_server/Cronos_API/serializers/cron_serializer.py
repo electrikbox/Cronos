@@ -17,6 +17,12 @@ class CronsSerializer(serializers.ModelSerializer):
             "id",
         ]
 
+    def validate_time(self, value: str) -> str:
+        """ Validate the time field """
+        if value.hour not in HOURS_RANGE or value.minute not in MINUTES_RANGE:
+            raise serializers.ValidationError(TIME_ALLOWED_MSG)
+        return value
+
     def validate_minutes(self, value: str) -> str:
         """ Validate minutes (0 to 59 or *) """
         if value not in (MINUTES_RANGE + ["*"]):
@@ -55,7 +61,7 @@ class CronsSerializer(serializers.ModelSerializer):
 
     def validate_day_of_week(self, value: str) -> str:
         """ Validate day of week (mon, tue, wed, thu, fri, sat, sun or *) """
-        if value not in (DAY_OF_WEEK_RANGE + ["*"]):
+        if value not in (DAY_OF_WEEK_RANGE + ["*"] + ["'-------------'"]):
             raise serializers.ValidationError(DAY_OF_WEEK_ALLOWED_MSG)
 
         elif (

@@ -15,14 +15,10 @@
 
     <div class="cron_form_date_cmd">
       {% csrf_token %}
-      <div class="element">
-        <label for="min">{{ cron_create_form.minutes.label }}</label>
-        <div class="select">{{ cron_create_form.minutes }}</div>
-      </div>
 
       <div class="element">
-        <label for="hours">{{ cron_create_form.hours.label }}</label>
-        <div class="select">{{ cron_create_form.hours }}</div>
+        <label for="time">{{ cron_create_form.time.label }}</label>
+        <div class="select">{{ cron_create_form.time }}</div>
       </div>
 
       <div class="element">
@@ -40,13 +36,61 @@
         <div class="select">{{ cron_create_form.day_of_week }}</div>
       </div>
 
+      {% comment %} <div class="element">
+        <label for="dom">{{ cron_create_form.day_of_month.label }}</label>
+        <div class="select">
+          <select id="dom">
+            {% for value, text in cron_create_form.day_of_month.field.choices %}
+            {% if value == 'separator' %}
+              <option value="{{ value }}" disabled>{{ text }}</option>
+            {% elif value == '*' %}
+              <option value="{{ value }}" selected>{{ text }}</option>
+            {% else %}
+              <option value="{{ value }}">{{ text }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="element">
+        <label for="month">{{ cron_create_form.months.label }}</label>
+        <div class="select">
+          <select id="month">
+            {% for value, text in cron_create_form.months.field.choices %}
+            {% if value == 'separator' %}
+              <option value="{{ value }}" disabled>{{ text }}</option>
+            {% else %}
+              <option value="{{ value }}">{{ text }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="element">
+        <label for="dow">{{ cron_create_form.day_of_week.label }}</label>
+        <div class="select">
+          <select id="dow">
+            {% for value, text in cron_create_form.day_of_week.field.choices %}
+            {% if value == 'separator' %}
+              <option value="{{ value }}" disabled>{{ text }}</option>
+            {% else %}
+              <option value="{{ value }}">{{ text }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+      </div> {% endcomment %}
+
       <div class="element">
         <label for="command">{{ cron_create_form.command.label }}</label>
         <div class="select">{{ cron_create_form.command }}</div>
       </div>
+
     </div>
 
-    <div class="select url_field">{{ cron_create_form.url }}</div>
+    {% comment %} <div class="select url_field">{{ cron_create_form.url }}</div> {% endcomment %}
     <button type="submit">create</button>
   </form>
 </div>
@@ -63,5 +107,12 @@
   </div>
   {% endfor %}
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('select option[value="separator"]').prop('disabled', true);
+  });
+</script>
+
 
 {% endblock %}

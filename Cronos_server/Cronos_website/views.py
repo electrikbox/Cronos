@@ -35,18 +35,8 @@ def FAQ(request) -> HttpResponse:
 
 @login_required
 def dashboard(request):
-    fields = [
-        "minutes",
-        "hours",
-        "day_of_month",
-        "months",
-        "day_of_week",
-        "command",
-    ]
-
-    # token = Token.objects.get(user=request.user).key
+    """ Render dashboard page """
     token = request.COOKIES.get('user_token')
-    print(token)
     header = {
         "Content-Type": "application/json",
         "Authorization": f"Token {token}"
@@ -54,18 +44,27 @@ def dashboard(request):
 
     if request.method == "POST":
         cron_create_form = CronForm(request.POST)
+        print(cron_create_form)
 
         if not cron_create_form.is_valid():
-            # messages.error(request, 'Please correct the errors below.')
+            messages.error(request, 'Please correct the errors below.')
             return redirect('/dashboard')
 
-        data = {field: cron_create_form.cleaned_data[field] for field in fields}
-        data["user"] = request.user.id
-        data["is_paused"] = False
-        data["validated"] = False
+        print(cron_create_form.cleaned_data)
+        data = {
+            "minutes": cron_create_form.cleaned_data["time"].minute,
+            "hours": cron_create_form.cleaned_data["time"].hour,
+            "day_of_month": cron_create_form.cleaned_data["day_of_month"],
+            "months": cron_create_form.cleaned_data["months"],
+            "day_of_week": cron_create_form.cleaned_data["day_of_week"],
+            "command": cron_create_form.cleaned_data["command"],
+            "user": request.user.id,
+            "is_paused": False,
+            "validated": False
+        }
 
         response = requests.post(CRON_CREATE_API_URL, headers=header, json=data)
-        # messages.success(request, 'Cron added successfully.')
+        messages.success(request, 'Cron added successfully.')
         return redirect('/dashboard')
 
     else:
@@ -75,3 +74,4 @@ def dashboard(request):
 
     context = {"cron_create_form": cron_create_form, "crons": crons.json()}
     return render(request, "dashboard.html", context)
+
