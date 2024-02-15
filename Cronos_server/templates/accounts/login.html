@@ -12,25 +12,24 @@
 {% block main %}
 <h2>Login</h2>
 
+<div class="success_msg">
 {% if request.GET.success %}
-<div class="success_msg">
   <p class="success_signup_text">Account created successfully</p>
-</div>
 {% endif %}
+</div>
 
+<div class="success_msg">
 {% if request.GET.reset %}
-<div class="success_msg">
-  <p class="success_reset_text">
-    Your password has been reset successfully, please log in
-  </p>
-</div>
+  <p class="success_reset_text">Your password has been reset successfully, please log in</p>
 {% endif %}
+</div>
 
-{% if request.GET.activate %}
+
 <div class="success_msg">
+  {% if request.GET.activate %}
   <p class="success_activate">Account activated, please log in</p>
-</div>
 {% endif %}
+</div>
 
 {% for message in messages %}
 <p class="error_msg">{{ message }}</p>

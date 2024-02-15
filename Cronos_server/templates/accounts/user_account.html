@@ -6,16 +6,17 @@
 {% block section %}
 <h2>Your account</h2>
 
+<div class="success_msg">
 {% if request.GET.updated %}
-<div class="success_msg">
   <p class="success_updated">Your personal details have been successfully modified</p>
-</div>
 {% endif %}
-{% if request.GET.updatedPWD %}
+</div>
+
 <div class="success_msg">
+{% if request.GET.updatedPWD %}
   <p class="success_updated">Your password has been successfully changed</p>
-</div>
 {% endif %}
+</div>
 
 {% for message in messages %}
     <p class="error_msg">{{ message }}</p>
