@@ -167,3 +167,9 @@ option,
 select {
 	min-width: 122px;
 }
+.success_msg {
+	color: rgb(0, 128, 0);
+	font-size: 16px;
+	text-align: center;
+	min-height: 20px;
+}
