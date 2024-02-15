@@ -7,13 +7,17 @@
     justify-content: center;
     gap: 10px;
     margin-top: 5px;
+	min-width: 250px;
+}
+.cron_form > * {
+	width: 100%;
 }
 .cron_form_date_cmd {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	align-items: flex-start;
 	justify-content: space-between;
 	gap: 5px;
-
 }
 .url_field {
 	display: flex;
@@ -21,19 +25,20 @@
 	width: 100%;
 }
 #id_url {
+	padding: 4px;
 	width: 100%;
-	padding: 7px;
 	border: none;
 	border-radius: 4px;
 	outline: none;
 	font-family: var(--main-font-family);
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
-
 .cron_form label {
 	font-family: var(--main-font-family);
 	font-size: 16px;
 	color: rgb(78, 78, 78);
+	padding-left: 7px;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 .cron_form select:focus {
 	border-color: #66afe9;
@@ -43,10 +48,28 @@
 }
 .element {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
-	justify-content: center;
-	gap: 5px;
+	justify-content: space-between;
+	gap: 10px;
+	width: 100%;
+	background-color: rgb(240, 240, 240);
+	border-radius: 3px;
+}
+.checkboxes {
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	align-items: start;
+	justify-content: space-between;
+	gap: 10px;
+}
+#day_check,
+#month_check,
+#dom_check {
+	margin: 0;
+	padding: 0;
+	width: 0%;
 }
 .cron_form_div {
 	margin: 0;
@@ -56,7 +79,6 @@
 	padding: 20px;
 	border-radius: 4px;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
-	min-width: 675px;
 }
 .cron_form_div h3 {
 	margin: 0;
@@ -70,7 +92,7 @@
 	text-align: left;
 	font-family: ubuntu;
 }
-
+.cron_form input,
 .cron_form select {
 	padding: 5px;
 	font-family: var(--main-font-family);
@@ -105,7 +127,6 @@
 	height: 30px;
 	vertical-align: middle;
 }
-
 .pause-cron, .delete-cron {
 	border-radius: 3px;
 	margin: 4px 0px 4px 0px;
@@ -135,7 +156,14 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	min-width: 300px;
 }
 .cron p {
 	margin: 0;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+#id_time,
+option,
+select {
+	min-width: 122px;
 }

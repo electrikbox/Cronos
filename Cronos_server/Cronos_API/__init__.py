@@ -5,6 +5,11 @@ CRON_CREATE_API_URL = "http://localhost:8000/api/crons/create/"
 CRON_LIST_API_URL = "http://localhost:8000/api/crons/"
 
 
+# Time
+# =============================================================================
+
+TIME_ALLOWED_MSG = "Only time from 00:00 to 23:59."
+
 # Minutes
 # =============================================================================
 
@@ -50,6 +55,7 @@ DAY_OF_WEEK_ERROR_MSG = "You set '{day_of_week}' to 'day_of_week', then 'months'
 
 COMMANDS = {
     "open": "open url",
+    "zoom-client": "open Zoom app",
     "pwd": "pwd",
     "cal": "cal",
 }

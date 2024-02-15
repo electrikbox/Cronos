@@ -2,10 +2,11 @@ $(document).ready(function () {
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   // Change day field to * when the other is selected
-  $('#id_day_of_week, #id_day_of_month').change(function () {
+  $('#dow, #dom').change(function () {
     const selectedValue = $(this).val();
-    const dayOfWeek = $('#id_day_of_week');
-    const dayOfMonth = $('#id_day_of_month');
+    const dayOfWeek = $('#dow');
+    const dayOfMonth = $('#dom');
+
     const otherField = $(this).is(dayOfWeek) ? dayOfMonth : dayOfWeek;
 
     if (selectedValue !== '*') {
@@ -74,9 +75,9 @@ $(document).ready(function () {
       $.ajax({
         url: `/api/crons/${cronId}/`,
         type: 'GET',
-        data: { csrfmiddlewaretoken: csrfTokenInput.val() },
+        // data: { csrfmiddlewaretoken: csrfTokenInput.val() },
         success: function (response) {
-          console.log('Cron status retrieved successfully');
+          // console.log('Cron status retrieved successfully');
           updateButtonIcon(button, response.is_paused);
         },
         error: handleAjaxError
@@ -95,7 +96,7 @@ $(document).ready(function () {
     $.ajax({
       url: `/api/crons/${cronId}/`,
       type: 'GET',
-      data: { csrfmiddlewaretoken: csrfTokenInput.val() },
+      // data: { csrfmiddlewaretoken: csrfTokenInput.val() },
       success: function (response) {
         console.log('Cron status retrieved successfully');
         const newIsPaused = !response.is_paused;

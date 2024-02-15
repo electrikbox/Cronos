@@ -8,22 +8,17 @@ from django.contrib.auth.models import User
 # CLASS CRON FORM
 # =============================================================================
 
-class CronForm(forms.ModelForm):
+class CronForm(forms.Form):
     """ Crons form class """
-    minutes = forms.ChoiceField(
-        choices=Crons.get_minutes_choices(),
-        label='Minutes',
-        initial=00
-    )
-    hours = forms.ChoiceField(
-        choices=Crons.get_hours_choices(),
-        label='Hours',
-        initial=10
+
+    time = forms.TimeField(
+        label='Time',
+        widget=forms.TimeInput(attrs={'type': 'time', 'value': '13:30'}),
     )
     day_of_month = forms.ChoiceField(
         choices=Crons.get_day_of_month_choices(),
-        label="Month's day",
-        initial='*'
+        label="Day",
+        initial='*',
     )
     months = forms.ChoiceField(
         choices=Crons.get_months_choices(),
@@ -40,16 +35,10 @@ class CronForm(forms.ModelForm):
         label='Command',
         initial='open_url'
     )
-    url = forms.URLField(
-        label='Url',
-        required=False,
-        widget=forms.URLInput(attrs={'placeholder': 'Enter a valid url (ex: https://www.google.com)'}),
-    )
 
     class Meta:
         model = Crons
-        fields = ['minutes', 'hours', 'day_of_month',
-                  'months', 'day_of_week', 'command']
+        fields = ['time', 'day_of_month', 'months', 'day_of_week', 'command']
 
 
 # CLASS SIGNUP FORM

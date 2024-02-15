@@ -93,6 +93,9 @@ class Crons(models.Model):
     is_paused = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    separator = ('separator', '-------------')
+    each_any = ('*', '*')
+
     @classmethod
     def get_minutes_choices(cls):
         """ Minutes choices for cron creation """
@@ -112,7 +115,8 @@ class Crons(models.Model):
     def get_day_of_month_choices(cls):
         """ Day of the month choice for cron creation """
         choices = [(str(day), str(day).zfill(2)) for day in range(1, 32)]
-        choices.append(('*', "each/any"))
+        choices.append(cls.separator)
+        choices.append(cls.each_any)
         return choices
 
     @classmethod
@@ -123,7 +127,8 @@ class Crons(models.Model):
             'July', 'August', 'September', 'October', 'November', 'December'
         ]
         choices = [(str(month[:3].lower()), month) for month in MONTH_NAME]
-        choices.append(('*', 'each/any'))
+        choices.append(cls.separator)
+        choices.append(cls.each_any)
         return choices
 
     @classmethod
@@ -134,7 +139,8 @@ class Crons(models.Model):
             'Thursday', 'Friday', 'Saturday', 'Sunday'
         ]
         choices = [(str(day[:3].lower()), day) for day in DAYS_OF_WEEK]
-        choices.append(('*', "each/any"))
+        choices.append(cls.separator)
+        choices.append(cls.each_any)
         return choices
 
     @classmethod
