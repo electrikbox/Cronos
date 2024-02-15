@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from rest_framework.authtoken.models import Token
-from .forms import CronForm
+from Cronos_website.forms import CronForm
 from Cronos_API import CRON_CREATE_API_URL, CRON_LIST_API_URL
 import requests
 
