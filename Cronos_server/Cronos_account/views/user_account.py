@@ -13,7 +13,7 @@ def user_account(request):
         personal_form = UserAccountForm(request.POST, instance=user)
         password_form = UserAccountPwdForm(request.POST)
 
-        if personal_form.is_valid():
+        if personal_form.is_valid() and personal_form.has_changed():
             personal_form.save()
 
             profile.first_name = personal_form.cleaned_data['first_name']
