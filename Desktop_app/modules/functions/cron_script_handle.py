@@ -38,7 +38,8 @@ class CronosScript:
         script = os.path.join(folder_path, f"cron_{self.cron_id}_script.sh")
         self.script_path = script
 
-        os.remove(script)
+        if os.path.exists(script):
+            os.remove(script)
 
 
 
