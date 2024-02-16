@@ -1,6 +1,9 @@
 """ This module is the package of the views of the Cronos_account app """
 
-
+import os
+from django.conf import settings
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.templatetags.static import static
 from Cronos_server.mail import activation_mail, forget_password_mail
 from Cronos_core.models import ActivationTemporaryToken, PasswordTemporaryToken, Profiles
 from Cronos_website.forms import (
@@ -10,6 +13,7 @@ from Cronos_website.forms import (
     SetNewPasswordForm,
     UserAccountForm,
     UserAccountPwdForm,
+    ProfileImgForm,
 )
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
