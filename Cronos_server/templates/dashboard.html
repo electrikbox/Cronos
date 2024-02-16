@@ -14,9 +14,12 @@
   {% if request.GET.create %}
   <p class="success_create">Cron has been successfully created</p>
   {% endif %}
+  {% for message in messages %}
+    <p class="error_msg">{{ message }}</p>
+  {% endfor %}
 </div>
 
-<div class="cron_form_div">
+<div class="cron_form_create">
   <h3>Create a cron</h3>
   <form class="cron_form" method="post">
 
@@ -43,53 +46,6 @@
         <div class="select">{{ cron_create_form.day_of_week }}</div>
       </div>
 
-      {% comment %} <div class="element">
-        <label for="dom">{{ cron_create_form.day_of_month.label }}</label>
-        <div class="select">
-          <select id="dom">
-            {% for value, text in cron_create_form.day_of_month.field.choices %}
-            {% if value == 'separator' %}
-              <option value="{{ value }}" disabled>{{ text }}</option>
-            {% elif value == '*' %}
-              <option value="{{ value }}" selected>{{ text }}</option>
-            {% else %}
-              <option value="{{ value }}">{{ text }}</option>
-            {% endif %}
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-
-      <div class="element">
-        <label for="month">{{ cron_create_form.months.label }}</label>
-        <div class="select">
-          <select id="month">
-            {% for value, text in cron_create_form.months.field.choices %}
-            {% if value == 'separator' %}
-              <option value="{{ value }}" disabled>{{ text }}</option>
-            {% else %}
-              <option value="{{ value }}">{{ text }}</option>
-            {% endif %}
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-
-      <div class="element">
-        <label for="dow">{{ cron_create_form.day_of_week.label }}</label>
-        <div class="select">
-          <select id="dow">
-            {% for value, text in cron_create_form.day_of_week.field.choices %}
-            {% if value == 'separator' %}
-              <option value="{{ value }}" disabled>{{ text }}</option>
-            {% else %}
-              <option value="{{ value }}">{{ text }}</option>
-            {% endif %}
-            {% endfor %}
-          </select>
-        </div>
-      </div> {% endcomment %}
-
       <div class="element">
         <label for="command">{{ cron_create_form.command.label }}</label>
         <div class="select">{{ cron_create_form.command }}</div>
@@ -97,12 +53,19 @@
 
     </div>
 
-    {% comment %} <div class="select url_field">{{ cron_create_form.url }}</div> {% endcomment %}
+    <div class="select url_field hidden">{{ cron_create_form.url }}</div>
     <button type="submit">create</button>
   </form>
 </div>
 
-<div class="cron_form_div">
+<div class="cron_form_create">
+  <h3>Logs</h3>
+  {% for log in logs|slice:":5" %}
+    <p>{{ log.log }} {{ log.create_date|date:"d-m-Y H:i" }}</p>
+  {% endfor %}
+</div>
+
+<div class="cron_form_list">
   <h3>Your crons</h3>
   {% for cron in crons %}
   <div class="cron">

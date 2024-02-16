@@ -34,6 +34,7 @@ section {
 	background-color: rgb(212, 212, 212);
 	width: 100%;
 	min-width: 800px;
+	padding-bottom: 100px;
 }
 footer {
 	background-color: var(--bg-color_1);

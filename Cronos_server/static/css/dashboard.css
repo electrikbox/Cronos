@@ -71,7 +71,8 @@
 	padding: 0;
 	width: 0%;
 }
-.cron_form_div {
+.cron_form_create,
+.cron_form_list {
 	margin: 0;
 	margin-top: 40px;
 	padding: 0;
@@ -80,7 +81,11 @@
 	border-radius: 4px;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 }
-.cron_form_div h3 {
+.cron_form_list {
+	min-width: 470px;
+}
+.cron_form_create h3,
+.cron_form_list h3 {
 	margin: 0;
 	margin-bottom: 20px;
 	padding: 5px 0px 5px 10px;
@@ -172,4 +177,7 @@ select {
 	font-size: 16px;
 	text-align: center;
 	min-height: 20px;
+}
+.hidden {
+    display: block;
 }
