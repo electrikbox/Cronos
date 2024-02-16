@@ -1,42 +1,4 @@
-""" Views """
-
-from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from Cronos_API import CRON_CREATE_API_URL, CRON_LIST_API_URL, LOGS_LIST_API_URL
-from Cronos_website.forms import CronForm
-import requests
-from Cronos_core.models import Logs
-
-
-def landing_page(request) -> HttpResponse:
-    """Render FAQ page"""
-    return render(request, "landing-page.html")
-
-
-@login_required
-def home(request) -> HttpResponse:
-    """Render home page"""
-    return render(request, "home.html")
-
-
-@login_required
-def contact(request) -> HttpResponse:
-    """Render contact page"""
-    return render(request, "contact.html")
-
-
-@login_required
-def downloads(request) -> HttpResponse:
-    """Render downloads page"""
-    return render(request, "downloads.html")
-
-
-@login_required
-def FAQ(request) -> HttpResponse:
-    """Render FAQ page"""
-    return render(request, "FAQ.html")
+from Cronos_website.views import *
 
 
 @login_required
