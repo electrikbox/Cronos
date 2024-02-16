@@ -109,12 +109,11 @@ class AppHandler:
             id = r_cron["id"]
             cmd = r_cron["command"]
 
-            r_cron_str = self.remote_cron_to_str(r_cron)
-
             # check if cron already exists
             if any(
-                r_cron_str == self.local_cron_to_str(l_cron)
-                for l_cron in local_crons
+                id == int(cron.comment.split("-")[1])
+                for cron in local_crons
+                if cron.comment and self.COMMENT in cron.comment
             ):
                 continue
 
@@ -142,6 +141,7 @@ class AppHandler:
                 command=self.cron_script_path,
                 comment=f"{self.COMMENT}-{id}"
             )
+            r_cron_str = self.remote_cron_to_str(r_cron)
             new_cron.setall(r_cron_str.split(" ")[:5])
             local_crons.write()
             print(f"{new_cron} : added")
@@ -157,12 +157,13 @@ class AppHandler:
         crons_to_remove = []
 
         for l_cron in local_crons:
-            l_cron_comment = l_cron.comment.split("-")[0]
-            l_cron_id = l_cron.comment.split("-")[1]
-
-            # check if cron is a cronos cron
-            if l_cron_comment != self.COMMENT:
+            if not l_cron.comment:
                 continue
+
+            if self.COMMENT not in l_cron.comment:
+                continue
+
+            l_cron_id = l_cron.comment.split("-")[1]
 
             # check if cron still exists on remote
             if any(l_cron_id == str(r_cron["id"]) for r_cron in remote_crons):
@@ -191,25 +192,24 @@ class AppHandler:
         remote_crons, local_crons = self.crons_lists()
 
         local_crons_dict = {
-            self.local_cron_to_str(cron): cron
-            for cron in local_crons
-            if cron.comment == self.COMMENT
+            cron.comment.split("-")[1]: cron for cron in local_crons
+            if cron.comment.split("-")[0] == self.COMMENT
         }
 
         for r_cron in remote_crons:
-            r_cron_str = self.remote_cron_to_str(r_cron)
+            id = str(r_cron["id"])
 
-            if r_cron_str in local_crons_dict:
-                l_cron = local_crons_dict[r_cron_str]
+            if id in local_crons_dict.keys():
+                cron = local_crons_dict[id]
                 is_paused = r_cron["is_paused"]
-                is_enabled = l_cron.is_enabled()
+                is_enabled = cron.is_enabled()
 
                 if is_paused and is_enabled:
-                    l_cron.enable(False)
-                    print(f"{l_cron} : paused")
+                    cron.enable(False)
+                    print(f"{cron} : paused")
                 elif not is_paused and not is_enabled:
-                    l_cron.enable(True)
-                    print(f"{l_cron} : enabled")
+                    cron.enable(True)
+                    print(f"{cron} : enabled")
 
         local_crons.write()
 
