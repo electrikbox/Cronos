@@ -3,6 +3,7 @@ from django import forms
 from Cronos_core.models import Crons
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.validators import URLValidator
 
 
 # CLASS CRON FORM
@@ -35,10 +36,24 @@ class CronForm(forms.Form):
         label='Command',
         initial='open_url'
     )
+    url = forms.URLField(
+        label='URL',
+        required=False,
+        widget=forms.URLInput(attrs={'placeholder': 'https://example.com'}),
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        command = cleaned_data.get("command")
+        url = cleaned_data.get("url")
+
+        if command == "open" and not url:
+            self.add_error("url", "URL field is required for this command.")
+        return cleaned_data
 
     class Meta:
         model = Crons
-        fields = ['time', 'day_of_month', 'months', 'day_of_week', 'command']
+        fields = ['time', 'day_of_month', 'months', 'day_of_week', 'command', 'url']
 
 
 # CLASS SIGNUP FORM
