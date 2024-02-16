@@ -1,4 +1,14 @@
 $(document).ready(function () {
+
+  $('#id_command').change(function () {
+    const command = $(this).val();
+    if (command !== 'open') {
+      $('.url_field').css('display', 'none');
+    } else {
+      $('.url_field').css('display', 'block');
+    }
+  });
+
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   // Change day field to * when the other is selected

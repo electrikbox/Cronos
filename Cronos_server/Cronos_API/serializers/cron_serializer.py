@@ -80,3 +80,15 @@ class CronsSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(COMMANDS_ALLOWED_MSG)
         else:
             return value
+
+    def validate_url(self, value):
+        """ Validate URL field only if command is not 'open' """
+        command = self.initial_data.get("command")
+        url = value
+
+        if command != "open":
+            return value
+        elif not url:
+            raise serializers.ValidationError("URL field is required for this command.")
+
+        return value

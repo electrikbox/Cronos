@@ -1,76 +1,96 @@
 """ Views """
+
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_
-from rest_framework.authtoken.models import Token
+from django.contrib.auth.decorators import login_required
+from Cronos_API import CRON_CREATE_API_URL, CRON_LIST_API_URL, LOGS_LIST_API_URL
 from Cronos_website.forms import CronForm
-from Cronos_API import CRON_CREATE_API_URL, CRON_LIST_API_URL
 import requests
+from Cronos_core.models import Logs
 
 
 def landing_page(request) -> HttpResponse:
-    """ Render FAQ page """
+    """Render FAQ page"""
     return render(request, "landing-page.html")
+
 
 @login_required
 def home(request) -> HttpResponse:
-    """ Render home page """
+    """Render home page"""
     return render(request, "home.html")
+
 
 @login_required
 def contact(request) -> HttpResponse:
-    """ Render contact page """
+    """Render contact page"""
     return render(request, "contact.html")
+
 
 @login_required
 def downloads(request) -> HttpResponse:
-    """ Render downloads page """
+    """Render downloads page"""
     return render(request, "downloads.html")
+
 
 @login_required
 def FAQ(request) -> HttpResponse:
-    """ Render FAQ page """
+    """Render FAQ page"""
     return render(request, "FAQ.html")
+
 
 @login_required
 def dashboard(request):
-    """ Render dashboard page """
-    token = request.COOKIES.get('user_token')
-    header = {
+    """Render dashboard page"""
+    URL_ERROR_MSG = "URL field is required for this command."
+    TOKEN = request.COOKIES.get("user_token")
+    HEADER = {
         "Content-Type": "application/json",
-        "Authorization": f"Token {token}"
+        "Authorization": f"Token {TOKEN}",
     }
 
     if request.method == "POST":
         cron_create_form = CronForm(request.POST)
-        print(cron_create_form)
 
         if not cron_create_form.is_valid():
-            messages.error(request, 'Please correct the errors below.')
-            return redirect('/dashboard')
+            if ("url" in cron_create_form.errors and URL_ERROR_MSG
+                in cron_create_form.errors["url"]):
+                messages.error(request, URL_ERROR_MSG)
+            return redirect("/dashboard")
 
-        print(cron_create_form.cleaned_data)
+        command = cron_create_form.cleaned_data['command']
+        url = cron_create_form.cleaned_data['url']
+
+        if command == "open":
+            command = f"{command} {url}"
+        else:
+            command = command
+
         data = {
             "minutes": cron_create_form.cleaned_data["time"].minute,
             "hours": cron_create_form.cleaned_data["time"].hour,
             "day_of_month": cron_create_form.cleaned_data["day_of_month"],
             "months": cron_create_form.cleaned_data["months"],
             "day_of_week": cron_create_form.cleaned_data["day_of_week"],
-            "command": cron_create_form.cleaned_data["command"],
+            "command": command,
             "user": request.user.id,
             "is_paused": False,
-            "validated": False
+            "validated": False,
         }
 
-        response = requests.post(CRON_CREATE_API_URL, headers=header, json=data)
-        return HttpResponseRedirect('/dashboard' + '?create=true')
+        response = requests.post(CRON_CREATE_API_URL, headers=HEADER, json=data)
+
+        if response.status_code != 201:
+            messages.error(request, "Cron creation failed.")
+
+        return HttpResponseRedirect("/dashboard" + "?create=true")
 
     else:
         cron_create_form = CronForm()
 
-    crons = requests.get(CRON_LIST_API_URL, headers=header)
+    crons = requests.get(CRON_LIST_API_URL, headers=HEADER)
+    logs = Logs.objects.filter(user=request.user).order_by("create_date").reverse()
 
-    context = {"cron_create_form": cron_create_form, "crons": crons.json()}
+    context = {"cron_create_form": cron_create_form, "crons": crons.json(), "logs": logs}
+    print(logs)
     return render(request, "dashboard.html", context)
-
