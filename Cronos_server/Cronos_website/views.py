@@ -1,8 +1,8 @@
 """ Views """
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_
 from rest_framework.authtoken.models import Token
 from Cronos_website.forms import CronForm
 from Cronos_API import CRON_CREATE_API_URL, CRON_LIST_API_URL
@@ -64,8 +64,7 @@ def dashboard(request):
         }
 
         response = requests.post(CRON_CREATE_API_URL, headers=header, json=data)
-        messages.success(request, 'Cron added successfully.')
-        return redirect('/dashboard')
+        return HttpResponseRedirect('/dashboard' + '?create=true')
 
     else:
         cron_create_form = CronForm()

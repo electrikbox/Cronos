@@ -9,6 +9,13 @@
 {% block section %}
 
 <h2>Create cron</h2>
+
+<div class="success_msg">
+  {% if request.GET.create %}
+  <p class="success_create">Cron has been successfully created</p>
+  {% endif %}
+</div>
+
 <div class="cron_form_div">
   <h3>Create a cron</h3>
   <form class="cron_form" method="post">
