@@ -1,7 +1,8 @@
 import flet as ft
-from Desktop_app_module import Elements, AppPages
-from Desktop_app_module.functions.api_request import CronScraper
-from Desktop_app_module.functions.check_command import CheckCommand
+from modules import Elements, AppPages
+from modules.functions.api_request import CronScraper
+from modules.functions.check_command import CheckCommand
+from modules.functions.cron_script_handle import CronosScript
 from crontab import CronTab, CronItem
 
 
@@ -21,6 +22,8 @@ class AppHandler:
         self.username = ""
         self.password = ""
         self.token = None
+
+        self.cron_script_path = ""
 
     # UTILS
     # =========================================================================
@@ -105,12 +108,14 @@ class AppHandler:
         for r_cron in remote_crons:
             r_cron_str = self.remote_cron_to_str(r_cron)
 
+            # check if cron already exists
             if any(
                 r_cron_str == self.local_cron_to_str(l_cron)
                 for l_cron in local_crons
             ):
                 continue
 
+            # check if command is available
             command = str(r_cron["command"]).split(" ")[0]
             cmd_validated = CheckCommand.is_command_available_unix(command)
 
@@ -123,7 +128,18 @@ class AppHandler:
 
             checked_cron.send_cron_validation(r_cron["id"])
 
-            new_cron = local_crons.new(command=command, comment=self.COMMENT)
+            # create cron script
+            new_cron_script = CronosScript(r_cron["id"], r_cron["command"])
+            new_cron_script.create_script()
+
+            self.cron_script_path = new_cron_script.script_path
+            cron_id = r_cron["id"]
+
+            # add cron to local crontab
+            new_cron = local_crons.new(
+                command=self.cron_script_path,
+                comment=f"{self.COMMENT}-{cron_id}"
+            )
             new_cron.setall(r_cron_str.split(" ")[:5])
             local_crons.write()
             print(f"{new_cron} : added")
@@ -139,24 +155,35 @@ class AppHandler:
         crons_to_remove = []
 
         for l_cron in local_crons:
-            l_cron_str = self.local_cron_to_str(l_cron)
+            # l_cron_str = self.local_cron_to_str(l_cron)
+            l_cron_comment = l_cron.comment.split("-")[0]
+            l_cron_id = l_cron.comment.split("-")[1]
 
-            if l_cron.comment != self.COMMENT:
+            # check if cron is a cronos cron
+            if l_cron_comment != self.COMMENT:
                 continue
 
+            # check if cron still exists on remote
             if any(
-                l_cron_str == self.remote_cron_to_str(r_cron)
+                l_cron_id == str(r_cron["id"])
                 for r_cron in remote_crons
             ):
                 continue
 
             crons_to_remove.append(l_cron)
 
+        # remove crons
         for cron in crons_to_remove:
+            # remove script
+            script_id = cron.comment.split("-")[1]
+            script_to_delete = CronosScript(script_id, "")
+            script_to_delete.remove_script()
+
+            # remove cron
             local_crons.remove(cron)
             print(f"{cron} : removed")
 
-        local_crons.write()
+        # local_crons.write()
 
 
     # PAUSE CRON
