@@ -1,8 +1,8 @@
 """Desktop app main, script that launch the app"""
 
 import flet as ft
-from Desktop_app_module import Elements, AppPages, logout, validate
-from Desktop_app_module.functions.login_button_handle import AppHandler
+from modules import Elements, AppPages, logout, validate
+from modules.functions.login_button_handle import AppHandler
 
 
 def main(page: ft.Page) -> None:

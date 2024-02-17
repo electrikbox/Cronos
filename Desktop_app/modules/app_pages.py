@@ -1,7 +1,7 @@
 """class to init app pages"""
 
 import flet as ft
-from Desktop_app_module import Elements
+from modules import Elements
 
 
 class AppPages(ft.UserControl):

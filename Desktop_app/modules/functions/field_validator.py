@@ -1,7 +1,7 @@
 """Activate the login button when entering username and password in fields"""
 
 import flet as ft
-from Desktop_app_module import Elements
+from modules import Elements
 
 
 def validate(elements: Elements, page: ft.Page) -> None:

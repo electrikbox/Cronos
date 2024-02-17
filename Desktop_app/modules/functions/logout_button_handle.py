@@ -1,7 +1,7 @@
 """Logout function call when hiting logout button"""
 
 import flet as ft
-from Desktop_app_module import Elements, AppPages
+from modules import Elements, AppPages
 
 
 def logout(elements: Elements, page: ft.Page, pages: AppPages) -> None:
