@@ -69,6 +69,9 @@ def user_account(request):
         password_form = UserAccountPwdForm()
         image_form = ProfileImgForm()
 
+        filename = f"{user.id}.png"
+        image_url = settings.MEDIA_URL + filename
+
     return render(request, 'accounts/user_account.html', {
         'user_account_form': personal_form,
         'user_pwd_form': password_form,
