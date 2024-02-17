@@ -131,8 +131,8 @@ class AppHandler:
             checked_cron.send_cron_validation(id)
 
             # create cron script
-            new_cron_script = CronosScript(id, cmd)
-            new_cron_script.create_script()
+            new_cron_script = CronosScript(id)
+            new_cron_script.create_script(cmd)
 
             self.cron_script_path = new_cron_script.script_path
 
@@ -175,7 +175,7 @@ class AppHandler:
         for cron in crons_to_remove:
             # remove script
             script_id = cron.comment.split("-")[1]
-            script_to_delete = CronosScript(script_id, "")
+            script_to_delete = CronosScript(script_id)
             script_to_delete.remove_script()
 
             # remove cron
