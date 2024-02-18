@@ -1,13 +1,23 @@
 {% extends 'user_logged.html' %}
+{% load static %}
 
 <!-- ================= TITLE ================= -->
 
 {% block title %}CronTab Form{% endblock %}
 
+<!-- ================= HEAD ================= -->
+
+{% block head_dashboard %}
+<script src="{% static '/js/dashboard/choice_field_handler.js' %}"></script>
+<script src="{% static '/js/dashboard/delete_crons.js' %}"></script>
+<script src="{% static '/js/dashboard/pause_handler.js' %}"></script>
+<script src="{% static '/js/dashboard/switch_pendings.js' %}"></script>
+<script src="{% static '/js/dashboard/utils.js' %}"></script>
+{% endblock %}
+
 <!-- ================= SECTION ================= -->
 
 {% block section %}
-
 <h2>Create cron</h2>
 
 <div class="success_msg">
@@ -19,70 +29,37 @@
   {% endfor %}
 </div>
 
-<div class="cron_form_create">
-  <h3>Create a cron</h3>
-  <form class="cron_form" method="post">
-
-    <div class="cron_form_date_cmd">
-      {% csrf_token %}
-
-      <div class="element">
-        <label for="time">{{ cron_create_form.time.label }}</label>
-        <div class="select">{{ cron_create_form.time }}</div>
+<div class="global">
+  <div class="create_and_logs">
+    <div class="cron_form_create">
+      <div class="dashboard_titles">
+        <ion-icon name="create-outline"></ion-icon>
+        <h3>Create a cron</h3>
       </div>
-
-      <div class="element">
-        <label for="dom">{{ cron_create_form.day_of_month.label }}</label>
-        <div class="select">{{ cron_create_form.day_of_month }}</div>
-      </div>
-
-      <div class="element">
-        <label for="months">{{ cron_create_form.months.label }}</label>
-        <div class="select">{{ cron_create_form.months }}</div>
-      </div>
-
-      <div class="element">
-        <label for="dow">{{ cron_create_form.day_of_week.label }}</label>
-        <div class="select">{{ cron_create_form.day_of_week }}</div>
-      </div>
-
-      <div class="element">
-        <label for="command">{{ cron_create_form.command.label }}</label>
-        <div class="select">{{ cron_create_form.command }}</div>
-      </div>
-
-    </div>
-
-    <div class="select url_field hidden">{{ cron_create_form.url }}</div>
-    <button type="submit">create</button>
-  </form>
-</div>
-
-<div class="cron_form_create">
-  <h3>Logs</h3>
-  {% for log in logs|slice:":5" %}
-    <p>{{ log.log }} {{ log.create_date|date:"d-m-Y H:i" }}</p>
-  {% endfor %}
-</div>
-
-<div class="cron_form_list">
-  <h3>Your crons</h3>
-  {% for cron in crons %}
-  <div class="cron">
-    <p>{{ cron.minutes }} {{ cron.hours }} {{ cron.day_of_month }} {{ cron.months }} {{ cron.day_of_week }} {{ cron.command }}</p>
-      <div class="cron-option">
-        <div class="pause-cron" data-cron-id="{{ cron.id }}"><ion-icon name="pause-circle-outline"></ion-icon></div>
-        <div class="delete-cron" data-cron-id="{{ cron.id }}"><ion-icon name="trash-outline"></ion-icon></div>
-      </div>
+      {% include "./dashboard_modules/create_cron.html" %}
   </div>
-  {% endfor %}
+
+  <div class="cron_form_logs">
+    <div class="dashboard_titles">
+      <ion-icon name="book-outline"></ion-icon>
+      <h3>Logs</h3>
+    </div>
+    {% include "./dashboard_modules/logs.html" %}
+  </div>
 </div>
 
-<script>
-  $(document).ready(function() {
-    $('select option[value="separator"]').prop('disabled', true);
-  });
-</script>
-
+<div class="crons_list">
+  <div class="cron_form_list">
+    <div class="dashboard_titles">
+      <ion-icon name="list-outline"></ion-icon>
+      <h3>Your crons</h3>
+    </div>
+    <div class="selected-buttons">
+      <button type="submit" class="delete-selected" disabled>Delete selected</button>
+      <button type="submit" class="pause-selected" disabled>Pause selected</button>
+    </div>
+    {% include "./dashboard_modules/cron.html" %}
+  </div>
+</div>
 
 {% endblock %}
