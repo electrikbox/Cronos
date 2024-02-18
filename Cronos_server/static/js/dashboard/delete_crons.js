@@ -18,43 +18,33 @@ $(document).ready(function () {
 
   $('.cron-test input[type="checkbox"]').change(updateDeleteSelectedButtonState);
 
-  // Function to delete a single cron
-  function deleteCron(cronId, row) {
-    // const userToken = cookie.get('user_token');
+  // Delete cron
+  $('.delete-cron').click(function () {
+    const cronId = $(this).data('cron-id');
+    const confirmation = confirm('Are you sure you want to delete this cron?');
+    const row = $(this).closest('.cron');
 
-    $.ajax({
-      url: `/api/crons/${cronId}/delete/`,
-      type: 'POST',
-      headers: {
-          // 'Authorization': `Token ${userToken}`,
-          'X-CSRFToken': csrfTokenInput.val()
-      },
-      success: function (response) {
+    if (confirmation) {
+      $.ajax({
+        url: `/api/crons/${cronId}/delete/`,
+        type: 'POST',
+        data: {
+          csrfmiddlewaretoken: csrfTokenInput.val()
+        },
+        success: function (response) {
           row.remove();
-      },
-      error: function (xhr) {
-          console.error(`${xhr.status}: ${xhr.responseText}`);
+        },
+        error: function (xhr) {
+          console.log(`${xhr.status}: ${xhr.responseText}`);
           alert('Failed to delete cron');
-      }
+        }
+      });
+    }
   });
-  }
 
   $('.select-all').click(function () {
     $('.cron_form_list .cron-test input[type="checkbox"]').click();
     getSelectedCronIds();
-  });
-
-  // Delete cron (individual)
-  $('.delete-cron').click(function (event) {
-    event.stopPropagation(); // Empêche la propagation de l'événement au parent
-
-    const cronId = $(this).data('cron-id');
-    const row = $(this).closest('.cron-test');
-
-    const confirmation = confirm('Are you sure you want to delete this cron?');
-    if (confirmation) {
-      deleteCron(cronId, row);
-    }
   });
 
   function deleteMultipleCrons(cronIds) {
