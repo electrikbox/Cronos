@@ -293,13 +293,11 @@ select {
 	color: rgb(147, 97, 227);
 }
 .selected-buttons {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
 	width: 100%;
 	gap: 10px;
 	margin-bottom: 10px;
+	padding-bottom: 9px;
+	border-bottom: 1px solid rgb(185, 185, 185);
 }
 .crons_list button[type="submit"] {
 	padding: 5px;

@@ -1,8 +1,8 @@
 {% for cron in crons %}
 <div class="cron-test">
+  <input type="checkbox" class="ui-checkbox">
   <div id="cron_id"><p>{{ cron.id }}</p></div>
   <div class="cron">
-    <input type="checkbox" class="ui-checkbox">
     <p class="first-p">{{ cron.minutes }} {{ cron.hours }} {{ cron.day_of_month }} {{ cron.months }} {{ cron.day_of_week }} {{ cron.command }}</p>
     <div class="pending"><p>pending</p></div>
     <div class="cron-option">

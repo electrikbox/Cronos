@@ -1,36 +1,48 @@
 $(document).ready(function () {
 
+  document.cookie.split(';').forEach(function (cookie) {
+    const parts = cookie.split('=');
+    console.log(parts);
+  });
+
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
   const deleteSelectedButton = $('.delete-selected');
   const pauseSelectedButton = $('.pause-selected');
 
   function updateDeleteSelectedButtonState() {
-    const checkedCrons = $('.cron input[type="checkbox"]:checked');
+    const checkedCrons = $('.cron-test input[type="checkbox"]:checked');
     const isEnabled = checkedCrons.length > 0;
     deleteSelectedButton.prop('disabled', !isEnabled);
     pauseSelectedButton.prop('disabled', !isEnabled);
   }
 
-  $('.cron input[type="checkbox"]').change(updateDeleteSelectedButtonState);
+  $('.cron-test input[type="checkbox"]').change(updateDeleteSelectedButtonState);
 
-  async function deleteCron(cronId, row) {
-      try {
-        const response = await fetch(`/api/crons/${cronId}/delete/`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfTokenInput.val()
-          }
-        });
-        if (!response.ok) {
-          throw new Error('Failed to delete cron');
-        }
-        row.remove();
-      } catch (error) {
-        console.error('Delete cron error:', error);
-        alert('Failed to delete cron');
+  // Function to delete a single cron
+  function deleteCron(cronId, row) {
+    // const userToken = cookie.get('user_token');
+
+    $.ajax({
+      url: `/api/crons/${cronId}/delete/`,
+      type: 'POST',
+      headers: {
+          // 'Authorization': `Token ${userToken}`,
+          'X-CSRFToken': csrfTokenInput.val()
+      },
+      success: function (response) {
+          row.remove();
+      },
+      error: function (xhr) {
+          console.error(`${xhr.status}: ${xhr.responseText}`);
+          alert('Failed to delete cron');
       }
-    }
+  });
+  }
+
+  $('.select-all').click(function () {
+    $('.cron_form_list .cron-test input[type="checkbox"]').click();
+    getSelectedCronIds();
+  });
 
   // Delete cron (individual)
   $('.delete-cron').click(function (event) {
@@ -55,6 +67,8 @@ $(document).ready(function () {
         console.log('Les crons ont été supprimés avec succès.');
         Object.values(cronIds).forEach(function (row) {
           row.remove();
+          $('.select-all').prop('checked', false);
+          updateDeleteSelectedButtonState();
         });
       },
       error: function (xhr, status, error) {
@@ -65,8 +79,8 @@ $(document).ready(function () {
 
   function getSelectedCronIds() {
     const selectedCronIds = {};
-    $('.cron input[type="checkbox"]:checked').each(function () {
-      const cronId = $(this).closest('.cron').find('.delete-cron').data('cron-id');
+    $('.cron-test input[type="checkbox"]:checked').each(function () {
+      const cronId = $(this).closest('.cron-test').find('.delete-cron').data('cron-id');
       const row = $(this).closest('.cron-test');
       selectedCronIds[cronId] = row;
     });
