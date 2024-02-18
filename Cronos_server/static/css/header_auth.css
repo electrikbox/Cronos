@@ -8,6 +8,7 @@
     padding: 0px;
     margin: 0px;
     background-color: var(--bg-color_1);
+    width: 100%;
 }
 
 .user_auth {
