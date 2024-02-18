@@ -43,6 +43,8 @@ def delete_cron(request, cron_id) -> Response:
 
 
 @api_view(["POST"])
+@authentication_classes([TokenAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
 async def delete_multiple_elements(request):
     data = request.data
     ids_to_delete = data.get("ids", [])
