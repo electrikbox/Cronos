@@ -15,7 +15,7 @@ def add_cron(request) -> Response:
     cron_instance = cron_serializer.save()
 
     log_data = {
-        "log": f"{cron_instance.id} : Creation OK",
+        "log": f"({cron_instance.id}) Created",
         "create_date": timezone.now(),
         "user": request.data.get("user"),
         "cron": cron_instance.id,
