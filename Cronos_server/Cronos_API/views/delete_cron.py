@@ -1,4 +1,8 @@
 from Cronos_API.views import *
+from asgiref.sync import sync_to_async
+from adrf.decorators import api_view
+import asyncio
+
 
 @api_view(["DELETE", "POST"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
@@ -10,7 +14,7 @@ def delete_cron(request, cron_id) -> Response:
     if request.method == "DELETE" or request.method == "POST":
 
         log_data = {
-            "log": f"{cron_id} : Delete OK",
+            "log": f"({cron_instance.id}) Removed",
             "create_date": timezone.now(),
             "user": request.user.id,
             "cron": cron_id,
@@ -26,7 +30,7 @@ def delete_cron(request, cron_id) -> Response:
 
         log_serializer.save()
         cron_instance.delete()
-#
+
         return Response(
             {"message": "Cron deleted successfully"},
             status=status.HTTP_204_NO_CONTENT,
@@ -34,5 +38,30 @@ def delete_cron(request, cron_id) -> Response:
     else:
         return Response(
             {"error": "Method not allowed"},
-            status=status.HTTP_405_METHOD_NOT_ALLOWED
+            status=status.HTTP_405_METHOD_NOT_ALLOWED,
         )
+
+
+@api_view(["POST"])
+async def delete_multiple_elements(request):
+    data = request.data
+    ids_to_delete = data.get("ids", [])
+    print(ids_to_delete)
+    print(data)
+
+    deletion_tasks = []
+
+    for id in ids_to_delete:
+        deletion_task = asyncio.create_task(delete_element(id))
+        deletion_tasks.append(deletion_task)
+
+    await asyncio.wait(deletion_tasks)
+
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@sync_to_async
+def delete_element(id):
+    cron = get_object_or_404(models.Crons, id=id)
+    print(id, cron.command, cron.user)
+    cron.delete()
