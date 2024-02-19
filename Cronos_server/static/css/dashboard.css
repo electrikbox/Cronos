@@ -1,5 +1,14 @@
 @import url('variables.css');
 
+.global {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 20px;
+	width: 80%;
+	padding: 10px 30px 10px 30px;
+}
 .cron_form {
     display: flex;
     flex-direction: column;
@@ -8,6 +17,7 @@
     gap: 10px;
     margin-top: 5px;
 	min-width: 250px;
+	width: 100%;
 }
 .cron_form > * {
 	width: 100%;
@@ -38,12 +48,15 @@
 	font-size: 16px;
 	color: rgb(78, 78, 78);
 	padding-left: 7px;
+	padding-top: 1px;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 .cron_form select:focus {
 	border-color: #66afe9;
 }
-.cron_form button[type="submit"]:hover {
+.cron_form button[type="submit"]:hover ,
+.delete-selected:hover,
+.pause-selected:hover {
 	background-color: rgb(14, 150, 212);
 }
 .element {
@@ -71,31 +84,33 @@
 	padding: 0;
 	width: 0%;
 }
+.create_and_logs {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	flex-grow: 1;
+}
 .cron_form_create,
+.cron_form_logs,
 .cron_form_list {
 	margin: 0;
-	margin-top: 40px;
-	padding: 0;
+	margin-bottom: 40px;
 	background-color: rgb(226, 226, 226);
 	padding: 20px;
 	border-radius: 4px;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+	width: 100%;
 }
 .cron_form_list {
-	min-width: 470px;
+	min-width: 430px;
 }
 .cron_form_create h3,
+.cron_form_logs h3,
 .cron_form_list h3 {
-	margin: 0;
-	margin-bottom: 20px;
-	padding: 5px 0px 5px 10px;
+	/* padding-bottom: 10px; */
 	font-family: var(--main-font-family);
-	color: rgb(255, 255, 255);
-	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-	background-color: var(--link-color);
-	border-radius: 3px;
-	text-align: left;
-	font-family: ubuntu;
 }
 .cron_form input,
 .cron_form select {
@@ -133,7 +148,6 @@
 	vertical-align: middle;
 }
 .pause-cron, .delete-cron {
-	border-radius: 3px;
 	margin: 4px 0px 4px 0px;
 	padding: 2px;
 }
@@ -147,11 +161,34 @@
 	justify-content: center;
 	padding: 0;
 	margin: 0;
+}
+.cron-test {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 	gap: 5px;
+	margin-top: 5px;
+	width: 100%;
+}
+#cron_id {
+	display: flex;
+	border-radius: 3px;
+	font-family: var(--main-font-family);
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+	font-size: 16px;
+	align-items: center;
+	min-width: 50px;
+	min-height: 42px;
+	text-align: center;
+	justify-content: center;
+	color: rgb(224, 224, 224);
+	/* background-color: rgb(88, 88, 88); */
+	background-color: rgb(147, 97, 227);
+
 }
 .cron {
 	background-color: rgb(247, 247, 247);
-	margin-top: 15px;
 	padding: 0px 10px;
 	border-radius: 3px;
 	font-family: var(--main-font-family);
@@ -161,11 +198,17 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	min-width: 300px;
+	/* min-width: 500px; */
+	min-height: 42px;
+	flex-grow: 2;
+	gap: 10px;
+	width: 100%;
 }
 .cron p {
 	margin: 0;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+	flex-grow: 3;
+	width: 100%;
 }
 #id_time,
 option,
@@ -180,4 +223,101 @@ select {
 }
 .hidden {
     display: block;
+}
+.logs {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: start;
+	margin-top: 5px;
+	padding: 5px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 3px;
+	gap: 5px;
+}
+.logs p {
+	margin: 0;
+	padding: 0;
+	font-family: var(--main-font-family);
+	font-size: 16px;
+	color: rgb(78, 78, 78);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+.pending {
+	color: rgb(255, 255, 255);
+	background-color: rgb(187, 187, 187);
+	border-radius: 3px;
+	padding: 5px;
+}
+.active {
+	background-color: rgb(147, 97, 227);
+}
+.crons_list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	flex-grow: 2;
+}
+.paused .first-p {
+	color: rgb(165, 165, 165);
+	text-shadow: none;
+  }
+.paused .active,
+.paused #cron_id {
+	background-color: rgb(141, 141, 141);
+	opacity: 0.4;
+}
+.paused .cron,
+.paused #cron_id {
+    box-shadow: none;
+}
+.paused .cron {
+	background-color: rgb(233, 233, 233);
+}
+.dashboard_titles {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid rgb(185, 185, 185);
+	gap: 10px;
+}
+.dashboard_titles ion-icon {
+    position: relative;
+    font-size: 2rem;
+	color: rgb(147, 97, 227);
+}
+.selected-buttons {
+	width: 100%;
+	gap: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 9px;
+	border-bottom: 1px solid rgb(185, 185, 185);
+}
+.crons_list button[type="submit"] {
+	padding: 5px;
+	font-size: 12px;
+    height: 25px;
+	width: 20%;
+	min-width: 100px;
+	font-weight: bold;
+	text-align: center;
+	/* background-color: rgb(51, 106, 132); */
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.delete-selected ,
+.pause-selected{
+	background-color: rgb(51, 106, 132);
+}
+.delete-selected[disabled],
+.pause-selected[disabled] {
+	background-color: #ccc;
 }

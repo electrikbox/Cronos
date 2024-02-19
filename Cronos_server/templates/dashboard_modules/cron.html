@@ -1,0 +1,14 @@
+{% for cron in crons %}
+<div class="cron-test">
+  <input type="checkbox" class="ui-checkbox">
+  <div id="cron_id"><p>{{ cron.id }}</p></div>
+  <div class="cron">
+    <p class="first-p">{{ cron.day_of_month }} {{ cron.months }} {{ cron.day_of_week }} {{ cron.hours }}:{{ cron.minutes }} {{ cron.command }}</p>
+    <div class="pending"><p>pending</p></div>
+    <div class="cron-option">
+      <div class="pause-cron" data-cron-id="{{ cron.id }}"><ion-icon name="pause-circle-outline"></ion-icon></div>
+      <div class="delete-cron" data-cron-id="{{ cron.id }}"><ion-icon name="trash-outline"></ion-icon></div>
+    </div>
+  </div>
+</div>
+{% endfor %}

@@ -29,6 +29,6 @@ from Cronos_API.views.get_all_crons import list_crons
 from Cronos_API.views.get_one_cron_by_id import show_cron
 from Cronos_API.views.create_cron import add_cron
 from Cronos_API.views.update_crons import update_cron
-from Cronos_API.views.delete_cron import delete_cron
+from Cronos_API.views.delete_cron import delete_cron, delete_multiple_elements
 from Cronos_API.views.api_signup import signup
 from Cronos_API.views.get_all_logs import list_logs

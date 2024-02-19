@@ -18,7 +18,7 @@ def update_cron(request, cron_id) -> Response:
     cron_serializer.save(updated_date=timezone.now())
 
     log_data = {
-        "log": "Update OK",
+        "log": f"({cron_instance.id}) Updated",
         "create_date": timezone.now(),
         "user": cron_instance.user.id if cron_instance.user else None,
         "cron": cron_instance.id,

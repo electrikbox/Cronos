@@ -1,9 +1,15 @@
 from Cronos_website.views import *
+from urllib.parse import urlencode
 
 
 @login_required
 def dashboard(request):
     """Render dashboard page"""
+
+    message = request.GET.get('message', None)
+    if message:
+        messages.success(request, message)
+
     URL_ERROR_MSG = "URL field is required for this command."
     TOKEN = request.COOKIES.get("user_token")
     HEADER = {
@@ -47,6 +53,7 @@ def dashboard(request):
 
         return HttpResponseRedirect("/dashboard" + "?create=true")
 
+
     else:
         cron_create_form = CronForm()
 
@@ -54,5 +61,4 @@ def dashboard(request):
     logs = Logs.objects.filter(user=request.user).order_by("create_date").reverse()
 
     context = {"cron_create_form": cron_create_form, "crons": crons.json(), "logs": logs}
-    print(logs)
     return render(request, "dashboard.html", context)
