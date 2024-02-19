@@ -1,3 +1,4 @@
+from django.forms import ClearableFileInput
 from Cronos_website.forms import *
 
 
@@ -43,7 +44,7 @@ class UserAccountPwdForm(forms.Form):
 class ProfileImgForm(forms.Form):
     """ Form for uploading profile picture """
     profile_img = forms.ImageField(
-        help_text="Max size: 2 MB",
+        widget=ClearableFileInput(attrs={'accept': 'image/*', 'class': 'form-img'}),
         validators=[
             FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png']),
         ]
