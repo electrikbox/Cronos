@@ -173,7 +173,6 @@
 }
 #cron_id {
 	display: flex;
-	background-color: rgb(247, 247, 247);
 	border-radius: 3px;
 	font-family: var(--main-font-family);
 	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
@@ -184,7 +183,8 @@
 	text-align: center;
 	justify-content: center;
 	color: rgb(224, 224, 224);
-	background-color: rgb(88, 88, 88);
+	/* background-color: rgb(88, 88, 88); */
+	background-color: rgb(147, 97, 227);
 
 }
 .cron {
