@@ -63,7 +63,7 @@ $(document).ready(function () {
           row.remove();
           $('.select-all').prop('checked', false);
           updateDeleteSelectedButtonState();
-          window.location.href = "/dashboard?delete=true";
+          window.location.href = "/dashboard?deletes=true";
         });
       },
       error: function (xhr, status, error) {

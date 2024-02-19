@@ -24,7 +24,9 @@
   {% if request.GET.create %}
   <p class="success_create">Cron has been successfully created</p>
   {% elif  request.GET.delete %}
-  <p class="success_create">Cron has been successfully deleted</p>
+  <p class="success_delete">Cron has been deleted</p>
+  {% elif  request.GET.deletes %}
+  <p class="success_delete">Crons has been deleted</p>
   {% endif %}
   {% for message in messages %}
     <p class="error_msg">{{ message }}</p>
