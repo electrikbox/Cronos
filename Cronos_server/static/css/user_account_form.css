@@ -2,10 +2,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: baseline;
 }
 .personal {
 	margin: 50px;
-
 }
 .user_account_form,
 .user_pwd_form {
@@ -93,9 +95,42 @@ h3 {
 	margin-top: -40px;
 	margin-left: auto;
 	margin-bottom: 15px;
-
 }
-
 .showPwd:hover {
 	color: var(--link-color);
 }
+.help-text {
+	font-family: var(--main-font-family);
+	font-size: 14px;
+	color: rgb(78, 78, 78);
+	text-align: right;
+}
+.pic {
+	text-align: center;
+	margin-top: 20px;
+}
+.profile_pic img {
+	border-radius: 50%;
+	overflow: hidden;
+}
+/* Hide default button */
+.user_pic input[type="file"] {
+	display: none;
+}
+/* Style label that remplace button */
+.user_pic label {
+	background-color: #97989a;
+	color: #fffefe;
+	padding: 8px 16px;
+	margin: 10px 0;
+	cursor: pointer;
+	border-radius: 4px;
+	border: none;
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+.user_pic label:hover {
+	background-color: #67696c;
+}
+
