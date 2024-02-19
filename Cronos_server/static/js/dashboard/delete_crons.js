@@ -33,6 +33,7 @@ $(document).ready(function () {
         },
         success: function (response) {
           row.remove();
+          window.location.href = "/dashboard?delete=true";
         },
         error: function (xhr) {
           console.log(`${xhr.status}: ${xhr.responseText}`);
@@ -62,6 +63,7 @@ $(document).ready(function () {
           row.remove();
           $('.select-all').prop('checked', false);
           updateDeleteSelectedButtonState();
+          window.location.href = "/dashboard?delete=true";
         });
       },
       error: function (xhr, status, error) {
