@@ -22,7 +22,7 @@ $(document).ready(function () {
   $('.delete-cron').click(function () {
     const cronId = $(this).data('cron-id');
     const confirmation = confirm('Are you sure you want to delete this cron?');
-    const row = $(this).closest('.cron');
+    const row = $(this).closest('.cron-test');
 
     if (confirmation) {
       $.ajax({
@@ -51,6 +51,9 @@ $(document).ready(function () {
     $.ajax({
       url: '/api/delete-multiple/',
       type: 'POST',
+      headers: {
+        'X-CSRFToken': csrfTokenInput.val()
+      },
       data: JSON.stringify({ ids: Object.keys(cronIds) }),
       contentType: 'application/json',
       success: function (response) {
