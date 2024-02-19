@@ -43,6 +43,8 @@ class UserAccountPwdForm(forms.Form):
 class ProfileImgForm(forms.Form):
     """ Form for uploading profile picture """
     profile_img = forms.ImageField(
-        help_text="Max size: 1 MB",
-        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])]
+        help_text="Max size: 2 MB",
+        validators=[
+            FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png']),
+        ]
     )
