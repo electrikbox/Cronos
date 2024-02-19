@@ -17,7 +17,6 @@ class UserPic():
         """ Upload user profile picture """
         _, file_extension = os.path.splitext(pic.name)
 
-
         filename = f"{self.user.id}{file_extension.lower()}"
         filepath = os.path.join(settings.MEDIA_ROOT, filename)
 
