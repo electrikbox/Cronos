@@ -1,8 +1,10 @@
 from Cronos_account.views import *
-
+from ..user_pics import UserPic
 
 # USER ACCOUNT
 # =============================================================================
+
+
 @login_required
 def user_account(request):
     """ Render user account page """
@@ -36,25 +38,9 @@ def user_account(request):
             return HttpResponseRedirect(reverse('Cronos_account:user_account') + '?updatedPWD=true')
 
         if image_form.is_valid():
-            profile_img = image_form.cleaned_data['profile_img']
-            filename, file_extension = os.path.splitext(profile_img.name)
-
-            if file_extension not in ['.jpg', '.jpeg', '.png']:
-                messages.error(request, "Invalid image file type")
-                return HttpResponseRedirect(reverse('Cronos_account:user_account'))
-
-            filename = f"{user.id}{file_extension.lower()}"
-            filepath = os.path.join(settings.MEDIA_ROOT, filename)
-
-            if profile_img.size > 1024 * 1024:
-                messages.error(request, "Image file too large ( > 1mb )")
-                return HttpResponseRedirect(reverse('Cronos_account:user_account'))
-
-            with open(filepath,'wb') as f:
-                for chunk in profile_img.chunks():
-                    f.write(chunk)
-
-            image_url = settings.MEDIA_URL + filename
+            user_pic = UserPic(user)
+            profile_pic = user_pic.upload_pic(
+                image_form.cleaned_data['profile_img'])
 
             return HttpResponseRedirect(reverse('Cronos_account:user_account') + '?updatedIMG=true')
 
@@ -69,8 +55,8 @@ def user_account(request):
         password_form = UserAccountPwdForm()
         image_form = ProfileImgForm()
 
-        filename = f"{user.id}.png"
-        image_url = settings.MEDIA_URL + filename
+        user_pic = UserPic(user)
+        image_url = user_pic.show_pic()
 
     return render(request, 'accounts/user_account.html', {
         'user_account_form': personal_form,
