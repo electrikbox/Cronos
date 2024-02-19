@@ -18,6 +18,7 @@ def user_account(request):
         password_form = UserAccountPwdForm(request.POST)
         image_form = ProfileImgForm(request.POST, request.FILES)
 
+        # PERSONAL INFO FORM
         if personal_form.is_valid() and personal_form.has_changed():
             personal_form.save()
 
@@ -27,6 +28,7 @@ def user_account(request):
 
             return HttpResponseRedirect(reverse('Cronos_account:user_account') + '?updated=true')
 
+        # PASSWORD (change) FORM
         if password_form.is_valid():
             if not user.check_password(password_form.cleaned_data['old_password']):
                 messages.error(request, "Invalid old password")
@@ -37,6 +39,7 @@ def user_account(request):
             update_session_auth_hash(request, user)
             return HttpResponseRedirect(reverse('Cronos_account:user_account') + '?updatedPWD=true')
 
+        # PROFILE PICTURE FORM
         if image_form.is_valid():
             user_pic = UserPic(user)
             profile_pic = user_pic.upload_pic(
