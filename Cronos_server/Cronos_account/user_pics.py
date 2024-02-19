@@ -1,10 +1,11 @@
 from Cronos_core.models import *
+import glob
 
 
 class UserPic():
     """ Class User profile picture """
 
-    def __init__(self, user):
+    def __init__(self, user: User):
         """ Initialize user profile picture """
         self.user = user
 
@@ -26,6 +27,11 @@ class UserPic():
         """ Show user profile picture """
 
         filepath = os.path.join(settings.MEDIA_ROOT)
+        search_file = f"{filepath}/{self.user.id}".split('.')[0]
+
+        if not any(glob.glob(f"{search_file}.*")):
+            pic = 'default_pic.png'
+            return settings.MEDIA_URL + pic
 
         for file in os.listdir(filepath):
             user_id = file.split('.')[0]
@@ -33,6 +39,7 @@ class UserPic():
 
             if user_id == str(self.user.id):
                 pic = f"{user_id}.{ext}"
+                break
 
         image_url = settings.MEDIA_URL + pic
 
