@@ -54,5 +54,4 @@ def dashboard(request):
     logs = Logs.objects.filter(user=request.user).order_by("create_date").reverse()
 
     context = {"cron_create_form": cron_create_form, "crons": crons.json(), "logs": logs}
-    print(logs)
     return render(request, "dashboard.html", context)
