@@ -18,47 +18,73 @@
 {% endif %}
 </div>
 
+<div class="success_msg">
+{% if request.GET.updatedIMG %}
+  <p class="success_updated">Your profile pic has been successfully uploaded</p>
+{% endif %}
+</div>
+
 {% for message in messages %}
     <p class="error_msg">{{ message }}</p>
 {% endfor %}
 
+<!-- ================= PIC FORM ================= -->
+
+<div class="profile_pic">
+	<h3>Your profile pic</h3>
+	<div>
+		<img src="{{ image_url }}" alt="pic">
+	</div>
+
+	<form class="user_pic" method="POST" enctype="multipart/form-data">
+		 {% csrf_token %}
+		<label for="profile_pic">Your profile pic</label>
+		{{ profile_img_form.profile_img }}
+		<input type="submit" value="Upload">
+	</form>
+</div>
+
 <div class="user_form_container">
-<div class="personal">
-	<h3>Your personal details</h3>
+<!-- ================= PERSONAL DETAILS FORM ================= -->
 
-	<form class="user_account_form" method="POST">
-		{% csrf_token %}
-		<label for="username">Your username</label>
-        {{ user_account_form.username }}
+	<div class="personal">
+		<h3>Your personal details</h3>
 
-		<label for="email">Your email</label>
-		{{ user_account_form.email }}
+		<form class="user_account_form" method="POST">
+			{% csrf_token %}
+			<label for="username">Your username</label>
+			{{ user_account_form.username }}
 
-		<label for="first_name">Your first name</label>
-		{{ user_account_form.first_name }}
+			<label for="email">Your email</label>
+			{{ user_account_form.email }}
 
-		<label for="last_name">Your last name</label>
-		{{ user_account_form.last_name }}
+			<label for="first_name">Your first name</label>
+			{{ user_account_form.first_name }}
 
-         <input type="submit" value="Save your changes">
-	</form>
-</div>
+			<label for="last_name">Your last name</label>
+			{{ user_account_form.last_name }}
 
-<div class="security">
-	<h3>Security</h3>
-	<form class="user_pwd_form" method="POST">
-		{% csrf_token %}
-		<label for="old_password">Your old password</label>
-        {{ user_pwd_form.old_password }}
+			<input type="submit" value="Save your changes">
+		</form>
+	</div>
 
-		<label for="new_password">Your new password</label>
-		{{ user_pwd_form.new_password }}
+<!-- ================= CHANGE PWD FORM ================= -->
+	<div class="security">
+		<h3>Security</h3>
+		<form class="user_pwd_form" method="POST">
+			{% csrf_token %}
+			<label for="old_password">Your old password</label>
+			{{ user_pwd_form.old_password }}
 
-		<label for="new_password2">Confirm your new password</label>
-		{{ user_pwd_form.new_password2 }}
+			<label for="new_password">Your new password</label>
+			{{ user_pwd_form.new_password }}
 
-		<input type="submit" value="Change your password">
-	</form>
-</div>
+			<label for="new_password2">Confirm your new password</label>
+			{{ user_pwd_form.new_password2 }}
+
+			<input type="submit" value="Change your password">
+		</form>
+	</div>
+
 </div>
 {% endblock %}

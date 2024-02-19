@@ -36,3 +36,13 @@ class UserAccountPwdForm(forms.Form):
     old_password = forms.CharField(widget=forms.PasswordInput)
     new_password = forms.CharField(widget=forms.PasswordInput)
     new_password2 = forms.CharField(widget=forms.PasswordInput)
+
+
+# PROFILE IMAGE FORM in USER ACCOUNT
+# =============================================================================
+class ProfileImgForm(forms.Form):
+    """ Form for uploading profile picture """
+    profile_img = forms.ImageField(
+        help_text="Max size: 1 MB",
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])]
+    )

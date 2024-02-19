@@ -2,9 +2,12 @@
 
 import datetime
 import secrets
+import os
+from pathlib import Path
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.conf import settings
 from Cronos_API import COMMANDS
 
 from Cronos_core.models.model_crons import Crons
