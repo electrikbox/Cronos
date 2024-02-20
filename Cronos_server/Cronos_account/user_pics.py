@@ -1,5 +1,5 @@
 from Cronos_core.models import *
-from PIL import Image
+from PIL import Image, ImageOps
 import glob
 
 
@@ -87,4 +87,6 @@ class UserPic():
         offset = ((size - new_width) // 2, (size - new_height) // 2)
         square_img.paste(resized_img, offset)
 
-        return square_img
+        cropped_img = ImageOps.fit(resized_img, (size, size), method=0, bleed=0.0, centering=(0.5, 0.5))
+
+        return cropped_img
