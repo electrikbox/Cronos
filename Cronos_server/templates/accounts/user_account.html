@@ -37,10 +37,11 @@
 	</div>
 	<form class="user_pic_form" method="POST" enctype="multipart/form-data">
 		 {% csrf_token %}
+		 <p id="file-name-display">No file selected</p>
 		 <div class="pic_button">
-			<label for="{{ profile_img_form.profile_img.id_for_label }}">Browse</label>
-			{{ profile_img_form.profile_img }}
-			<input type="submit" value="Upload" id>
+			<label for="input_profile_img">Browse</label>
+            <input id="input_profile_img" type="file" name="profile_img" accept="image/*" class="form-img">
+			<input type="submit" value="Upload">
 		</div>
 		<p class="help-text">Max size: 2 MB</p>
         <p class="help-text">Formats: JPG, JPEG, PNG</p>

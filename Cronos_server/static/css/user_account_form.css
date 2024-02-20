@@ -85,6 +85,12 @@
 .user_pic_form input[type="submit"]:hover {
 	background-color: rgb(14, 150, 212);
 }
+#file-name-display {
+	font-family: var(--main-font-family);
+	font-size: 12px;
+	color: rgb(78, 78, 78);
+	text-align: left;
+}
 .personal,
 .security {
 	margin: 0;
