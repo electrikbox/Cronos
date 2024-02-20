@@ -2,13 +2,6 @@ $(document).ready(function () {
 
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
-  // Function to handle AJAX errors
-  // ==========================================================================
-  function handleAjaxError(xhr) {
-    console.error('AJAX request failed:', xhr.status, xhr.responseText);
-    alert('Failed to perform the operation. Please try again.');
-  };
-
   // Function to update cron status in database to pause
   // ==========================================================================
   function updateCronStatus(button, cronId, isPaused) {
@@ -39,8 +32,12 @@ $(document).ready(function () {
         const newIsPaused = !response.is_paused;
         updateCronStatus(button, cronId, newIsPaused);
         updateButtonIcon(button, newIsPaused);
+        window.location.reload();
       },
-      error: handleAjaxError
+      error: function (xhr) {
+        console.error('AJAX request failed:', xhr.status, xhr.responseText);
+        alert('Failed to perform the operation. Please try again.');
+      }
     });
   });
 
@@ -56,24 +53,4 @@ $(document).ready(function () {
       cronTestDiv.removeClass('paused');
     }
   }
-
-  // Function to update the pause-cron buttons on page load
-  // ==========================================================================
-  function updatePauseButtonsOnLoad() {
-    $('.pause-cron').each(function () {
-      const button = $(this);
-      const cronId = button.data('cron-id');
-
-      $.ajax({
-        url: `/api/crons/${cronId}/`,
-        type: 'GET',
-        success: function (response) {
-          updateButtonIcon(button, response.is_paused);
-        },
-        error: handleAjaxError
-      });
-    });
-  }
-
-  updatePauseButtonsOnLoad();
 });
