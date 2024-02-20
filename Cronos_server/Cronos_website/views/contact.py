@@ -1,4 +1,3 @@
-from operator import is_
 from Cronos_website.views import *
 
 
@@ -12,6 +11,14 @@ def contact(request) -> HttpResponse:
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
+
+            send_mail(
+                subject=f"CRONOS - Message from {name} - {email}",
+                message=f'Name: {name}\nEmail: {email}\nMessage: {message}',
+                from_email=email,
+                recipient_list=[settings.MAIL_CRONOS]
+            )
+            return HttpResponseRedirect("/contact" + "?send=true")
 
     else:
         user = request.user
