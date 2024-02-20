@@ -1,7 +1,7 @@
 """ URLs for Cronos_API """
 
 from django.urls import path
-from .views import list_crons, add_cron, show_cron, update_cron, delete_cron, login, signup, list_logs, delete_multiple_elements
+from .views import list_crons, add_cron, show_cron, update_cron, delete_cron, login, signup, list_logs, delete_multiple_elements, pause_multiple_elements
 
 
 app_name = 'Cronos_API'
@@ -16,4 +16,5 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('signup/', signup, name='signup'),
     path('delete-multiple/', delete_multiple_elements, name='delete_multiple_elements'),
+    path('pause-multiple/', pause_multiple_elements, name='pause_multiple_elements'),
 ]
