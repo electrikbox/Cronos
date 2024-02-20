@@ -1,7 +1,27 @@
 {% extends 'user_logged.html' %}
+{% load static %}
 
-{% block title %}Cronos contact us{% endblock %}
+{% block title %}Cronos Contact Us{% endblock %}
 
 {% block section %}
-<h2>Contact us</h2>
+<h2>Contact Us</h2>
+
+{% for message in messages %}
+<p class="error_msg">{{ message }}</p>
+{% endfor %}
+
+<div>
+	<form class="contact_form" method="POST">
+		{% csrf_token %}
+		<label for="name">Your name</label>
+		<input type="text" id="name" name="name" value="{{ contact_form.name.value }}" readonly>
+		<label for="email">Your email</label>
+		<input type="email" id="email" name="email" value="{{ contact_form.email.value }}" readonly>
+		<label for="message">Your message</label>
+		{{ contact_form.message }}
+
+		<input type="submit" value="Send">
+	</form>
+</div>
+
 {% endblock %}
