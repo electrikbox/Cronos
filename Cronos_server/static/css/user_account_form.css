@@ -91,6 +91,9 @@
 	color: rgb(78, 78, 78);
 	text-align: left;
 }
+#file-name-display.file-selected {
+	color: #2e8b57;
+}
 .personal,
 .security {
 	margin: 0;
