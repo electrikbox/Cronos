@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from Cronos_API import CRON_CREATE_API_URL, CRON_LIST_API_URL, LOGS_LIST_API_URL
 from Cronos_website.forms import CronForm
+from Cronos_account.user_pics import UserPic
 import requests
 from Cronos_core.models import Logs
 
