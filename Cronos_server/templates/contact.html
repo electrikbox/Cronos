@@ -6,6 +6,12 @@
 {% block section %}
 <h2>Contact Us</h2>
 
+<div class="success_msg">
+  {% if request.GET.send %}
+  <p class="success_activate">Your message has been sent to us and you will receive a reply within 48 hours</p>
+{% endif %}
+</div>
+
 {% for message in messages %}
 <p class="error_msg">{{ message }}</p>
 {% endfor %}
