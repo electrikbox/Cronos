@@ -37,7 +37,7 @@
   <div class="create_and_logs">
     <div class="cron_form_create">
       <div class="dashboard_titles">
-        <ion-icon name="create-outline"></ion-icon>
+        {% comment %} <ion-icon name="create-outline"></ion-icon> {% endcomment %}
         <h3>Create a cron</h3>
       </div>
       {% include "./dashboard_modules/create_cron.html" %}
@@ -45,7 +45,7 @@
 
   <div class="cron_form_logs">
     <div class="dashboard_titles">
-      <ion-icon name="book-outline"></ion-icon>
+      {% comment %} <ion-icon name="book-outline"></ion-icon> {% endcomment %}
       <h3>Logs</h3>
     </div>
     {% include "./dashboard_modules/logs.html" %}
@@ -55,13 +55,19 @@
 <div class="crons_list">
   <div class="cron_form_list">
     <div class="dashboard_titles">
-      <ion-icon name="list-outline"></ion-icon>
+      {% comment %} <ion-icon name="list-outline"></ion-icon> {% endcomment %}
       <h3>Your crons</h3>
     </div>
-    <input type="checkbox" class="select-all">
     <div class="selected-buttons">
-      <button type="submit" class="delete-selected" disabled>Delete selected</button>
-      <button type="submit" class="pause-selected" disabled>Pause selected</button>
+      <div>
+        <input type="checkbox" class="select-all">
+        <p>Select all</p>
+      </div>
+      <div>
+        <button type="submit" class="delete-selected" disabled>Delete selected</button>
+        <button type="submit" class="pause-selected" disabled>Pause selected</button>
+        <button type="submit" class="play-selected" disabled>Play selected</button>
+      </div>
     </div>
     {% for cron in page_obj %}
       {% include 'dashboard_modules/cron.html' %}
