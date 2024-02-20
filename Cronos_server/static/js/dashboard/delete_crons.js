@@ -1,19 +1,13 @@
 $(document).ready(function () {
 
-  document.cookie.split(';').forEach(function (cookie) {
-    const parts = cookie.split('=');
-    console.log(parts);
-  });
-
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
-  const deleteSelectedButton = $('.delete-selected');
-  const pauseSelectedButton = $('.pause-selected');
 
   function updateDeleteSelectedButtonState() {
     const checkedCrons = $('.cron-test input[type="checkbox"]:checked');
     const isEnabled = checkedCrons.length > 0;
-    deleteSelectedButton.prop('disabled', !isEnabled);
-    pauseSelectedButton.prop('disabled', !isEnabled);
+    $('.delete-selected').prop('disabled', !isEnabled);
+    $('.pause-selected').prop('disabled', !isEnabled);
+    $('.play-selected').prop('disabled', !isEnabled);
   }
 
   $('.cron-test input[type="checkbox"]').change(updateDeleteSelectedButtonState);
