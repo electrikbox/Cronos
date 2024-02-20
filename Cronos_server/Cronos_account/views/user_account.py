@@ -46,6 +46,12 @@ def user_account(request):
                 image_form.cleaned_data['profile_img'])
 
             return HttpResponseRedirect(reverse('Cronos_account:user_account') + '?updatedIMG=true')
+        else:
+            for field, errors in image_form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{error}")
+
+            return HttpResponseRedirect(reverse('Cronos_account:user_account'))
 
     else:
         initial_data = {
