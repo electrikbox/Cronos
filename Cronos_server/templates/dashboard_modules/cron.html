@@ -1,4 +1,3 @@
-{% for cron in crons %}
 <div class="cron-test{% if cron.is_paused %} paused{% endif %}">
   <input type="checkbox" class="ui-checkbox">
   <div id="cron_id"><p>{{ cron.id }}</p></div>
@@ -11,4 +10,3 @@
     </div>
   </div>
 </div>
-{% endfor %}

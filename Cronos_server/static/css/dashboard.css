@@ -91,17 +91,26 @@
 	justify-content: center;
 	width: 50%;
 	flex-grow: 1;
+	gap: 20px;
 }
 .cron_form_create,
 .cron_form_logs,
 .cron_form_list {
 	margin: 0;
-	margin-bottom: 40px;
-	background-color: rgb(226, 226, 226);
+	/* margin-bottom: 20px; */
+	/* background-color: rgb(226, 226, 226); */
 	padding: 20px;
-	border-radius: 4px;
-	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+	/* border-radius: 4px; */
+	/* box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2); */
 	width: 100%;
+	/* height: 100%; */
+}
+.crons_list,
+.cron_form_logs,
+.cron_form_create {
+	background-color: rgb(226, 226, 226);
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
 }
 .cron_form_list {
 	min-width: 430px;
@@ -109,7 +118,6 @@
 .cron_form_create h3,
 .cron_form_logs h3,
 .cron_form_list h3 {
-	/* padding-bottom: 10px; */
 	font-family: var(--main-font-family);
 }
 .cron_form input,
@@ -183,8 +191,7 @@
 	text-align: center;
 	justify-content: center;
 	color: rgb(224, 224, 224);
-	/* background-color: rgb(88, 88, 88); */
-	background-color: rgb(147, 97, 227);
+	background-color: var(--main-color);
 
 }
 .cron {
@@ -198,7 +205,6 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	/* min-width: 500px; */
 	min-height: 42px;
 	flex-grow: 2;
 	gap: 10px;
@@ -230,14 +236,14 @@ select {
 	align-items: start;
 	justify-content: start;
 	margin-top: 5px;
-	padding: 5px;
+	padding: 0;
 	background-color: rgb(255, 255, 255);
 	border-radius: 3px;
-	gap: 5px;
+	gap: 3px;
 }
 .logs p {
 	margin: 0;
-	padding: 0;
+	padding: 3.4px;
 	font-family: var(--main-font-family);
 	font-size: 16px;
 	color: rgb(78, 78, 78);
@@ -250,7 +256,7 @@ select {
 	padding: 5px;
 }
 .active {
-	background-color: rgb(147, 97, 227);
+	background-color: var(--main-color);
 }
 .crons_list {
 	display: flex;
@@ -258,6 +264,7 @@ select {
 	align-items: center;
 	justify-content: center;
 	width: 100%;
+	/* height: 100%; */
 	flex-grow: 2;
 }
 .paused .first-p {
@@ -290,7 +297,7 @@ select {
 .dashboard_titles ion-icon {
     position: relative;
     font-size: 2rem;
-	color: rgb(147, 97, 227);
+	color: var(--main-color);
 }
 .selected-buttons {
 	width: 100%;
@@ -307,7 +314,6 @@ select {
 	min-width: 100px;
 	font-weight: bold;
 	text-align: center;
-	/* background-color: rgb(51, 106, 132); */
 	color: white;
 	border: none;
 	border-radius: 4px;
@@ -320,4 +326,11 @@ select {
 .delete-selected[disabled],
 .pause-selected[disabled] {
 	background-color: #ccc;
+}
+.pagination {
+	font-family: var(--main-font-family);
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	padding-bottom: 20px;
 }
