@@ -28,23 +28,22 @@
     <p class="error_msg">{{ message }}</p>
 {% endfor %}
 
-<div class="user_form_container">
-<!-- ================= PIC FORM ================= -->
 
+<!-- ================= PIC FORM ================= -->
+<div class="user_form_container">
 <div class="profile_pic">
-	<h3>Your profile pic</h3>
 	<div class="pic">
 		<img src="{{ image_url }}" alt="pic">
 	</div>
-
-	<form class="user_pic" method="POST" enctype="multipart/form-data">
+	<form class="user_pic_form" method="POST" enctype="multipart/form-data">
 		 {% csrf_token %}
-		<label for="{{ profile_img_form.profile_img.id_for_label }}">Choose your new pic</label>
-		{{ profile_img_form.profile_img }}
+		 <div class="pic_button">
+			<label for="{{ profile_img_form.profile_img.id_for_label }}">Browse</label>
+			{{ profile_img_form.profile_img }}
+			<input type="submit" value="Upload" id>
+		</div>
 		<p class="help-text">Max size: 2 MB</p>
         <p class="help-text">Formats: JPG, JPEG, PNG</p>
-
-		<input type="submit" value="Upload">
 	</form>
 </div>
 
@@ -52,8 +51,10 @@
 <!-- ================= PERSONAL DETAILS FORM ================= -->
 
 	<div class="personal">
-		<h3>Your personal details</h3>
-
+		<div class="account_title">
+			<ion-icon name="planet-outline"></ion-icon>
+			<h3>Your personal details</h3>
+		</div>
 		<form class="user_account_form" method="POST">
 			{% csrf_token %}
 			<label for="username">Your username</label>
@@ -74,7 +75,10 @@
 
 <!-- ================= CHANGE PWD FORM ================= -->
 	<div class="security">
-		<h3>Security</h3>
+		<div class="account_title">
+			<ion-icon name="lock-closed-outline"></ion-icon>
+			<h3>Security</h3>
+		</div>
 		<form class="user_pwd_form" method="POST">
 			{% csrf_token %}
 			<label for="old_password">Your old password</label>

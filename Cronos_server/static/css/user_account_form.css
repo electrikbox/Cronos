@@ -1,32 +1,137 @@
+@import url('variables.css');
+
 .user_form_container {
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: baseline;
+	align-items: flex-start;
+	justify-content: space-evenly;
+	gap: 50px;
+	width: 80%;
+	height: 400px;
+	padding: 10px 20px 10px 20px;
 }
-.personal {
-	margin: 50px;
-}
-.user_account_form,
-.user_pwd_form {
+.profile_pic {
 	display: flex;
-	flex-direction: column;
-	width: 400px;
-	gap: 8px;
-	margin: 0 auto;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    gap: 10px;
+	margin-right: 25px;
+	margin-bottom: 40px;
+	margin-top: -45px;
+	/* background-color: rgb(226, 226, 226); */
+	padding: 20px;
+	border-radius: 4px;
+}
+.pic {
+	text-align: center;
 	margin-top: 20px;
+}
+.profile_pic img {
+	border-radius: 50%;
+	overflow: hidden;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.pic_button {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+/* Hide default button */
+.user_pic_form input[type="file"] {
+	display: none;
+}
+/* Style label that remplace button */
+.user_pic_form label {
+	display: flex;
+	font-weight: bold;
+	flex-direction: row;
+	background-color: #97989a;
+	color: #fffefe;
+	padding: 8px 40px;
+	width: 90%;
+	font-family: var(--main-font-family);
+	margin: 10px 0;
+	cursor: pointer;
+	border-radius: 4px;
+	border: none;
+	display: inline-block;
+	text-align: center;
+}
+.user_pic_form label:hover {
+	background-color: #67696c;
+}
+.help-text {
+	font-family: var(--main-font-family);
+	font-size: 12px;
+	color: rgb(78, 78, 78);
+	text-align: right;
+}
+.user_pic_form input[type="submit"] {
+	display: flex;
+	flex-direction: row;
+	width: 100px;
+	background-color: #97989a;
+	color: #fffefe;
+	font-size: 13px;
+	padding: 8px 8px;
+	margin: 10px 0;
+	cursor: pointer;
+	border-radius: 4px;
+	border: none;
+	display: inline-block;
+	text-align: center;
+}
+.user_pic_form input[type="submit"]:hover {
+	background-color: rgb(14, 150, 212);
+}
+.personal,
+.security {
+	margin: 0;
+	margin-bottom: 40px;
 	background-color: rgb(226, 226, 226);
 	padding: 20px;
 	border-radius: 4px;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 }
-label {
+.user_account_form {
+	width: 440px;
+}
+.user_pwd_form {
+	width: 320px;
+}
+.user_account_form,
+.user_pwd_form {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0;
+	background-color: rgb(226, 226, 226);
+	padding: 15px;
+	border-radius: 4px;
+}
+.user_account_form label,
+.user_pwd_form label{
 	padding-top: 10px;
 	font-family: var(--main-font-family);
 	font-size: 16px;
 	color: rgb(78, 78, 78);
+	display: inherit;
+}
+.account_title {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-family: var(--main-font-family);
+	font-size: 24px;
+	color: rgb(147, 97, 227);
+	padding-bottom: 5px;
+	border-bottom: 1px solid rgb(185, 185, 185);
+	gap: 10px;
+}
+.account_title ion-icon {
+	position: relative;
+	font-size: 2rem;
 }
 input[type="text"],
 input[type="email"],
@@ -54,24 +159,20 @@ input[type="submit"] {
 	border-radius: 5px;
 	cursor: pointer;
 }
-
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
 	border-color: #66afe9;
 }
-
 input[type="submit"]:hover {
 	background-color: rgb(14, 150, 212);
 }
-
 .error_msg {
 	color: rgb(199, 66, 66);
 	text-align: center;
 	font-family: sans-serif;
 	font-size: 18px;
 }
-
 .success_msg {
 	color: #2e8b57;
 	text-align: center;
@@ -79,15 +180,14 @@ input[type="submit"]:hover {
 	font-size: 18px;
 }
 h3 {
-	/* text-align: center; */
 	font-family: var(--main-font-family);
-	font-size: 24px;
 	color: rgb(147, 97, 227);
 }
 .showPwd {
 	font-family: var(--main-font-family);
 	color: var(--text-color);
 	width: auto;
+	display: block;
 	font-weight: bold;
 	font-size: 11px;
 	cursor: pointer;
@@ -99,38 +199,3 @@ h3 {
 .showPwd:hover {
 	color: var(--link-color);
 }
-.help-text {
-	font-family: var(--main-font-family);
-	font-size: 14px;
-	color: rgb(78, 78, 78);
-	text-align: right;
-}
-.pic {
-	text-align: center;
-	margin-top: 20px;
-}
-.profile_pic img {
-	border-radius: 50%;
-	overflow: hidden;
-}
-/* Hide default button */
-.user_pic input[type="file"] {
-	display: none;
-}
-/* Style label that remplace button */
-.user_pic label {
-	background-color: #97989a;
-	color: #fffefe;
-	padding: 8px 16px;
-	margin: 10px 0;
-	cursor: pointer;
-	border-radius: 4px;
-	border: none;
-	display: inline-block;
-	width: 100%;
-	text-align: center;
-}
-.user_pic label:hover {
-	background-color: #67696c;
-}
-
