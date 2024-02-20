@@ -56,7 +56,8 @@
 }
 .cron_form button[type="submit"]:hover ,
 .delete-selected:hover,
-.pause-selected:hover {
+.pause-selected:hover,
+.play-selected:hover {
 	background-color: rgb(14, 150, 212);
 }
 .element {
@@ -159,7 +160,8 @@
 	margin: 4px 0px 4px 0px;
 	padding: 2px;
 }
-.pause-cron:hover, .delete-cron:hover {
+.pause-cron:hover,
+.delete-cron:hover {
 	cursor: pointer;
 }
 .cron-option {
@@ -300,11 +302,26 @@ select {
 	color: var(--main-color);
 }
 .selected-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 	width: 100%;
 	gap: 10px;
 	margin-bottom: 10px;
 	padding-bottom: 9px;
 	border-bottom: 1px solid rgb(185, 185, 185);
+}
+#select-all-check {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+}
+.selected-buttons p {
+	font-family: var(--main-font-family);
+	font-size: 14px;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 .crons_list button[type="submit"] {
 	padding: 5px;
@@ -320,11 +337,13 @@ select {
 	cursor: pointer;
 }
 .delete-selected ,
-.pause-selected{
+.pause-selected,
+.play-selected {
 	background-color: rgb(51, 106, 132);
 }
 .delete-selected[disabled],
-.pause-selected[disabled] {
+.pause-selected[disabled],
+.play-selected[disabled] {
 	background-color: #ccc;
 }
 .pagination {
