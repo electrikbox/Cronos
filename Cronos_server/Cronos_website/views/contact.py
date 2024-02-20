@@ -25,11 +25,20 @@ def contact(request) -> HttpResponse:
         if user.is_authenticated:
             try:
                 profile = Profiles.objects.get(user=user)
-                initial_data = {
-                    'name': f"{profile.first_name} {profile.last_name}",
-                    'email': user.email
-                }
+
+                if profile.first_name and profile.last_name:
+                    initial_data = {
+                        'name': f"{profile.first_name} {profile.last_name}",
+                        'email': user.email
+                    }
+                else:
+                    initial_data = {
+                        'name': user.username,
+                        'email': user.email
+                    }
+                    
                 form = ContactForm(initial=initial_data)
+
             except Profiles.DoesNotExist:
                 form = ContactForm()
         else:
