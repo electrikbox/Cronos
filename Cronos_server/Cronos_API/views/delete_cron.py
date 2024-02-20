@@ -78,29 +78,3 @@ def delete_multiple_elements(request):
             {"error": "Method not allowed"},
             status=status.HTTP_405_METHOD_NOT_ALLOWED,
         )
-
-# @api_view(["DELETE", "POST"])
-# @authentication_classes([TokenAuthentication, SessionAuthentication])
-# @permission_classes([IsAuthenticated])
-# async def delete_multiple_elements(request):
-#     data = request.data
-#     ids_to_delete = data.get("ids", [])
-#     print(ids_to_delete)
-#     print(data)
-
-#     deletion_tasks = []
-
-#     for id in ids_to_delete:
-#         deletion_task = asyncio.create_task(delete_element(id))
-#         deletion_tasks.append(deletion_task)
-
-#     await asyncio.wait(deletion_tasks)
-
-#     return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-# @sync_to_async
-# def delete_element(id):
-#     cron = get_object_or_404(models.Crons, id=id)
-#     print(id, cron.command, cron.user)
-#     cron.delete()
