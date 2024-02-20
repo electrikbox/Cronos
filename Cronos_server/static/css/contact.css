@@ -38,6 +38,10 @@
 .contact_form textarea:focus {
 	border-color: #66afe9;
 }
+input[type="text"]:focus,
+input[type="email"]:focus {
+	border-color: #ddd;
+}
 
 input[type="text"],
 input[type="email"] {
