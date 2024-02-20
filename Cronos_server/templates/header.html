@@ -10,6 +10,7 @@
 
   <div class="user_auth">
     {% if user.is_authenticated %}
+    <img src="{{ image_url }}" alt="Profile Pic" class="profile_pic_header">
     <p id="username"><a href="{% url 'Cronos_account:user_account'%}">Welcome {{ user.username | capfirst}}</a></p>
     <p>|</p>
     <p><a href="{% url 'Cronos_account:logout'%}">Logout</a></p>

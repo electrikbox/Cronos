@@ -60,5 +60,8 @@ def dashboard(request):
     crons = requests.get(CRON_LIST_API_URL, headers=HEADER)
     logs = Logs.objects.filter(user=request.user).order_by("create_date").reverse()
 
-    context = {"cron_create_form": cron_create_form, "crons": crons.json(), "logs": logs}
+    user_pic = UserPic(request.user)
+    image_url = user_pic.show_pic()
+
+    context = {"cron_create_form": cron_create_form, "crons": crons.json(), "logs": logs, "image_url": image_url}
     return render(request, "dashboard.html", context)
