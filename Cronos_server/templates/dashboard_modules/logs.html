@@ -1,7 +1,7 @@
 <div class="logs">
   {% if logs %}
 
-  {% for log in logs|slice:":7" %}
+  {% for log in logs|slice:":6" %}
   <p>{{ log.create_date|date:"d-m-y H:i" }}: {{ log.log }}</p>
   {% endfor %}
 
