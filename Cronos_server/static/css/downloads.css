@@ -51,16 +51,17 @@
 	margin-bottom: 5px;
 	color: var(--main-color);
 }
+.ionicon-dl:hover {
+	color: var(--link-color);
+}
 .help-dl-block, .msg-help-block {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 20px;
-	margin-top: 30px;
+	margin-top: 40px;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
-}
-.msg-help-block {
-	margin-top: 80px;
+	border-radius: 8px;
 }
 .help-dl, .msg-help {
 	font-family: var(--main-font-family);
