@@ -17,6 +17,7 @@ $(document).ready(function () {
     const cronId = $(this).data('cron-id');
     const confirmation = confirm('Are you sure you want to delete this cron?');
     const row = $(this).closest('.cron-test');
+    $('.loader').show();
 
     if (confirmation) {
       $.ajax({
@@ -82,6 +83,7 @@ $(document).ready(function () {
     if (numSelectedCrons > 0) {
       const confirmation = confirm('Are you shure you want to delete cron ?');
       if (confirmation) {
+        $('.loader').show();
         deleteMultipleCrons(selectedCronIds);
       }
     } else {
