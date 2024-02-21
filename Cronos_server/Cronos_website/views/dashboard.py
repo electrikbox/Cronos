@@ -60,7 +60,7 @@ def dashboard(request):
 
     crons = requests.get(CRON_LIST_API_URL, headers=HEADER)
     crons_data = crons.json()
-    paginator = Paginator(crons_data, 10)
+    paginator = Paginator(crons_data, 6)
 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
