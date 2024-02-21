@@ -1,0 +1,39 @@
+{% extends 'user_logged.html' %}
+
+{% block title %}Cronos Help Center{% endblock %}
+
+{% block section %}
+
+<h2>Help Center</h2>
+
+<div class="search-container">
+	<input type="text" id="searchInput" placeholder="&#128269;  Search in FAQ...">
+</div>
+
+<div class="faq-block">
+	<div class="question">
+		<div class="title-faq">
+			<button class="toggle-answer">▶︎</button>
+			<h3 class="h3-faq">Question 1</h3>
+		</div>
+		<p class="answer">Answer to question 1</p>
+	</div>
+
+	<div class="question">
+		<div class="title-faq">
+			<button class="toggle-answer">▶︎</button>
+			<h3 class="h3-faq">Question 2</h3>
+		</div>
+		<p class="answer">Answer to question 2</p>
+	</div>
+
+	<div class="question">
+		<div class="title-faq">
+			<button class="toggle-answer">▶︎</button>
+			<h3 class="h3-faq">Question 3</h3>
+		</div>
+		<p class="answer">Answer to question 3</p>
+	</div>
+</div>
+
+{% endblock %}
