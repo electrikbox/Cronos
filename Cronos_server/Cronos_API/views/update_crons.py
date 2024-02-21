@@ -39,7 +39,7 @@ def pause_multiple_elements(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
         cron_serializer.save(updated_date=timezone.now())
-        create_log(cron_instance.id, "Paused", request.user.id)
+        create_log(cron_instance.id, "Updated", request.user.id)
 
     return Response(
         {"message": "All crons updated successfully"},
