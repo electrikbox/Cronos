@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $('#searchInput').on('input', function () {
     var query = $(this).val().toLowerCase();
-    $('.question').each(function () {
+    $('.question, .tuto').each(function () {
       var questionText = $(this).find('h3').text().toLowerCase();
       var answerText = $(this).find('.answer').text().toLowerCase();
       if (
