@@ -121,7 +121,7 @@ $(document).ready(function () {
           // updateSelectedButtonState();
           // updatePauseButtonsOnLoad(); // <------- à remplacer pour eviter les multiples requetes
         });
-        window.location.href = "/dashboard?delete=true"; // <------- reload page
+        window.location.href = "/dashboard?pause=true"; // <------- reload page
       },
       error: function (xhr, status, error) {
         console.error('Error pausing crons:', error);
