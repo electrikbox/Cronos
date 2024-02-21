@@ -2,5 +2,5 @@ from Cronos_website.views import *
 
 
 def landing_page(request) -> HttpResponse:
-    """Render FAQ page"""
+    """Render landing page"""
     return render(request, "landing-page.html")
