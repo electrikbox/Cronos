@@ -1,5 +1,6 @@
 from Cronos_website.views import *
 from urllib.parse import urlencode
+from django.core.paginator import Paginator
 
 
 @login_required
@@ -58,10 +59,22 @@ def dashboard(request):
         cron_create_form = CronForm()
 
     crons = requests.get(CRON_LIST_API_URL, headers=HEADER)
+    crons_data = crons.json()
+    paginator = Paginator(crons_data, 6)
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     logs = Logs.objects.filter(user=request.user).order_by("create_date").reverse()
 
     user_pic = UserPic(request.user)
     image_url = user_pic.show_pic()
 
-    context = {"cron_create_form": cron_create_form, "crons": crons.json(), "logs": logs, "image_url": image_url}
+    context = {
+        "cron_create_form": cron_create_form,
+        "crons": crons.json(),
+        "logs": logs,
+        "image_url": image_url,
+        "page_obj": page_obj
+    }
     return render(request, "dashboard.html", context)

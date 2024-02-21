@@ -133,7 +133,7 @@
 	align-items: center;
 	font-family: var(--main-font-family);
 	font-size: 24px;
-	color: rgb(147, 97, 227);
+	color: var(--main-color);
 	padding-bottom: 5px;
 	border-bottom: 1px solid rgb(185, 185, 185);
 	gap: 10px;
@@ -192,7 +192,7 @@ input[type="submit"]:hover {
 }
 h3 {
 	font-family: var(--main-font-family);
-	color: rgb(147, 97, 227);
+	color: var(--main-color);
 }
 .showPwd {
 	font-family: var(--main-font-family);

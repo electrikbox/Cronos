@@ -1,19 +1,13 @@
 $(document).ready(function () {
 
-  document.cookie.split(';').forEach(function (cookie) {
-    const parts = cookie.split('=');
-    console.log(parts);
-  });
-
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
-  const deleteSelectedButton = $('.delete-selected');
-  const pauseSelectedButton = $('.pause-selected');
 
   function updateDeleteSelectedButtonState() {
     const checkedCrons = $('.cron-test input[type="checkbox"]:checked');
     const isEnabled = checkedCrons.length > 0;
-    deleteSelectedButton.prop('disabled', !isEnabled);
-    pauseSelectedButton.prop('disabled', !isEnabled);
+    $('.delete-selected').prop('disabled', !isEnabled);
+    $('.pause-selected').prop('disabled', !isEnabled);
+    $('.play-selected').prop('disabled', !isEnabled);
   }
 
   $('.cron-test input[type="checkbox"]').change(updateDeleteSelectedButtonState);
@@ -58,7 +52,7 @@ $(document).ready(function () {
       data: JSON.stringify({ ids: Object.keys(cronIds) }),
       contentType: 'application/json',
       success: function (response) {
-        console.log('Les crons ont été supprimés avec succès.');
+        console.log('Crons deleted successfully.');
         Object.values(cronIds).forEach(function (row) {
           row.remove();
           $('.select-all').prop('checked', false);
@@ -67,7 +61,7 @@ $(document).ready(function () {
         });
       },
       error: function (xhr, status, error) {
-        console.error('Erreur lors de la suppression des crons:', error);
+        console.error('Delete crons error:', error);
       }
     });
   }
@@ -86,12 +80,12 @@ $(document).ready(function () {
     const selectedCronIds = getSelectedCronIds();
     const numSelectedCrons = Object.keys(selectedCronIds).length;
     if (numSelectedCrons > 0) {
-      const confirmation = confirm('Êtes-vous sûr de vouloir supprimer ces crons?');
+      const confirmation = confirm('Are you shure you want to delete cron ?');
       if (confirmation) {
         deleteMultipleCrons(selectedCronIds);
       }
     } else {
-      alert('Veuillez sélectionner au moins un cron à supprimer.');
+      alert('Please select at least 1 cron.');
     }
   });
 

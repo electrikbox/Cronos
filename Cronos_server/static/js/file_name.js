@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function () {
   const inputFile = document.getElementById('input_profile_img');
   const fileNameDisplay = document.getElementById('file-name-display');
 
