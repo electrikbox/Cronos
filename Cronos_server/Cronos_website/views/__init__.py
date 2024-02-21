@@ -16,7 +16,7 @@ import requests
 from Cronos_website.views.landing_page import landing_page
 from Cronos_website.views.downloads import downloads
 from Cronos_website.views.contact import contact
-from Cronos_website.views.FAQ import FAQ
+from Cronos_website.views.help_center import help_center
 from Cronos_website.views.home import home
 from Cronos_website.views.dashboard import dashboard
 from Cronos_website.views.contact import contact
