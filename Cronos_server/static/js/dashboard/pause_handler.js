@@ -118,9 +118,10 @@ $(document).ready(function () {
         console.log('Crons have been paused successfully.');
         Object.values(cronIds).forEach(function (row) {
           $('.select-all').prop('checked', false);
-          updateSelectedButtonState();
-          updatePauseButtonsOnLoad();
+          // updateSelectedButtonState();
+          // updatePauseButtonsOnLoad(); // <------- à remplacer pour eviter les multiples requetes
         });
+        window.location.href = "/dashboard?delete=true"; // <------- reload page
       },
       error: function (xhr, status, error) {
         console.error('Error pausing crons:', error);
@@ -131,11 +132,13 @@ $(document).ready(function () {
   // Handling pause-selected button click
   $('.pause-selected').click(function () {
     togglePauseButton(true);
+    $('.loader').show();
   });
 
   // Handling play-selected button click
   $('.play-selected').click(function () {
     togglePauseButton(false);
+    $('.loader').show();
   });
 
   // Initial update of pause buttons
