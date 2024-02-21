@@ -4,6 +4,7 @@
   	position: absolute;
   	top: 8%;
   	right: 20px;
+	width: 15%;
 }
 .search-container input[type=text] {
   	background: #f1f1f1;
@@ -12,6 +13,10 @@
 	border-radius: 5px;
 	margin-bottom: 12px;
 	font-size: 14px;
+
+}
+.search-container input[type=text]::placeholder {
+	color: rgba(114, 114, 114, 0.5);
 }
 .answer {
 	display: none;
@@ -40,7 +45,8 @@
 	font-weight: bold;
 	color: var(--link-color);
 }
-.faq-block {
+.faq-block,
+.tuto-block {
 	display: flex;
 	flex-direction: column;
 	background-color: rgb(226, 226, 226);
@@ -51,12 +57,25 @@
 	height: fit-content;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 }
-.h3-faq {
+.block-title {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: right;
+	gap: 5px;
+	width: 100%;
+	padding-bottom: 5px;
+}
+.tuto-block {
+	margin-top: 40px;
+	margin-bottom: 50px;
+}
+.h4-help {
 	color: rgb(68, 66, 66);
 	margin: 15px;
 
 }
-.title-faq {
+.title-help {
 	display: flex;
 	flex-direction: row;
 	font-size: 20px;
