@@ -66,6 +66,7 @@ $(document).ready(function () {
         const newIsPaused = !response.is_paused;
         updateCronStatus(button, cronId, newIsPaused);
         updateButtonIcon(button, newIsPaused);
+        setTimeout(reloadCronFormLogs, 500);
       },
       error: function (xhr) {
         console.error('AJAX request failed:', xhr.status, xhr.responseText);
@@ -144,4 +145,9 @@ $(document).ready(function () {
   // Initial update of pause buttons
   updatePauseButtonsOnLoad();
 
+
+  function reloadCronFormLogs() {
+    var currentUrl = window.location.href;
+    $('.logs-div').load(currentUrl + ' .logs');
+  }
 });
