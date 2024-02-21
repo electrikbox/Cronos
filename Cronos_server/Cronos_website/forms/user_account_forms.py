@@ -49,3 +49,12 @@ class ProfileImgForm(forms.Form):
             FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png']),
         ]
     )
+
+    def clean_profile_img(self):
+        profile_img = self.cleaned_data.get('profile_img')
+
+        if profile_img:
+            if profile_img.size > 2 * 1024 * 1024:
+                raise forms.ValidationError("Image file is too large ( > 2mb )")
+
+        return profile_img
