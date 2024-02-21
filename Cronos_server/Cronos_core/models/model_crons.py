@@ -20,6 +20,16 @@ class Crons(models.Model):
     separator = ('separator', '-------------')
     each_any = ('*', '*')
 
+    def __str__(self) -> str:
+        return str(
+            self.minutes + ' ' +
+            self.hours + ' ' +
+            self.day_of_month + ' ' +
+            self.months + ' ' +
+            self.day_of_week + ' ' +
+            self.command
+        )
+
     @classmethod
     def get_minutes_choices(cls):
         """ Minutes choices for cron creation """
