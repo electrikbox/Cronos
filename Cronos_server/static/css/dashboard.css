@@ -6,8 +6,6 @@
 	align-items: flex-start;
 	justify-content: center;
 	gap: 20px;
-	width: 80%;
-	padding: 10px 30px 10px 30px;
 }
 .cron_form {
     display: flex;
