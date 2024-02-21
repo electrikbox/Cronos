@@ -247,7 +247,10 @@ select {
 	padding: 6px;
 }
 .active {
+	color: rgb(255, 255, 255);
 	background-color: var(--main-color);
+	border-radius: 3px;
+	padding: 6px;
 }
 .crons_list {
 	display: flex;
