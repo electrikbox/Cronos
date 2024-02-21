@@ -6,6 +6,9 @@ from Cronos_account.views import *
 
 def login_user(request):
     """ Render login page and authenticate user """
+    if request.user.is_authenticated:
+        return redirect('Cronos_website:home')
+
     if request.method == 'POST':
         form = LoginFormCustom(request.POST)
 
