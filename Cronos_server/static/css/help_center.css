@@ -39,7 +39,7 @@
 }
 .answer a {
 	text-decoration: none;
-	color: rgb(147, 97, 227);
+	color: var(--main-color);
 }
 .answer a:hover {
 	font-weight: bold;
@@ -85,7 +85,7 @@
 }
 .toggle-answer {
 	background-color: transparent;
-	color: rgb(147, 97, 227);
+	color: var(--main-color);
 	border: none;
 	margin-right: 5px;
 	font-size: 20px;
