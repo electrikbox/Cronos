@@ -1,4 +1,4 @@
-{% load to_every %}
+{% load to_date %}
 
 {% comment %} <div class="cron-test{% if cron.is_paused %} paused{% endif %}"> {% endcomment %}
 <div class="cron-test">
@@ -12,22 +12,22 @@
 
       <div class="cron-infos" id="dom">
         <p>Month's day</p>
-        <p class="info">{{ cron.day_of_month | to_every}}</p>
+        <p class="info">{{ cron.day_of_month | to_date}}</p>
       </div>
 
       <div class="cron-infos" id="month">
         <p>Month</p>
-        <p class="info">{{ cron.months | to_every}}</p>
+        <p class="info">{{ cron.months | to_date}}</p>
       </div>
 
       <div class="cron-infos" id="dow">
         <p>Week's day</p>
-        <p class="info">{{ cron.day_of_week | to_every}}</p>
+        <p class="info">{{ cron.day_of_week | to_date}}</p>
       </div>
 
       <div class="cron-infos">
         <p>Time</p>
-        <p class="info">{{ cron.hours }}:{{ cron.minutes }}</p>
+        <p class="info">{{ cron.hours | to_double_digit }}:{{ cron.minutes | to_double_digit}}</p>
       </div>
 
       <div class="cron-infos" id="command">
