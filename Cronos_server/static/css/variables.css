@@ -16,7 +16,8 @@
     --title-color-dark: var(--bg-color_1-dark);
 
     --main-font-family: 'Roboto', sans-serif;
-    --main-color: rgb(113, 81, 189);
+    /* --main-color: rgb(113, 81, 189); */
+    --main-color: #5C0066;
 }
 
 .light-mode {
