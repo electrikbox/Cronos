@@ -11,3 +11,4 @@ from Cronos_website.forms.forget_password_forms import ForgetPasswordForm, SetNe
 from Cronos_website.forms.login_form import LoginFormCustom
 from Cronos_website.forms.signup_form import SignUpForm
 from Cronos_website.forms.user_account_forms import UserAccountForm, UserAccountPwdForm, ProfileImgForm
+from Cronos_website.forms.contact_form import ContactForm

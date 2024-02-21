@@ -1,7 +1,37 @@
 {% extends 'user_logged.html' %}
+{% load static %}
 
-{% block title %}Cronos contact us{% endblock %}
+{% block title %}Cronos Contact Us{% endblock %}
 
 {% block section %}
-<h2>Contact us</h2>
+<h2>Contact Us</h2>
+
+<div class="success_msg">
+  {% if request.GET.send %}
+  <p class="success_activate">Your message has been sent to us and you will receive a reply within 48 hours</p>
+{% endif %}
+</div>
+
+{% for message in messages %}
+<p class="error_msg">{{ message }}</p>
+{% endfor %}
+
+<div class="contact">
+	<div class="contact-title">
+		<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><rect x="48" y="96" width="416" height="320" rx="40" ry="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M112 160l144 112 144-112"/></svg>
+		<h3>Send us an email</h3>
+	</div>
+	<form class="contact_form" method="POST">
+		{% csrf_token %}
+		<label for="name">Your name</label>
+		<input type="text" id="name" name="name" value="{{ contact_form.name.value }}" readonly class="readonly-fields">
+		<label for="email">Your email</label>
+		<input type="email" id="email" name="email" value="{{ contact_form.email.value }}" readonly class="readonly-fields">
+		<label for="message">How can we help you ?</label>
+		{{ contact_form.message }}
+
+		<input type="submit" value="Send">
+	</form>
+</div>
+
 {% endblock %}
