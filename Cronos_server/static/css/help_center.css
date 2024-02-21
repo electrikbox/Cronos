@@ -1,0 +1,40 @@
+@import url('variables.css');
+
+.search-container {
+  	position: absolute;
+  	top: 8%;
+  	right: 20px;
+}
+.search-container input[type=text] {
+  	background: #f1f1f1;
+	padding: 10px 10px 10px 8px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	margin-bottom: 12px;
+	font-size: 14px;
+}
+.answer {
+	display: none;
+	padding: 0 18px;
+	overflow: hidden;
+	font-family: var(--main-font-family);
+}
+.faq-block {
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(226, 226, 226);
+	padding: 25px;
+	border-radius: 10px;
+	margin-top: 55px;
+	width: 90%;
+	height: fit-content;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.title-faq {
+	display: flex;
+	flex-direction: row;
+	font-size: 20px;
+	font-weight: 600;
+	width: 100%;
+	border-bottom: 1px solid rgb(185, 185, 185);
+}
