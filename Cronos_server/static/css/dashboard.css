@@ -365,7 +365,8 @@ select {
 	margin: 0;
 	font-family: var(--main-font-family);
 	font-size: 16px;
-	color: rgb(78, 78, 78);
+	/* color: rgb(78, 78, 78); */
+	color: black;
 	background-color: rgb(227, 221, 233);
 	padding: 6px;
 	border-radius: 3px;
