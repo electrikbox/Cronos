@@ -6,6 +6,9 @@ from Cronos_account.views import *
 
 def signup_user(request):
     """ Render signup page and create new user """
+    if request.user.is_authenticated:
+        return redirect('Cronos_website:home')
+
     if request.method == 'POST':
         form = SignUpForm(request.POST)
 

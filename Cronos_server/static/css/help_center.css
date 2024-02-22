@@ -39,7 +39,7 @@
 }
 .answer a {
 	text-decoration: none;
-	color: rgb(147, 97, 227);
+	color: var(--main-color);
 }
 .answer a:hover {
 	font-weight: bold;
@@ -71,9 +71,8 @@
 	margin-bottom: 50px;
 }
 .h4-help {
-	color: rgb(68, 66, 66);
+	color: rgb(78, 78, 78);
 	margin: 15px;
-
 }
 .title-help {
 	display: flex;
@@ -85,7 +84,7 @@
 }
 .toggle-answer {
 	background-color: transparent;
-	color: rgb(147, 97, 227);
+	color: var(--main-color);
 	border: none;
 	margin-right: 5px;
 	font-size: 20px;

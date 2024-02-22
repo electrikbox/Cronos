@@ -4,21 +4,16 @@
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
-	justify-content: space-evenly;
 	gap: 50px;
-	width: 80%;
-	height: 400px;
 	padding: 10px 20px 10px 20px;
 }
 .profile_pic {
 	display: flex;
     flex-direction: column;
     align-items:center;
-    justify-content: center;
     gap: 10px;
 	margin-right: 25px;
-	margin-bottom: 40px;
-	margin-top: -45px;
+	margin-top: -40px;
 	/* background-color: rgb(226, 226, 226); */
 	padding: 20px;
 	border-radius: 4px;
@@ -99,6 +94,7 @@
 	margin: 0;
 	margin-bottom: 40px;
 	background-color: rgb(226, 226, 226);
+	width: fit-content;
 	padding: 20px;
 	border-radius: 4px;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
