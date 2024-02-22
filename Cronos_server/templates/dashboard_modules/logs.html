@@ -2,7 +2,7 @@
   {% if logs %}
 
   {% for log in logs|slice:":6" %}
-  <p>{{ log.create_date|date:"d-m-y H:i" }}: {{ log.log }}</p>
+  <p>{{ log.log }} : {{ log.create_date|date:"d M y H:i" }}</p>
   {% endfor %}
 
   {% else %}

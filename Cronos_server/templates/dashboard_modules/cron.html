@@ -32,13 +32,18 @@
 
       <div class="cron-infos" id="command">
         <p>Command</p>
-        <p class="info">{{ cron.command | truncatechars:20 }}</p>
+        <p class="info">{{ cron.command }}</p>
       </div>
     </div>
 
     {% comment %} </div> {% endcomment %}
 
-    <div class="pending"><p>pending</p></div>
+    {% if cron.validated %}
+    <div class="active"><p>Active</p></div>
+    {% else %}
+    <div class="pending"><p>Pending</p></div>
+    {% endif %}
+
     <div class="cron-option">
       <div class="pause-cron" data-cron-id="{{ cron.id }}">
         {% if cron.is_paused %}

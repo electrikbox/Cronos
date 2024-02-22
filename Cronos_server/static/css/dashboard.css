@@ -6,6 +6,8 @@
 	align-items: flex-start;
 	justify-content: center;
 	gap: 20px;
+	width: 90%;
+	margin-top: 55px;
 }
 .cron_form {
     display: flex;
@@ -47,7 +49,6 @@
 	color: rgb(78, 78, 78);
 	padding-left: 7px;
 	padding-top: 1px;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 .cron_form select:focus {
 	border-color: #66afe9;
@@ -88,7 +89,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 50%;
+	max-width: 300px;
 	flex-grow: 1;
 	gap: 20px;
 }
@@ -104,9 +105,12 @@
 .cron_form_create {
 	background-color: rgb(226, 226, 226);
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
-	border-radius: 4px;
+	border-radius: 10px;
 }
 .cron_form_list {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
 	min-width: 788.67px;
 }
 .cron_form_create h3,
@@ -235,7 +239,6 @@ select {
 	font-family: var(--main-font-family);
 	font-size: 16px;
 	color: rgb(78, 78, 78);
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 .pending {
 	color: rgb(255, 255, 255);
@@ -244,7 +247,10 @@ select {
 	padding: 6px;
 }
 .active {
+	color: rgb(255, 255, 255);
 	background-color: var(--main-color);
+	border-radius: 3px;
+	padding: 6px;
 }
 .crons_list {
 	display: flex;
@@ -255,7 +261,6 @@ select {
 }
 .paused {
 	color: rgb(165, 165, 165);
-	text-shadow: none;
   }
 .paused .active,
 .paused #cron_id {
@@ -307,7 +312,6 @@ select {
 }
 .selected-buttons p {
 	font-family: var(--main-font-family);
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 .crons_list button[type="submit"] {
 	padding: 5px;
@@ -361,8 +365,8 @@ select {
 	margin: 0;
 	font-family: var(--main-font-family);
 	font-size: 16px;
-	color: rgb(78, 78, 78);
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+	/* color: rgb(78, 78, 78); */
+	color: black;
 	background-color: rgb(227, 221, 233);
 	padding: 6px;
 	border-radius: 3px;
@@ -381,8 +385,33 @@ select {
 	justify-content: center;
 	gap: 10px;
 }
-
-
+#pages {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+	border-radius: 3px;
+	padding: 1px;
+}
+#pages li {
+    list-style: none;
+    font-family: var(--main-font-family);
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 2px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#pages li a{
+    text-decoration: none;
+}
+#pages li.active {
+	color: rgb(255, 255, 255);
+}
 
 
 

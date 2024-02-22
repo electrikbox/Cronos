@@ -1,5 +1,10 @@
 $(document).ready(function () {
 
+  const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
+
+  /**
+   * Updates the pause buttons on page load.
+   */
   function updatePauseButtonsOnLoad() {
     $('.pause-cron').each(function () {
       const button = $(this);
@@ -22,6 +27,12 @@ $(document).ready(function () {
     updateSelectedButtonState();
   }
 
+  /**
+   * Toggles the pause button for selected crons.
+   *
+   * @param {boolean} is_paused - Indicates whether the crons should be paused or resumed.
+   * @returns {void}
+   */
   function togglePauseButton(is_paused) {
     const selectedCronIds = getSelectedPauseCronIds();
     const numSelectedCrons = Object.keys(selectedCronIds).length;
@@ -36,9 +47,6 @@ $(document).ready(function () {
     updateSelectedButtonState();
   }
 
-  const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
-
-  // Function to update cron status in database to pause
   function updateCronStatus(button, cronId, isPaused) {
     $.ajax({
       url: `/api/crons/${cronId}/update/`,
@@ -54,8 +62,10 @@ $(document).ready(function () {
     });
   }
 
-  // Handling clicks on pause-cron buttons
-  $('.pause-cron').click(function () {
+  /**
+   * Toggles the pause state of a cron job.
+   */
+  function pauseToggle () {
     const button = $(this);
     const cronId = button.data('cron-id');
 
@@ -66,15 +76,20 @@ $(document).ready(function () {
         const newIsPaused = !response.is_paused;
         updateCronStatus(button, cronId, newIsPaused);
         updateButtonIcon(button, newIsPaused);
+        setTimeout(reloadCronFormLogs, 500);
       },
       error: function (xhr) {
         console.error('AJAX request failed:', xhr.status, xhr.responseText);
         alert('Failed to perform the operation. Please try again.');
       }
     });
-  });
+  }
 
-  // Function to update the icon of the pause-cron button
+  /**
+   * Updates the button icon and styling based on the pause state.
+   * @param {jQuery} button - The button element.
+   * @param {boolean} isPaused - The pause state.
+   */
   function updateButtonIcon(button, isPaused) {
     const icon = button.find('ion-icon');
     icon.attr('name', isPaused ? 'play-circle-outline' : 'pause-circle-outline');
@@ -86,7 +101,10 @@ $(document).ready(function () {
     }
   }
 
-  // Multi pause
+  /**
+   * Retrieves the selected pause cron IDs along with their corresponding rows.
+   * @returns {Object} An object containing the selected cron IDs as keys and their corresponding rows as values.
+   */
   function getSelectedPauseCronIds() {
     const selectedCronIds = {};
     $('.cron-test input[type="checkbox"]:checked').each(function () {
@@ -97,6 +115,9 @@ $(document).ready(function () {
     return selectedCronIds;
   }
 
+  /**
+   * Updates the state of the selected buttons based on the number of checked cron checkboxes.
+   */
   function updateSelectedButtonState() {
     const checkedCrons = $('.cron-test input[type="checkbox"]:checked');
     const isEnabled = checkedCrons.length > 0;
@@ -105,6 +126,12 @@ $(document).ready(function () {
     $('.play-selected').prop('disabled', !isEnabled);
   }
 
+  /**
+   * Pauses multiple crons.
+   *
+   * @param {Object} cronIds - The cron IDs to pause.
+   * @param {boolean} is_paused - Indicates whether the crons should be paused or not.
+   */
   function pauseMultipleCrons(cronIds, is_paused) {
     $.ajax({
       url: '/api/pause-multiple/',
@@ -129,6 +156,14 @@ $(document).ready(function () {
     });
   }
 
+  /**
+   * Reloads the cron form logs by fetching the current URL and updating the logs section.
+   */
+  function reloadCronFormLogs() {
+    var currentUrl = window.location.href;
+    $('.logs-div').load(currentUrl + ' .logs');
+  }
+
   // Handling pause-selected button click
   $('.pause-selected').click(function () {
     togglePauseButton(true);
@@ -141,7 +176,11 @@ $(document).ready(function () {
     $('.loader').show();
   });
 
+  $('.pause-cron').click(function () {
+    pauseToggle();
+    $('.loader').show();
+  });
+
   // Initial update of pause buttons
   updatePauseButtonsOnLoad();
-
 });
