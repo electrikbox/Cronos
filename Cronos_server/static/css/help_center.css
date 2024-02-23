@@ -12,7 +12,8 @@
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	margin-bottom: 12px;
-	font-size: 14px;
+	font-size: 1.4rem;
+
 }
 .search-container input[type=text]::placeholder {
 	color: rgba(114, 114, 114, 0.5);
@@ -24,8 +25,8 @@
 	margin-left: 20px;
 	font-family: var(--main-font-family);
 }
-.answer h5 {
-	font-size: 18px;
+.answer h4 {
+	font-size: 1.8rem;
 	margin-bottom: 5px;
 	font-weight: 500;
 	font-family: var(--main-font-family);
@@ -78,7 +79,7 @@
 .title-help {
 	display: flex;
 	flex-direction: row;
-	font-size: 20px;
+	font-size: 2rem;
 	font-weight: 600;
 	width: 100%;
 	border-bottom: 1px solid rgb(185, 185, 185);
@@ -88,7 +89,7 @@
 	color: var(--main-color);
 	border: none;
 	margin-right: 5px;
-	font-size: 20px;
+	font-size: 2rem;
 }
 /* .toggle-answer.open {
 	margin-left: 10px;

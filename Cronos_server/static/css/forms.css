@@ -17,7 +17,7 @@
 label {
 	padding-top: 10px;
 	font-family: var(--main-font-family);
-	font-size: 16px;
+	font-size: 1.6rem;
 	color: rgb(78, 78, 78);
 }
 
@@ -30,7 +30,7 @@ input[type="submit"] {
 		margin-bottom: 5px;
 		box-sizing: border-box;
 		font-family: Arial, sans-serif;
-		font-size: 16px;
+		font-size: 1.6rem;
 		outline: none;
 		border-radius: 4px;
 		border: 1px solid #ccc;
@@ -39,7 +39,7 @@ input[type="submit"] {
 
 input[type="submit"] {
 	padding: 15px 20px;
-	font-size: 18px;
+	font-size: 1.8rem;
 	font-weight: bold;
 	text-align: center;
 	margin: 10px 0 10px 0;
@@ -60,26 +60,12 @@ input[type="submit"]:hover {
 	background-color: rgb(14, 150, 212);
 }
 
-.error_msg {
-	color: rgb(199, 66, 66);
-	text-align: center;
-	font-family: var(--main-font-family);
-	font-size: 18px;
-}
-
-.success_msg {
-	color: rgb(0, 128, 0);
-	font-family: var(--main-font-family);
-	font-size: 16px;
-	text-align: center;
-	min-height: 20px;
-}
 .showPwd {
 	font-family: var(--main-font-family);
 	color: var(--text-color);
 	width: auto;
 	font-weight: bold;
-	font-size: 11px;
+	font-size: 1.1rem;
 	cursor: pointer;
 	margin-right: 10px;
 	margin-top: -40px;
@@ -93,7 +79,7 @@ input[type="submit"]:hover {
 
 .pwd_forget, .pwd_forget a {
 	font-family: var(--main-font-family);
-	font-size: 12px;
+	font-size: 1.2rem;
 	text-align: right;
 	margin-top: 0;
 	margin-bottom: 0;

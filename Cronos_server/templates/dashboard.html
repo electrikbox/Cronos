@@ -8,6 +8,11 @@
 <!-- ================= HEAD ================= -->
 
 {% block head_dashboard %}
+<link rel="stylesheet" href="{% static '/css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/create.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/logs.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/list.css' %}">
+<link rel="stylesheet" href="{% static '/css/dashboard/cron.css' %}">
 <script src="{% static '/js/dashboard/choice_field_handler.js' %}"></script>
 <script src="{% static '/js/dashboard/delete_crons.js' %}"></script>
 <script src="{% static '/js/dashboard/pause_handler.js' %}"></script>
@@ -35,19 +40,19 @@
   {% endfor %}
 </div>
 
-<div class="global">
+<div class="container-dashboard">
   <div class="create_and_logs">
-    <div class="cron_form_create">
+    <div class="cron_form_create-div">
       <div class="dashboard_titles">
-        {% comment %} <ion-icon name="create-outline"></ion-icon> {% endcomment %}
+        <ion-icon name="create-outline"></ion-icon>
         <h3>Create a cron</h3>
       </div>
       {% include "./dashboard_modules/create_cron.html" %}
   </div>
 
-  <div class="cron_form_logs">
+  <div class="cron_form_logs-div">
     <div class="dashboard_titles">
-      {% comment %} <ion-icon name="book-outline"></ion-icon> {% endcomment %}
+      <ion-icon name="book-outline"></ion-icon>
       <h3>Logs</h3>
     </div>
     <div class="logs-div">
@@ -56,30 +61,27 @@
   </div>
 </div>
 
-<div class="crons_list">
-  <div class="cron_form_list">
-    <div class="dashboard_titles">
-      {% comment %} <ion-icon name="list-outline"></ion-icon> {% endcomment %}
-      <h3>Your crons</h3>
-      <span class="loader"></span>
-    </div>
-    <div class="selected-buttons">
-      <div id="select-all-div">
-        <input type="checkbox" class="select-all">
-        <p>Select all</p>
-      </div>
-      <div>
-        <button type="submit" class="delete-selected" disabled>Delete selected</button>
-        <button type="submit" class="pause-selected" disabled>Pause selected</button>
-        <button type="submit" class="play-selected" disabled>Play selected</button>
-      </div>
-    </div>
-    {% for cron in page_obj %}
-      {% include 'dashboard_modules/cron.html' %}
-    {% endfor %}
+<div class="cron_form_list-div">
+  <div class="dashboard_titles">
+    <ion-icon name="list-outline"></ion-icon>
+    <h3>Your crons</h3>
+    <span class="loader"></span>
   </div>
-
-  <ul id="pages">
+  <div class="selected-buttons">
+    <div id="select-all-div">
+      <input type="checkbox" class="select-all">
+      <p>Select all</p>
+    </div>
+    <div>
+      <button type="submit" class="delete-selected" disabled>Delete selected</button>
+      <button type="submit" class="pause-selected" disabled>Pause selected</button>
+      <button type="submit" class="play-selected" disabled>Play selected</button>
+    </div>
+  </div>
+  {% for cron in page_obj %}
+    {% include 'dashboard_modules/cron.html' %}
+  {% endfor %}
+  {% comment %} <ul id="pages">
     {% for i in page_obj.paginator.page_range %}
       {% if page_obj.number == i %}
           <li class="active"><span>{{ i }}</span></li>
@@ -87,9 +89,9 @@
           <li><a href="?page={{ i }}">{{ i }}</a></li>
         {% endif %}
     {% endfor %}
-  </ul>
-
+  </ul> {% endcomment %}
 </div>
+
 
 
 {% endblock %}

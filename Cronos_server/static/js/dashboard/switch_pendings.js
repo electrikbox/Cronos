@@ -58,7 +58,7 @@ $(document).ready(function () {
   function getPendingsCrons() {
     const selectedCronIds = [];
     $('.pending').each(function () {
-      const cronId = $(this).closest('.cron-test').find('.pause-cron').data('cron-id');
+      const cronId = $(this).closest('.cron-full').find('.pause-cron').data('cron-id');
       selectedCronIds.push(cronId);
     });
     return selectedCronIds;
