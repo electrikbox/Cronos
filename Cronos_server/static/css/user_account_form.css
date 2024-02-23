@@ -2,19 +2,17 @@
 
 .user_form_container {
 	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
+	flex-wrap: wrap;
 	justify-content: center;
-	width: 80%;
+	align-items: flex-start;
 	gap: 30px;
-	/* padding: 10px 20px 10px 20px; */
 }
 .profile_pic {
 	display: flex;
     flex-direction: column;
     align-items:center;
     gap: 10px;
-	margin-right: 25px;
+	/* margin-right: 20px; */
 	margin-top: -40px;
 	/* background-color: rgb(226, 226, 226); */
 	padding: 20px;
