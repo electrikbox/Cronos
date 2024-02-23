@@ -1,3 +1,4 @@
+// Display a alert when click on a download link
 $(document).ready(function () {
 
   $('.dl-link, .WiP').click(function (event) {
