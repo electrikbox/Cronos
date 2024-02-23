@@ -13,7 +13,6 @@
 	border-radius: 5px;
 	margin-bottom: 12px;
 	font-size: 14px;
-
 }
 .search-container input[type=text]::placeholder {
 	color: rgba(114, 114, 114, 0.5);
@@ -25,10 +24,11 @@
 	margin-left: 20px;
 	font-family: var(--main-font-family);
 }
-.answer h4 {
+.answer h5 {
 	font-size: 18px;
 	margin-bottom: 5px;
 	font-weight: 500;
+	font-family: var(--main-font-family);
 }
 .answer ul {
 	padding-left: 20px;
@@ -73,6 +73,7 @@
 .h4-help {
 	color: rgb(78, 78, 78);
 	margin: 15px;
+	font-family: var(--main-font-family);
 }
 .title-help {
 	display: flex;
@@ -89,6 +90,6 @@
 	margin-right: 5px;
 	font-size: 20px;
 }
-.toggle-answer.open {
+/* .toggle-answer.open {
 	margin-left: 10px;
-}
+} */
