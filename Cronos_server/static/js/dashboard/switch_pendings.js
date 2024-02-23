@@ -32,6 +32,16 @@ $(document).ready(function () {
             hasPending = true;
           }
         });
+        if (crons.some(cronId => !filteredResponse.some(cron => cron.id === cronId))) {
+          const notFoundCrons = crons.filter(cronId => !filteredResponse.some(cron => cron.id === cronId));
+          notFoundCrons.forEach(cronId => {
+            const pendingDiv = $(`.pending[data-cron-id='${cronId}']`);
+            const cronFull = pendingDiv.closest('.cron-full');
+            alert(`Command from cron ${cronId} can't be executed\non your computer.\nIt will be deleted.`);
+            cronFull.remove();
+          });
+          window.location.href = "/dashboard?delete=true";
+        }
         if (!hasPending) {
           clearInterval(intervalId);
         }
