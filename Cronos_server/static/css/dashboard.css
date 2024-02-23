@@ -8,16 +8,17 @@
 	align-items: flex-start;
 	justify-content: center;
 	gap: 20px;
-	width: 100%;
-	padding-left: 10em;
-	padding-right: 10em;
+	width: 90%;
+	padding-bottom: 5em;
+	/* padding-left: 7em;
+	padding-right: 7em; */
 }
 .create_and_logs {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 400px;
+	width: 420px;
 	flex-grow: 1;
 	gap: 20px;
 }
@@ -55,7 +56,7 @@
 	color: var(--main-color);
 }
 
-@media screen and (max-width: 1390px) {
+@media screen and (max-width: 1000px) {
 	.container-dashboard {
 		flex-direction: column;
 	}
