@@ -19,6 +19,7 @@
 	align-items: flex-end;
 	justify-content: space-between;
 	min-height: 42px;
+	min-width: 23.13em;
 	flex-grow: 2;
 	gap: 5px;
 }
@@ -59,7 +60,7 @@
 	min-width: 7em;
 }
 #command.cron-infos {
-	min-width: 15em;
+	/* min-width: 15em; */
 	width: 100%;
 }
 .active, .pending {
@@ -112,16 +113,14 @@
 
 /* responsive ======================================================*/
 
-/* @media screen and (max-width: 1570px) {
-	.container-dashboard {
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-} */
 
 @media screen and (max-width: 1590px) {
-	.cron-line,
+	.cron-line {
+		flex-wrap: wrap;
+	}
+}
+
+@media screen and (max-width: 1390px) {
 	.cron {
 		flex-wrap: wrap;
 	}
