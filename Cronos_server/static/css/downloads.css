@@ -21,7 +21,7 @@
 
 }
 .h3-dl {
-	font-size: 30px;
+	font-size: 3rem;
 	text-align: center;
 }
 .logo {
@@ -32,7 +32,7 @@
 }
 .windows-alert {
 	font-family: var(--main-font-family);
-	font-size: 14px;
+	font-size: 1.4rem;
 	text-align: center;
 	margin-top: 2px;
 }
@@ -66,7 +66,7 @@
 .help-dl, .msg-help {
 	font-family: var(--main-font-family);
 	color: rgb(78, 78, 78);
-	font-size: 20px;
+	font-size: 2rem;
 	text-align: center;
 }
 .msg-help a {

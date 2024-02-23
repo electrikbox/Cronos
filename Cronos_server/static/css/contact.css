@@ -16,7 +16,7 @@
 	padding-top: 15px;
 	margin-bottom: 5px;
 	font-family: var(--main-font-family);
-	font-size: 16px;
+	font-size: 1.6em;
 	color: rgb(78, 78, 78);
 }
 
@@ -26,7 +26,7 @@
 	margin-bottom: 5px;
 	box-sizing: border-box;
 	font-family: var(--main-font-family);
-	font-size: 16px;
+	font-size: 1.6em;
 	outline: none;
 	border-radius: 20px;
 	border: 1px solid #ccc;
@@ -49,7 +49,7 @@ input[type="email"] {
 	margin-bottom: 5px;
 	box-sizing: border-box;
 	font-family: var(--main-font-family);
-	font-size: 16px;
+	font-size: 1.6em;
 	outline: none;
 	border-radius: 4px;
 	border: 1px solid #ccc;
