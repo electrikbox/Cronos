@@ -1,0 +1,18 @@
+.logs {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: start;
+	margin-top: 5px;
+	padding: 0;
+	background-color: rgb(255, 255, 255);
+	border-radius: 3px;
+	gap: 3px;
+}
+.logs p {
+	margin: 0;
+	padding: 3.4px;
+	font-family: var(--main-font-family);
+	font-size: 1.6rem;
+	color: rgb(78, 78, 78);
+}
