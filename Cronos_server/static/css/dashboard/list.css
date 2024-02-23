@@ -51,7 +51,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 10px;
+	margin-top: 10px;
 	border-radius: 3px;
 	padding: 1px;
 }
@@ -72,6 +72,15 @@
 }
 #pages li.active {
 	color: rgb(255, 255, 255);
+}
+.no-cron {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 3.4em;
+	font-family: var(--main-font-family);
+	font-size: 2rem;
 }
 
 

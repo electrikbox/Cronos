@@ -78,9 +78,14 @@
       <button type="submit" class="play-selected" disabled>Play selected</button>
     </div>
   </div>
+  {% if crons %}
   {% for cron in page_obj %}
-    {% include 'dashboard_modules/cron.html' %}
+  {% include 'dashboard_modules/cron.html' %}
   {% endfor %}
+  {% else %}
+  <p class="no-cron">You don't have any cron</p>
+  {% endif %}
+
   <ul id="pages">
     {% for i in page_obj.paginator.page_range %}
       {% if page_obj.number == i %}
