@@ -39,7 +39,7 @@ $(document).ready(function () {
   });
 
   $('.select-all').click(function () {
-    $('.cron_form_list .cron-full input[type="checkbox"]').click();
+    $('.cron_form_list-div .cron-full input[type="checkbox"]').click();
     getSelectedCronIds();
   });
 
