@@ -1,9 +1,7 @@
 {% load to_date %}
 
-{% comment %} <div class="cron-test{% if cron.is_paused %} paused{% endif %}"> {% endcomment %}
-<div class="cron-test">
+<div class="cron-full">
   <input type="checkbox" class="ui-checkbox">
-  {% comment %} <div id="cron_id"><p>{{ cron.id }}</p></div> {% endcomment %}
   <div class="cron">
 
     <div id="cron_id"><p>{{ cron.id }}</p></div>
@@ -32,7 +30,7 @@
 
       <div class="cron-infos" id="command">
         <p>Command</p>
-        <p class="info">{{ cron.command }}</p>
+        <p class="info">{{ cron.command | truncatechars:20}}</p>
       </div>
     </div>
 

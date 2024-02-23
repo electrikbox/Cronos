@@ -23,7 +23,7 @@ $(document).ready(function () {
       });
     });
     // Deselect all checkboxes after loading buttons
-    $('.cron-test input[type="checkbox"]').prop('checked', false);
+    $('.cron-full input[type="checkbox"]').prop('checked', false);
     updateSelectedButtonState();
   }
 
@@ -43,7 +43,7 @@ $(document).ready(function () {
     }
     pauseMultipleCrons(selectedCronIds, is_paused);
     // Deselect all checkboxes after operation
-    $('.cron-test input[type="checkbox"]').prop('checked', false);
+    $('.cron-full input[type="checkbox"]').prop('checked', false);
     updateSelectedButtonState();
   }
 
@@ -65,10 +65,7 @@ $(document).ready(function () {
   /**
    * Toggles the pause state of a cron job.
    */
-  function pauseToggle () {
-    const button = $(this);
-    const cronId = button.data('cron-id');
-
+  function pauseToggle(cronId, button) {
     $.ajax({
       url: `/api/crons/${cronId}/`,
       type: 'GET',
@@ -93,11 +90,11 @@ $(document).ready(function () {
   function updateButtonIcon(button, isPaused) {
     const icon = button.find('ion-icon');
     icon.attr('name', isPaused ? 'play-circle-outline' : 'pause-circle-outline');
-    const cronTestDiv = button.closest('.cron-test');
+    const cronFullDiv = button.closest('.cron-full');
     if (isPaused) {
-      cronTestDiv.addClass('paused');
+      cronFullDiv.addClass('paused');
     } else {
-      cronTestDiv.removeClass('paused');
+      cronFullDiv.removeClass('paused');
     }
   }
 
@@ -107,9 +104,9 @@ $(document).ready(function () {
    */
   function getSelectedPauseCronIds() {
     const selectedCronIds = {};
-    $('.cron-test input[type="checkbox"]:checked').each(function () {
-      const cronId = $(this).closest('.cron-test').find('.pause-cron').data('cron-id');
-      const row = $(this).closest('.cron-test');
+    $('.cron-full input[type="checkbox"]:checked').each(function () {
+      const cronId = $(this).closest('.cron-full').find('.pause-cron').data('cron-id');
+      const row = $(this).closest('.cron-full');
       selectedCronIds[cronId] = row;
     });
     return selectedCronIds;
@@ -119,7 +116,7 @@ $(document).ready(function () {
    * Updates the state of the selected buttons based on the number of checked cron checkboxes.
    */
   function updateSelectedButtonState() {
-    const checkedCrons = $('.cron-test input[type="checkbox"]:checked');
+    const checkedCrons = $('.cron-full input[type="checkbox"]:checked');
     const isEnabled = checkedCrons.length > 0;
     $('.delete-selected').prop('disabled', !isEnabled);
     $('.pause-selected').prop('disabled', !isEnabled);
@@ -177,8 +174,12 @@ $(document).ready(function () {
   });
 
   $('.pause-cron').click(function () {
-    pauseToggle();
-    $('.loader').show();
+    const button = $(this);
+    const cronId = button.data('cron-id');
+    console.log('cronId:', cronId);
+
+    pauseToggle(cronId, button);
+    // $('.loader').show();
   });
 
   // Initial update of pause buttons

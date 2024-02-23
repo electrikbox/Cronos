@@ -3,20 +3,20 @@ $(document).ready(function () {
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   function updateDeleteSelectedButtonState() {
-    const checkedCrons = $('.cron-test input[type="checkbox"]:checked');
+    const checkedCrons = $('.cron-full input[type="checkbox"]:checked');
     const isEnabled = checkedCrons.length > 0;
     $('.delete-selected').prop('disabled', !isEnabled);
     $('.pause-selected').prop('disabled', !isEnabled);
     $('.play-selected').prop('disabled', !isEnabled);
   }
 
-  $('.cron-test input[type="checkbox"]').change(updateDeleteSelectedButtonState);
+  $('.cron-full input[type="checkbox"]').change(updateDeleteSelectedButtonState);
 
   // Delete cron
   $('.delete-cron').click(function () {
     const cronId = $(this).data('cron-id');
     const confirmation = confirm('Are you sure you want to delete this cron?');
-    const row = $(this).closest('.cron-test');
+    const row = $(this).closest('.cron-full');
     $('.loader').show();
 
     if (confirmation) {
@@ -39,7 +39,7 @@ $(document).ready(function () {
   });
 
   $('.select-all').click(function () {
-    $('.cron_form_list .cron-test input[type="checkbox"]').click();
+    $('.cron_form_list .cron-full input[type="checkbox"]').click();
     getSelectedCronIds();
   });
 
@@ -69,9 +69,9 @@ $(document).ready(function () {
 
   function getSelectedCronIds() {
     const selectedCronIds = {};
-    $('.cron-test input[type="checkbox"]:checked').each(function () {
-      const cronId = $(this).closest('.cron-test').find('.delete-cron').data('cron-id');
-      const row = $(this).closest('.cron-test');
+    $('.cron-full input[type="checkbox"]:checked').each(function () {
+      const cronId = $(this).closest('.cron-full').find('.delete-cron').data('cron-id');
+      const row = $(this).closest('.cron-full');
       selectedCronIds[cronId] = row;
     });
     return selectedCronIds;
