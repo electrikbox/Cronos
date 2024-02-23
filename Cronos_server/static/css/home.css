@@ -6,7 +6,7 @@
 	justify-content: center;
 	width: 80%;
 	/* background-color: rgb(226, 226, 226); */
-	margin-top: 70px;
+	/* margin-top: 70px; */
 }
 .home-section-full-width {
 	display: flex;
@@ -46,7 +46,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 }
 #home-account h3 {
 	font-family: var(--main-font-family);
@@ -56,6 +56,15 @@
 	font-family: var(--main-font-family);
 	color: rgb(78, 78, 78);
 	text-align: center;
+	font-size: 12px;
+}
+#home-account a {
+	text-decoration: none;
+	color: var(--main-color);
+}
+#home-account a:hover {
+	font-weight: bold;
+	color: var(--link-color);
 }
 .home-cron-active,
 .home-cron-pending {

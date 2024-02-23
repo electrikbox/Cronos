@@ -9,8 +9,8 @@
 	justify-content: center;
 	gap: 20px;
 	width: 100%;
-	padding-left: 5em;
-	padding-right: 5em;
+	padding-left: 10em;
+	padding-right: 10em;
 }
 .create_and_logs {
 	display: flex;
@@ -53,4 +53,10 @@
     position: relative;
     font-size: 2.5rem;
 	color: var(--main-color);
+}
+
+@media screen and (max-width: 1390px) {
+	.container-dashboard {
+		flex-direction: column;
+	}
 }

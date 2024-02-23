@@ -103,3 +103,15 @@ button {
 	border-radius: .4em;
 	cursor: pointer;
 }
+
+/* contenairs on pages ===============================================*/
+.container-dashboard {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 20px;
+	width: 100%;
+	padding-left: 5em;
+	padding-right: 5em;
+}

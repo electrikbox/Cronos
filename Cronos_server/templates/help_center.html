@@ -10,6 +10,12 @@
 	<input type="text" id="searchInput" placeholder="&#128269;  Search the Help Center...">
 </div>
 
+<div class="success_msg">
+	{% for message in messages %}
+	<p class="error_msg">{{ message }}</p>
+	{% endfor %}
+</div>
+
 <!-- Section FAQ -->
 
 <div class="faq-block">

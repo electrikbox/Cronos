@@ -2,7 +2,7 @@
 
 .search-container {
   	position: absolute;
-  	top: 8%;
+  	top: 8em;
   	right: 20px;
 	width: 15%;
 }
@@ -53,10 +53,11 @@
 	background-color: rgb(226, 226, 226);
 	padding: 30px;
 	border-radius: 10px;
-	margin-top: 55px;
+	/* margin-top: 55px; */
 	width: 90%;
 	height: fit-content;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+
 }
 .block-title {
 	display: flex;

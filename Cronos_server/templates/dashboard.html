@@ -81,7 +81,7 @@
   {% for cron in page_obj %}
     {% include 'dashboard_modules/cron.html' %}
   {% endfor %}
-  {% comment %} <ul id="pages">
+  <ul id="pages">
     {% for i in page_obj.paginator.page_range %}
       {% if page_obj.number == i %}
           <li class="active"><span>{{ i }}</span></li>
@@ -89,7 +89,7 @@
           <li><a href="?page={{ i }}">{{ i }}</a></li>
         {% endif %}
     {% endfor %}
-  </ul> {% endcomment %}
+  </ul>
 </div>
 
 

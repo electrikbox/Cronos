@@ -3,7 +3,14 @@
 {% block title %}Cronos home{% endblock %}
 
 {% block section %}
-{% comment %} <h2>Home</h2> {% endcomment %}
+<h2>Home</h2>
+
+<div class="success_msg">
+	{% for message in messages %}
+	<p class="error_msg">{{ message }}</p>
+	{% endfor %}
+</div>
+
 <div class="home-block">
 	<div class="home-section-full-width">
 		<div class="home-info" id="home-account">
@@ -15,7 +22,10 @@
 					</svg>
 				</div>
 			</a>
-			<h3>Hello {{ user.username | capfirst}} !</h3>
+			<div class="home-name">
+				<h3>Hello {{ user.username | capfirst}} !</h3>
+				<p>Not {{ user.username | capfirst}} ? <a href="/accounts/logout">Logout</a></p>
+			</div>
 
 		</div>
 		<div class="home-info">
