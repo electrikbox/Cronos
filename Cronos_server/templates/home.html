@@ -3,10 +3,10 @@
 {% block title %}Cronos home{% endblock %}
 
 {% block section %}
-<h2>Home</h2>
+{% comment %} <h2>Home</h2> {% endcomment %}
 <div class="home-block">
 	<div class="home-section-full-width">
-		<h3>Hello {{ user.username | capfirst}}</h3>
+		<h3>Hello {{ user.username | capfirst}} !</h3>
 		<p>You have a total of {{ crons_count }} crons <br>
 		{{ active_crons_count }} active crons <br>
 		{{ pending_crons_count }} crons pending</p>
@@ -22,7 +22,7 @@
 
 	<div class="home-link">
 		<div class="home-section">
-			<a href="/downloads/">
+			<a href="downloads">
 				<h3>Downloads</h3>
 				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon-home" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M176 262.62L256 342l80-79.38M256 330.97V170"/><path d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
 			</a>
