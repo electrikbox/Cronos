@@ -161,6 +161,8 @@ $(document).ready(function () {
     $('.logs-div').load(currentUrl + ' .logs');
   }
 
+    // =======================  Event Listeners  =======================
+    
   // Handling pause-selected button click
   $('.pause-selected').click(function () {
     togglePauseButton(true);
@@ -182,6 +184,5 @@ $(document).ready(function () {
     // $('.loader').show();
   });
 
-  // Initial update of pause buttons
   updatePauseButtonsOnLoad();
 });
