@@ -1,4 +1,5 @@
 import flet as ft
+import time
 from modules import Elements, AppPages
 from modules.functions.api_request import CronScraper
 from modules.functions.check_command import CheckCommand
@@ -223,6 +224,12 @@ class AppHandler:
         self.toggle_pause_local_crons()
 
     def fetch_remote_crons(self) -> None:
-        self.add_remote_crons_to_local()
-        self.del_local_crons()
-        self.toggle_pause_local_crons()
+        # self.add_remote_crons_to_local()
+        # self.del_local_crons()
+        # self.toggle_pause_local_crons()
+        while True:
+            self.add_remote_crons_to_local()
+            self.del_local_crons()
+            self.toggle_pause_local_crons()
+            time.sleep(5)
+
