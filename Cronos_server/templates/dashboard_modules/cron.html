@@ -23,7 +23,7 @@
         <p class="info">{{ cron.day_of_week | to_date}}</p>
       </div>
 
-      <div class="cron-infos">
+      <div class="cron-infos" id="time">
         <p>Time</p>
         <p class="info">{{ cron.hours | to_double_digit }}:{{ cron.minutes | to_double_digit}}</p>
       </div>
