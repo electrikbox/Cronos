@@ -34,6 +34,7 @@
 }
 #navbar {
     display: flex;
+    flex-direction: column;
     padding: 8px 0px 0px 7px;
     width: 11em;
     background-color: var(--background-secondary);

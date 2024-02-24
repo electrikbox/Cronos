@@ -43,6 +43,11 @@ section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	/* background: url('/static/img/43.jpg');
+	background-size: 100%;
+  	background-position: bottom right;
+  	background-repeat: no-repeat;
+	background-blend-mode:screen; */
 	background-color: rgb(212, 212, 212);
 	width: 100%;
 	/* min-width: 930px; */
