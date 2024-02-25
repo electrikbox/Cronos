@@ -12,6 +12,8 @@ def dashboard(request):
         messages.success(request, message)
 
     URL_ERROR_MSG = "URL field is required for this command."
+    SOURCE_ERROR_MSG = "Source field is required for this command."
+    DEST_ERROR_MSG = "Destination field is required for this command."
     TOKEN = request.COOKIES.get("user_token")
     HEADER = {
         "Content-Type": "application/json",
@@ -19,19 +21,30 @@ def dashboard(request):
     }
 
     if request.method == "POST":
-        cron_create_form = CronForm(request.POST)
+        cron_create_form = CronForm(request.POST, request.FILES)
 
         if not cron_create_form.is_valid():
-            if ("url" in cron_create_form.errors and URL_ERROR_MSG
-                in cron_create_form.errors["url"]):
+            if "url" in cron_create_form.errors:
                 messages.error(request, URL_ERROR_MSG)
+
+            elif "destination" in cron_create_form.errors:
+                messages.error(request, DEST_ERROR_MSG)
+
+            return redirect("/dashboard")
+
+        if len(request.FILES) == 0:
+            messages.error(request, SOURCE_ERROR_MSG)
             return redirect("/dashboard")
 
         command = cron_create_form.cleaned_data['command']
         url = cron_create_form.cleaned_data['url']
+        source = request.FILES['name']
+        destination = cron_create_form.cleaned_data['destination']
 
         if command == "open":
             command = f"{command} {url}"
+        elif command == "cp":
+            command = f"{command} {source} {destination}"
         else:
             command = command
 

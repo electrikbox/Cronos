@@ -1,4 +1,4 @@
-<form class="cron_form-create" method="post">
+<form class="cron_form-create" method="post" enctype="multipart/form-data">
 
   <div class="cron_form_date_cmd">
     {% csrf_token %}
@@ -31,5 +31,9 @@
   </div>
 
   <div class="select url_field hidden">{{ cron_create_form.url }}</div>
+
+  <input id="source" type="file" name="name" accept="*" class="form-source">
+  <div class="select dest_field hidden">{{ cron_create_form.destination }}</div>
+
   <button type="submit">Create</button>
 </form>
