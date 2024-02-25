@@ -10,22 +10,28 @@ class CronosScript:
         self.cron_id = cron_id
         self.script_path = ""
 
-    def create_script(self, cmd: str) -> None:
+    def build_script(self, cmd: str) -> str:
         os_name = platform.system()
-        folder_path = os.path.expanduser(CRONOS_SCRIPT_PATH)
         option = ""
         cmd_name = cmd.split(" ")[0]
 
         if os_name == "Linux" and cmd_name == "open":
             option = "export DISPLAY=:0\n"
 
+        script_shibang = "#!/bin/bash\n"
+        script_protect_sudo = "\nif [ $(id -u) -eq 0 ];\n\tthen echo \"sudo forbiden.\"\n\texit 1\nfi\n"
+        script_content = f"{script_shibang}{script_protect_sudo}{option}{cmd}"
+
+        return script_content
+
+    def create_script(self, cmd: str) -> None:
+        folder_path = os.path.expanduser(CRONOS_SCRIPT_PATH)
+
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
         script = os.path.join(folder_path, f"cron_{self.cron_id}_script.sh")
-        script_shibang = "#!/bin/bash\n"
-        script_protect_sudo = "\nif [ $(id -u) -eq 0 ];\n\tthen echo \"sudo forbiden.\"\n\texit 1\nfi\n"
-        script_content = f"{script_shibang}{script_protect_sudo}{option}{cmd}"
+        script_content = self.build_script(cmd)
 
         with open(script, "w") as f:
             f.write(script_content)
