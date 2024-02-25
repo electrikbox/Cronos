@@ -43,7 +43,7 @@ class CronForm(forms.Form):
     destination = forms.CharField(
         label="Destination",
         required=False,
-        widget=forms.TextInput(attrs={"placeholder": "Save folder name"}),
+        widget=forms.TextInput(attrs={"placeholder": "Destination folder name"}),
     )
 
     def clean(self):
