@@ -81,7 +81,7 @@ def create_cron_job(request: WSGIRequest, cron_create_form: CronForm, header: di
 def get_command_from_form_data(form_data: dict, request: WSGIRequest) -> str:
     """Construct the command based on form data"""
     command = form_data["command"]
-    if command == "cp":
+    if command == "cp" or command == "ls":
         source = request.FILES["name"]
         destination = form_data["destination"]
         command = f"{command} {source} {destination}"
