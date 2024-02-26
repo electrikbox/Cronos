@@ -57,6 +57,14 @@ class Elements(ft.UserControl):
             color=ft.colors.TEAL_400,
         )
 
+        # MSG
+        # =====================================================================
+
+        self.cron_action_text = ft.Text(
+            value="",
+            color="pink"
+        )
+
         # Fetch button
         # =====================================================================
 
