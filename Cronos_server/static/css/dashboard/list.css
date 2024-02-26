@@ -1,0 +1,117 @@
+.selected-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	gap: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 9px;
+	border-bottom: 1px solid rgb(185, 185, 185);
+}
+.selected-buttons p {
+	font-family: var(--main-font-family);
+}
+#select-all-div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+#select-all-check {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+}
+.delete-selected ,
+.pause-selected,
+.play-selected {
+	background-color: rgb(51, 106, 132);
+}
+.delete-selected[disabled],
+.pause-selected[disabled],
+.play-selected[disabled] {
+	background-color: #ccc;
+}
+
+
+/* pagination ======================================*/
+
+.pagination {
+	font-family: var(--main-font-family);
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	padding-bottom: 20px;
+}
+#pages {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
+	border-radius: 3px;
+	padding: 1px;
+}
+#pages li {
+    list-style: none;
+    font-family: var(--main-font-family);
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 2px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#pages li a{
+    text-decoration: none;
+}
+#pages li.active {
+	color: rgb(255, 255, 255);
+}
+.no-cron {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 3.4em;
+	font-family: var(--main-font-family);
+	font-size: 2rem;
+}
+
+
+.loader {
+	display: none;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	position: relative;
+	margin-left: auto;
+	top: -5px;
+	animation: rotate 0.7s linear infinite
+}
+.loader::before {
+	content: "";
+	box-sizing: border-box;
+	position: absolute;
+	inset: 0px;
+	border-radius: 50%;
+	border: 5px solid var(--main-color);
+	animation: prixClipFix 2s linear infinite ;
+}
+
+@keyframes rotate {
+	100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+	  0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+	  25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+	  50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+	  75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+	  100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+}

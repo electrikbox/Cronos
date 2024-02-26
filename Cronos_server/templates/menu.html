@@ -1,14 +1,14 @@
 {% load static %}
 <!-- Navbar -->
 <nav id="navbar">
-  {% comment %} <div class="logo">
-    <img src="{% static '/img/Cron0S_03.png' %}" alt="logo">
-  </div> {% endcomment %}
   <ul class="navbar-items flexbox-col">
     <li id="home" class="navbar-item flexbox-left">
       <a class="navbar-item-inner flexbox-left">
         <div class="navbar-item-inner-icon-wrapper flexbox">
-          <ion-icon name="home-outline"></ion-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" class="ionicon-menu" viewBox="0 0 512 512">
+            <path d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+            <path d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+          </svg>
         </div>
         <span class="link-text">Home</span>
       </a>
@@ -16,7 +16,10 @@
     <li id="accounts/user_account" class="navbar-item flexbox-left">
       <a class="navbar-item-inner flexbox-left">
         <div class="navbar-item-inner-icon-wrapper flexbox">
-          <ion-icon name="person-outline"></ion-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" class="ionicon-menu" viewBox="0 0 512 512">
+            <path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+            <path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+          </svg>
         </div>
         <span class="link-text">Account</span>
       </a>
@@ -24,7 +27,10 @@
     <li id="dashboard" class="navbar-item flexbox-left">
       <a class="navbar-item-inner flexbox-left">
         <div class="navbar-item-inner-icon-wrapper flexbox">
-          <ion-icon name="timer-outline"></ion-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" class="ionicon-menu" viewBox="0 0 512 512">
+            <path d="M112.91 128A191.85 191.85 0 0064 254c-1.18 106.35 85.65 193.8 192 194 106.2.2 192-85.83 192-192 0-104.54-83.55-189.61-187.5-192a4.36 4.36 0 00-4.5 4.37V152" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+            <path d="M233.38 278.63l-79-113a8.13 8.13 0 0111.32-11.32l113 79a32.5 32.5 0 01-37.25 53.26 33.21 33.21 0 01-8.07-7.94z" fill="currentColor"/>
+          </svg>
         </div>
         <span class="link-text">Dashboard</span>
       </a>
@@ -32,7 +38,10 @@
     <li id="downloads" class="navbar-item flexbox-left">
       <a class="navbar-item-inner flexbox-left">
         <div class="navbar-item-inner-icon-wrapper flexbox">
-          <ion-icon name="arrow-down-circle-outline"></ion-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" class="ionicon-menu" viewBox="0 0 512 512">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M176 262.62L256 342l80-79.38M256 330.97V170"/>
+            <path d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+          </svg>
         </div>
         <span class="link-text">Downloads</span>
       </a>
@@ -40,7 +49,11 @@
     <li id="help_center" class="navbar-item flexbox-left">
       <a class="navbar-item-inner flexbox-left">
         <div class="navbar-item-inner-icon-wrapper flexbox">
-          <ion-icon name="help-outline"></ion-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" class="ionicon-menu" viewBox="0 0 512 512">
+            <path d="M160 164s1.44-33 33.54-59.46C212.6 88.83 235.49 84.28 256 84c18.73-.23 35.47 2.94 45.48 7.82C318.59 100.2 352 120.6 352 164c0 45.67-29.18 66.37-62.35 89.18S248 298.36 248 324" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="40"/>
+            <circle cx="248" cy="399.99" r="32" fill="currentColor"/>
+          </svg>
+
         </div>
         <span class="link-text">Help Center</span>
       </a>
@@ -48,7 +61,7 @@
     <li id="contact" class="navbar-item flexbox-left">
       <a class="navbar-item-inner flexbox-left">
         <div class="navbar-item-inner-icon-wrapper flexbox">
-          <ion-icon name="mail-outline"></ion-icon>
+          <svg xmlns="http://www.w3.org/2000/svg" class="ionicon-menu" viewBox="0 0 512 512"><rect x="48" y="96" width="416" height="320" rx="40" ry="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M112 160l144 112 144-112"/></svg>
         </div>
         <span class="link-text">Contact Us</span>
       </a>

@@ -10,6 +10,35 @@ $(document).ready(function () {
   let intervalId;
 
   /**
+   * Validates and updates the status of a pending item.
+   * @param {number} index - The index of the pending item to validate.
+   */
+  function validate(index) {
+    const pendingDiv = $(`.pending:eq(${index})`);
+    const paragraph = pendingDiv.find('p');
+    pendingDiv.addClass('active').removeClass('pending');
+    paragraph.text('Active');
+  }
+
+  /**
+   * Rejects the specified crons based on the filtered response.
+   * Removes the corresponding cron elements from the DOM.
+   *
+   * @param {Array<number>} crons - The array of cron IDs to reject.
+   * @param {Array<Object>} filteredResponse - The filtered response containing cron objects.
+   * @returns {void}
+   */
+  function reject(crons, filteredResponse) {
+    const notFoundCrons = crons.filter(cronId => !filteredResponse.some(cron => cron.id === cronId));
+    notFoundCrons.forEach(cronId => {
+      const pendingDiv = $(`.pending[data-cron-id='${cronId}']`);
+      const cronFull = pendingDiv.closest('.cron-full');
+      alert(`Command from cron ${cronId} can't be executed\non your computer. It will be deleted.`);
+      cronFull.remove();
+    });
+  }
+
+  /**
    * Switches the pending status of crons by making an AJAX request to the server.
    * If a cron is validated, its corresponding HTML element is updated to show "Active".
    * If there are no more pending crons, the interval for checking pending status is cleared.
@@ -24,14 +53,15 @@ $(document).ready(function () {
         let hasPending = false;
         filteredResponse.forEach((cron, index) => {
           if (cron.validated) {
-            const pendingDiv = $(`.pending:eq(${index})`);
-            const paragraph = pendingDiv.find('p');
-            pendingDiv.addClass('active').removeClass('pending');
-            paragraph.text('Active');
+            validate(index);
           } else {
             hasPending = true;
           }
         });
+        if (crons.some(cronId => !filteredResponse.some(cron => cron.id === cronId))) {
+          reject(crons, filteredResponse);
+          window.location.href = "/dashboard?delete=true";
+        }
         if (!hasPending) {
           clearInterval(intervalId);
         }
@@ -58,7 +88,7 @@ $(document).ready(function () {
   function getPendingsCrons() {
     const selectedCronIds = [];
     $('.pending').each(function () {
-      const cronId = $(this).closest('.cron-test').find('.pause-cron').data('cron-id');
+      const cronId = $(this).closest('.cron-full').find('.pause-cron').data('cron-id');
       selectedCronIds.push(cronId);
     });
     return selectedCronIds;

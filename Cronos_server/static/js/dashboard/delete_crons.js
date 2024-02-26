@@ -2,21 +2,24 @@ $(document).ready(function () {
 
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
+  /**
+   * Updates the state of the delete selected button based on the number of checked crons.
+   */
   function updateDeleteSelectedButtonState() {
-    const checkedCrons = $('.cron-test input[type="checkbox"]:checked');
+    const checkedCrons = $('.cron-full input[type="checkbox"]:checked');
     const isEnabled = checkedCrons.length > 0;
     $('.delete-selected').prop('disabled', !isEnabled);
     $('.pause-selected').prop('disabled', !isEnabled);
     $('.play-selected').prop('disabled', !isEnabled);
   }
 
-  $('.cron-test input[type="checkbox"]').change(updateDeleteSelectedButtonState);
-
-  // Delete cron
-  $('.delete-cron').click(function () {
+  /**
+   * Deletes a cron.
+   */
+  function deleteCron () {
     const cronId = $(this).data('cron-id');
     const confirmation = confirm('Are you sure you want to delete this cron?');
-    const row = $(this).closest('.cron-test');
+    const row = $(this).closest('.cron-full');
     $('.loader').show();
 
     if (confirmation) {
@@ -36,13 +39,12 @@ $(document).ready(function () {
         }
       });
     }
-  });
+  }
 
-  $('.select-all').click(function () {
-    $('.cron_form_list .cron-test input[type="checkbox"]').click();
-    getSelectedCronIds();
-  });
-
+  /**
+   * Deletes multiple crons.
+   * @param {Object} cronIds - The cron IDs to be deleted.
+   */
   function deleteMultipleCrons(cronIds) {
     $.ajax({
       url: '/api/delete-multiple/',
@@ -67,17 +69,24 @@ $(document).ready(function () {
     });
   }
 
+  /**
+   * Retrieves the selected cron IDs and their corresponding rows.
+   * @returns {Object} An object containing the selected cron IDs as keys and their corresponding rows as values.
+   */
   function getSelectedCronIds() {
     const selectedCronIds = {};
-    $('.cron-test input[type="checkbox"]:checked').each(function () {
-      const cronId = $(this).closest('.cron-test').find('.delete-cron').data('cron-id');
-      const row = $(this).closest('.cron-test');
+    $('.cron-full input[type="checkbox"]:checked').each(function () {
+      const cronId = $(this).closest('.cron-full').find('.delete-cron').data('cron-id');
+      const row = $(this).closest('.cron-full');
       selectedCronIds[cronId] = row;
     });
     return selectedCronIds;
   }
 
-  $('.delete-selected').click(function () {
+  /**
+   * Deletes the selected cron jobs.
+   */
+  function deleteSelected() {
     const selectedCronIds = getSelectedCronIds();
     const numSelectedCrons = Object.keys(selectedCronIds).length;
     if (numSelectedCrons > 0) {
@@ -89,7 +98,24 @@ $(document).ready(function () {
     } else {
       alert('Please select at least 1 cron.');
     }
-  });
+  }
+
+  // =======================  Event Listeners  =======================
 
   updateDeleteSelectedButtonState();
+
+  // delect selected crons
+  $('.delete-selected').click(deleteSelected);
+
+  //change state of buttons
+  $('.cron-full input[type="checkbox"]').change(updateDeleteSelectedButtonState);
+
+  // delete 1 cron
+  $('.delete-cron').click(deleteCron);
+
+  // select all crons
+  $('.select-all').click(function () {
+    $('.cron_form_list-div .cron-full input[type="checkbox"]').click();
+    getSelectedCronIds();
+  });
 });

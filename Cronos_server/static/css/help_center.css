@@ -2,7 +2,7 @@
 
 .search-container {
   	position: absolute;
-  	top: 8%;
+  	top: 8em;
   	right: 20px;
 	width: 15%;
 }
@@ -12,7 +12,7 @@
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	margin-bottom: 12px;
-	font-size: 14px;
+	font-size: 1.4rem;
 
 }
 .search-container input[type=text]::placeholder {
@@ -26,9 +26,10 @@
 	font-family: var(--main-font-family);
 }
 .answer h4 {
-	font-size: 18px;
+	font-size: 1.8rem;
 	margin-bottom: 5px;
 	font-weight: 500;
+	font-family: var(--main-font-family);
 }
 .answer ul {
 	padding-left: 20px;
@@ -52,10 +53,11 @@
 	background-color: rgb(226, 226, 226);
 	padding: 30px;
 	border-radius: 10px;
-	margin-top: 55px;
+	/* margin-top: 55px; */
 	width: 90%;
 	height: fit-content;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+
 }
 .block-title {
 	display: flex;
@@ -73,11 +75,12 @@
 .h4-help {
 	color: rgb(78, 78, 78);
 	margin: 15px;
+	font-family: var(--main-font-family);
 }
 .title-help {
 	display: flex;
 	flex-direction: row;
-	font-size: 20px;
+	font-size: 2rem;
 	font-weight: 600;
 	width: 100%;
 	border-bottom: 1px solid rgb(185, 185, 185);
@@ -87,8 +90,8 @@
 	color: var(--main-color);
 	border: none;
 	margin-right: 5px;
-	font-size: 20px;
+	font-size: 2rem;
 }
-.toggle-answer.open {
+/* .toggle-answer.open {
 	margin-left: 10px;
-}
+} */

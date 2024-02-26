@@ -10,6 +10,7 @@ from Cronos_website.forms import CronForm, ContactForm
 from Cronos_account.user_pics import UserPic
 from Cronos_core.models import Profiles
 from Cronos_core.models import Logs
+from Cronos_core.models import Crons
 
 import requests
 

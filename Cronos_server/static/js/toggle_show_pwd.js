@@ -1,3 +1,4 @@
+// Toggle visibility of password fields
 document.addEventListener('DOMContentLoaded', function () {
   const passwordInputs = document.querySelectorAll('input[type="password"]');
 

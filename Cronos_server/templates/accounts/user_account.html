@@ -9,24 +9,15 @@
 <div class="success_msg">
 {% if request.GET.updated %}
   <p class="success_updated">Your personal details have been successfully modified</p>
-{% endif %}
-</div>
-
-<div class="success_msg">
-{% if request.GET.updatedPWD %}
+{% elif request.GET.updatedPWD %}
   <p class="success_updated">Your password has been successfully changed</p>
-{% endif %}
-</div>
-
-<div class="success_msg">
-{% if request.GET.updatedIMG %}
+  {% elif request.GET.updatedIMG %}
   <p class="success_updated">Your profile pic has been successfully uploaded</p>
 {% endif %}
-</div>
-
 {% for message in messages %}
     <p class="error_msg">{{ message }}</p>
 {% endfor %}
+</div>
 
 
 <!-- ================= PIC FORM ================= -->

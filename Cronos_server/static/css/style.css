@@ -4,7 +4,10 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	/* width: 100%; */
+}
+html {
+scroll-behavior: smooth;
+  font-size: 62.5%;
 }
 body {
 	display: flex;
@@ -40,10 +43,14 @@ section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	/* background: url('/static/img/43.jpg');
+	background-size: 100%;
+  	background-position: bottom right;
+  	background-repeat: no-repeat;
+	background-blend-mode:screen; */
 	background-color: rgb(212, 212, 212);
 	width: 100%;
-	min-width: 930px;
-	/* padding-bottom: 100px; */
+	/* min-width: 930px; */
 }
 footer {
 	background-color: var(--bg-color_1);
@@ -56,7 +63,7 @@ footer p{
 	color: var(--text-color);
 	font-family: var(--main-font-family);
 	text-align: center;
-	font-size: 12px;
+	font-size: 1.2rem;
 	opacity: 0.7;
 }
 footer a{
@@ -65,21 +72,51 @@ footer a{
 }
 h1, h2, h3 {
 	font-family: var(--main-font-family);
-	margin: 0%;
-	/* margin-bottom: 10px; */
+	margin: 0;
 	color: var(--title-color);
 	width: 100%;
 }
 h1 {
-	font-size: 40px;
+	font-size: 4rem;
 	text-align: center;
 }
 h2 {
-	font-size: 26px;
+	font-size: 2.6rem;
 	text-align: center;
+	padding-top: 2rem;
+	padding-bottom: 1rem;
 }
 h3 {
 	color: var(--text-color);
-	font-size: 20px;
+	font-size: 2rem;
 	text-align: left;
+}
+.success_msg, .error_msg {
+	font-family: var(--main-font-family);
+	min-height: 2em;
+	font-size: 1.8rem;
+	text-align: center;
+}
+.success_msg {
+	color: rgb(0, 128, 0);
+}
+.error_msg {
+	color: rgb(199, 66, 66);
+}
+button {
+	border: none;
+	border-radius: .4em;
+	cursor: pointer;
+}
+
+/* contenairs on pages ===============================================*/
+.container-dashboard {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 20px;
+	width: 100%;
+	padding-left: 5em;
+	padding-right: 5em;
 }

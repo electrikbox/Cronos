@@ -1,0 +1,127 @@
+.cron-full {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 5px;
+	margin-top: 5px;
+	width: 100%;
+}
+.cron {
+	background-color: rgb(247, 247, 247);
+	padding: 10px;
+	border-radius: 3px;
+	font-family: var(--main-font-family);
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+	font-size: 1.6rem;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	justify-content: space-between;
+	min-height: 42px;
+	min-width: 23.13em;
+	flex-grow: 2;
+	gap: 5px;
+}
+.cron p {
+	margin: 0;
+	flex-grow: 3;
+	width: 100%;
+}
+#cron_id {
+	display: flex;
+	border-radius: 3px;
+	font-family: var(--main-font-family);
+	font-size: 1.6rem;
+	align-items: center;
+	min-width: 47px;
+	min-height: 47px;
+	text-align: center;
+	justify-content: center;
+	color: rgb(224, 224, 224);
+	background-color: var(--main-color);
+	align-self: flex-start;
+}
+.cron-line {
+	display: flex;
+	gap: 4px;
+	width: 100%;
+}
+.cron-infos {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+.info {
+	background-color: rgb(227, 221, 233);
+	padding: 4px;
+	border-radius: 3px;
+	min-width: 7em;
+}
+#command.cron-infos {
+	/* min-width: 15em; */
+	width: 100%;
+}
+.active, .pending {
+	color: rgb(255, 255, 255);
+	background-color: var(--main-color);
+	border-radius: 3px;
+	padding: 6px;
+}
+.pending {
+	background-color: rgb(187, 187, 187);
+}
+.cron-option {
+	display: flex;
+	flex-direction: row;
+}
+.pause-cron > *, .delete-cron > * {
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+}
+.pause-cron:hover {
+	color: rgb(21, 82, 122);
+}
+.delete-cron:hover {
+	color: rgb(136, 15, 15);
+}
+.pause-cron:hover,
+.delete-cron:hover {
+	cursor: pointer;
+}
+
+/* paused cron ======================================================*/
+
+.paused .cron {
+	background-color: rgb(233, 233, 233);
+}
+.paused .active,
+.paused #cron_id {
+	background-color: rgb(141, 141, 141);
+	opacity: 0.4;
+}
+.paused .cron,
+.paused #cron_id {
+    box-shadow: none;
+}
+.paused .cron-line {
+	opacity: 0.4;
+}
+
+
+/* responsive ======================================================*/
+
+
+@media screen and (max-width: 1590px) {
+	.cron-line {
+		flex-wrap: wrap;
+	}
+}
+
+@media screen and (max-width: 1390px) {
+	.cron {
+		flex-wrap: wrap;
+	}
+}

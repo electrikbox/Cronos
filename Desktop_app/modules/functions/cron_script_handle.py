@@ -23,7 +23,9 @@ class CronosScript:
             os.makedirs(folder_path)
 
         script = os.path.join(folder_path, f"cron_{self.cron_id}_script.sh")
-        script_content = f"#!/bin/bash\n{option}{cmd}"
+        script_shibang = "#!/bin/bash\n"
+        script_protect_sudo = "\nif [ $(id -u) -eq 0 ];\n\tthen echo \"sudo forbiden.\"\n\texit 1\nfi\n"
+        script_content = f"{script_shibang}{script_protect_sudo}{option}{cmd}"
 
         with open(script, "w") as f:
             f.write(script_content)

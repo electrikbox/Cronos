@@ -10,6 +10,12 @@
 	<input type="text" id="searchInput" placeholder="&#128269;  Search the Help Center...">
 </div>
 
+<div class="success_msg">
+	{% for message in messages %}
+	<p class="error_msg">{{ message }}</p>
+	{% endfor %}
+</div>
+
 <!-- Section FAQ -->
 
 <div class="faq-block">
@@ -20,10 +26,10 @@
 	<div class="question">
 		<div class="title-help">
 			<button class="toggle-answer">▶︎</button>
-			<h3 class="h4-help">On which systems can I use CronOS ?</h3>
+			<h4 class="h4-help">On which systems can I use CronOS ?</h4>
 		</div>
 		<article class="answer">
-			<h4>The systems available are:</h4>
+			<h5>The systems available are:</h5>
 			<ul>
 				<li>MacOs - Babar and later versions</li>
 				<li>Linux - Truc and later versions</li>
@@ -34,7 +40,7 @@
 	<div class="question">
 		<div class="title-help">
 			<button class="toggle-answer">▶︎</button>
-			<h3 class="h4-help">What crons are available and what can I do with them?</h3>
+			<h4 class="h4-help">What crons are available and what can I do with them?</h4>
 		</div>
 		<article class="answer">
 			<ul>
@@ -50,7 +56,7 @@
 	<div class="question">
 		<div class="title-help">
 			<button class="toggle-answer">▶︎</button>
-			<h3 class="h4-help">How can i change my password</h3>
+			<h4 class="h4-help">How can i change my password</h4>
 		</div>
 		<article class="answer">
 			<p>To change your password, go to your <a href="/accounts/user_account/">Account</a>. Then locate the <em>Security</em> block, and enter your old password, followed by the new one</p>
@@ -69,7 +75,7 @@
 	<div class="tuto">
 		<div class="title-help">
 			<button class="toggle-answer">▶︎</button>
-			<h3 class="h4-help">How to install the application on my computer ?</h3>
+			<h4 class="h4-help">How to install the application on my computer ?</h4>
 		</div>
 
 		<article class="answer">
@@ -80,7 +86,7 @@
 	<div class="tuto">
 		<div class="title-help">
 			<button class="toggle-answer">▶︎</button>
-			<h3 class="h4-help">How to create a cron</h3>
+			<h4 class="h4-help">How to create a cron</h4>
 		</div>
 
 		<article class="answer">
@@ -91,7 +97,7 @@
 	<div class="tuto">
 		<div class="title-help">
 			<button class="toggle-answer">▶︎</button>
-			<h3 class="h4-help">How to pause a cron</h3>
+			<h4 class="h4-help">How to pause a cron</h4>
 		</div>
 
 		<article class="answer">
@@ -102,9 +108,9 @@
 	<div class="tuto">
 		<div class="title-help">
 			<button class="toggle-answer">▶︎</button>
-			<h3 class="h4-help">How to detele a cron</h3>
+			<h4 class="h4-help">How to detele a cron</h4>
 		</div>
-		
+
 		<article class="answer">
 			<p> {% lorem %} </p>
 		</article>

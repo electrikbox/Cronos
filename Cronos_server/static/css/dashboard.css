@@ -1,281 +1,43 @@
 @import url('variables.css');
 
-.global {
+/* global ===============================================*/
+
+.container-dashboard {
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
 	justify-content: center;
 	gap: 20px;
 	width: 90%;
-	margin-top: 55px;
-}
-.cron_form {
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 5px;
-	min-width: 250px;
-	width: 100%;
-}
-.cron_form > * {
-	width: 100%;
-}
-.cron_form_date_cmd {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 5px;
-}
-.url_field {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-}
-#id_url {
-	padding: 4px;
-	width: 100%;
-	border: none;
-	border-radius: 4px;
-	outline: none;
-	font-family: var(--main-font-family);
-	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-}
-.cron_form label {
-	font-family: var(--main-font-family);
-	font-size: 16px;
-	color: rgb(78, 78, 78);
-	padding-left: 7px;
-	padding-top: 1px;
-}
-.cron_form select:focus {
-	border-color: #66afe9;
-}
-.cron_form button[type="submit"]:hover ,
-.delete-selected:hover,
-.pause-selected:hover,
-.play-selected:hover {
-	background-color: rgb(14, 150, 212);
-}
-.element {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	gap: 10px;
-	width: 100%;
-	background-color: rgb(240, 240, 240);
-	border-radius: 3px;
-}
-.checkboxes {
-	padding: 0;
-	display: flex;
-	flex-direction: row;
-	align-items: start;
-	justify-content: space-between;
-	gap: 10px;
-}
-#day_check,
-#month_check,
-#dom_check {
-	margin: 0;
-	padding: 0;
-	width: 0%;
+	padding-bottom: 5em;
+	/* padding-left: 7em;
+	padding-right: 7em; */
 }
 .create_and_logs {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	max-width: 300px;
+	width: 470px;
 	flex-grow: 1;
 	gap: 20px;
 }
-.cron_form_create,
-.cron_form_logs,
-.cron_form_list {
-	margin: 0;
+.cron_form_create-div,
+.cron_form_logs-div,
+.cron_form_list-div {
 	padding: 20px;
 	width: 100%;
-}
-.crons_list,
-.cron_form_logs,
-.cron_form_create {
 	background-color: rgb(226, 226, 226);
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
 }
-.cron_form_list {
-	display: flex;
-	flex-direction: column;
-	gap: 2px;
-	min-width: 788.67px;
-}
-.cron_form_create h3,
-.cron_form_logs h3,
-.cron_form_list h3 {
-	font-family: var(--main-font-family);
-	width: 80%;
-}
-.cron_form input,
-.cron_form select {
+.cron_form_list-div button[type="submit"] {
 	padding: 5px;
-	font-family: var(--main-font-family);
-	font-size: 16px;
-	outline: none;
-	border-radius: 4px;
-	border: 1px solid transparent;
-	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-	background-color: rgb(255, 255, 255);
-}
-.cron_form button[type="submit"] {
-	padding: 5px;
-	font-size: 16px;
-    height: 32px;
-	width: 30%;
+	font-size: 1.2rem;
+	min-width: 10rem;
 	font-weight: bold;
 	text-align: center;
-	background-color: rgb(51, 106, 132);
 	color: white;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-.pause-cron {
-	color: rgb(21, 82, 122);
-}
-.delete-cron {
-	color: rgb(136, 15, 15);
-}
-.pause-cron > *, .delete-cron > * {
-	width: 30px;
-	height: 30px;
-	vertical-align: middle;
-}
-.pause-cron:hover,
-.delete-cron:hover {
-	cursor: pointer;
-}
-.cron-option {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	padding: 0;
-	margin: 0;
-}
-.cron-test {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	gap: 5px;
-	margin-top: 5px;
-	width: 100%;
-}
-#cron_id {
-	display: flex;
-	border-radius: 3px;
-	font-family: var(--main-font-family);
-	font-size: 16px;
-	align-items: center;
-	min-width: 47px;
-	min-height: 47px;
-	text-align: center;
-	justify-content: center;
-	color: rgb(224, 224, 224);
-	background-color: var(--main-color);
-}
-.cron {
-	background-color: rgb(247, 247, 247);
-	padding: 10px;
-	border-radius: 3px;
-	font-family: var(--main-font-family);
-	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
-	font-size: 16px;
-	display: flex;
-	flex-direction: row;
-	align-items: flex-end;
-	justify-content: space-between;
-	min-height: 42px;
-	flex-grow: 2;
-	gap: 5px;
-}
-.cron p {
-	margin: 0;
-	flex-grow: 3;
-	width: 100%;
-}
-#id_time,
-option,
-select {
-	min-width: 122px;
-}
-.success_msg {
-	color: rgb(0, 128, 0);
-	font-size: 16px;
-	text-align: center;
-	min-height: 20px;
-}
-.hidden {
-    display: block;
-}
-.logs {
-	display: flex;
-	flex-direction: column;
-	align-items: start;
-	justify-content: start;
-	margin-top: 5px;
-	padding: 0;
-	background-color: rgb(255, 255, 255);
-	border-radius: 3px;
-	gap: 3px;
-}
-.logs p {
-	margin: 0;
-	padding: 3.4px;
-	font-family: var(--main-font-family);
-	font-size: 16px;
-	color: rgb(78, 78, 78);
-}
-.pending {
-	color: rgb(255, 255, 255);
-	background-color: rgb(187, 187, 187);
-	border-radius: 3px;
-	padding: 6px;
-}
-.active {
-	color: rgb(255, 255, 255);
-	background-color: var(--main-color);
-	border-radius: 3px;
-	padding: 6px;
-}
-.crons_list {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	flex-grow: 2;
-}
-.paused {
-	color: rgb(165, 165, 165);
-  }
-.paused .active,
-.paused #cron_id {
-	background-color: rgb(141, 141, 141);
-	opacity: 0.4;
-}
-.paused .cron,
-.paused #cron_id {
-    box-shadow: none;
-}
-.paused .cron {
-	background-color: rgb(233, 233, 233);
-}
-.paused .cron-line {
-	opacity: 0.4;
 }
 .dashboard_titles {
 	display: flex;
@@ -290,163 +52,12 @@ select {
 }
 .dashboard_titles ion-icon {
     position: relative;
-    font-size: 2rem;
+    font-size: 2.5rem;
 	color: var(--main-color);
 }
-.selected-buttons {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	gap: 10px;
-	margin-bottom: 10px;
-	padding-bottom: 9px;
-	border-bottom: 1px solid rgb(185, 185, 185);
-}
-#select-all-check {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 5px;
-}
-.selected-buttons p {
-	font-family: var(--main-font-family);
-}
-.crons_list button[type="submit"] {
-	padding: 5px;
-	font-size: 12px;
-    height: 25px;
-	width: 20%;
-	min-width: 100px;
-	font-weight: bold;
-	text-align: center;
-	color: white;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-.delete-selected ,
-.pause-selected,
-.play-selected {
-	background-color: rgb(51, 106, 132);
-}
-.delete-selected[disabled],
-.pause-selected[disabled],
-.play-selected[disabled] {
-	background-color: #ccc;
-}
-.pagination {
-	font-family: var(--main-font-family);
-	display: flex;
-	align-items: flex-end;
-	justify-content: center;
-	padding-bottom: 20px;
-}
-.cron-infos {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
-}
-.cron-infos p:first-child {
-	font-size: 15px;
-	color: var(--main-color)
-}
-.cron-line {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
-	width: 100%;
-	gap: 4px;
-}
-.info {
-	margin: 0;
-	font-family: var(--main-font-family);
-	font-size: 16px;
-	/* color: rgb(78, 78, 78); */
-	color: black;
-	background-color: rgb(227, 221, 233);
-	padding: 6px;
-	border-radius: 3px;
-}
-#command {
-	width: 100%;
-	min-width: 180px;
-}
-#dow, #dom, #month {
-	min-width: 90px;
-}
-#select-all-div {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	gap: 10px;
-}
-#pages {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 10px;
-	border-radius: 3px;
-	padding: 1px;
-}
-#pages li {
-    list-style: none;
-    font-family: var(--main-font-family);
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    border-radius: 2px;
-    line-height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#pages li a{
-    text-decoration: none;
-}
-#pages li.active {
-	color: rgb(255, 255, 255);
-}
 
-
-
-
-
-
-
-.loader {
-	display: none;
-	width: 25px;
-	height: 25px;
-	border-radius: 50%;
-	position: relative;
-	margin-left: auto;
-	top: -5px;
-	animation: rotate 0.7s linear infinite
-}
-.loader::before {
-	content: "";
-	box-sizing: border-box;
-	position: absolute;
-	inset: 0px;
-	border-radius: 50%;
-	border: 5px solid var(--main-color);
-	animation: prixClipFix 2s linear infinite ;
-}
-
-@keyframes rotate {
-	100%   {transform: rotate(360deg)}
-}
-
-@keyframes prixClipFix {
-	  0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
-	  25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
-	  50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
-	  75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
-	  100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+@media screen and (max-width: 1000px) {
+	.container-dashboard {
+		flex-direction: column;
+	}
 }

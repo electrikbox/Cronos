@@ -4,4 +4,91 @@
 
 {% block section %}
 <h2>Home</h2>
+
+<div class="success_msg">
+	{% for message in messages %}
+	<p class="error_msg">{{ message }}</p>
+	{% endfor %}
+</div>
+
+<div class="home-block">
+	<div class="home-section-full-width">
+		<div class="home-info" id="home-account">
+			<a href="/accounts/user_account/">
+				<div class="ionicon-home-account">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+						<path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+						<path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+					</svg>
+				</div>
+			</a>
+			<div class="home-name">
+				<h3>Hello {{ user.username | capfirst}} !</h3>
+				<p>Not {{ user.username | capfirst}} ? <a href="/accounts/logout">Logout</a></p>
+			</div>
+
+		</div>
+		<div class="home-info">
+			{% comment %} EMPTY {% endcomment %}
+		</div>
+		<div class="home-info">
+			<h4>You have a total of {{ crons_count }} crons</h4>
+			<div class="home-cron-active">
+				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon-info-cron" viewBox="0 0 512 512">
+					<path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+					<path d="M216.32 334.44l114.45-69.14a10.89 10.89 0 000-18.6l-114.45-69.14a10.78 10.78 0 00-16.32 9.31v138.26a10.78 10.78 0 0016.32 9.31z" fill="currentColor"/>
+				</svg>
+				<p>
+					{{ active_crons_count }} active crons
+				</p>
+			</div>
+			<div class="home-cron-pending">
+				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon-info-cron" viewBox="0 0 512 512">
+					<path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M208 192v128M304 192v128"/>
+				</svg>
+				<p>
+					{{ pending_crons_count }} crons pending
+				</p>
+			</div>
+
+		</div>
+	</div>
+	<div class="home-link">
+		<div class="home-section">
+			<a href="/dashboard/">
+				<h3>Dashboard</h3>
+				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon-home" viewBox="0 0 512 512"><path d="M112.91 128A191.85 191.85 0 0064 254c-1.18 106.35 85.65 193.8 192 194 106.2.2 192-85.83 192-192 0-104.54-83.55-189.61-187.5-192a4.36 4.36 0 00-4.5 4.37V152" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M233.38 278.63l-79-113a8.13 8.13 0 0111.32-11.32l113 79a32.5 32.5 0 01-37.25 53.26 33.21 33.21 0 01-8.07-7.94z" fill="#5C0066"/></svg>
+			</a>
+		</div>
+	</div>
+
+	<div class="home-link">
+		<div class="home-section">
+			<a href="downloads">
+				<h3>Downloads</h3>
+				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon-home" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M176 262.62L256 342l80-79.38M256 330.97V170"/><path d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
+			</a>
+		</div>
+	</div>
+
+	<div class="home-link">
+		<a href="/help_center">
+			<div class="home-section">
+				<h3>Help Center</h3>
+				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon-home" viewBox="0 0 512 512"><path d="M160 164s1.44-33 33.54-59.46C212.6 88.83 235.49 84.28 256 84c18.73-.23 35.47 2.94 45.48 7.82C318.59 100.2 352 120.6 352 164c0 45.67-29.18 66.37-62.35 89.18S248 298.36 248 324" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="40"/><circle cx="248" cy="399.99" r="32" fill="#5C0066"/></svg>
+			</div>
+		</a>
+	</div>
+
+	<div class="home-link">
+		<a href="/contact/">
+			<div class="home-section">
+				<h3>Contact Cronos</h3>
+				<svg xmlns="http://www.w3.org/2000/svg" class="ionicon-home" viewBox="0 0 512 512"><rect x="48" y="96" width="416" height="320" rx="40" ry="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M112 160l144 112 144-112"/></svg>
+			</div>
+		</a>
+	</div>
+
+</div>
 {% endblock %}

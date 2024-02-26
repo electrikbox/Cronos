@@ -9,7 +9,7 @@
     --white: 0, 0%, 100%;
     --quite-gray: 0, 0%, 50%;
 
-    --navbar-buttons: 2.4rem;
+    --navbar-buttons: 3.5rem;
 
     --transition-main: .175, .685, .32;
 }
@@ -17,6 +17,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.link-text {
+    padding-left: .7em;
 }
 .flexbox-left {
     display: flex;
@@ -31,10 +34,12 @@
 }
 #navbar {
     display: flex;
+    flex-direction: column;
     padding: 8px 0px 0px 7px;
-    width: 12em;
+    width: 11em;
     background-color: var(--background-secondary);
     height: 100%;
+    font-size: 1.6rem;
 }
 .navbar-items {
     list-style-type: none;
@@ -45,7 +50,8 @@
     cursor: pointer;
 }
 .navbar-item-inner {
-    padding: 1em 0;
+    padding: 1em;
+    padding-left: .5em;
     width: 100%;
     position: relative;
     color: hsl(var(--quite-gray));
@@ -65,4 +71,10 @@
 .navbar-item-inner-icon-wrapper ion-icon {
     position: absolute;
     font-size: calc(var(--navbar-buttons) - 1rem);
+}
+.ionicon-menu {
+    height: 20px;
+}
+path :hover {
+    color: var(--link-color);
 }
