@@ -8,12 +8,20 @@ CRONOS_COPY_FOLDER = "Cronos_copy_folder"
 
 
 class CronosScript:
+    """
+    Represents a cron script handler.
+
+    Attributes:
+        cron_id (int): The ID of the cron job.
+        script_path (str): The path of the script file.
+    """
 
     def __init__(self, cron_id: int) -> None:
         self.cron_id = cron_id
         self.script_path = ""
 
     def build_script(self, cmd: str) -> str:
+        """Builds a script content based on the given command."""
         os_name = platform.system()
         option = ""
         cmd_name = cmd.split(" ")[0]
@@ -31,11 +39,11 @@ class CronosScript:
             check_dest = f'if [ ! -d "$destination" ]; then\n\tmkdir -p "$destination"\nfi\n'
             option = f"{var_dest}\n{check_dest}\n"
 
-            exclude = f"-path \'{destination_path}\' -prune -o"
-            search_file = f"-iname \"{source}\""
-            exec_copy = f"-exec cp -t \"$destination\" -r {{}} +"
+            exclude = f'-path "{destination_path}" -prune -o'
+            search_file = f'-iname "{source}"'
+            exec_copy = f'-exec cp -t "$destination" -r {{}} +'
 
-            cmd = f'find {USER_PATH} {exclude} {search_file} {exec_copy}'
+            cmd = f"find {USER_PATH} {exclude} {search_file} {exec_copy}"
 
         script_shibang = "#!/bin/bash\n"
         script_protect_sudo = '\nif [ $(id -u) -eq 0 ];\n\tthen echo "sudo forbiden."\n\texit 1\nfi\n'
@@ -44,6 +52,7 @@ class CronosScript:
         return script_content
 
     def create_script(self, cmd: str) -> None:
+        """Creates a cron script file with the given command."""
         folder_path = os.path.expanduser(CRONOS_SCRIPT_PATH)
 
         if not os.path.exists(folder_path):
@@ -59,6 +68,7 @@ class CronosScript:
         self.script_path = script
 
     def remove_script(self) -> None:
+        """Removes the script file associated with the cron job."""
         folder_path = os.path.expanduser(CRONOS_SCRIPT_PATH)
         script = os.path.join(folder_path, f"cron_{self.cron_id}_script.sh")
         self.script_path = script
