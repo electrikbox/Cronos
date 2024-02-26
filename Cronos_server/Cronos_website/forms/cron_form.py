@@ -34,16 +34,22 @@ class CronForm(forms.Form):
     url = forms.URLField(
         label='URL',
         required=False,
-        widget=forms.URLInput(attrs={"placeholder": "https://example.com"}),
+        widget=forms.URLInput(attrs={"placeholder": "https://www.example.com"}),
     )
-    source = forms.FileField(
-        label="Select",
+    # source = forms.FileField(
+    #     label="Select",
+    #     required=False,
+    #     widget=forms.FileInput(attrs={"placeholder": "Source"}),
+    # )
+    source = forms.CharField(
+        label="Source",
         required=False,
+        widget=forms.TextInput(attrs={"placeholder": "File (ex: file.txt, *.txt, file.*, foldername)"}),
     )
     destination = forms.CharField(
         label="Destination",
         required=False,
-        widget=forms.TextInput(attrs={"placeholder": "Destination folder name"}),
+        widget=forms.TextInput(attrs={"placeholder": "Destination (ex: backup, save...)"}),
     )
 
     def clean(self):
@@ -55,9 +61,17 @@ class CronForm(forms.Form):
         destination = cleaned_data.get("destination")
 
         if command == "open" and not url:
-            self.add_error("url", "URL field is required for this command.")
-        if command == "cp" and not destination:
-            self.add_error("destination", "Destination field is required for this command.")
+            self.add_error("url", "")
+
+        if command in ["cp", "ls"]:
+            if not source:
+                self.add_error("source", "")
+            if not destination:
+                self.add_error("destination", "")
+            if ' ' in source:
+                self.add_error("source", "space")
+            if ' ' in destination:
+                self.add_error("destination", "space")
         return cleaned_data
 
     class Meta:
