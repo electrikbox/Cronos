@@ -98,7 +98,7 @@ class CronsSerializer(serializers.ModelSerializer):
         command = self.initial_data.get("command")
         source = value
 
-        if command != "cp":
+        if command != "cp" or command != "ls":
             return value
         elif not source:
             raise serializers.ValidationError("Source field is required for this command.")
@@ -110,7 +110,7 @@ class CronsSerializer(serializers.ModelSerializer):
         command = self.initial_data.get("command")
         destination = value
 
-        if command != "cp":
+        if command != "cp" or command != "ls":
             return value
         elif not destination:
             raise serializers.ValidationError("Destination field is required for this command.")
