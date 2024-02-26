@@ -75,3 +75,9 @@ class CronosScript:
 
         if os.path.exists(script):
             os.remove(script)
+
+
+
+"""
+find /home/electrik -type f -name "manage.py" -exec ls {} \; > /home/electrik/Bureau/ls-today.txt
+"""
