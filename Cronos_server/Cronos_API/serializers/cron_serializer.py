@@ -96,23 +96,25 @@ class CronsSerializer(serializers.ModelSerializer):
     def validate_source(self, value):
         """ Validate source field only if command is not 'cp' """
         command = self.initial_data.get("command")
-        source = value
 
-        if command != "cp" or command != "ls":
+        if command in ["cp", "ls"]:
+            if not value.strip():
+                raise serializers.ValidationError("Source field is required for this command.")
+            elif ' ' in value:
+                raise serializers.ValidationError("No space in source name.")
             return value
-        elif not source:
-            raise serializers.ValidationError("Source field is required for this command.")
 
         return value
 
     def validate_destination(self, value):
         """ Validate destination field only if command is not 'cp' """
         command = self.initial_data.get("command")
-        destination = value
+        print("command", command)
 
-        if command != "cp" or command != "ls":
-            return value
-        elif not destination:
-            raise serializers.ValidationError("Destination field is required for this command.")
+        if command in ["cp", "ls"]:
+            if not value.strip():
+                raise serializers.ValidationError("Destination is required for this command.")
+            elif ' ' in value:
+                raise serializers.ValidationError("No space in destination name.")
 
         return value
