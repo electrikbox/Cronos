@@ -1,3 +1,5 @@
+from audioop import add
+from gc import enable
 import flet as ft
 import time
 from modules import Elements, AppPages
@@ -27,13 +29,18 @@ class AppHandler:
         self.cron_script_path = ""
 
         self.cron_action_text = self.elements.cron_action_text
+        self.added_crons_msg = []
+        self.removed_crons_msg = []
+        self.paused_crons_msg = []
+        self.enabled_crons_msg = []
 
 
     # MSG in APP
     # =========================================================================
 
-    def cron_action_msg(self, message: str):
-        self.cron_action_text.value = message
+    def cron_action_msg(self, messages: list[str]):
+        combined_msg = "\n".join(messages)
+        self.cron_action_text.value = combined_msg
         self.page.update()
 
     # UTILS
@@ -116,8 +123,6 @@ class AppHandler:
     def add_remote_crons_to_local(self) -> None:
         remote_crons, local_crons = self.crons_lists()
 
-        added_crons_msg = []
-
         for r_cron in remote_crons:
             id = r_cron["id"]
             cmd = r_cron["command"]
@@ -162,11 +167,10 @@ class AppHandler:
 
             # MSG USER ON APP
             message_user = f"Cron {id} // Command {command} : added"
-            added_crons_msg.append(message_user)
+            self.added_crons_msg.append(message_user)
 
-            if added_crons_msg:
-                messages = "\n".join(added_crons_msg)
-                self.cron_action_msg(messages)
+            if self.added_crons_msg:
+                self.cron_action_msg(self.added_crons_msg)
 
             # send message for user on app
             # self.update_page()
@@ -193,7 +197,7 @@ class AppHandler:
 
             crons_to_remove.append(l_cron)
 
-        removed_crons_msg = []
+
 
         # remove crons
         for cron in crons_to_remove:
@@ -205,11 +209,10 @@ class AppHandler:
             # remove cron
             local_crons.remove(cron)
             print(f"{cron} : removed")
-            removed_crons_msg.append(f"{cron} : removed")
+            self.removed_crons_msg.append(f"{cron} : removed")
 
-        if removed_crons_msg:
-            messages = "\n".join(removed_crons_msg)
-            self.cron_action_msg(messages)
+        if self.removed_crons_msg:
+            self.cron_action_msg(self.removed_crons_msg)
 
         local_crons.write()
 
@@ -225,6 +228,8 @@ class AppHandler:
             if cron.comment.split("-")[0] == self.COMMENT
         }
 
+
+
         for r_cron in remote_crons:
             id = str(r_cron["id"])
 
@@ -236,11 +241,18 @@ class AppHandler:
                 if is_paused and is_enabled:
                     cron.enable(False)
                     print(f"{cron} : paused")
-                    self.cron_action_msg("Cron paused successfully")
+                    self.paused_crons_msg.append(f"{cron} : paused")
                 elif not is_paused and not is_enabled:
                     cron.enable(True)
                     print(f"{cron} : enabled")
-                    self.cron_action_msg("Cron enabled successfully")
+                    self.paused_crons_msg.append(f"{cron} : enabled")
+
+
+        if self.paused_crons_msg:
+            self.cron_action_msg(self.paused_crons_msg)
+
+        if self.enabled_crons_msg:
+            self.cron_action_msg(self.enabled_crons_msg)
 
         local_crons.write()
 
@@ -253,13 +265,31 @@ class AppHandler:
         self.del_local_crons()
         self.toggle_pause_local_crons()
 
+        messages = []
+
+        messages.extend(self.added_crons_msg)
+        messages.extend(self.removed_crons_msg)
+        messages.extend(self.paused_crons_msg)
+        messages.extend(self.enabled_crons_msg)
+
+        self.cron_action_msg(messages)
+
     def fetch_remote_crons(self) -> None:
         self.add_remote_crons_to_local()
         self.del_local_crons()
         self.toggle_pause_local_crons()
+
         # while True:
         #     self.add_remote_crons_to_local()
         #     self.del_local_crons()
         #     self.toggle_pause_local_crons()
         #     time.sleep(5)
 
+        messages = []
+
+        messages.extend(self.added_crons_msg)
+        messages.extend(self.removed_crons_msg)
+        messages.extend(self.paused_crons_msg)
+        messages.extend(self.enabled_crons_msg)
+
+        self.cron_action_msg(messages)
