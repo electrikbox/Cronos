@@ -4,6 +4,7 @@
 .download-block {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	gap: 50px;
 	margin-top: 70px;
 	max-width: 800px;
@@ -37,6 +38,7 @@
 }
 .dl-link {
 	font-family: var(--main-font-family);
+	font-size: 1.4rem;
 	text-decoration: none;
 	color: var(--main-color);
 	margin-top: 10px;
