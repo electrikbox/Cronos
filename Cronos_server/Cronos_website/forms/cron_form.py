@@ -62,5 +62,14 @@ class CronForm(forms.Form):
 
     class Meta:
         model = Crons
-        fields = ['time', 'day_of_month', 'months', 'day_of_week', 'command', 'url', 'source', 'destination']
+        fields = [
+            'time',
+            'day_of_month',
+            'months',
+            'day_of_week',
+            'command',
+            'url',
+            'source',
+            'destination'
+        ]
 
