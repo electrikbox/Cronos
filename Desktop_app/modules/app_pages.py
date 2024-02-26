@@ -46,6 +46,10 @@ class AppPages(ft.UserControl):
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
                 ft.Row(
+                    [self.elements.cron_action_text],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                ),
+                ft.Row(
                     controls=[ft.Text(value="Connected", color="green")],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
