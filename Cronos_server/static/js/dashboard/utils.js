@@ -6,7 +6,7 @@ $(document).ready(function () {
 
   function updateCopyField() {
     const command = $('#id_command').val();
-    if (command === 'cp') {
+    if (command === 'cp' || command === 'ls') {
       $('.url_field').css('display', 'none');
       $('.copy_field').css('display', 'block');
     } else if (command === 'open'){
