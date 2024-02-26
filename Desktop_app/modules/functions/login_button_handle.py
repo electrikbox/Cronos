@@ -1,7 +1,5 @@
-from audioop import add
-from gc import enable
 import flet as ft
-import time
+import os
 from modules import Elements, AppPages
 from modules.functions.api_request import CronScraper
 from modules.functions.check_command import CheckCommand
@@ -197,8 +195,6 @@ class AppHandler:
 
             crons_to_remove.append(l_cron)
 
-
-
         # remove crons
         for cron in crons_to_remove:
             # remove script
@@ -209,7 +205,10 @@ class AppHandler:
             # remove cron
             local_crons.remove(cron)
             print(f"{cron} : removed")
-            self.removed_crons_msg.append(f"{cron} : removed")
+
+            # MSG USER ON APP
+            removed_msg = f"Cron {cron.comment.split('-')[1]} // Command {os.path.basename(cron.command)} : removed"
+            self.removed_crons_msg.append(removed_msg)
 
         if self.removed_crons_msg:
             self.cron_action_msg(self.removed_crons_msg)
@@ -228,8 +227,6 @@ class AppHandler:
             if cron.comment.split("-")[0] == self.COMMENT
         }
 
-
-
         for r_cron in remote_crons:
             id = str(r_cron["id"])
 
@@ -241,11 +238,14 @@ class AppHandler:
                 if is_paused and is_enabled:
                     cron.enable(False)
                     print(f"{cron} : paused")
-                    self.paused_crons_msg.append(f"{cron} : paused")
+                    # MSG USER ON APP
+                    message = f"Cron {cron.comment.split('-')[1]} : paused"
+                    self.paused_crons_msg.append(message)
                 elif not is_paused and not is_enabled:
                     cron.enable(True)
                     print(f"{cron} : enabled")
-                    self.paused_crons_msg.append(f"{cron} : enabled")
+                    message = f"Cron {cron.comment.split('-')[1]} : enabled"
+                    self.paused_crons_msg.append(message)
 
 
         if self.paused_crons_msg:
