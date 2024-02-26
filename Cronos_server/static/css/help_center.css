@@ -13,7 +13,6 @@
 	border-radius: 5px;
 	margin-bottom: 12px;
 	font-size: 1.4rem;
-
 }
 .search-container input[type=text]::placeholder {
 	color: rgba(114, 114, 114, 0.5);
@@ -24,6 +23,7 @@
 	padding: 20px;
 	margin-left: 20px;
 	font-family: var(--main-font-family);
+	font-size: 1.7rem;
 }
 .answer h4 {
 	font-size: 1.8rem;
@@ -31,12 +31,16 @@
 	font-weight: 500;
 	font-family: var(--main-font-family);
 }
+.answer h5 {
+	font-size: 1.8rem;
+}
 .answer ul {
 	padding-left: 20px;
 }
 .answer li {
 	list-style: none;
 	margin-top: 5px;
+	font-size: 1.7rem;
 }
 .answer a {
 	text-decoration: none;

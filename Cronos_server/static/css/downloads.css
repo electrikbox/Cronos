@@ -37,6 +37,7 @@
 }
 .dl-link {
 	font-family: var(--main-font-family);
+	font-size: 1.4rem;
 	text-decoration: none;
 	color: var(--main-color);
 	margin-top: 10px;
