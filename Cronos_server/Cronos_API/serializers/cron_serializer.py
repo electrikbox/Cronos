@@ -92,3 +92,27 @@ class CronsSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("URL field is required for this command.")
 
         return value
+
+    def validate_source(self, value):
+        """ Validate source field only if command is not 'cp' """
+        command = self.initial_data.get("command")
+        source = value
+
+        if command != "cp":
+            return value
+        elif not source:
+            raise serializers.ValidationError("Source field is required for this command.")
+
+        return value
+
+    def validate_destination(self, value):
+        """ Validate destination field only if command is not 'cp' """
+        command = self.initial_data.get("command")
+        destination = value
+
+        if command != "cp":
+            return value
+        elif not destination:
+            raise serializers.ValidationError("Destination field is required for this command.")
+
+        return value

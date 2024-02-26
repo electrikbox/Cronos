@@ -34,19 +34,42 @@ class CronForm(forms.Form):
     url = forms.URLField(
         label='URL',
         required=False,
-        widget=forms.URLInput(attrs={'placeholder': 'https://example.com'}),
+        widget=forms.URLInput(attrs={"placeholder": "https://example.com"}),
+    )
+    source = forms.FileField(
+        label="Select",
+        required=False,
+    )
+    destination = forms.CharField(
+        label="Destination",
+        required=False,
+        widget=forms.TextInput(attrs={"placeholder": "Destination folder name"}),
     )
 
     def clean(self):
+
         cleaned_data = super().clean()
         command = cleaned_data.get("command")
         url = cleaned_data.get("url")
+        source = cleaned_data.get("source")
+        destination = cleaned_data.get("destination")
 
         if command == "open" and not url:
             self.add_error("url", "URL field is required for this command.")
+        if command == "cp" and not destination:
+            self.add_error("destination", "Destination field is required for this command.")
         return cleaned_data
 
     class Meta:
         model = Crons
-        fields = ['time', 'day_of_month', 'months', 'day_of_week', 'command', 'url']
+        fields = [
+            'time',
+            'day_of_month',
+            'months',
+            'day_of_week',
+            'command',
+            'url',
+            'source',
+            'destination'
+        ]
 

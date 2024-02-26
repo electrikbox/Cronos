@@ -56,7 +56,7 @@ DAY_OF_WEEK_ERROR_MSG = "You set '{day_of_week}' to 'day_of_week', then 'months'
 
 COMMANDS = {
     "open": "open url",
-    "pwd": "pwd",
+    "cp": "copy files/folders",
     "cal": "cal",
 }
 COMMANDS_ALLOWED_MSG = f"Command allowed : {' - '.join(COMMANDS.keys())}"

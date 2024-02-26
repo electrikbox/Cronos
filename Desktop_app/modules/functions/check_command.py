@@ -4,14 +4,14 @@ exist and can be executed on the computer"""
 import shutil
 
 class CheckCommand:
-    def __init__(self, command):
+    def __init__(self, command) -> None:
         self.command = command
 
     # Linux - Mac OS
     # =============================================================================
 
     @staticmethod
-    def is_command_available_unix(command):
+    def is_command_available_unix(command) -> bool:
         return shutil.which(command) is not None
 
 

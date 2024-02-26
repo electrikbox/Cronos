@@ -1,5 +1,3 @@
-""" Scrapper to get user's crons list """
-
 import sys
 import requests
 
@@ -17,7 +15,7 @@ class CronScraper:
     # Function to log in and get the token
     # =========================================================================
 
-    def user_auth(self):
+    def user_auth(self) -> str | None:
         login_headers = {"Content-Type": "application/json"}
         login_data = {"username": self.username, "password": self.password}
 
@@ -85,7 +83,7 @@ class CronScraper:
     # Delete unvalideted cron
     # =========================================================================
 
-    def unvalideted_cron_delete(self, cron_id):
+    def unvalideted_cron_delete(self, cron_id) -> str | None:
         self.user_auth()
 
         crons_headers = {
