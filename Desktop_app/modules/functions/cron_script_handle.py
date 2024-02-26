@@ -3,8 +3,14 @@ import stat
 import platform
 
 USER_PATH = os.path.expanduser("~")
-CRONOS_SCRIPT_PATH = os.path.expanduser("~/cronos_scripts")
-CRONOS_COPY_FOLDER = "Cronos_copy_folder"
+CRONOS_PATH = os.path.expanduser("~/Cronos")
+
+CRONOS_SCRIPT_PATH = f"{CRONOS_PATH}/.cronos_scripts"
+CRONOS_COPY_FOLDER = f"{CRONOS_PATH}/Cronos_copy"
+CRONOS_LIST_FOLDER = f"{CRONOS_PATH}/Cronos_list"
+
+SCRIPT_SHIBANG = "#!/bin/bash\n"
+SCRIPT_PREVENT_SUDO = '\nif [ $(id -u) -eq 0 ];\n\tthen echo "sudo forbiden."\n\texit 1\nfi\n'
 
 
 class CronosScript:
@@ -20,36 +26,106 @@ class CronosScript:
         self.cron_id = cron_id
         self.script_path = ""
 
+
+    # utils ls cp
+    # =========================================================================
+
+    def utils_ls_cp(self, cmd, folder: str) -> dict[str, str]:
+        """Dictionary with the option, exclude, search_file and destination_path."""
+        source = cmd.split(" ")[1]
+        destination = cmd.split(" ")[2]
+
+        destination_path = os.path.join(folder, destination)
+        var_dest = f'destination="{destination_path}"'
+
+        check_dest = f'if [ ! -d "$destination" ]; then\n\tmkdir -p "$destination"\nfi\n'
+        option = f"{var_dest}\n{check_dest}\n"
+
+        exclude = f'-path "{CRONOS_PATH}" -prune -o'
+        search_file = f'-iname "{source}"'
+
+        return {
+            "option": option,
+            "exclude": exclude,
+            "search_file": search_file,
+            "destination_path": destination_path
+        }
+
+
+    # open command
+    # =========================================================================
+
+    def open_command(self, cmd: str)  -> tuple[str, str]:
+        """returns the option and the command for the open command."""
+        os_name = platform.system()
+        if os_name == "Linux":
+            option = "export DISPLAY=:0\n"
+
+        return (option, cmd)
+
+
+    # copy command
+    # =========================================================================
+
+    def copy_command(self, cmd: str) -> tuple[str, str]:
+        """returns the option and the command for the copy command."""
+        utils = self.utils_ls_cp(cmd, CRONOS_COPY_FOLDER)
+        option = utils["option"]
+        exclude = utils["exclude"]
+        search_file = utils["search_file"]
+
+        exec_copy = f'-exec cp -t "$destination" -r {{}} +'
+
+        cmd = f"find {USER_PATH} {exclude} {search_file} {exec_copy}"
+
+        return (option, cmd)
+
+
+    # list command
+    # =========================================================================
+
+    def list_command(self, cmd: str) -> str:
+        """returns the option and the command for the copy command."""
+        file = cmd.split(" ")[1].split(".")[0]
+
+        utils = self.utils_ls_cp(cmd, CRONOS_LIST_FOLDER)
+        option = utils["option"]
+        option += 'current_date=$(date +"%Y-%m-%d")\n'
+        exclude = utils["exclude"]
+        search_file = utils["search_file"]
+        destination_path = utils["destination_path"]
+
+        exec_copy = f'-exec ls {{}} \; > {destination_path}/list-{file}-$current_date.txt'
+
+        cmd = f"find {USER_PATH} {exclude} {search_file} {exec_copy}"
+
+        return (option, cmd)
+
+
+    # build script
+    # =========================================================================
+
     def build_script(self, cmd: str) -> str:
         """Builds a script content based on the given command."""
-        os_name = platform.system()
         option = ""
         cmd_name = cmd.split(" ")[0]
 
-        if os_name == "Linux" and cmd_name == "open":
-            option = "export DISPLAY=:0\n"
+        if cmd_name == "open":
+            option, cmd = self.open_command(cmd)
 
         elif cmd_name == "cp":
-            source = cmd.split(" ")[1]
-            destination = cmd.split(" ")[2]
+            option, cmd = self.copy_command(cmd)
 
-            destination_path = os.path.join(USER_PATH, CRONOS_COPY_FOLDER, destination)
-            var_dest = f'destination="{destination_path}"'
+        elif cmd_name == "ls":
+            option, cmd = self.list_command(cmd)
 
-            check_dest = f'if [ ! -d "$destination" ]; then\n\tmkdir -p "$destination"\nfi\n'
-            option = f"{var_dest}\n{check_dest}\n"
-
-            exclude = f'-path "{destination_path}" -prune -o'
-            search_file = f'-iname "{source}"'
-            exec_copy = f'-exec cp -t "$destination" -r {{}} +'
-
-            cmd = f"find {USER_PATH} {exclude} {search_file} {exec_copy}"
-
-        script_shibang = "#!/bin/bash\n"
-        script_protect_sudo = '\nif [ $(id -u) -eq 0 ];\n\tthen echo "sudo forbiden."\n\texit 1\nfi\n'
-        script_content = f"{script_shibang}{script_protect_sudo}{option}{cmd}"
+        script_content = f"{SCRIPT_SHIBANG}{SCRIPT_PREVENT_SUDO}{option}{cmd}"
 
         return script_content
+
+
+    # create script
+    # =========================================================================
 
     def create_script(self, cmd: str) -> None:
         """Creates a cron script file with the given command."""
@@ -67,6 +143,10 @@ class CronosScript:
         os.chmod(script, stat.S_IRWXU | stat.S_IRGRP | stat.S_IROTH)
         self.script_path = script
 
+
+    # remove script
+    # =========================================================================
+
     def remove_script(self) -> None:
         """Removes the script file associated with the cron job."""
         folder_path = os.path.expanduser(CRONOS_SCRIPT_PATH)
@@ -75,9 +155,3 @@ class CronosScript:
 
         if os.path.exists(script):
             os.remove(script)
-
-
-
-"""
-find /home/electrik -type f -name "manage.py" -exec ls {} \; > /home/electrik/Bureau/ls-today.txt
-"""
