@@ -1,5 +1,6 @@
 from Cronos_website.views import *
 from django.core.paginator import Paginator
+from django.core.handlers.wsgi import WSGIRequest
 
 
 URL_ERROR_MSG = "URL field is required for this command."
@@ -13,7 +14,7 @@ COMMAND_COOKIE_NAME = "previous_command"
 
 
 @login_required
-def dashboard(request):
+def dashboard(request: WSGIRequest) -> HttpResponseRedirect | HttpResponse:
     """Render the dashboard page"""
     message = request.GET.get("message", None)
     if message:
@@ -31,14 +32,14 @@ def dashboard(request):
     if request.method == "POST":
         return handle_post_request(request, HEADER)
     else:
-        return render_dashboard_page(request, HEADER, previous_command)
+        return render_dashboard_page(request, HEADER)
 
 
 # Handle the POST request to create a cron job
 # ==============================================================================
 
 
-def handle_post_request(request, header):
+def handle_post_request(request: WSGIRequest, header: dict) -> HttpResponseRedirect:
     """Handle the POST request to create a cron job"""
     cron_create_form = CronForm(request.POST, request.FILES)
 
@@ -58,7 +59,7 @@ def handle_post_request(request, header):
 # ==============================================================================
 
 
-def create_cron_job(request, cron_create_form, header):
+def create_cron_job(request: WSGIRequest, cron_create_form: CronForm, header: dict) -> HttpResponseRedirect:
     """Create a new cron job"""
     command = get_command_from_form_data(cron_create_form.cleaned_data, request)
     data = get_cron_job_data(
@@ -77,7 +78,7 @@ def create_cron_job(request, cron_create_form, header):
 # ==============================================================================
 
 
-def get_command_from_form_data(form_data, request):
+def get_command_from_form_data(form_data: dict, request: WSGIRequest) -> str:
     """Construct the command based on form data"""
     command = form_data["command"]
     if command == "cp":
@@ -93,7 +94,7 @@ def get_command_from_form_data(form_data, request):
 # ==============================================================================
 
 
-def get_cron_job_data(form_data, command, user_id):
+def get_cron_job_data(form_data: dict, command: str, user_id: int) -> dict:
     """Construct the data for creating a cron job"""
     return {
         "minutes": form_data["time"].minute,
@@ -112,7 +113,7 @@ def get_cron_job_data(form_data, command, user_id):
 # ==============================================================================
 
 
-def handle_invalid_form(request, cron_create_form):
+def handle_invalid_form(request: WSGIRequest, cron_create_form: CronForm) -> HttpResponseRedirect:
     """Handle an invalid form submission"""
     errors = cron_create_form.errors
     if "url" in errors:
@@ -128,7 +129,6 @@ def handle_invalid_form(request, cron_create_form):
     previous_month = request.POST.get("months", "")
     previous_day_of_week = request.POST.get("day_of_week", "")
 
-    # set cookies and redirect
     response = redirect("/dashboard")
     response.set_cookie(COMMAND_COOKIE_NAME, previous_command)
     response.set_cookie("previous_day", previous_day)
@@ -141,17 +141,28 @@ def handle_invalid_form(request, cron_create_form):
 # ==============================================================================
 
 
-def render_dashboard_page(request, header, previous_command):
+def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
     """Render the dashboard page"""
-    # Use previous command as initial value for the form
-    cron_create_form = CronForm(
-        initial={
-            "command": previous_command,
-            "day_of_month": request.COOKIES.get("previous_day", ""),
-            "months": request.COOKIES.get("previous_month", ""),
-            "day_of_week": request.COOKIES.get("previous_day_of_week", ""),
+
+    previous_day = request.COOKIES.get("previous_day", "")
+    previous_month = request.COOKIES.get("previous_month", "")
+    previous_day_of_week = request.COOKIES.get("previous_day_of_week", "")
+
+    if not previous_day or not previous_month or not previous_day_of_week:
+        set_initial = {
+            "day_of_month": '*',
+            "months": '*',
+            "day_of_week": '*',
         }
-    )
+    else:
+        set_initial = {
+            "day_of_month": previous_day,
+            "months": previous_month,
+            "day_of_week": previous_day_of_week,
+        }
+
+    # Use previous command as initial value for the form
+    cron_create_form = CronForm(initial=set_initial)
     crons = requests.get(CRON_LIST_API_URL, headers=header).json()
     paginator = Paginator(crons, 6)
     page_number = request.GET.get("page")

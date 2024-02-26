@@ -3,7 +3,7 @@ from Cronos_API.views import *
 @api_view(["PUT", "POST"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
-def update_cron(request, cron_id):
+def update_cron(request: WSGIRequest, cron_id) -> Response:
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
     cron_serializer = CronsSerializer(
         cron_instance, data=request.data, partial=True
@@ -23,7 +23,7 @@ def update_cron(request, cron_id):
 @api_view(["PUT", "POST"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
-def pause_multiple_elements(request):
+def pause_multiple_elements(request: WSGIRequest) -> Response:
     data = request.data.get("ids", [])
     for id in data:
         cron_instance = get_object_or_404(models.Crons, id=id)
@@ -47,7 +47,7 @@ def pause_multiple_elements(request):
     )
 
 
-def create_log(cron_id, action, user_id):
+def create_log(cron_id, action, user_id) -> None:
     log_data = {
         "log": f"({cron_id}) {action}",
         "create_date": timezone.now(),

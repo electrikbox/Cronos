@@ -1,12 +1,9 @@
 from Cronos_API.views import *
-from asgiref.sync import sync_to_async
-# from adrf.decorators import api_view
-import asyncio
 
 @api_view(["DELETE", "POST"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
-def delete_cron(request, cron_id) -> Response:
+def delete_cron(request: WSGIRequest, cron_id) -> Response:
     """Delete a cron by its id"""
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
 
@@ -44,7 +41,7 @@ def delete_cron(request, cron_id) -> Response:
 @api_view(["DELETE", "POST"])
 @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
-def delete_multiple_elements(request):
+def delete_multiple_elements(request: WSGIRequest) -> Response:
     if request.method == "DELETE" or request.method == "POST":
         data = request.data
         ids_to_delete = data.get("ids", [])
