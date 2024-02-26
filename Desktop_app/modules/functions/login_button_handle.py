@@ -26,6 +26,16 @@ class AppHandler:
 
         self.cron_script_path = ""
 
+        self.cron_action_text = self.elements.cron_action_text
+
+
+    # MSG in APP
+    # =========================================================================
+
+    def cron_action_msg(self, message: str):
+        self.cron_action_text.value = message
+        self.page.update()
+
     # UTILS
     # =========================================================================
 
@@ -106,6 +116,8 @@ class AppHandler:
     def add_remote_crons_to_local(self) -> None:
         remote_crons, local_crons = self.crons_lists()
 
+        added_crons_msg = []
+
         for r_cron in remote_crons:
             id = r_cron["id"]
             cmd = r_cron["command"]
@@ -125,7 +137,8 @@ class AppHandler:
             checked_cron = CronScraper(self.username, self.password)
 
             if not cmd_validated:
-                deleted_cron = checked_cron.unvalideted_cron_delete(id)
+                self.cron_action_msg(f"Command {command} not available")
+                deleted_cron = checked_cron.unvalidated_cron_delete(id)
                 # send message for user on website
                 continue
 
@@ -146,6 +159,14 @@ class AppHandler:
             new_cron.setall(r_cron_str.split(" ")[:5])
             local_crons.write()
             print(f"{new_cron} : added")
+
+            # MSG USER ON APP
+            message_user = f"Cron {id} // Command {command} : added"
+            added_crons_msg.append(message_user)
+
+            if added_crons_msg:
+                messages = "\n".join(added_crons_msg)
+                self.cron_action_msg(messages)
 
             # send message for user on app
             # self.update_page()
@@ -172,6 +193,8 @@ class AppHandler:
 
             crons_to_remove.append(l_cron)
 
+        removed_crons_msg = []
+
         # remove crons
         for cron in crons_to_remove:
             # remove script
@@ -182,6 +205,11 @@ class AppHandler:
             # remove cron
             local_crons.remove(cron)
             print(f"{cron} : removed")
+            removed_crons_msg.append(f"{cron} : removed")
+
+        if removed_crons_msg:
+            messages = "\n".join(removed_crons_msg)
+            self.cron_action_msg(messages)
 
         local_crons.write()
 
@@ -208,9 +236,11 @@ class AppHandler:
                 if is_paused and is_enabled:
                     cron.enable(False)
                     print(f"{cron} : paused")
+                    self.cron_action_msg("Cron paused successfully")
                 elif not is_paused and not is_enabled:
                     cron.enable(True)
                     print(f"{cron} : enabled")
+                    self.cron_action_msg("Cron enabled successfully")
 
         local_crons.write()
 
@@ -224,12 +254,12 @@ class AppHandler:
         self.toggle_pause_local_crons()
 
     def fetch_remote_crons(self) -> None:
-        # self.add_remote_crons_to_local()
-        # self.del_local_crons()
-        # self.toggle_pause_local_crons()
-        while True:
-            self.add_remote_crons_to_local()
-            self.del_local_crons()
-            self.toggle_pause_local_crons()
-            time.sleep(5)
+        self.add_remote_crons_to_local()
+        self.del_local_crons()
+        self.toggle_pause_local_crons()
+        # while True:
+        #     self.add_remote_crons_to_local()
+        #     self.del_local_crons()
+        #     self.toggle_pause_local_crons()
+        #     time.sleep(5)
 
