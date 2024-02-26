@@ -5,7 +5,9 @@ from django.core.handlers.wsgi import WSGIRequest
 
 URL_ERROR_MSG = "URL field is required for this command."
 SOURCE_ERROR_MSG = "Source field is required for this command."
+SOURCE_SPACE_ERROR_MSG = "Source field can't have spaces."
 DEST_ERROR_MSG = "Destination field is required for this command."
+DEST_SPACE_ERROR_MSG = "Destination field can't have spaces."
 COMMAND_COOKIE_NAME = "previous_command"
 
 
@@ -25,9 +27,6 @@ def dashboard(request: WSGIRequest) -> HttpResponseRedirect | HttpResponse:
         "Content-Type": "application/json",
         "Authorization": f"Token {TOKEN}",
     }
-
-    # Retrieve previous command from cookies
-    previous_command = request.COOKIES.get(COMMAND_COOKIE_NAME, "")
 
     if request.method == "POST":
         return handle_post_request(request, HEADER)
@@ -82,7 +81,8 @@ def get_command_from_form_data(form_data: dict, request: WSGIRequest) -> str:
     """Construct the command based on form data"""
     command = form_data["command"]
     if command == "cp" or command == "ls":
-        source = request.FILES["name"]
+        # source = request.FILES["name"]
+        source = form_data["source"]
         destination = form_data["destination"]
         command = f"{command} {source} {destination}"
     elif command == "open":
@@ -115,13 +115,20 @@ def get_cron_job_data(form_data: dict, command: str, user_id: int) -> dict:
 
 def handle_invalid_form(request: WSGIRequest, cron_create_form: CronForm) -> HttpResponseRedirect:
     """Handle an invalid form submission"""
+
     errors = cron_create_form.errors
     if "url" in errors:
         messages.error(request, URL_ERROR_MSG)
+    elif "source" in errors:
+        if "space" in errors["source"]:
+            messages.error(request, SOURCE_SPACE_ERROR_MSG)
+        else:
+            messages.error(request, SOURCE_ERROR_MSG)
     elif "destination" in errors:
-        messages.error(request, DEST_ERROR_MSG)
-    elif len(request.FILES) == 0:
-        messages.error(request, SOURCE_ERROR_MSG)
+        if "space" in errors["destination"]:
+            messages.error(request, DEST_SPACE_ERROR_MSG)
+        else:
+            messages.error(request, DEST_ERROR_MSG)
 
     # Store previous command in cookies
     previous_command = request.POST.get("command", "")
