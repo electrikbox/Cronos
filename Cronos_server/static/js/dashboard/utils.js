@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  updateCopyField();
 
   $('select option[value="separator"]').prop('disabled', true);
   // $('.copy_field').css('display', 'none');
@@ -11,12 +12,13 @@ $(document).ready(function () {
     } else if (command === 'open'){
       $('.url_field').css('display', 'block');
       $('.copy_field').css('display', 'none');
+    } else {
+      $('.url_field').css('display', 'none');
+      $('.copy_field').css('display', 'none');
     }
   }
 
   $('#id_command').change(function () {
     updateCopyField();
   });
-
-  updateCopyField();
 });
