@@ -81,11 +81,13 @@
 	height: 30px;
 	vertical-align: middle;
 }
-.pause-cron:hover {
-	color: rgb(21, 82, 122);
-}
+.delete-cron > * :hover,
 .delete-cron:hover {
 	color: rgb(136, 15, 15);
+}
+.pause-cron > * :hover,
+.pause-cron:hover {
+	color: rgb(21, 82, 122);
 }
 .pause-cron:hover,
 .delete-cron:hover {
