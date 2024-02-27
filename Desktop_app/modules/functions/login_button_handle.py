@@ -33,6 +33,8 @@ class AppHandler:
     # =========================================================================
 
     def cron_action_msg(self, messages: list[str]):
+        """ Update the cron action text in the app """
+
         combined_msg = "\n".join(messages)
         self.cron_action_text.value = combined_msg
         self.page.update()
@@ -41,6 +43,7 @@ class AppHandler:
     # =========================================================================
 
     def remote_cron_to_str(self, cron: dict) -> str:
+        """ Convert remote cron to string """
         cmd = cron["command"]
         schedule = " ".join(
             [
@@ -69,6 +72,7 @@ class AppHandler:
         return local_cron_str
 
     def crons_lists(self) -> tuple[list[dict], CronTab]:
+        """ Get remote and local crons """
         remote_crons = CronScraper(
             self.username,
             self.password
@@ -77,6 +81,7 @@ class AppHandler:
         return remote_crons, local_crons
 
     def update_page(self) -> None:
+        """ Update the page """
         self.page.clean()
         self.page.add(self.app_pages.logout_page)
         self.page.update()
@@ -85,6 +90,7 @@ class AppHandler:
     # =========================================================================
 
     def authenticate(self) -> None:
+        """ Authenticate user """
         self.username = self.elements.username_field.value
         self.password = self.elements.password_field.value
 
@@ -115,6 +121,7 @@ class AppHandler:
     # =========================================================================
 
     def add_remote_crons_to_local(self) -> None:
+        """ Add remote crons to local crontab """
         remote_crons, local_crons = self.crons_lists()
 
         added_crons_msg = []
@@ -174,6 +181,7 @@ class AppHandler:
     # =========================================================================
 
     def del_local_crons(self) -> None:
+        """ Delete local crons that are not in remote crontab """
         remote_crons, local_crons = self.crons_lists()
         crons_to_remove = []
 
@@ -219,6 +227,7 @@ class AppHandler:
     # =========================================================================
 
     def toggle_pause_local_crons(self) -> None:
+        """ Toggle pause/enable on local crons """
         remote_crons, local_crons = self.crons_lists()
 
         local_crons_dict = {
@@ -261,6 +270,7 @@ class AppHandler:
     # =========================================================================
 
     def login(self) -> None:
+        """ Login and fetch remote crons """
         self.authenticate()
         self.add_remote_crons_to_local()
         self.del_local_crons()
@@ -276,7 +286,7 @@ class AppHandler:
 
 
     def fetch_remote_crons(self) -> None:
-
+        """ Fetch remote crons and update local crontab """
         initial_msg_count = len(self.all_msg_in_app)
 
         self.add_remote_crons_to_local()
@@ -294,8 +304,6 @@ class AppHandler:
         if final_message_count == initial_msg_count:
             self.all_msg_in_app.append("Nothing to fetch")
 
-        # messages_user = self.all_msg_in_app
-
         self.cron_action_msg(self.all_msg_in_app)
 
 
@@ -303,5 +311,6 @@ class AppHandler:
     # =========================================================================
 
     def clear_msg(self):
+        """ Clear all messages in app """
         self.all_msg_in_app = []
         self.cron_action_msg([])
