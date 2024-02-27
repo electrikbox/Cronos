@@ -77,6 +77,14 @@ class Elements(ft.UserControl):
             color=ft.colors.TEAL_400,
         )
 
+        # Clear button
+        # =====================================================================
+        self.clear_button = ElevatedButton(
+            text="Clear logs",
+            width=200,
+        )
+
+
         # Logout button
         # =====================================================================
 

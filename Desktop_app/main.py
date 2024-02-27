@@ -38,6 +38,7 @@ def main(page: ft.Page) -> None:
     app_logic = AppHandler(elements, page, app_pages)
 
     elements.login_button.on_click = lambda e: app_logic.login()
+    elements.clear_button.on_click = lambda e: app_logic.clear_msg()
     elements.fetch_button.on_click = lambda e: app_logic.fetch_remote_crons()
     elements.logout_button.on_click = lambda e: logout(elements, page, app_pages)
 

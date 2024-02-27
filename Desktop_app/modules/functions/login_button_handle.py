@@ -284,3 +284,7 @@ class AppHandler:
         messages_user = self.all_msg_in_app
 
         self.cron_action_msg(messages_user)
+
+    def clear_msg(self):
+        self.all_msg_in_app = []
+        self.cron_action_msg([])
