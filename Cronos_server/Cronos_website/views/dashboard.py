@@ -151,18 +151,24 @@ def handle_invalid_form(request: WSGIRequest, cron_create_form: CronForm) -> Htt
 def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
     """Render the dashboard page"""
 
+    previous_command = request.COOKIES.get(COMMAND_COOKIE_NAME, "")
     previous_day = request.COOKIES.get("previous_day", "")
     previous_month = request.COOKIES.get("previous_month", "")
     previous_day_of_week = request.COOKIES.get("previous_day_of_week", "")
 
-    if not previous_day or not previous_month or not previous_day_of_week:
+    if (not previous_command or
+        not previous_day or
+        not previous_month or
+        not previous_day_of_week):
         set_initial = {
+            "command": "open_url",
             "day_of_month": '*',
             "months": '*',
             "day_of_week": '*',
         }
     else:
         set_initial = {
+            "command": previous_command,
             "day_of_month": previous_day,
             "months": previous_month,
             "day_of_week": previous_day_of_week,
