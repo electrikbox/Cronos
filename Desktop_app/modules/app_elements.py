@@ -62,6 +62,7 @@ class Elements(ft.UserControl):
 
         self.cron_action_text = ft.Text(
             value="",
+            text_align="center",
             color=ft.colors.DEEP_PURPLE_300,
         )
 
