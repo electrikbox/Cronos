@@ -5,7 +5,9 @@ from django.core.handlers.wsgi import WSGIRequest
 
 URL_ERROR_MSG = "URL field is required for this command."
 SOURCE_ERROR_MSG = "Source field is required for this command."
+SOURCE_SPACE_ERROR_MSG = "Source field can't have spaces."
 DEST_ERROR_MSG = "Destination field is required for this command."
+DEST_SPACE_ERROR_MSG = "Destination field can't have spaces."
 COMMAND_COOKIE_NAME = "previous_command"
 
 
@@ -26,9 +28,6 @@ def dashboard(request: WSGIRequest) -> HttpResponseRedirect | HttpResponse:
         "Authorization": f"Token {TOKEN}",
     }
 
-    # Retrieve previous command from cookies
-    previous_command = request.COOKIES.get(COMMAND_COOKIE_NAME, "")
-
     if request.method == "POST":
         return handle_post_request(request, HEADER)
     else:
@@ -45,7 +44,8 @@ def handle_post_request(request: WSGIRequest, header: dict) -> HttpResponseRedir
 
     if cron_create_form.is_valid():
         command = get_command_from_form_data(
-            cron_create_form.cleaned_data, request
+            cron_create_form.cleaned_data,
+            request
         )
         # Store the command in cookies
         response = create_cron_job(request, cron_create_form, header)
@@ -61,9 +61,14 @@ def handle_post_request(request: WSGIRequest, header: dict) -> HttpResponseRedir
 
 def create_cron_job(request: WSGIRequest, cron_create_form: CronForm, header: dict) -> HttpResponseRedirect:
     """Create a new cron job"""
-    command = get_command_from_form_data(cron_create_form.cleaned_data, request)
+    command = get_command_from_form_data(
+        cron_create_form.cleaned_data,
+        request
+    )
     data = get_cron_job_data(
-        cron_create_form.cleaned_data, command, request.user.id
+        cron_create_form.cleaned_data,
+        command,
+        request.user.id
     )
 
     response = requests.post(CRON_CREATE_API_URL, headers=header, json=data)
@@ -81,12 +86,16 @@ def create_cron_job(request: WSGIRequest, cron_create_form: CronForm, header: di
 def get_command_from_form_data(form_data: dict, request: WSGIRequest) -> str:
     """Construct the command based on form data"""
     command = form_data["command"]
-    if command == "cp":
-        source = request.FILES["name"]
+
+    if command == "cp" or command == "ls":
+        # source = request.FILES["name"]
+        source = form_data["source"]
         destination = form_data["destination"]
         command = f"{command} {source} {destination}"
+
     elif command == "open":
         command = f"{command} {form_data['url']}"
+
     return command
 
 
@@ -115,13 +124,20 @@ def get_cron_job_data(form_data: dict, command: str, user_id: int) -> dict:
 
 def handle_invalid_form(request: WSGIRequest, cron_create_form: CronForm) -> HttpResponseRedirect:
     """Handle an invalid form submission"""
+
     errors = cron_create_form.errors
     if "url" in errors:
         messages.error(request, URL_ERROR_MSG)
+    elif "source" in errors:
+        if "space" in errors["source"]:
+            messages.error(request, SOURCE_SPACE_ERROR_MSG)
+        else:
+            messages.error(request, SOURCE_ERROR_MSG)
     elif "destination" in errors:
-        messages.error(request, DEST_ERROR_MSG)
-    elif len(request.FILES) == 0:
-        messages.error(request, SOURCE_ERROR_MSG)
+        if "space" in errors["destination"]:
+            messages.error(request, DEST_SPACE_ERROR_MSG)
+        else:
+            messages.error(request, DEST_ERROR_MSG)
 
     # Store previous command in cookies
     previous_command = request.POST.get("command", "")
@@ -144,18 +160,24 @@ def handle_invalid_form(request: WSGIRequest, cron_create_form: CronForm) -> Htt
 def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
     """Render the dashboard page"""
 
+    previous_command = request.COOKIES.get(COMMAND_COOKIE_NAME, "")
     previous_day = request.COOKIES.get("previous_day", "")
     previous_month = request.COOKIES.get("previous_month", "")
     previous_day_of_week = request.COOKIES.get("previous_day_of_week", "")
 
-    if not previous_day or not previous_month or not previous_day_of_week:
+    if (not previous_command or
+        not previous_day or
+        not previous_month or
+        not previous_day_of_week):
         set_initial = {
+            "command": "open_url",
             "day_of_month": '*',
             "months": '*',
             "day_of_week": '*',
         }
     else:
         set_initial = {
+            "command": previous_command,
             "day_of_month": previous_day,
             "months": previous_month,
             "day_of_week": previous_day_of_week,
@@ -168,7 +190,9 @@ def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     logs = (
-        Logs.objects.filter(user=request.user).order_by("create_date").reverse()
+        Logs.objects
+        .filter(user=request.user)
+        .order_by("create_date").reverse()
     )
     user_pic = UserPic(request.user)
     image_url = user_pic.show_pic()

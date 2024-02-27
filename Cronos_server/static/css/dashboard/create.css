@@ -77,6 +77,14 @@
 	border-radius: 4px;
 	cursor: pointer;
 }
+.help_create_text {
+	font-size: 1.4rem;
+	font-family: var(--main-font-family);
+	color: rgb(78, 78, 78);
+	background-color: rgb(240, 240, 240);
+	padding: 5px;
+	border-radius: 3px;
+}
 #id_time,
 select {
 	min-width: 122px;

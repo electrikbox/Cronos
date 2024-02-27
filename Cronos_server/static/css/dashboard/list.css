@@ -26,10 +26,12 @@
 	justify-content: center;
 	gap: 5px;
 }
-.delete-selected ,
 .pause-selected,
 .play-selected {
 	background-color: rgb(51, 106, 132);
+}
+.delete-selected {
+	background-color: rgb(145, 22, 22);
 }
 .delete-selected[disabled],
 .pause-selected[disabled],

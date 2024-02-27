@@ -36,7 +36,7 @@ def contact(request) -> HttpResponse:
                         'name': user.username,
                         'email': user.email
                     }
-                    
+
                 form = ContactForm(initial=initial_data)
 
             except Profiles.DoesNotExist:
