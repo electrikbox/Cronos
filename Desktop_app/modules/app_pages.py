@@ -54,16 +54,16 @@ class AppPages(ft.UserControl):
                     controls=[ft.Text(value="Connected", color="green")],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
+                 ft.Row(
+                    [self.elements.fetch_button],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                ),
                 ft.Row(
                     [self.elements.logout_button],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
                 ft.Row(
                     [self.elements.logged_text],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                ),
-                ft.Row(
-                    [self.elements.fetch_button],
                     alignment=ft.MainAxisAlignment.CENTER,
                 )
             ]
