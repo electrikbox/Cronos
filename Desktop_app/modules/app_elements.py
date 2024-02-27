@@ -62,7 +62,7 @@ class Elements(ft.UserControl):
 
         self.cron_action_text = ft.Text(
             value="",
-            color="pink"
+            color=ft.colors.DEEP_PURPLE_300,
         )
 
         # Fetch button
@@ -83,7 +83,6 @@ class Elements(ft.UserControl):
             text="Clear logs",
             width=200,
         )
-
 
         # Logout button
         # =====================================================================
