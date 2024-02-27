@@ -32,7 +32,16 @@
 			{% comment %} EMPTY {% endcomment %}
 		</div>
 		<div class="home-info">
-			<h4>You have a total of {{ crons_count }} cron(s)</h4>
+			<h4>
+				You have
+				{% if crons_count == 0 %}
+					no cron yet
+				{% elif crons_count == 1 %}
+					only 1 cron
+				{% else %}
+					a total of {{ crons_count }} crons
+				{% endif %}
+   			 </h4>
 			<div class="cron-info">
 				<div class="home-cron-active">
 					<svg xmlns="http://www.w3.org/2000/svg" class="ionicon-info-cron" viewBox="0 0 512 512">
@@ -40,7 +49,13 @@
 						<path d="M216.32 334.44l114.45-69.14a10.89 10.89 0 000-18.6l-114.45-69.14a10.78 10.78 0 00-16.32 9.31v138.26a10.78 10.78 0 0016.32 9.31z" fill="currentColor"/>
 					</svg>
 					<p>
-						{{ active_crons_count }} active cron(s)
+						{% if active_crons_count == 0 %}
+							No active crons
+						{% elif active_crons_count == 1 %}
+							1 active cron
+						{% else %}
+							{{ active_crons_count }} active crons
+						{% endif %}
 					</p>
 				</div>
 				<div class="home-cron-pending">
@@ -49,7 +64,19 @@
 						<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M208 192v128M304 192v128"/>
 					</svg>
 					<p>
-						{{ pending_crons_count }} cron(s) pending / ({{ paused_crons_count }} on pause)
+						{% if pending_crons_count == 0 %}
+							{% if paused_crons_count == 0 %}
+								No crons pending
+							{% elif paused_crons_count == 1 %}
+								No crons pending / 1 cron on pause
+							{% else %}
+								No crons pending / {{ paused_crons_count }} on pause
+							{% endif %}
+						{% elif pending_crons_count == 1 %}
+							1 cron pending / ({{ paused_crons_count }} on pause)
+						{% else %}
+							{{ pending_crons_count }} crons pending / ({{ paused_crons_count }} on pause)
+						{% endif %}
 					</p>
 				</div>
 			</div>
