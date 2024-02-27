@@ -134,7 +134,7 @@ class AppHandler:
             checked_cron = CronScraper(self.username, self.password)
 
             if not cmd_validated:
-                self.all_msg_in_app(f"Command {command} not available")
+                self.cron_action_text.value += (f"Command {command} not available")
                 deleted_cron = checked_cron.unvalidated_cron_delete(id)
                 continue
 
@@ -201,8 +201,7 @@ class AppHandler:
             script = os.path.basename(cron.command)
             # del_cron_cmd_name = script.split("-")[1]
 
-            msg = f"\nCron n°{cron.comment.split(
-                '-')[1]} // Script {script} : removed"
+            msg = (f"\nCron n°{cron.comment.split('-')[1]} // Script {script} : removed")
 
             self.cron_action_text.value += msg
             self.page.update()
@@ -235,8 +234,7 @@ class AppHandler:
 
                     self.all_msg_in_app.append(cron)
 
-                    self.cron_action_text.value += f"\nCron n°{
-                        cron.comment.split('-')[1]} : paused"
+                    self.cron_action_text.value += (f"\nCron n°{cron.comment.split('-')[1]} : paused")
                     self.page.update()
 
                 elif not is_paused and not is_enabled:
@@ -245,8 +243,7 @@ class AppHandler:
 
                     self.all_msg_in_app.append(cron)
 
-                    self.cron_action_text.value += f"\nCron n°{
-                        cron.comment.split('-')[1]} : enabled"
+                    self.cron_action_text.value += (f"\nCron n°{cron.comment.split('-')[1]} : enabled")
                     self.page.update()
 
         local_crons.write()
