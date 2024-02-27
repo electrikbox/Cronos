@@ -69,7 +69,7 @@ class Elements(ft.UserControl):
         # =====================================================================
 
         self.fetch_button = ElevatedButton(
-            text="Fetch",
+            text="Refresh your crons",
             width=200,
         )
         self.fetch_info_text = Text(
