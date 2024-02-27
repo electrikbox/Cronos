@@ -257,7 +257,7 @@ class AppHandler:
 
         local_crons.write()
 
-    # MAIN METHODS
+    # MAIN METHODS  (LOGIN + FETCH REMOTE CRONS)
     # =========================================================================
 
     def login(self) -> None:
@@ -268,9 +268,17 @@ class AppHandler:
 
         messages_user = self.all_msg_in_app
 
-        self.cron_action_msg(messages_user)
+        if not messages_user:
+            messages_user.append("Nothing to fetch at login")
+            self.cron_action_msg(messages_user)
+        else:
+            self.cron_action_msg(messages_user)
+
 
     def fetch_remote_crons(self) -> None:
+
+        initial_msg_count = len(self.all_msg_in_app)
+
         self.add_remote_crons_to_local()
         self.del_local_crons()
         self.toggle_pause_local_crons()
@@ -281,9 +289,18 @@ class AppHandler:
         #     self.toggle_pause_local_crons()
         #     time.sleep(5)
 
-        messages_user = self.all_msg_in_app
+        final_message_count = len(self.all_msg_in_app)
 
-        self.cron_action_msg(messages_user)
+        if final_message_count == initial_msg_count:
+            self.all_msg_in_app.append("Nothing to fetch")
+
+        # messages_user = self.all_msg_in_app
+
+        self.cron_action_msg(self.all_msg_in_app)
+
+
+    # CLEAR MSG
+    # =========================================================================
 
     def clear_msg(self):
         self.all_msg_in_app = []
