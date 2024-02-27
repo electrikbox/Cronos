@@ -161,13 +161,13 @@ class AppHandler:
             print(f"{new_cron} : added")
 
             # MSG USER ON APP
-            message_user = f"Cron n°{id} // Command <{command}> : added"
-            added_crons_msg.append(message_user)
+            add_message_user = f"Cron n°{id} // Command <{command}> : added"
+            added_crons_msg.append(add_message_user)
 
             self.all_msg_in_app.extend(added_crons_msg)
 
             self.cron_action_msg(self.all_msg_in_app)
-            added_crons_msg.clear()
+
 
 
     # DEL CRON
@@ -177,7 +177,7 @@ class AppHandler:
         remote_crons, local_crons = self.crons_lists()
         crons_to_remove = []
 
-        removed_crone_msg = []
+        rm_cron_msg = []
 
         for l_cron in local_crons:
             if not l_cron.comment:
@@ -206,10 +206,10 @@ class AppHandler:
             print(f"{cron} : removed")
 
             # MSG USER ON APP
-            removed_msg = f"Cron n°{cron.comment.split('-')[1]} // Script {os.path.basename(cron.command)} : removed"
-            removed_crone_msg.append(removed_msg)
+            removed_msg_user = f"Cron n°{cron.comment.split('-')[1]} // Script {os.path.basename(cron.command)} : removed"
+            rm_cron_msg.append(removed_msg_user)
 
-        self.all_msg_in_app.extend(removed_crone_msg)
+        self.all_msg_in_app.extend(rm_cron_msg)
         self.cron_action_msg(self.all_msg_in_app)
 
         local_crons.write()
@@ -241,14 +241,14 @@ class AppHandler:
                     cron.enable(False)
                     print(f"{cron} : paused")
                     # MSG USER ON APP
-                    message = f"Cron n°{cron.comment.split('-')[1]} : paused"
-                    paused_crons_msg.append(message)
+                    pause_message_user = f"Cron n°{cron.comment.split('-')[1]} : paused"
+                    paused_crons_msg.append(pause_message_user)
                 elif not is_paused and not is_enabled:
                     cron.enable(True)
                     print(f"{cron} : enabled")
                     # MSG USER ON APP
-                    message = f"Cron n°{cron.comment.split('-')[1]} : enabled"
-                    enabled_crons_msg.append(message)
+                    enable_message_user = f"Cron n°{cron.comment.split('-')[1]} : enabled"
+                    enabled_crons_msg.append(enable_message_user)
 
         self.all_msg_in_app.extend(paused_crons_msg)
         self.all_msg_in_app.extend(enabled_crons_msg)
@@ -266,9 +266,9 @@ class AppHandler:
         self.del_local_crons()
         self.toggle_pause_local_crons()
 
-        messages = self.all_msg_in_app
+        messages_user = self.all_msg_in_app
 
-        self.cron_action_msg(messages)
+        self.cron_action_msg(messages_user)
 
     def fetch_remote_crons(self) -> None:
         self.add_remote_crons_to_local()
@@ -281,6 +281,6 @@ class AppHandler:
         #     self.toggle_pause_local_crons()
         #     time.sleep(5)
 
-        messages = self.all_msg_in_app
+        messages_user = self.all_msg_in_app
 
-        self.cron_action_msg(messages)
+        self.cron_action_msg(messages_user)
