@@ -16,6 +16,7 @@ def main(page: ft.Page) -> None:
     page.window_min_width = 450
     page.window_height = 400
     page.window_min_height = 500
+    page.scroll = True
     page.update()
 
     # init elements and pages
