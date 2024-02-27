@@ -44,7 +44,8 @@ def handle_post_request(request: WSGIRequest, header: dict) -> HttpResponseRedir
 
     if cron_create_form.is_valid():
         command = get_command_from_form_data(
-            cron_create_form.cleaned_data, request
+            cron_create_form.cleaned_data,
+            request
         )
         # Store the command in cookies
         response = create_cron_job(request, cron_create_form, header)
@@ -60,9 +61,14 @@ def handle_post_request(request: WSGIRequest, header: dict) -> HttpResponseRedir
 
 def create_cron_job(request: WSGIRequest, cron_create_form: CronForm, header: dict) -> HttpResponseRedirect:
     """Create a new cron job"""
-    command = get_command_from_form_data(cron_create_form.cleaned_data, request)
+    command = get_command_from_form_data(
+        cron_create_form.cleaned_data,
+        request
+    )
     data = get_cron_job_data(
-        cron_create_form.cleaned_data, command, request.user.id
+        cron_create_form.cleaned_data,
+        command,
+        request.user.id
     )
 
     response = requests.post(CRON_CREATE_API_URL, headers=header, json=data)
@@ -80,13 +86,16 @@ def create_cron_job(request: WSGIRequest, cron_create_form: CronForm, header: di
 def get_command_from_form_data(form_data: dict, request: WSGIRequest) -> str:
     """Construct the command based on form data"""
     command = form_data["command"]
+
     if command == "cp" or command == "ls":
         # source = request.FILES["name"]
         source = form_data["source"]
         destination = form_data["destination"]
         command = f"{command} {source} {destination}"
+
     elif command == "open":
         command = f"{command} {form_data['url']}"
+
     return command
 
 
@@ -181,7 +190,9 @@ def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     logs = (
-        Logs.objects.filter(user=request.user).order_by("create_date").reverse()
+        Logs.objects
+        .filter(user=request.user)
+        .order_by("create_date").reverse()
     )
     user_pic = UserPic(request.user)
     image_url = user_pic.show_pic()
