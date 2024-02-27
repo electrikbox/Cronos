@@ -46,20 +46,34 @@ class AppPages(ft.UserControl):
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
                 ft.Row(
-                    controls=[ft.Text(value="Connected", color="green")],
+                    [self.elements.cron_action_text],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
-                ft.Row(
-                    [self.elements.logout_button],
+                ft.Column(
+                    [
+                        ft.Row(
+                            controls=[
+                                ft.Text(value="Connected", color="green")],
+                            alignment=ft.MainAxisAlignment.CENTER,
+                        ),
+                        ft.Container(
+                            content=self.elements.fetch_button,
+                            alignment=ft.alignment.center,
+                        ),
+                        ft.Container(
+                            content=self.elements.clear_button,
+                            alignment=ft.alignment.center,
+                        ),
+                        ft.Container(
+                            content=self.elements.logout_button,
+                            alignment=ft.alignment.center,
+                        ),
+                        ft.Container(
+                            content=self.elements.logged_text,
+                            alignment=ft.alignment.center,
+                        )
+                    ],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
-                ft.Row(
-                    [self.elements.logged_text],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                ),
-                ft.Row(
-                    [self.elements.fetch_button],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                )
             ]
         )

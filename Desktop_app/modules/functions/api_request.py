@@ -83,7 +83,7 @@ class CronScraper:
     # Delete unvalideted cron
     # =========================================================================
 
-    def unvalideted_cron_delete(self, cron_id) -> str | None:
+    def unvalidated_cron_delete(self, cron_id) -> str | None:
         self.user_auth()
 
         crons_headers = {

@@ -1,4 +1,5 @@
 import flet as ft
+import os
 import time
 from modules import Elements, AppPages
 from modules.functions.api_request import CronScraper
@@ -26,10 +27,14 @@ class AppHandler:
 
         self.cron_script_path = ""
 
+        self.cron_action_text = self.elements.cron_action_text
+        self.all_msg_in_app = []
+
     # UTILS
     # =========================================================================
 
     def remote_cron_to_str(self, cron: dict) -> str:
+        """ Convert remote cron to string """
         cmd = cron["command"]
         schedule = " ".join(
             [
@@ -58,6 +63,7 @@ class AppHandler:
         return local_cron_str
 
     def crons_lists(self) -> tuple[list[dict], CronTab]:
+        """ Get remote and local crons """
         remote_crons = CronScraper(
             self.username,
             self.password
@@ -66,6 +72,7 @@ class AppHandler:
         return remote_crons, local_crons
 
     def update_page(self) -> None:
+        """ Update the page """
         self.page.clean()
         self.page.add(self.app_pages.logout_page)
         self.page.update()
@@ -74,6 +81,7 @@ class AppHandler:
     # =========================================================================
 
     def authenticate(self) -> None:
+        """ Authenticate user """
         self.username = self.elements.username_field.value
         self.password = self.elements.password_field.value
 
@@ -104,6 +112,7 @@ class AppHandler:
     # =========================================================================
 
     def add_remote_crons_to_local(self) -> None:
+        """ Add remote crons to local crontab """
         remote_crons, local_crons = self.crons_lists()
 
         for r_cron in remote_crons:
@@ -125,8 +134,8 @@ class AppHandler:
             checked_cron = CronScraper(self.username, self.password)
 
             if not cmd_validated:
-                deleted_cron = checked_cron.unvalideted_cron_delete(id)
-                # send message for user on website
+                self.all_msg_in_app(f"Command {command} not available")
+                deleted_cron = checked_cron.unvalidated_cron_delete(id)
                 continue
 
             checked_cron.send_cron_validation(id)
@@ -147,13 +156,17 @@ class AppHandler:
             local_crons.write()
             print(f"{new_cron} : added")
 
-            # send message for user on app
-            # self.update_page()
+            self.all_msg_in_app.append(new_cron)
+
+            msg = f"\nCron n°{id} // Command <{command}> : added"
+            self.cron_action_text.value += msg
+            self.page.update()
 
     # DEL CRON
     # =========================================================================
 
     def del_local_crons(self) -> None:
+        """ Delete local crons that are not in remote crontab """
         remote_crons, local_crons = self.crons_lists()
         crons_to_remove = []
 
@@ -183,13 +196,24 @@ class AppHandler:
             local_crons.remove(cron)
             print(f"{cron} : removed")
 
-        local_crons.write()
+            self.all_msg_in_app.append(cron)
 
+            script = os.path.basename(cron.command)
+            # del_cron_cmd_name = script.split("-")[1]
+
+            msg = f"\nCron n°{cron.comment.split(
+                '-')[1]} // Script {script} : removed"
+
+            self.cron_action_text.value += msg
+            self.page.update()
+
+        local_crons.write()
 
     # PAUSE CRON
     # =========================================================================
 
     def toggle_pause_local_crons(self) -> None:
+        """ Toggle pause/enable on local crons """
         remote_crons, local_crons = self.crons_lists()
 
         local_crons_dict = {
@@ -208,28 +232,71 @@ class AppHandler:
                 if is_paused and is_enabled:
                     cron.enable(False)
                     print(f"{cron} : paused")
+
+                    self.all_msg_in_app.append(cron)
+
+                    self.cron_action_text.value += f"\nCron n°{
+                        cron.comment.split('-')[1]} : paused"
+                    self.page.update()
+
                 elif not is_paused and not is_enabled:
                     cron.enable(True)
                     print(f"{cron} : enabled")
 
+                    self.all_msg_in_app.append(cron)
+
+                    self.cron_action_text.value += f"\nCron n°{
+                        cron.comment.split('-')[1]} : enabled"
+                    self.page.update()
+
         local_crons.write()
 
-    # MAIN METHODS
+    # MAIN METHODS  (LOGIN + FETCH REMOTE CRONS)
     # =========================================================================
 
     def login(self) -> None:
+        """ Login and fetch remote crons """
         self.authenticate()
         self.add_remote_crons_to_local()
         self.del_local_crons()
         self.toggle_pause_local_crons()
 
-    def fetch_remote_crons(self) -> None:
-        # self.add_remote_crons_to_local()
-        # self.del_local_crons()
-        # self.toggle_pause_local_crons()
-        while True:
-            self.add_remote_crons_to_local()
-            self.del_local_crons()
-            self.toggle_pause_local_crons()
-            time.sleep(5)
+        messages_user = self.all_msg_in_app
 
+        if len(messages_user) == 0:
+            self.cron_action_text.value = "Nothing to fetch at login"
+            self.page.update()
+
+        self.all_msg_in_app.clear()
+
+    def fetch_remote_crons(self) -> None:
+        """ Fetch remote crons and update local crontab """
+
+        self.add_remote_crons_to_local()
+        self.del_local_crons()
+        self.toggle_pause_local_crons()
+
+        # while True:
+        #     self.add_remote_crons_to_local()
+        #     self.del_local_crons()
+        #     self.toggle_pause_local_crons()
+        #     time.sleep(5)
+
+        messages_user = self.all_msg_in_app
+
+        if len(messages_user) == 0:
+            self.cron_action_text.value += "\nNothing to fetch"
+            self.page.update()
+
+        self.all_msg_in_app.clear()
+
+    # CLEAR MSG
+    # =========================================================================
+
+    def clear_msg(self):
+        """ Clear all messages in app """
+        self.cron_action_text.value = "--Logs cleared--"
+        self.page.update()
+        time.sleep(2)
+        self.cron_action_text.value = ""
+        self.page.update()

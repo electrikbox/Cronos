@@ -57,16 +57,32 @@ class Elements(ft.UserControl):
             color=ft.colors.TEAL_400,
         )
 
+        # MSG
+        # =====================================================================
+
+        self.cron_action_text = ft.Text(
+            value="",
+            text_align="center",
+            color=ft.colors.DEEP_PURPLE_300,
+        )
+
         # Fetch button
         # =====================================================================
 
         self.fetch_button = ElevatedButton(
-            text="Fetch",
+            text="Refresh your crons",
             width=200,
         )
         self.fetch_info_text = Text(
             INFO_TEXT,
             color=ft.colors.TEAL_400,
+        )
+
+        # Clear button
+        # =====================================================================
+        self.clear_button = ElevatedButton(
+            text="Clear logs",
+            width=200,
         )
 
         # Logout button

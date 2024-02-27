@@ -14,8 +14,9 @@ def main(page: ft.Page) -> None:
     page.vertical_alignment = ft.CrossAxisAlignment.START
     page.window_width = 350
     page.window_min_width = 450
-    page.window_height = 400
+    page.window_height = 550
     page.window_min_height = 500
+    page.scroll = True
     page.update()
 
     # init elements and pages
@@ -37,8 +38,10 @@ def main(page: ft.Page) -> None:
     app_logic = AppHandler(elements, page, app_pages)
 
     elements.login_button.on_click = lambda e: app_logic.login()
+    elements.clear_button.on_click = lambda e: app_logic.clear_msg()
     elements.fetch_button.on_click = lambda e: app_logic.fetch_remote_crons()
-    elements.logout_button.on_click = lambda e: logout(elements, page, app_pages)
+    elements.logout_button.on_click = lambda e: logout(
+        elements, page, app_pages)
 
     page.add(app_pages.login_page)
 

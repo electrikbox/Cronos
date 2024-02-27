@@ -7,6 +7,7 @@ def home(request) -> HttpResponse:
 
     active_crons_count = Crons.objects.filter(user=request.user, validated=True, is_paused=False).count()
     pending_crons_count = Crons.objects.filter(user=request.user, validated=False).count()
+    paused_crons_count = Crons.objects.filter(user=request.user, is_paused=True).count()
     crons_count = Crons.objects.filter(user=request.user).count()
 
     user_pic = UserPic(request.user)
@@ -17,6 +18,7 @@ def home(request) -> HttpResponse:
         "crons_count": crons_count,
         "active_crons_count": active_crons_count,
         "pending_crons_count": pending_crons_count,
+        "paused_crons_count": paused_crons_count,
     }
 
     return render(request, "home.html", context)
