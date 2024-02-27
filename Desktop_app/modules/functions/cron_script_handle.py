@@ -10,7 +10,7 @@ CRONOS_COPY_FOLDER = f"{CRONOS_PATH}/Cronos_copy"
 CRONOS_LIST_FOLDER = f"{CRONOS_PATH}/Cronos_list"
 
 SCRIPT_SHIBANG = "#!/bin/bash\n"
-SCRIPT_PREVENT_SUDO = '\nif [ $(id -u) -eq 0 ];\n\tthen echo "sudo forbiden."\n\texit 1\nfi\n'
+SCRIPT_PREVENT_SUDO = ('\nif [ $(id -u) -eq 0 ];\n\tthen echo "sudo forbiden."\n\texit 1\nfi\n')
 
 
 class CronosScript:
@@ -26,19 +26,18 @@ class CronosScript:
         self.cron_id = cron_id
         self.script_path = ""
 
-
     # utils ls cp
     # =========================================================================
 
-    def utils_ls_cp(self, cmd, folder: str) -> dict[str, str]:
-        """Dictionary with the option, exclude, search_file and destination_path."""
+    def utils_ls_cp(self, cmd: str, folder: str) -> dict[str, str]:
+        """Return option, exclude, search_file and destination_path."""
         source = cmd.split(" ")[1]
         destination = cmd.split(" ")[2]
 
         destination_path = os.path.join(folder, destination)
         var_dest = f'destination="{destination_path}"'
 
-        check_dest = f'if [ ! -d "$destination" ]; then\n\tmkdir -p "$destination"\nfi\n'
+        check_dest = (f'if [ ! -d "$destination" ]; then\n\tmkdir -p "$destination"\nfi\n')
         option = f"{var_dest}\n{check_dest}\n"
 
         exclude = f'-path "{CRONOS_PATH}" -prune -o'
@@ -48,21 +47,19 @@ class CronosScript:
             "option": option,
             "exclude": exclude,
             "search_file": search_file,
-            "destination_path": destination_path
+            "destination_path": destination_path,
         }
-
 
     # open command
     # =========================================================================
 
-    def open_command(self, cmd: str)  -> tuple[str, str]:
+    def open_command(self, cmd: str) -> tuple[str, str]:
         """returns the option and the command for the open command."""
         os_name = platform.system()
         if os_name == "Linux":
             option = "export DISPLAY=:0\n"
 
         return (option, cmd)
-
 
     # copy command
     # =========================================================================
@@ -80,11 +77,10 @@ class CronosScript:
 
         return (option, cmd)
 
-
     # list command
     # =========================================================================
 
-    def list_command(self, cmd: str) -> str:
+    def list_command(self, cmd: str) -> tuple[str, str]:
         """returns the option and the command for the copy command."""
         file = cmd.split(" ")[1].split(".")[0]
 
@@ -93,14 +89,15 @@ class CronosScript:
         option += 'current_date=$(date +"%Y-%m-%d")\n'
         exclude = utils["exclude"]
         search_file = utils["search_file"]
-        destination_path = utils["destination_path"]
+        dest_path = utils["destination_path"]
 
-        exec_copy = f'-exec ls {{}} \; > {destination_path}/list-{file}-$current_date.txt'
+        exec_copy = (
+            f"-exec ls {{}} \; > {dest_path}/list-{file}-$current_date.txt"
+        )
 
         cmd = f"find {USER_PATH} {exclude} {search_file} {exec_copy}"
 
         return (option, cmd)
-
 
     # build script
     # =========================================================================
@@ -123,7 +120,6 @@ class CronosScript:
 
         return script_content
 
-
     # create script
     # =========================================================================
 
@@ -143,7 +139,6 @@ class CronosScript:
         os.chmod(script, stat.S_IRWXU | stat.S_IRGRP | stat.S_IROTH)
         self.script_path = script
 
-
     # remove script
     # =========================================================================
 
@@ -155,3 +150,8 @@ class CronosScript:
 
         if os.path.exists(script):
             os.remove(script)
+
+
+if __name__ == "__main__":
+    import flet
+    help(flet)

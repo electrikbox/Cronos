@@ -102,14 +102,12 @@ class CronScraper:
             return None
 
 
-
 # =================================================================
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print(
-            "Please provide a username and password in argument"
-        )
+        print("Please provide a username and password in argument")
         sys.exit(1)
 
     username = sys.argv[1]

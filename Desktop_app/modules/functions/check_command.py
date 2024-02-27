@@ -3,6 +3,7 @@ exist and can be executed on the computer"""
 
 import shutil
 
+
 class CheckCommand:
     def __init__(self, command) -> None:
         self.command = command
