@@ -134,7 +134,7 @@ class AppHandler:
             checked_cron = CronScraper(self.username, self.password)
 
             if not cmd_validated:
-                self.cron_action_text.value += (f"Command {command} not available")
+                self.cron_action_text.value += (f"\nCommand {command} not available")
                 deleted_cron = checked_cron.unvalidated_cron_delete(id)
                 continue
 
