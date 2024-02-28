@@ -1,0 +1,17 @@
+.about-us {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.olive {
+	background-color: olive;
+	width: 40%;
+}
+
+.valentine {
+	background-color: violet;
+	width: 40%;
+}
