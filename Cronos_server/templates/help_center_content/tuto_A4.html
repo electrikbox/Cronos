@@ -1,8 +1,19 @@
+{% load static %}
+
 <div class="title-help">
 	<button class="toggle-answer">▶︎</button>
 	<h4 class="h4-help">How to pause a cron</h4>
 </div>
 
 <article class="answer">
-	<p> {% lorem %} </p>
+	<h5>What does it mean to pause a cron?</h5>
+	<p>A paused cron won't run until you reactivate it. It's still there for you if you need it later</p>
+	<div class="pause-cron">
+		<img src="{% static 'img/help_center_img/pause_cron00.png' %}" alt="pause a cron">
+	</div>
+	<p>To pause a cron, click on the <em>pause</em> icon on the right. The icon will then change to a <em>play</em> button, and your cron row will turn grey.</p>
+	<div class="pause-cron">
+		<img src="{% static 'img/help_center_img/pause_cron01.png' %}" alt="reactivate a cron">
+	</div>
+	<p>When you're ready to reactivate your cron, simply click on this <em>play</em> button</p>
 </article>
