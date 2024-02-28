@@ -198,10 +198,11 @@ class AppHandler:
 
             self.all_msg_in_app.append(cron)
 
+            id = cron.comment.split("-")[1]
             script = os.path.basename(cron.command)
-            # del_cron_cmd_name = script.split("-")[1]
+            command = script.split("-")[1]
 
-            msg = (f"\nCron n°{cron.comment.split('-')[1]} // Script {script} : removed")
+            msg = (f"\nCron n°{id} // Command <{command}> : removed")
 
             self.cron_action_text.value += msg
             self.page.update()
