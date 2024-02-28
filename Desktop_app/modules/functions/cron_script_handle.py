@@ -126,11 +126,12 @@ class CronosScript:
     def create_script(self, cmd: str) -> None:
         """Creates a cron script file with the given command."""
         folder_path = os.path.expanduser(CRONOS_SCRIPT_PATH)
+        cmd_name = cmd.split(" ")[0]
 
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        script = os.path.join(folder_path, f"cron_{self.cron_id}_script.sh")
+        script = os.path.join(folder_path, f"cron_{self.cron_id}-{cmd_name}-script.sh")
         script_content = self.build_script(cmd)
 
         with open(script, "w") as f:
