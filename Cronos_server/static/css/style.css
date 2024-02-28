@@ -120,3 +120,8 @@ button {
 	padding-left: 5em;
 	padding-right: 5em;
 }
+input[type="submit"]:hover,
+.cron_form-create button[type="submit"]:hover,
+.user_pic_form input[type="submit"]:hover {
+	background-color: rgb(34, 82, 104);
+}

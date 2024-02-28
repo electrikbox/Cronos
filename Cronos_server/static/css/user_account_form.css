@@ -79,9 +79,6 @@
 	display: inline-block;
 	text-align: center;
 }
-.user_pic_form input[type="submit"]:hover {
-	background-color: rgb(14, 150, 212);
-}
 #file-name-display {
 	font-family: var(--main-font-family);
 	font-size: 1.2rem;
@@ -171,9 +168,7 @@ input[type="email"]:focus,
 input[type="password"]:focus {
 	border-color: #66afe9;
 }
-input[type="submit"]:hover {
-	background-color: rgb(14, 150, 212);
-}
+
 h3 {
 	font-family: var(--main-font-family);
 	color: var(--main-color);
