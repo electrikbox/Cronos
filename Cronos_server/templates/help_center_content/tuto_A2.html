@@ -1,0 +1,70 @@
+{% load static %}
+<div class="title-help">
+	<button class="toggle-answer">▶︎</button>
+	<h4 class="h4-help">A quick tour of the application</h4>
+</div>
+
+<article class="answer">
+	<h5>Cronos-Connect</h5>
+	<div class="tuto-app-block">
+		<div class="tuto-app">
+			<img class="tuto-app-img" src="{% static 'img/help_center_img/c-connect01.png' %}" alt="login-page-app">
+			<p>
+				This is the login page. Enter your username and password and click on login
+			</p>
+		</div>
+		<div class="tuto-app">
+			<img class="tuto-app-img" src="{% static 'img/help_center_img/c-connect02.png' %}" alt="home page with green message Connected">
+			<p>
+				Once connected, you'll see the application's main page and a <em>Connected</em> success message
+				Then, we have two possible scenarios :
+			</p>
+		</div>
+		<div class="tuto-app">
+			<img class="tuto-app-img" src="{% static 'img/help_center_img/c-connect03.png' %}" alt="home page with purple logs messages">
+			<p>
+				If your application has needed to take any action on your crons, you'll see the corresponding logs appear on the page
+			</p>
+		</div>
+	</div>
+	<div class="tuto-app-block">
+		<div class="tuto-app">
+			<img class="tuto-app-img" src="{% static 'img/help_center_img/c-connect04.png' %}" alt="home page with purple message : Nothing to fetch at login">
+			<p>
+				If no action is required, the application will tell you clearly
+			</p>
+		</div>
+		<div class="tuto-app">
+			<img class="tuto-app-img" src="{% static 'img/help_center_img/c-connect05.png' %}" alt="home page with focus on the Clear logs button">
+			<p>
+				To make things clearer, you can click the <em>Clear logs</em> button and your home page will be emptied of all messages
+			</p>
+		</div>
+		<div class="tuto-app">
+			<img class="tuto-app-img" src="{% static 'img/help_center_img/c-connect06.png' %}" alt="home page with focus on the Refresh your crons button">
+			<p>
+				The <em>Refresh your cron</em> button will allow the application to check if any actions need to be taken
+			</p>
+		</div>
+	</div>
+	<div class="tuto-app-block">
+		<div class="tuto-app">
+			<img class="tuto-app-img" src="{% static 'img/help_center_img/c-connect07.png' %}" alt="home page with purple message Nothing to fetch">
+			<p>
+				If any action is taken, the corresponding logs will appear. If no action is required, the message <em>Nothing to fetch</em> will inform you of that
+			</p>
+		</div>
+		<div class="tuto-app">
+			<img class="tuto-app-img" src="{% static 'img/help_center_img/c-connect08.png' %}" alt="home page with focus on the logout button">
+			<p>
+				If you feel you have finished, click on "Logout"
+			</p>
+		</div>
+		<div class="tuto-app">
+			<img class="tuto-app-img" src="{% static 'img/help_center_img/c-connect01.png' %}" alt="login-page-app">
+			<p>
+				You will be returned to the login page
+			</p>
+		</div>
+	</div>
+</article>

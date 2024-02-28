@@ -28,6 +28,27 @@ def to_date(value):
     }
     return mappings.get(value, value)
 
+
 @register.filter
 def to_double_digit(value):
     return str(value).zfill(2)
+
+
+@register.filter
+def rm_http(value: str):
+
+    new_value = value.split(" ")[-1]
+
+    if new_value.startswith("http://www."):
+        value = value.replace("http://www.", " ")
+
+    elif new_value.startswith("https://www."):
+        value = value.replace("https://www.", " ")
+
+    elif new_value.startswith("https://"):
+        value = value.replace("https://", " ")
+
+    elif new_value.startswith("http://"):
+        value = value.replace("http://", " ")
+
+    return value

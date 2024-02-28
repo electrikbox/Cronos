@@ -1,0 +1,22 @@
+.avis {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.avis1 {
+	background-color: white;
+	width: 25%;
+}
+
+.avis2 {
+	background-color: rgb(60, 171, 71);
+	width: 25%;
+}
+
+.avis3 {
+	background-color: rgb(92, 213, 246);
+	width: 25%;
+}

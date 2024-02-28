@@ -9,6 +9,7 @@
     <title>{% block title %}Default title{% endblock %}</title>
     <link rel="stylesheet" href="{% static '/css/style.css' %}"/>
     <link rel="stylesheet" href="{% static '/css/header_auth.css' %}"/>
+    {% block css_landing_page %}{% endblock %}
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
