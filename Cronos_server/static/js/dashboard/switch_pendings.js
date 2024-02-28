@@ -60,7 +60,7 @@ $(document).ready(function () {
         });
         if (crons.some(cronId => !filteredResponse.some(cron => cron.id === cronId))) {
           reject(crons, filteredResponse);
-          window.location.href = "/dashboard?delete=true";
+          window.location.href = "/dashboard";
         }
         if (!hasPending) {
           clearInterval(intervalId);
