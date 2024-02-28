@@ -56,6 +56,7 @@ class CronosScript:
     def open_command(self, cmd: str) -> tuple[str, str]:
         """returns the option and the command for the open command."""
         os_name = platform.system()
+        option = ""
         if os_name == "Linux":
             option = "export DISPLAY=:0\n"
 
