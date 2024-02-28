@@ -29,6 +29,7 @@ class AppHandler:
 
         self.cron_action_text = self.elements.cron_action_text
         self.all_msg_in_app = []
+        self.unvalid_found = False
 
     # UTILS
     # =========================================================================
@@ -136,6 +137,7 @@ class AppHandler:
             if not cmd_validated:
                 self.cron_action_text.value += (f"\nCommand {command} not available")
                 deleted_cron = checked_cron.unvalidated_cron_delete(id)
+                self.unvalid_found = True
                 continue
 
             checked_cron.send_cron_validation(id)
@@ -282,11 +284,12 @@ class AppHandler:
 
         messages_user = self.all_msg_in_app
 
-        if len(messages_user) == 0:
+        if len(messages_user) == 0 and not self.unvalid_found:
             self.cron_action_text.value += "\nNothing to fetch"
             self.page.update()
 
         self.all_msg_in_app.clear()
+        self.unvalid_found = False
 
     # CLEAR MSG
     # =========================================================================
