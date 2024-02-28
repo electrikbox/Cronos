@@ -18,11 +18,11 @@
 	color: rgba(114, 114, 114, 0.5);
 }
 .answer {
-	display: none;
+	/* display: none; */
 	overflow: hidden;
 	padding: 20px;
 	margin-left: 50px;
-	margin-right: 150px;
+	margin-right: 50px;
 	font-family: var(--main-font-family);
 	font-size: 1.7rem;
 	text-align: justify;
@@ -56,6 +56,7 @@
 .tuto-block {
 	display: flex;
 	flex-direction: column;
+	flex-wrap: wrap;
 	background-color: rgb(226, 226, 226);
 	padding: 30px;
 	border-radius: 10px;
@@ -63,7 +64,6 @@
 	width: 90%;
 	height: fit-content;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
-
 }
 .block-title {
 	display: flex;
@@ -97,6 +97,42 @@
 	border: none;
 	margin-right: 5px;
 	font-size: 2rem;
+}
+.cmd-na {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+/* .cmd-na-img {
+	width: 300px;
+} */
+.tuto-app-block {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: center;
+	max-width: 100%;
+	gap: 20px;
+}
+.tuto-app {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex: 1;
+	text-align: center;
+}
+.tuto-app p {
+	font-size: 1.6rem;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.tuto-app img {
+	height: 100%;
+	max-width: 100%;
 }
 /* .toggle-answer.open {
 	margin-left: 10px;

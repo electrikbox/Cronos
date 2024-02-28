@@ -1,4 +1,5 @@
 {% extends 'user_logged.html' %}
+{% load static %}
 
 {% block title %}Cronos Help Center{% endblock %}
 
@@ -43,6 +44,10 @@
 		{% include 'help_center_content/faq_Q4.html' %}
 	</div>
 
+	<div class="question">
+		{% include 'help_center_content/faq_Q6.html' %}
+	</div>
+
 </div>
 
 <!-- Section TUTO -->
@@ -53,47 +58,23 @@
 	</div>
 
 	<div class="tuto">
-		<div class="title-help">
-			<button class="toggle-answer">▶︎</button>
-			<h4 class="h4-help">How to install the application on my computer ?</h4>
-		</div>
-
-		<article class="answer">
-			<p> {% lorem %} </p>
-		</article>
+		{% include 'help_center_content/tuto_A2.html' %}
 	</div>
 
 	<div class="tuto">
-		<div class="title-help">
-			<button class="toggle-answer">▶︎</button>
-			<h4 class="h4-help">How to create a cron</h4>
-		</div>
-
-		<article class="answer">
-			<p> {% lorem %} </p>
-		</article>
+		{% include 'help_center_content/tuto_A1.html' %}
 	</div>
 
 	<div class="tuto">
-		<div class="title-help">
-			<button class="toggle-answer">▶︎</button>
-			<h4 class="h4-help">How to pause a cron</h4>
-		</div>
-
-		<article class="answer">
-			<p> {% lorem %} </p>
-		</article>
+		{% include 'help_center_content/tuto_A3.html' %}
 	</div>
 
 	<div class="tuto">
-		<div class="title-help">
-			<button class="toggle-answer">▶︎</button>
-			<h4 class="h4-help">How to detele a cron</h4>
-		</div>
+		{% include 'help_center_content/tuto_A4.html' %}
+	</div>
 
-		<article class="answer">
-			<p> {% lorem %} </p>
-		</article>
+	<div class="tuto">
+		{% include 'help_center_content/tuto_A5.html' %}
 	</div>
 </div>
 
