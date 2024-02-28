@@ -21,9 +21,11 @@
 	display: none;
 	overflow: hidden;
 	padding: 20px;
-	margin-left: 20px;
+	margin-left: 50px;
+	margin-right: 150px;
 	font-family: var(--main-font-family);
 	font-size: 1.7rem;
+	text-align: justify;
 }
 .answer h4 {
 	font-size: 1.8rem;
@@ -47,7 +49,7 @@
 	color: var(--main-color);
 }
 .answer a:hover {
-	font-weight: bold;
+	/* font-weight: bold; */
 	color: var(--link-color);
 }
 .faq-block,
