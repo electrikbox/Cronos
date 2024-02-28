@@ -30,7 +30,7 @@
 
       <div class="cron-infos" id="command">
         <p>Command</p>
-        <p class="info">{{ cron.command | truncatechars:30 }}</p>
+        <p class="info">{{ cron.command | rm_http}}</p>
       </div>
     </div>
 
