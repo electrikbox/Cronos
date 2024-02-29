@@ -1,8 +1,21 @@
+{% load static %}
 <div class="title-help">
 	<button class="toggle-answer">▶︎</button>
-	<h4 class="h4-help">How to detele a cron</h4>
+	<h4 class="h4-help">How to delete a cron</h4>
 </div>
 
 <article class="answer">
-	<p> {% lorem %} </p>
+	<p>
+		If you delete your cron, it will completely disappear from your dashboard
+		and you'll have to recreate it from scratch
+		if you want to run the same command again with the same options.
+	</p>
+	<div class="del-cron">
+		<img src="{% static 'img/help_center_img/delete_cron00.png' %}" alt="delete a cron">
+	</div>
+	<p>
+		To delete a cron, simply click on the <em>trash</em> icon on the right-hand side of your dashboard.
+		A confirmation message will appear and : if you're sure you want to permanently delete this cron, you can click <em>OK</em>.
+		Your cron will then be deleted
+	</p>
 </article>

@@ -18,7 +18,7 @@
 	color: rgba(114, 114, 114, 0.5);
 }
 .answer {
-	/* display: none; */
+	display: none;
 	overflow: hidden;
 	padding: 20px;
 	margin-left: 50px;
@@ -36,9 +36,9 @@
 .answer h5 {
 	font-size: 1.8rem;
 }
-.answer ul {
+/* .answer ul {
 	padding-left: 20px;
-}
+} */
 .answer li {
 	list-style: none;
 	margin-top: 5px;
@@ -104,9 +104,6 @@
 	align-items: center;
 	justify-content: center;
 }
-/* .cmd-na-img {
-	width: 300px;
-} */
 .tuto-app-block {
 	display: flex;
 	flex-direction: row;
@@ -134,6 +131,23 @@
 	height: 100%;
 	max-width: 100%;
 }
-/* .toggle-answer.open {
-	margin-left: 10px;
-} */
+.pause-cron,
+.del-cron {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.open_cmd, .cp-cmd, .ls-cmd, .create-cron-tuto {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 20px;
+}
+.pause-cron img,
+.del-cron img,
+.open_cmd img,
+.cp-cmd img,
+.ls-cmd img,
+.create-cron-tuto img {
+	margin: 15px;
+}
