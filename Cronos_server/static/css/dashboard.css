@@ -56,7 +56,7 @@
 	color: var(--main-color);
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 768px) {
 	.container-dashboard {
 		flex-direction: column;
 	}
