@@ -16,6 +16,8 @@ from rest_framework.authentication import (
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework import status
+from rest_framework.throttling import UserRateThrottle
+from rest_framework.decorators import throttle_classes
 from Cronos_core import models
 from ..serializers import (
     CronsSerializer,
