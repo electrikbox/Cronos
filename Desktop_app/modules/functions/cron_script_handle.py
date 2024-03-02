@@ -1,5 +1,6 @@
 import os
 import stat
+import glob
 import platform
 
 USER_PATH = os.path.expanduser("~")
@@ -147,7 +148,9 @@ class CronosScript:
     def remove_script(self) -> None:
         """Removes the script file associated with the cron job."""
         folder_path = os.path.expanduser(CRONOS_SCRIPT_PATH)
-        script = os.path.join(folder_path, f"cron_{self.cron_id}_script.sh")
+        for filename in os.listdir(folder_path):
+            if str(self.cron_id) in filename:
+                script = os.path.join(folder_path, filename)
         self.script_path = script
 
         if os.path.exists(script):
