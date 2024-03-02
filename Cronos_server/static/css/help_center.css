@@ -137,17 +137,37 @@
 	flex-direction: column;
 	align-items: center;
 }
-.open_cmd, .cp-cmd, .ls-cmd, .create-cron-tuto {
+.open_cmd, .cp-cmd, .ls-cmd {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: center;
 	gap: 20px;
 }
-.pause-cron img,
+/* .tuto-text {
+	max-height: 200px;
+} */
+.create-img {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	margin-top: 20px;
+	width: 100%;
+	height: 100%;
+}
+.create-img img, .pause-cron img,
 .del-cron img,
 .open_cmd img,
 .cp-cmd img,
-.ls-cmd img,
-.create-cron-tuto img {
-	margin: 15px;
+.ls-cmd img {
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	margin: 20px;
+}
+.open_cmd img, .cp-cmd img, .ls-cmd img {
+	width: 300px;
+}
+.create-text {
+	padding: 10px 40px 0 40px;
 }
