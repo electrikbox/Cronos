@@ -20,11 +20,17 @@
 	justify-content: center;
 	/* background-color: white; */
 	width: 50%;
+	padding-top: 25px;
 }
 
 .prez-web-txt {
-	background-color: blue;
+	/* background-color: blue; */
 	width: 50%;
+}
+#land-web-txt {
+	font-size: 1.8rem;
+	text-align: justify;
+	/* width: 50%; */
 }
 
 #land-img-dash {
@@ -35,7 +41,7 @@
 
 .diagonal-gradient-div2 {
     width: 100vw;
-    height: 5vh;
-    background: linear-gradient(to bottom right, rgba(76, 62, 85, 0.3) 50.5%, transparent 49.5%);
+    height: 2vh;
+    background: linear-gradient(to bottom right, transparent 49.5%, rgb(235, 235, 235) 50.5%);
     /* transform: rotate(45deg); */
 }

@@ -5,13 +5,13 @@
 	justify-content: center;
 	gap: 5rem;
 
-	background-color: rgb(235, 235, 235);
+	/* background-color: rgb(235, 235, 235);
 
 	background-image: url('../../img/cronos-back-rev.png');
 	background-attachment: fixed;
     background-repeat: no-repeat;
 	background-size: contain;
-	background-position: 0px -3em;
+	background-position: 0px -3em; */
 
 	/* min-height: 600px; */
 }
@@ -75,7 +75,7 @@
 
 .diagonal-gradient {
     width: 100vw;
-    height: 5vh;
+    height: 2vh;
     background: linear-gradient(to bottom right, transparent 49.5%, rgba(76, 62, 85, 0.3) 50.5%);
     /* transform: rotate(45deg); */
 }

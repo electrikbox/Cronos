@@ -1,5 +1,19 @@
 @import url('variables.css');
 
+.main-landing {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	background-color: rgb(235, 235, 235);
+
+	background-image: url('../img/cronos-back-rev.png');
+	background-attachment: fixed;
+    background-repeat: no-repeat;
+	background-size: contain;
+	background-position: 0px -3em;
+}
 .main-block p {
 	text-align: center;
 	/* font-size: 4rem; */
