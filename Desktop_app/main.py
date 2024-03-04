@@ -12,10 +12,10 @@ def main(page: ft.Page) -> None:
     page.title = "Cronos connect"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.vertical_alignment = ft.CrossAxisAlignment.START
-    page.window_width = 300
-    page.window_min_width = 400
-    page.window_height = 500
-    page.window_min_height = 500
+    page.window_width = 450
+    page.window_min_width = 550
+    page.window_height = 550
+    page.window_min_height = 550
     page.scroll = False
     page.update()
 
