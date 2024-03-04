@@ -1,9 +1,39 @@
 {% load static %}
 
+<h2>Our Website</h2>
 <div class="div2-content">
-	<div class="prez-web-img">
-		<img id="land-img-dash" src="{% static '/img/landing_img/landing-dashboard.png' %}" alt="Image">
-	</div>
+	<div class="slider-container">
+		<div class="slider">
+		  <div class="slides">
+			<div id="slides__1" class="slide">
+			  <img id="land-img-dash" src="{% static '/img/landing_img/landing-dashboard.png' %}" alt="Image">
+			  <a class="slide__prev" href="#slides__4" title="Next"></a>
+			  <a class="slide__next" href="#slides__2" title="Next"></a>
+			</div>
+			<div id="slides__2" class="slide">
+			  <img id="land-img-dash" src="{% static '/img/landing_img/landing-dashboard.png' %}" alt="Image">
+			  <a class="slide__prev" href="#slides__1" title="Prev"></a>
+			  <a class="slide__next" href="#slides__3" title="Next"></a>
+			</div>
+			<div id="slides__3" class="slide">
+			  <img id="land-img-dash" src="{% static '/img/landing_img/landing-dashboard.png' %}" alt="Image">
+			  <a class="slide__prev" href="#slides__2" title="Prev"></a>
+			  <a class="slide__next" href="#slides__4" title="Next"></a>
+			</div>
+			<div id="slides__4" class="slide">
+			  <img id="land-img-dash" src="{% static '/img/landing_img/landing-dashboard.png' %}" alt="Image">
+			  <a class="slide__prev" href="#slides__3" title="Prev"></a>
+			  <a class="slide__next" href="#slides__1" title="Prev"></a>
+			</div>
+		  </div>
+		  {% comment %} <div class="slider__nav">
+			<a class="slider__navlink" href="#slides__1"></a>
+			<a class="slider__navlink" href="#slides__2"></a>
+			<a class="slider__navlink" href="#slides__3"></a>
+			<a class="slider__navlink" href="#slides__4"></a>
+		  </div> {% endcomment %}
+		</div>
+	  </div>
 
 	<div class="prez-web-txt">
 		<p id="land-web-txt">{% lorem 50 w random %}</p>
