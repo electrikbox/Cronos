@@ -8,7 +8,7 @@ PASSWORD_FIELD_TEXT = "Password"
 LOGIN_BTN_TEXT = "Login"
 LOGOUT_BTN_TEXT = "Logout"
 INFO_TEXT = "Please login"
-LOGO = "logo.gif"
+LOGO = "CronOs_logo_Rond.png"
 
 
 class Elements(ft.UserControl):
