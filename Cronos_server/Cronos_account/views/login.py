@@ -46,4 +46,4 @@ def login_user(request):
 def logout_user(request):
     """ Logout user """
     logout(request)
-    return redirect('Cronos_account:login')
+    return redirect('/')
