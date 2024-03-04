@@ -14,6 +14,6 @@ $(document).ready(function () {
         slideIndex = 0;
       }
       carousel();
-    }, 4000);
+    }, 6000);
   }
 });
