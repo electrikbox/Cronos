@@ -136,6 +136,7 @@ class AppHandler:
 
             if not cmd_validated:
                 self.cron_action_text.value += (f"\nCommand {command} not available")
+                self.page.update()
                 deleted_cron = checked_cron.unvalidated_cron_delete(id)
                 self.unvalid_found = True
                 continue
