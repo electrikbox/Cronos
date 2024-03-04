@@ -8,12 +8,18 @@ $(document).ready(function () {
     $slides.eq(slideIndex).fadeIn(2000);
 
     setTimeout(function () {
-      $slides.hide();
-      slideIndex++;
-      if (slideIndex >= $slides.length) {
-        slideIndex = 0;
-      }
-      carousel();
-    }, 6000);
+      $slides.eq(slideIndex).fadeOut(2000, function() {
+        $(this).css('display', 'none');
+
+        slideIndex++;
+        if (slideIndex >= $slides.length) {
+          slideIndex = 0;
+        }
+
+        $slides.eq(slideIndex).fadeIn(2000);
+
+        carousel();
+      });
+    }, 5000);
   }
 });
