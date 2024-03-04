@@ -1,9 +1,35 @@
+.div3 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+
+}
+.gallery-app {
+	display: flex;
+	overflow: hidden;
+}
+.gallery-app-img {
+	display: none;
+	flex: 1;
+}
+.gallery-app-img img {
+	width: 100%;
+	height: auto;
+}
+
 .prez-app-txt {
-	background-color: red;
+	background-color: rgb(121, 121, 121);
 	width: 50%;
 }
 
 .prez-app-img {
-	background-color: white;
+	background-color: rgb(121, 121, 121);
 	width: 50%;
+}
+.div3 {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
