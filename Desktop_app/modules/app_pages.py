@@ -45,9 +45,20 @@ class AppPages(ft.UserControl):
                     [self.elements.logo],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
-                ft.Row(
-                    [self.elements.cron_action_text],
-                    alignment=ft.MainAxisAlignment.CENTER,
+                ft.Container(
+                    content=ft.Column(
+                        [self.elements.cron_action_text],
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        scroll=True,
+                        auto_scroll=True,
+                        height=120,
+                        width=350,
+                    ),
+                    alignment=ft.alignment.center,
+                    border=ft.border.all(1, ft.colors.GREY_800),
+                    border_radius=10,
+                    padding=10,
+                    width=350,
                 ),
                 ft.Column(
                     [
@@ -57,23 +68,23 @@ class AppPages(ft.UserControl):
                             alignment=ft.MainAxisAlignment.CENTER,
                         ),
                         ft.Container(
-                            content=self.elements.fetch_button,
+                            content=ft.Column(
+                                [
+                                    self.elements.fetch_button,
+                                    self.elements.clear_button,
+                                    self.elements.logout_button,
+                                ],
+                            ),
                             alignment=ft.alignment.center,
                         ),
                         ft.Container(
-                            content=self.elements.clear_button,
-                            alignment=ft.alignment.center,
-                        ),
-                        ft.Container(
-                            content=self.elements.logout_button,
-                            alignment=ft.alignment.center,
-                        ),
-                        ft.Container(
-                            content=self.elements.logged_text,
-                            alignment=ft.alignment.center,
+                            content=ft.Column(
+                                [self.elements.logged_text],
+                            ),
                         )
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
-            ]
+            ],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         )
