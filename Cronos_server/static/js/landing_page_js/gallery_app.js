@@ -5,7 +5,7 @@ $(document).ready(function () {
   carousel();
 
   function carousel() {
-    $slides.eq(slideIndex).fadeIn(1000);
+    $slides.eq(slideIndex).fadeIn(2000);
 
     setTimeout(function () {
       $slides.hide();
