@@ -1,9 +1,37 @@
+.div2 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(76, 62, 85, 0.3);
+}
+
+.div2-content {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
 .prez-web-img {
-	background-color: white;
+	/* background-color: white; */
 	width: 50%;
 }
 
 .prez-web-txt {
 	background-color: blue;
 	width: 50%;
+}
+
+#land-img-dash {
+	background-color: white;
+	width: 50%;
+	border-radius: 5px;
+}
+
+.diagonal-gradient-div2 {
+    width: 100vw;
+    height: 5vh;
+    background: linear-gradient(to bottom right, rgba(76, 62, 85, 0.3) 50.5%, transparent 49.5%);
+    /* transform: rotate(45deg); */
 }
