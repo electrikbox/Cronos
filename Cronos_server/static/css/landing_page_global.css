@@ -14,7 +14,7 @@
 }
 
 .scrolled .main-landing {
-	background-position: center calc(50% + 100px); /* Déplacer l'image de fond de 100 pixels vers le bas lors du défilement */
+	background-position: center calc(50% + 100px);
 }
 
 .main-block p {
