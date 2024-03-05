@@ -1,5 +1,6 @@
 @import url('variables.css');
 
+
 .main-landing {
 	display: flex;
 	flex-direction: column;
@@ -11,7 +12,8 @@
 	background-image: url('../img/cronos-back-rev.png');
 	background-attachment: fixed;
     background-repeat: no-repeat;
-	background-size: contain;
+	/* background-size: contain; */
+	background-size: cover;
 	background-position: 0px -3em;
 }
 .main-block p {
@@ -24,7 +26,7 @@
 }
 .div-title h2 {
 	text-align: center;
-	font-family: var(--main-font-family);
+	/* font-family: 'mustica', sans-serif; */
 	color: var(--main-color);
 	font-weight: normal;
 	font-size: 3rem;
