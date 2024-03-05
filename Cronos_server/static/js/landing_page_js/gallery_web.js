@@ -7,7 +7,7 @@ $(document).ready(function() {
   let autoScrollInterval;
 
   function startAutoScroll() {
-    autoScrollInterval = setInterval(nextSlide, 6000);
+    autoScrollInterval = setInterval(nextSlide, 4000);
   }
 
   function stopAutoScroll() {
