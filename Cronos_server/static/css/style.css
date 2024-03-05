@@ -1,5 +1,10 @@
 @import url('variables.css');
 
+@font-face {
+	font-family: 'mustica';
+	src: url('../fonts/MusticaPro-SemiBold.otf');
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -71,7 +76,8 @@ footer a{
 	color: var(--text-color);
 }
 h1, h2, h3 {
-	font-family: var(--main-font-family);
+	/* font-family: var(--main-font-family); */
+	font-family: 'mustica', sans-serif;
 	margin: 0;
 	color: var(--title-color);
 	width: 100%;

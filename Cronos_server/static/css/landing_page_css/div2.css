@@ -17,6 +17,12 @@
 	padding-bottom: 20px;
 }
 
+@media screen and (max-width: 768px) {
+	.div2-content {
+		flex-direction: column;
+	}
+}
+
 .prez-web-txt {
 	width: 50%;
 }
