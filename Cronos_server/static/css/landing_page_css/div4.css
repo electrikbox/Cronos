@@ -11,10 +11,11 @@
 
 .about-us {
 	display: flex;
+	flex-wrap: wrap;
 	flex-direction: row;
 	align-items: start;
-	justify-content: center;
-	gap: 20rem;
+	justify-content: space-around;
+	gap: 5rem;
 }
 
 .about-name {
