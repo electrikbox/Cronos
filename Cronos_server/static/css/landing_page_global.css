@@ -1,6 +1,5 @@
 @import url('variables.css');
 
-
 .main-landing {
 	display: flex;
 	flex-direction: column;
@@ -8,29 +7,32 @@
 	align-items: center;
 
 	background-color: rgb(235, 235, 235);
-
 	background-image: url('../img/cronos-back-rev.png');
 	background-attachment: fixed;
     background-repeat: no-repeat;
-	/* background-size: contain; */
 	background-size: cover;
-	background-position: 0px -3em;
 }
+
+.scrolled .main-landing {
+	background-position: center calc(50% + 100px); /* Déplacer l'image de fond de 100 pixels vers le bas lors du défilement */
+}
+
 .main-block p {
 	text-align: center;
-	/* font-size: 4rem; */
 	font-family: var(--main-font-family);
 }
+
 .div-title {
 	width: 100%;
 }
+
 .div-title h2 {
 	text-align: center;
-	/* font-family: 'mustica', sans-serif; */
 	color: var(--main-color);
 	font-weight: normal;
 	font-size: 3rem;
 }
+
 .div5 {
 	display: flex;
 	flex-direction: column;
