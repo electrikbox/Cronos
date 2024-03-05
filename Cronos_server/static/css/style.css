@@ -11,8 +11,8 @@
 	box-sizing: border-box;
 }
 html {
-scroll-behavior: smooth;
-  font-size: 62.5%;
+	scroll-behavior: smooth;
+  	font-size: 62.5%;
 }
 body {
 	display: flex;
@@ -50,12 +50,7 @@ section {
 	align-items: center;
 	background-color: rgb(212, 212, 212);
 	width: 100%;
-
-	background-image: url('../img/cronos-back-rev-low.png');
-	background-attachment: fixed;
-    background-repeat: no-repeat;
-	background-size: contain;
-	background-position: 0px -3em;
+	background-color: transparent;
 }
 footer {
 	background-color: var(--bg-color_1);
@@ -130,4 +125,12 @@ input[type="submit"]:hover,
 .cron_form-create button[type="submit"]:hover,
 .user_pic_form input[type="submit"]:hover {
 	background-color: rgb(34, 82, 104);
+}
+
+main {
+	background-image: url('../img/cronos-back-rev-low.png');
+	background-attachment:fixed;
+	background-position: bottom;
+    background-repeat: no-repeat;
+	background-size: contain;
 }
