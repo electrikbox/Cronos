@@ -1,40 +1,5 @@
 $(document).ready(function() {
-  const carouselContainer = $("#carousel-container");
   const carouselSlides = $(".carousel-slide");
-  const slideWidth = carouselSlides.first().width();
-  const slideGap = parseFloat(carouselContainer.css("gap"));
-  let currentIndex = 0;
-  let autoScrollInterval;
-
-  function startAutoScroll() {
-    autoScrollInterval = setInterval(nextSlide, 4000);
-  }
-
-  function stopAutoScroll() {
-    clearInterval(autoScrollInterval);
-  }
-
-  function nextSlide() {
-    const nextIndex = (currentIndex + 1) % carouselSlides.length;
-    carouselSlides.eq(currentIndex).addClass('hidden');
-    carouselSlides.eq(nextIndex).removeClass('hidden');
-    const scrollAmount = (slideWidth + slideGap) * nextIndex;
-    carouselContainer.animate({scrollLeft: scrollAmount}, 500);
-    currentIndex = nextIndex;
-  }
-
-  startAutoScroll();
-
-  // Stop auto scroll when mouse over a slide
-  carouselSlides.on('mouseenter', function() {
-    stopAutoScroll();
-  });
-
-  // Restart auto scroll when mouse leaves a slide
-  carouselSlides.on('mouseleave', function() {
-    startAutoScroll();
-  });
-
   const lightbox = $("#lightbox");
   const lightboxImg = $("#lightbox-img");
 
