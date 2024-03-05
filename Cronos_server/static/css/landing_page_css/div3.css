@@ -14,15 +14,6 @@
 	justify-content: center;
 	width: 100%;
 }
-.div3-title {
-	width: 100%;
-}
-.div3-title h2 {
-	text-align: center;
-	font-family: var(--main-font-family);
-	color: var(--main-color);
-	font-weight: normal;
-}
 .prez-app {
 	display: flex;
 	flex-direction: row;

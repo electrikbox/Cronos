@@ -19,14 +19,16 @@
 	/* font-size: 4rem; */
 	font-family: var(--main-font-family);
 }
-
-.div4 {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	background-color: yellow;
+.div-title {
+	width: 100%;
 }
-
+.div-title h2 {
+	text-align: center;
+	font-family: var(--main-font-family);
+	color: var(--main-color);
+	font-weight: normal;
+	font-size: 3rem;
+}
 .div5 {
 	display: flex;
 	flex-direction: column;
