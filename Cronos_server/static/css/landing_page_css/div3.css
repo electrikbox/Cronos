@@ -19,7 +19,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	gap: 20px;
+	/* gap: 20px; */
 }
 .prez-app-txt {
 	font-size: 2rem;
@@ -63,4 +63,20 @@
 
 .diagonal-gradient-div3 {
 	background: linear-gradient(to bottom left, transparent 49.5%, rgba(76, 62, 85, 0.3) 50.5%);
+}
+
+@media screen and (max-width: 768px) {
+	.prez-app {
+		flex-direction: column;
+	}
+	.prez-app-txt {
+		width: 100%;
+	}
+	.gallery-app-img {
+		width: 90%;
+	}
+	.prez-app-txt {
+		padding-left: 0;
+		width: 90%;
+	}
 }
