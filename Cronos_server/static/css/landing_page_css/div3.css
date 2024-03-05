@@ -35,17 +35,6 @@
 	text-align: center;
 	padding-bottom: 20px;
 }
-/* .animated-title {
-	animation: tiltAnimation 0.8s ease-in-out infinite alternate;
-}
-@keyframes tiltAnimation {
-	0% {
-		transform: rotate(-2deg);
-	}
-	100% {
-		transform: rotate(2deg);
-	}
-} */
 .prez-app-img {
 	display: flex;
 	flex-direction: column;

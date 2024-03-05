@@ -32,10 +32,3 @@
 	font-weight: normal;
 	font-size: 3rem;
 }
-
-.div5 {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	background-color: orange;
-}
