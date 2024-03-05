@@ -32,3 +32,10 @@
 	font-weight: normal;
 	font-size: 3rem;
 }
+.diagonal-gradient,
+.diagonal-gradient-div2,
+.diagonal-gradient-div3,
+.diagonal-gradient-div5 {
+	width: 100%;
+	height: 2vh;
+}

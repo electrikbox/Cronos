@@ -65,7 +65,5 @@
 }
 
 .diagonal-gradient-div5 {
-	width: 100%;
-	height: 6vh;
 	background: linear-gradient(to top right, transparent 49.5%, rgba(76, 62, 85, 0.3) 50.5%);
 }
