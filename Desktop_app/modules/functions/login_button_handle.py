@@ -17,6 +17,7 @@ class AppHandler:
     COMMENT = "Cronos"
 
     def __init__(self, elements: Elements, page: ft.Page, app_pages: AppPages) -> None:
+        """ Init app handler"""
         self.elements = elements
         self.page = page
         self.app_pages = app_pages
