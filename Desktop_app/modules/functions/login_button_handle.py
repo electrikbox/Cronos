@@ -17,6 +17,7 @@ class AppHandler:
     COMMENT = "Cronos"
 
     def __init__(self, elements: Elements, page: ft.Page, app_pages: AppPages) -> None:
+        """ Init app handler"""
         self.elements = elements
         self.page = page
         self.app_pages = app_pages
@@ -30,6 +31,7 @@ class AppHandler:
         self.cron_action_text = self.elements.cron_action_text
         self.all_msg_in_app = []
         self.unvalid_found = False
+        self.auto_fetch = True
 
     # UTILS
     # =========================================================================
@@ -50,6 +52,7 @@ class AppHandler:
         return remote_cron_str
 
     def local_cron_to_str(self, cron: CronItem) -> str:
+        """ Convert local cron to string """
         cmd = cron.command
         schedule = " ".join(
             [
@@ -252,42 +255,47 @@ class AppHandler:
 
         local_crons.write()
 
-    # MAIN METHODS  (LOGIN + FETCH REMOTE CRONS)
+    # LOGIN
     # =========================================================================
 
     def login(self) -> None:
         """ Login and fetch remote crons """
+        self.elements.fetch_button.text = "Stop Auto-fetch"
         self.authenticate()
-        self.add_remote_crons_to_local()
-        self.del_local_crons()
-        self.toggle_pause_local_crons()
-
         messages_user = self.all_msg_in_app
 
         if len(messages_user) == 0:
             self.cron_action_text.value = "Nothing to fetch at login"
-            self.page.update()
+        self.page.update()
 
+        self.auto_fetch_loop()
         self.all_msg_in_app.clear()
 
-    def fetch_remote_crons(self) -> None:
+    # AUTO FETCH
+    # =========================================================================
+
+    def auto_fetch_on_off(self) -> None:
         """ Fetch remote crons and update local crontab """
+        self.auto_fetch = not self.auto_fetch
 
-        self.add_remote_crons_to_local()
-        self.del_local_crons()
-        self.toggle_pause_local_crons()
-
-        # while True:
-        #     self.add_remote_crons_to_local()
-        #     self.del_local_crons()
-        #     self.toggle_pause_local_crons()
-        #     time.sleep(5)
+        if self.auto_fetch:
+            self.elements.fetch_button.text = "Stop Auto-fetch"
+            self.cron_action_text.value += "\nAuto fetch crons : ON"
+        else:
+            self.elements.fetch_button.text = "Start Auto-fetch"
+            self.cron_action_text.value += "\nAuto fetch crons : OFF"
 
         messages_user = self.all_msg_in_app
 
-        if len(messages_user) == 0 and not self.unvalid_found:
+        if (len(messages_user) == 0 and
+            not self.unvalid_found and
+            self.auto_fetch
+            ):
             self.cron_action_text.value += "\nNothing to fetch"
             self.page.update()
+
+        self.auto_fetch_loop()
+        self.page.update()
 
         self.all_msg_in_app.clear()
         self.unvalid_found = False
@@ -302,3 +310,14 @@ class AppHandler:
         time.sleep(2)
         self.cron_action_text.value = ""
         self.page.update()
+
+    # AUTO FETCH LOOP
+    # =========================================================================
+
+    def auto_fetch_loop(self):
+        """ Auto-fetch remote crons """
+        while self.auto_fetch:
+            self.add_remote_crons_to_local()
+            self.del_local_crons()
+            self.toggle_pause_local_crons()
+            time.sleep(5)

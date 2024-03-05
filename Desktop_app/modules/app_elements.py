@@ -8,7 +8,7 @@ PASSWORD_FIELD_TEXT = "Password"
 LOGIN_BTN_TEXT = "Login"
 LOGOUT_BTN_TEXT = "Logout"
 INFO_TEXT = "Please login"
-LOGO = "logo.gif"
+LOGO = "CronOs_logo_Rond.png"
 
 
 class Elements(ft.UserControl):
@@ -63,7 +63,7 @@ class Elements(ft.UserControl):
         self.cron_action_text = ft.Text(
             value="",
             text_align="center",
-            color=ft.colors.DEEP_PURPLE_300,
+            color=ft.colors.GREY_100,
         )
 
         # Fetch button

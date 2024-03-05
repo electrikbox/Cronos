@@ -4,31 +4,22 @@
 	align-items: center;
 	justify-content: center;
 	gap: 5rem;
-
-	background-color: rgb(235, 235, 235);
-
-	background-image: url('../../img/cronos-back-rev.png');
-	background-attachment: fixed;
-    background-repeat: no-repeat;
-	background-size: contain;
-	background-position: 0px -3em;
-
-	/* min-height: 600px; */
+	width: 100%;
 }
+
 .logo-img {
-	width: 100%;
-}
- #landing_logo {
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	font-size: 6rem;
-	padding-top: 3rem;
-	font-family: sans-serif;
-	font-weight: bolder;
- }
+	padding-top: 10rem;
+	padding-bottom: 8rem;
+}
+#landing_logo {
+	width: 90%;
+}
+
 .logo-msg {
 	width: 100%;
 }
@@ -58,6 +49,7 @@
 	padding: 10px;
 	width: 60%;
 }
+
 .log-btn {
 	width: 15rem;
 	padding: 15px 20px;
@@ -69,15 +61,13 @@
 	font-weight: bold;
 	color: white;
 }
+
 .log-btn:hover {
 	background-color: rgb(34, 82, 104);
 }
 
 .diagonal-gradient {
-    width: 100vw;
-    height: 5vh;
     background: linear-gradient(to bottom right, transparent 49.5%, rgba(76, 62, 85, 0.3) 50.5%);
-    /* transform: rotate(45deg); */
 }
 
 /* ================= animation ================= */
@@ -115,7 +105,15 @@
         display: none;
     }
     .header_auth {
-        flex-direction: column;
         align-items: end;
     }
+}
+
+@media screen and (max-width: 768px) {
+	.log-info-text {
+		width: 90%;
+	}
+	.logo-img {
+		padding-bottom: 0;
+	}
 }

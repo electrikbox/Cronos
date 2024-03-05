@@ -1,13 +1,18 @@
 @import url('variables.css');
 
+@font-face {
+	font-family: 'mustica';
+	src: url('../fonts/MusticaPro-SemiBold.otf');
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 html {
-scroll-behavior: smooth;
-  font-size: 62.5%;
+	scroll-behavior: smooth;
+  	font-size: 62.5%;
 }
 body {
 	display: flex;
@@ -45,12 +50,7 @@ section {
 	align-items: center;
 	background-color: rgb(212, 212, 212);
 	width: 100%;
-
-	background-image: url('../img/cronos-back-rev-low.png');
-	background-attachment: fixed;
-    background-repeat: no-repeat;
-	background-size: contain;
-	background-position: 0px -3em;
+	background-color: transparent;
 }
 footer {
 	background-color: var(--bg-color_1);
@@ -71,7 +71,8 @@ footer a{
 	color: var(--text-color);
 }
 h1, h2, h3 {
-	font-family: var(--main-font-family);
+	/* font-family: var(--main-font-family); */
+	font-family: 'mustica', sans-serif;
 	margin: 0;
 	color: var(--title-color);
 	width: 100%;
@@ -124,4 +125,12 @@ input[type="submit"]:hover,
 .cron_form-create button[type="submit"]:hover,
 .user_pic_form input[type="submit"]:hover {
 	background-color: rgb(34, 82, 104);
+}
+
+main {
+	background-image: url('../img/cronos-back-rev-low.png');
+	background-attachment:fixed;
+	background-position: bottom;
+    background-repeat: no-repeat;
+	background-size: contain;
 }

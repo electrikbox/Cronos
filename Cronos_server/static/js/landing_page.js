@@ -4,6 +4,6 @@ $(document).ready(function () {
   });
 
   $('#log-register').click(function () {
-    window.location.href = 'http://localhost:8000/accounts/register'
+    window.location.href = 'http://localhost:8000/accounts/signup'
   });
 });

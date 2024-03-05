@@ -10,46 +10,48 @@
 {% endblock %}
 
 {% block main %}
-<h2>Login</h2>
+<div class="account-back">
+  <h2>Login</h2>
 
-<div class="success_msg">
-{% if request.GET.success %}
-  <p class="success_signup_text">Account created successfully</p>
-{% endif %}
-</div>
+  <div class="success_msg">
+  {% if request.GET.success %}
+    <p class="success_signup_text">Account created successfully</p>
+  {% endif %}
+  </div>
 
-<div class="success_msg">
-{% if request.GET.reset %}
-  <p class="success_reset_text">Your password has been reset successfully, please log in</p>
-{% endif %}
-</div>
+  <div class="success_msg">
+  {% if request.GET.reset %}
+    <p class="success_reset_text">Your password has been reset successfully, please log in</p>
+  {% endif %}
+  </div>
 
-<div class="success_msg">
-  {% if request.GET.activate %}
-  <p class="success_activate">Account activated, please log in</p>
-{% endif %}
-</div>
+  <div class="success_msg">
+    {% if request.GET.activate %}
+    <p class="success_activate">Account activated, please log in</p>
+  {% endif %}
+  </div>
 
-{% for message in messages %}
-<p class="error_msg">{{ message }}</p>
-{% endfor %}
+  {% for message in messages %}
+  <p class="error_msg">{{ message }}</p>
+  {% endfor %}
 
-<div>
-    <form class="login_form" method="POST">
-        {% csrf_token %}
+  <div>
+      <form class="login_form" method="POST">
+          {% csrf_token %}
 
-        <label for="username">Username</label>
-        {{ login_form.username }}
-        <label for="password">Password</label>
-        {{ login_form.password }}
+          <label for="username">Username</label>
+          {{ login_form.username }}
+          <label for="password">Password</label>
+          {{ login_form.password }}
 
-    <p class="pwd_forget">
-      <a href="{% url 'Cronos_account:forget_password' %}">
-        Forget your password ?
-      </a>
-    </p>
+      <p class="pwd_forget">
+        <a href="{% url 'Cronos_account:forget_password' %}">
+          Forget your password ?
+        </a>
+      </p>
 
-        <input type="submit" value="Login">
-    </form>
+          <input type="submit" value="Login">
+      </form>
+  </div>
 </div>
 {% endblock %}

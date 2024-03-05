@@ -14,12 +14,15 @@
 
 .logo-menu {
     align-self: center;
-    padding-left: 1.5rem;
+    padding-left: 1rem;
 }
 .logo-menu img {
-    height: 3rem;
-    width: 3.2rem;
-    opacity: .7;
+    /* height: 3rem; */
+    width: 10rem;
+}
+
+#logo-small {
+    width: 3rem;
 }
 
 .user_auth {
@@ -27,6 +30,7 @@
     flex-direction: row;
     align-items: center;
     padding: 10px;
+    padding-right: 15px;
     gap: 7px;
 }
 

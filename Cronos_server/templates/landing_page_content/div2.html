@@ -1,6 +1,21 @@
-<div class="prez-web-img">
-	<p>IMG</p>
+{% load static %}
+
+<div class="div-title">
+	<h2>Our Website</h2>
 </div>
-<div class="prez-web-txt">
-	<p>TEXTE</p>
+<div class="div2-content">
+
+	<img class="carousel-slide" src="{% static '/img/landing_img/landing-dashboard.png' %}" alt="Image 1">
+
+	<div class="prez-web-txt">
+		<p>{% lorem 15 w random %}</p>
+	</div>
+
+</div>
+
+<div id="lightbox" style="display: none;">
+	<div id="lightbox-content">
+		<img id="lightbox-img" src="" alt="Lightbox Image">
+		<span id="close-lightbox">&times;</span>
+	</div>
 </div>

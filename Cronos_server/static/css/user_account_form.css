@@ -170,7 +170,8 @@ input[type="password"]:focus {
 }
 
 h3 {
-	font-family: var(--main-font-family);
+	/* font-family: var(--main-font-family); */
+	font-family: 'mustica', sans-serif;
 	color: var(--main-color);
 }
 .showPwd {
