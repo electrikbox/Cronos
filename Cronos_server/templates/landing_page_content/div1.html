@@ -1,5 +1,8 @@
+{% load static %}
+
 <div class="logo-img">
-	<div id="landing_logo">CRONOS</div>
+	{% comment %} <div id="landing_logo">CRONOS</div> {% endcomment %}
+	<img id="landing_logo" src="{% static '/img/CronOs_logo.png' %}" alt="logo">
 </div>
 
 <div class="logo-msg">
@@ -14,7 +17,7 @@
 </div>
 
 <div class="log-info-text">
-	<p>{% lorem 24 w %}</p>
+	<p>{% lorem 10 w %}</p>
 </div>
 
 <div class="logo-log">
