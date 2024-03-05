@@ -186,7 +186,7 @@ def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
     # Use previous command as initial value for the form
     cron_create_form = CronForm(initial=set_initial)
     crons = requests.get(CRON_LIST_API_URL, headers=header).json()
-    paginator = Paginator(crons, 6)
+    paginator = Paginator(crons, 7)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     logs = (

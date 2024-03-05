@@ -16,6 +16,7 @@ class AppPages(ft.UserControl):
                 ft.Row(
                     [self.elements.logo],
                     alignment=ft.MainAxisAlignment.CENTER,
+                    height=180,
                 ),
                 ft.Row(
                     [self.elements.username_field],
@@ -44,6 +45,7 @@ class AppPages(ft.UserControl):
                 ft.Row(
                     [self.elements.logo],
                     alignment=ft.MainAxisAlignment.CENTER,
+                    height=180,
                 ),
                 ft.Container(
                     content=ft.Column(
