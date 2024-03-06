@@ -15,6 +15,22 @@
     align-self: center;
     padding-left: 1rem;
 }
+.logo-menu ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    gap: 1rem;
+}
+.logo-menu ul a {
+    font-family: var(--main-font-family);
+    text-decoration: none;
+    color: rgb(187, 187, 187);
+}
+.logo-menu ul a:hover {
+    color: var(--link-color);
+}
 .logo-menu img {
     width: 10rem;
 }
