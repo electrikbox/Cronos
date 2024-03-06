@@ -1,6 +1,5 @@
 import os
 import stat
-import glob
 import platform
 
 USER_PATH = os.path.expanduser("~")
@@ -15,15 +14,10 @@ SCRIPT_PREVENT_SUDO = ('\nif [ $(id -u) -eq 0 ];\n\tthen echo "sudo forbiden."\n
 
 
 class CronosScript:
-    """
-    Represents a cron script handler.
-
-    Attributes:
-        cron_id (int): The ID of the cron job.
-        script_path (str): The path of the script file.
-    """
+    """ Represents a cron script handler. """
 
     def __init__(self, cron_id: int) -> None:
+        """ Initialize the cron script handler. """
         self.cron_id = cron_id
         self.script_path = ""
 
@@ -155,8 +149,3 @@ class CronosScript:
 
         if os.path.exists(script):
             os.remove(script)
-
-
-if __name__ == "__main__":
-    import flet
-    help(flet)

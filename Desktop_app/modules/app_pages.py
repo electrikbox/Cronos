@@ -1,11 +1,12 @@
-"""class to init app pages"""
-
 import flet as ft
 from modules import Elements
 
 
 class AppPages(ft.UserControl):
+    """ Class to initialize the pages of the app """
+
     def __init__(self, elements: Elements) -> None:
+        """ Initialize the pages """
         self.elements = elements
 
         # login page elements

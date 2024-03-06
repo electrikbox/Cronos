@@ -1,20 +1,13 @@
-"""Function that check if the received command
-exist and can be executed on the computer"""
-
 import shutil
 
 
 class CheckCommand:
+    """ Check if the command is available on the computer """
     def __init__(self, command) -> None:
+        """ Initialize the command """
         self.command = command
-
-    # Linux - Mac OS
-    # =============================================================================
 
     @staticmethod
     def is_command_available_unix(command) -> bool:
+        """ Check if the command is available on Unix systems """
         return shutil.which(command) is not None
-
-
-if __name__ == "__main__":
-    print(CheckCommand.is_command_available_unix("cal"))

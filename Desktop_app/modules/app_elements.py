@@ -1,5 +1,3 @@
-"""Class init elements like buttons, fields"""
-
 import flet as ft
 from flet import ElevatedButton, Image, ImageFit, Text, TextField
 
@@ -12,6 +10,7 @@ LOGO = "CronOs_logo_Rond.png"
 
 
 class Elements(ft.UserControl):
+    """ Class to initialize the elements of the app """
     def __init__(self) -> None:
 
         # Logo
