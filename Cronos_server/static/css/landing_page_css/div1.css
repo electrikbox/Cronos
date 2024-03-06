@@ -5,6 +5,7 @@
 	justify-content: center;
 	gap: 5rem;
 	width: 100%;
+	z-index: 1;
 }
 
 .logo-img {
@@ -51,7 +52,7 @@
 }
 
 .log-btn {
-	width: 15rem;
+	/* width: 15rem;
 	padding: 15px 20px;
 	background-color: rgba(51, 106, 132, 0.9);
 	border: none;
@@ -59,11 +60,40 @@
 	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.4);
 	font-size: 1.8rem;
 	font-weight: bold;
-	color: white;
+	color: white; */
+
+	position: relative;
+	background-color: rgba(51, 106, 132, 0.9);
+	border-radius: 5px;
+	box-shadow: rgb(22, 31, 48) 0px 2px 0px 0px;
+	padding: 15px;
+	cursor: pointer;
+	width: 154px;
+	height: 49px;
+	color: #fff;
+	border: none;
+	font-size: 20px;
+	transition: all 0.3s ease-in-out;
+	z-index: 1;
+	overflow: hidden;
 }
 
-.log-btn:hover {
+.log-btn::before {
+	content: "";
 	background-color: rgb(34, 82, 104);
+	width: 0;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	transition: width 300ms ease-in-out;
+	display: inline-block;
+  }
+
+.log-btn:hover::before {
+	/* background-color: rgb(34, 82, 104); */
+	width: 100%;
 }
 
 .diagonal-gradient {
