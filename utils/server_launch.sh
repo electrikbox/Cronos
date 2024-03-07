@@ -20,7 +20,7 @@ run_after_delay() {
         sleep 1
     done
 
-    source ../../.venv/bin/activate
+    source ../.venv/bin/activate
     echo -e "\n${COLOR_YELLOW}==============================${COLOR_RESET}"
     echo -e "${COLOR_YELLOW}==         Check DB         ==${COLOR_RESET}"
     echo -e "${COLOR_YELLOW}==============================${COLOR_RESET}"
