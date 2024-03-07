@@ -41,7 +41,7 @@ class ActivationTemporaryToken(models.Model):
             self.activation_token = secrets.token_urlsafe(32)
 
         if not self.expires_at:
-            self.expires_at = timezone.now() + datetime.timedelta(days=7)  # modif ici le délai
+            self.expires_at = timezone.now() + datetime.timedelta(days=1)  # modif ici le délai
         super().save(*args, **kwargs)
 
     def is_valid(self):
