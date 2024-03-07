@@ -16,6 +16,7 @@ class CronScraper:
     # =========================================================================
 
     def user_auth(self) -> str | None:
+        """ Authenticate user and get token """
         login_headers = {"Content-Type": "application/json"}
         login_data = {"username": self.username, "password": self.password}
 
@@ -38,6 +39,7 @@ class CronScraper:
     # =========================================================================
 
     def get_remote_crons(self, token):
+        """ Get list of crons from the server """
         self.token = token
 
         crons_headers = {
@@ -59,6 +61,7 @@ class CronScraper:
     # =========================================================================
 
     def send_cron_validation(self, cron_id):
+        """ Send cron validation to the server """
         self.user_auth()
 
         cron_data = {"validated": True}
@@ -84,6 +87,7 @@ class CronScraper:
     # =========================================================================
 
     def unvalidated_cron_delete(self, cron_id) -> str | None:
+        """ Delete unvalidated cron """
         self.user_auth()
 
         crons_headers = {
@@ -100,27 +104,3 @@ class CronScraper:
         else:
             print(f"Failed to delete {cron_id}. {response.status_code}")
             return None
-
-
-# =================================================================
-
-
-if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Please provide a username and password in argument")
-        sys.exit(1)
-
-    username = sys.argv[1]
-    password = sys.argv[2]
-
-    cron_scraper = CronScraper(username, password)
-    cron_scraper.user_auth()
-
-    if cron_scraper.authenticated:
-        print("Successful authentication")
-        crons_list = cron_scraper.get_remote_crons()
-
-        if crons_list:
-            print(crons_list)
-    else:
-        print("Authentication failed")
