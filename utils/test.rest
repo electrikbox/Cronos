@@ -1,0 +1,79 @@
+POST http://localhost:8000/api/signup/
+Content-Type: application/json
+
+{
+  "username": "",
+  "password": "",
+  "email": "",
+  "first_name": "",
+  "last_name": ""
+}
+
+###
+
+POST http://localhost:8000/api/login/
+Content-Type: application/json
+
+{
+  "username": "",
+  "password": ""
+}
+
+###
+
+GET http://localhost:8000/api/crons/
+Content-Type: application/json
+Authorization: Token 6863d9c35569d486310c3c706a306158e2a57dc9
+
+{}
+
+###
+
+GET http://localhost:8000/api/crons/53/
+Content-Type: application/json
+Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
+
+{}
+
+###
+
+POST http://localhost:8000/api/crons/create/
+Content-Type: application/json
+Authorization: Token 30a45936e5a1a6ba629568a2674748a2a27e87d2
+
+{
+  "minutes": "30",
+  "hours": "10",
+  "day_of_month": "24",
+  "months": "dec",
+  "day_of_week": "*",
+  "command": "ls",
+  "user": 1,
+  "is_paused": false,
+  "validated" : false
+}
+
+###
+
+PUT http://localhost:8000/api/crons/269/update/
+Content-Type: application/json
+Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
+
+{
+  "minutes": "*",
+  "hours": "*",
+  "day_of_month": "*",
+  "months": "mar",
+  "day_of_week": "mon",
+  "command": "pwd",
+  "is_paused": true,
+  "validated" : false
+}
+
+###
+
+DELETE http://localhost:8000/api/crons/683/delete/
+Content-Type: application/json
+Authorization: Token 6863d9c35569d486310c3c706a306158e2a57dc9
+
+{}
