@@ -1,0 +1,12 @@
+Django==5.0.1
+djangorestframework==3.14.0
+flet==0.19.0
+flet-core==0.19.0
+flet-runtime==0.19.0
+mysqlclient==2.2.1
+pillow==10.2.0
+PyMySQL==1.1.0
+python-crontab==3.0.0
+python-dotenv==1.0.0
+redis==5.0.1
+requests==2.31.0
