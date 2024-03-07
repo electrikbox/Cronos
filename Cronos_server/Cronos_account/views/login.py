@@ -26,7 +26,7 @@ def login_user(request):
 
         if user.is_active:
             login(request, user)
-            token = Token.objects.get(user=request.user).key
+            token = Token.objects.get_or_create(user=user)
             response = HttpResponseRedirect(request.GET.get('next', '/home'))
             response.set_cookie('user_token', token, httponly=True)
             return response
@@ -45,5 +45,9 @@ def login_user(request):
 
 def logout_user(request):
     """ Logout user """
+    token = Token.objects.get(user=request.user)
+    token.delete()
+
     logout(request)
+
     return redirect('/')

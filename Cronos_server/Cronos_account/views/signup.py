@@ -29,7 +29,7 @@ def signup_user(request):
             user.last_name = last_name
             user.save()
 
-            Token.objects.get_or_create(user=user)
+            # Token.objects.get_or_create(user=user)
 
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
             activation_token = ActivationTemporaryToken.objects.create(
