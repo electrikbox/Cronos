@@ -8,7 +8,7 @@ $(document).ready(function () {
     $slides.eq(slideIndex).fadeIn(2000);
 
     setTimeout(function () {
-      $slides.eq(slideIndex).fadeOut(2000, function() {
+      $slides.eq(slideIndex).fadeOut(1000, function() {
         $(this).css('display', 'none');
 
         slideIndex++;
@@ -23,3 +23,4 @@ $(document).ready(function () {
     }, 5000);
   }
 });
+

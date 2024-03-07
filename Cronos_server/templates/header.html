@@ -5,7 +5,12 @@
     {% if user.is_authenticated %}
     <a href="{% url 'Cronos_website:home' %}"><img src="{% static '/img/CronOs_logo.png' %}" alt="logo"></a>
     {% else %}
-    <a href="{% url 'Cronos_website:landing_page' %}"><img id="logo-small" src="{% static '/img/CronOs_logo_Rond.png' %}" alt="logo-small"></a>
+    <ul id="landing-menu">
+      <li><a href="#landing-web">Web</a></li>
+      <li><a href="#landing-app">App</a></li>
+      <li><a href="#landing-about">About</a></li>
+      <li><a href="#landing-reviews">Reviews</a></li>
+    </ul>
     {% endif %}
   </div>
 

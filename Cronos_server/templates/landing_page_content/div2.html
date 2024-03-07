@@ -1,16 +1,42 @@
 {% load static %}
 
-<div class="div-title">
-	<h2>Our Website</h2>
-</div>
-<div class="div2-content">
+<script>
+	$(document).ready(function() {
+		var splide = new Splide('.splide', {
+			type: 'loop',
+			perPage: 1,
+			autoplay: true,
+			speed: 1000
+		});
+		splide.mount();
+	});
+</script>
 
-	<img class="carousel-slide" src="{% static '/img/landing_img/landing-dashboard.png' %}" alt="Image 1">
+<div class="div-title"><h2>Our Website</h2></div>
+
+<div class="div2-content">
+	<section id="image-carousel" class="splide" aria-label="Beautiful Images">
+		<div class="splide__track">
+			<ul class="splide__list">
+				<li class="splide__slide">
+					<img class="carousel-slide" src="{% static '/img/landing_img/landing-dashboard.png' %}" alt="Image 1">
+				</li>
+				<li class="splide__slide">
+					<img class="carousel-slide" src="{% static '/img/landing_img/landing-download.png' %}" alt="Image 2">
+				</li>
+				<li class="splide__slide">
+					<img class="carousel-slide" src="{% static '/img/landing_img/landing-home.png' %}" alt="Image 3">
+				</li>
+				<li class="splide__slide">
+					<img class="carousel-slide" src="{% static '/img/landing_img/landing-faq.png' %}" alt="Image 4">
+				</li>
+			</ul>
+		</div>
+	</section>
 
 	<div class="prez-web-txt">
 		<p>{% lorem 15 w random %}</p>
 	</div>
-
 </div>
 
 <div id="lightbox" style="display: none;">
