@@ -26,7 +26,7 @@ class CronScraper:
         )
 
         if login_response.status_code == 200:
-            self.token = login_response.headers.get("Authorization", "").split(",")[1].split(" ")[2][1:-2]
+            self.token = login_response.headers.get("Authorization", "").split(" ")[1]
             self.authenticated = True
             return self.token
         else:
