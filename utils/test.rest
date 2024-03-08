@@ -2,11 +2,11 @@ POST http://localhost:8000/api/signup/
 Content-Type: application/json
 
 {
-  "username": "",
-  "password": "",
-  "email": "",
-  "first_name": "",
-  "last_name": ""
+  "username": "olive",
+  "password": "Azertylilivier59!",
+  "email": "electrikbox@icloud.com",
+  "first_name": "olive",
+  "last_name": "electrik"
 }
 
 ###
@@ -15,15 +15,15 @@ POST http://localhost:8000/api/login/
 Content-Type: application/json
 
 {
-  "username": "",
-  "password": ""
+  "username": "electrik",
+  "password": "olive"
 }
 
 ###
 
 GET http://localhost:8000/api/crons/
 Content-Type: application/json
-Authorization: Token 6863d9c35569d486310c3c706a306158e2a57dc9
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5OTQ0MDU3LCJpYXQiOjE3MDk4NTc2NTcsImp0aSI6IjQ1ZmIzZjE5ZTIzNTQ1OWFhMDNiYjA5MmIyZTM1MmIzIiwidXNlcl9pZCI6MX0.BtqQKOxh3I3xHd0wrAEHsLTbN9A1d5-hQr-UH8wmlEk
 
 {}
 
@@ -39,7 +39,7 @@ Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
 
 POST http://localhost:8000/api/crons/create/
 Content-Type: application/json
-Authorization: Token 30a45936e5a1a6ba629568a2674748a2a27e87d2
+Authorization: Token 6f2559adb4f3e4f02fc5197463b69e02e080897c
 
 {
   "minutes": "30",
