@@ -26,8 +26,9 @@ def login(request) -> Response:
 
     tokens = create_jwt_token(user)
     access_token = tokens['access']
+    refresh_token = tokens['refresh']
 
-    return Response(
-        {"message": "Login successful"},
-        headers={'Authorization': f'Tokens {access_token}'}
-    )
+    response = Response({"message": "Login successful"})
+    response.set_cookie('access_token', access_token, httponly=True)
+    response.set_cookie('refresh_token', refresh_token, httponly=True)
+    return response
