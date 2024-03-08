@@ -1,4 +1,5 @@
 from Cronos_API.views import *
+from Cronos_API.views.tokens import create_jwt_token
 
 @api_view(["POST"])
 def login(request) -> Response:
@@ -23,11 +24,9 @@ def login(request) -> Response:
     user.last_login = timezone.now()
     user.save()
 
-    token, created = Token.objects.get_or_create(user=user)
-    user_serializer = UserSerializer(instance=user)
+    tokens = create_jwt_token(user)
 
-    # return Response({"token": token.key, "user": user_serializer.data})
     return Response(
         {"message": "Login successful"},
-        headers={'Authorization': f'Token {token.key}'}
+        headers={'Authorization': f'Tokens {tokens}'}
     )
