@@ -1,6 +1,7 @@
 from Cronos_website.views import *
 from django.core.paginator import Paginator
 from django.core.handlers.wsgi import WSGIRequest
+from Cronos_API.views.tokens import renew_access_token
 
 
 URL_ERROR_MSG = "URL field is required for this command."
@@ -18,14 +19,16 @@ COMMAND_COOKIE_NAME = "previous_command"
 @login_required
 def dashboard(request: WSGIRequest) -> HttpResponseRedirect | HttpResponse:
     """Render the dashboard page"""
+
     message = request.GET.get("message", None)
     if message:
         messages.success(request, message)
 
-    user_token = request.COOKIES.get("user_token")
+    access_token = request.COOKIES.get("access")
+
     HEADER = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {user_token}",
+        "Authorization": f"Bearer {access_token}",
     }
 
     if request.method == "POST":
@@ -185,7 +188,15 @@ def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
 
     # Use previous command as initial value for the form
     cron_create_form = CronForm(initial=set_initial)
-    crons = requests.get(CRON_LIST_API_URL, headers=header).json()
+    crons = requests.get(CRON_LIST_API_URL, headers=header)
+
+    if crons.status_code == 401:
+        response = HttpResponseRedirect('/dashboard')
+        access = renew_access_token(request.user)
+        response.set_cookie("access", access)
+        return response
+
+    crons = crons.json()
     paginator = Paginator(crons, 7)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
