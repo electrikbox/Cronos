@@ -21,6 +21,15 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:8000/api/token/refresh/
+Content-Type: application/json
+
+{
+  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwOTk4Njg4OCwiaWF0IjoxNzA5OTAwNDg4LCJqdGkiOiJiNjQzNDIzNDNlMDU0ZWU2OGI5NGExYWZkZDc1NWRmMiIsInVzZXJfaWQiOjF9.SGkcMk254uxH0OoK4YvsivroXRavGnBufZBMLPAxTd8"
+}
+
+###
+
 GET http://localhost:8000/api/crons/
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5OTQ0MDU3LCJpYXQiOjE3MDk4NTc2NTcsImp0aSI6IjQ1ZmIzZjE5ZTIzNTQ1OWFhMDNiYjA5MmIyZTM1MmIzIiwidXNlcl9pZCI6MX0.BtqQKOxh3I3xHd0wrAEHsLTbN9A1d5-hQr-UH8wmlEk
