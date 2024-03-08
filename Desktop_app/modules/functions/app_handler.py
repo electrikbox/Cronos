@@ -238,7 +238,7 @@ class AppHandler:
     def logout(self) -> None:
         """ Logout function call """
 
-        self.cron_scraper.user_logout(self.token)
+        # self.cron_scraper.user_logout(self.token)
         self.auto_fetch = False
 
         self.elements.login_info_text.value = "Please login"
