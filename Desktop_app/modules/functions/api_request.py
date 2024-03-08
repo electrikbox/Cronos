@@ -26,7 +26,7 @@ class CronScraper:
         )
 
         if login_response.status_code == 200:
-            self.token = login_response.headers.get("Authorization", "").split(" ")[1]
+            self.token = login_response.headers.get("Authorization", "").split(",")[1].split(" ")[2][1:-2]
             self.authenticated = True
             return self.token
         else:
@@ -63,7 +63,7 @@ class CronScraper:
 
         crons_headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Token {self.token}",
+            "Authorization": f"Bearer {self.token}",
         }
 
         response = requests.get(self.CRONS_URL, headers=crons_headers)
@@ -81,12 +81,12 @@ class CronScraper:
 
     def send_cron_validation(self, cron_id):
         """ Send cron validation to the server """
-        self.user_auth()
+        # self.user_auth()
 
         cron_data = {"validated": True}
         crons_headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Token {self.token}",
+            "Authorization": f"Bearer {self.token}",
         }
 
         validation_url = f"{self.CRONS_URL}{cron_id}/update/"
@@ -111,7 +111,7 @@ class CronScraper:
 
         crons_headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Token {self.token}",
+            "Authorization": f"Bearer {self.token}",
         }
 
         validation_url = f"{self.CRONS_URL}{cron_id}/delete/"
