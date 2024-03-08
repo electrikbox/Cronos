@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  const access_token = document.cookie.split("user_token")[1].split(";")[0].replace("=", "");
+  const access_token = $.cookie('access')
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   /**
@@ -99,7 +99,7 @@ $(document).ready(function () {
       const confirmation = confirm('Are you shure you want to delete cron ?');
       if (confirmation) {
         $('.loader').show();
-        deleteMultipleCrons(selectedCronIds);
+        // deleteMultipleCrons(selectedCronIds);
       }
     } else {
       alert('Please select at least 1 cron.');
@@ -117,7 +117,7 @@ $(document).ready(function () {
   $('.cron-full input[type="checkbox"]').change(updateDeleteSelectedButtonState);
 
   // delete 1 cron
-  $('.delete-cron').click(deleteCron);
+  // $('.delete-cron').click(deleteCron);
 
   // select all crons
   $('.select-all').click(function () {
