@@ -1,9 +1,10 @@
-import sys
 import requests
+import json
 
 
 class CronScraper:
     LOGIN_URL = "http://localhost:8000/api/login/"
+    LOGOUT_URL = "http://localhost:8000/api/logout/"
     CRONS_URL = "http://localhost:8000/api/crons/"
 
     def __init__(self, username, password) -> None:
@@ -12,7 +13,7 @@ class CronScraper:
         self.authenticated = False
         self.token = None
 
-    # Function to log in and get the token
+    # Function to login and get the token
     # =========================================================================
 
     def user_auth(self) -> str | None:
@@ -34,6 +35,24 @@ class CronScraper:
             )
             self.authenticated = False
             return None
+
+    # Function to logout
+    # =========================================================================
+
+    def user_logout(self, token) -> None:
+        """ User logout """
+        logout_headers = {"Content-Type": "application/json"}
+        data = {"key": token}
+        json_data = json.dumps(data)
+
+        logout_response = requests.post(self.LOGOUT_URL, headers=logout_headers, data=json_data)
+
+        if logout_response.status_code == 200:
+            print("Logout successful")
+            self.authenticated = False
+        else:
+            print(f"Logout failed: {logout_response.status_code}")
+            self.authenticated = True
 
     # Get user crons list
     # =========================================================================
