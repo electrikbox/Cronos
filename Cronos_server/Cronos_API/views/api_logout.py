@@ -13,6 +13,6 @@ def logout(request) -> Response:
             status=status.HTTP_404_NOT_FOUND
         )
 
-    token.delete()
+    # token.delete()
 
     return Response({"message": "Logout successful"})

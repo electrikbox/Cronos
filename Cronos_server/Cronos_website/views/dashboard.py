@@ -22,7 +22,7 @@ def dashboard(request: WSGIRequest) -> HttpResponseRedirect | HttpResponse:
     if message:
         messages.success(request, message)
 
-    user_token = request.COOKIES.get("user_token").split(",")[1].split(":")[1][2:-2]
+    user_token = request.COOKIES.get("user_token")
     HEADER = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {user_token}",

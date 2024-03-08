@@ -1,9 +1,6 @@
 $(document).ready(function () {
 
-  const cookieValue = document.cookie.split("access")[1].split("}")[0];
-  const access_token = cookieValue.substring(4, cookieValue.length -1);
-  console.log(access_token);
-
+  const access_token = document.cookie.split("user_token")[1].split(";")[0].replace("=", "");
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   /**

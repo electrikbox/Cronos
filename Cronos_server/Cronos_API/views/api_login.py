@@ -25,8 +25,9 @@ def login(request) -> Response:
     user.save()
 
     tokens = create_jwt_token(user)
+    access_token = tokens['access']
 
     return Response(
         {"message": "Login successful"},
-        headers={'Authorization': f'Tokens {tokens}'}
+        headers={'Authorization': f'Tokens {access_token}'}
     )

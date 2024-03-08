@@ -1,9 +1,7 @@
 $(document).ready(function () {
 
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
-
-  const cookieValue = document.cookie.split(':')[3].split(';')[0];
-  const access_token = cookieValue.substring(2, cookieValue.length - 3);
+  const access_token = document.cookie.split("user_token")[1].split(";")[0].replace("=", "");
 
   /**
    * Updates the pause buttons on page load.

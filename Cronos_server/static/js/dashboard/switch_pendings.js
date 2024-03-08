@@ -9,8 +9,7 @@
 $(document).ready(function () {
   let intervalId;
 
-  const cookieValue = document.cookie.split(':')[3].split(';')[0];
-  const access_token = cookieValue.substring(2, cookieValue.length - 3);
+  const access_token = document.cookie.split("user_token")[1].split(";")[0].replace("=", "");
 
   /**
    * Validates and updates the status of a pending item.

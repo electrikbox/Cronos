@@ -28,9 +28,9 @@ def login_user(request):
         if user.is_active:
             login(request, user)
             tokens = create_jwt_token(user)
+            access_token = tokens['access']
             response = HttpResponseRedirect(request.GET.get('next', '/home'))
-            # response.set_cookie("user_token", tokens, httponly=True)
-            response.set_cookie("user_token", tokens, secure=True)
+            response.set_cookie("user_token", access_token)
             return response
 
         messages.error(
