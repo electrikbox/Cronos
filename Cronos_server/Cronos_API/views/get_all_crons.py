@@ -5,7 +5,6 @@ import rest_framework
 @permission_classes([IsAuthenticated])
 def list_crons(request: rest_framework.request.Request) -> Response:
     """List all user's crons"""
-    print(request.user)
     crons = models.Crons.objects.filter(user=request.user)
     serializer = CronsSerializer(crons, many=True)
     return Response(serializer.data)
