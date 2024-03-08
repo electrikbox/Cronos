@@ -1,7 +1,7 @@
 from Cronos_API.views import *
 
 @api_view(["GET"])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
+# @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def show_cron(request, cron_id) -> Response:
     """Show one user's cron by its id"""
