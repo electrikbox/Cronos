@@ -22,10 +22,16 @@ $(document).ready(function () {
     const row = $(this).closest('.cron-full');
     $('.loader').show();
 
+    const cookieValue = document.cookie.split(':')[3].split(';')[0];
+    const access_token = cookieValue.substring(2, cookieValue.length - 3);
+
     if (confirmation) {
       $.ajax({
         url: `/api/crons/${cronId}/delete/`,
         type: 'POST',
+        headers: {
+          'Authorization': `Bearer ${access_token}`
+        },
         data: {
           csrfmiddlewaretoken: csrfTokenInput.val()
         },
@@ -46,10 +52,14 @@ $(document).ready(function () {
    * @param {Object} cronIds - The cron IDs to be deleted.
    */
   function deleteMultipleCrons(cronIds) {
+    const cookieValue = document.cookie.split(':')[3].split(';')[0];
+    const access_token = cookieValue.substring(2, cookieValue.length - 3);
+
     $.ajax({
       url: '/api/delete-multiple/',
       type: 'POST',
       headers: {
+        'Authorization': `Bearer ${access_token}`,
         'X-CSRFToken': csrfTokenInput.val()
       },
       data: JSON.stringify({ ids: Object.keys(cronIds) }),

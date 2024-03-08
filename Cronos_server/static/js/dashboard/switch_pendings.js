@@ -9,6 +9,9 @@
 $(document).ready(function () {
   let intervalId;
 
+  const cookieValue = document.cookie.split(':')[3].split(';')[0];
+  const access_token = cookieValue.substring(2, cookieValue.length - 3);
+
   /**
    * Validates and updates the status of a pending item.
    * @param {number} index - The index of the pending item to validate.
@@ -44,15 +47,12 @@ $(document).ready(function () {
    * If there are no more pending crons, the interval for checking pending status is cleared.
    */
   function switchPendingStatus() {
-    const cookies = document.cookie.split('; ');
-    const accessToken = cookies[4].split(':')[2];
-    const accessTokenWithoutLastThree = accessToken.substring(2, accessToken.length - 3);
 
     $.ajax({
       url: `/api/crons/`,
       type: 'GET',
       headers: {
-        'Authorization': `Bearer ${accessTokenWithoutLastThree}`
+        'Authorization': `Bearer ${access_token}`
       },
       success: function (response) {
         const crons = getPendingsCrons();

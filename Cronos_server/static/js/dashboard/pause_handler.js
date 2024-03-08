@@ -2,6 +2,9 @@ $(document).ready(function () {
 
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
+  const cookieValue = document.cookie.split(':')[3].split(';')[0];
+  const access_token = cookieValue.substring(2, cookieValue.length - 3);
+
   /**
    * Updates the pause buttons on page load.
    */
@@ -13,6 +16,9 @@ $(document).ready(function () {
       $.ajax({
         url: `/api/crons/${cronId}/`,
         type: 'GET',
+        headers: {
+          'Authorization': `Bearer ${access_token}`
+        },
         success: function (response) {
           updateButtonIcon(button, response.is_paused);
         },
@@ -48,9 +54,13 @@ $(document).ready(function () {
   }
 
   function updateCronStatus(button, cronId, isPaused) {
+
     $.ajax({
       url: `/api/crons/${cronId}/update/`,
       type: 'POST',
+      headers: {
+        'Authorization': `Bearer ${access_token}`
+      },
       data: { csrfmiddlewaretoken: csrfTokenInput.val(), is_paused: isPaused },
       success: function (response) {
         console.log('Cron status updated successfully, is_paused:', isPaused);
@@ -66,9 +76,13 @@ $(document).ready(function () {
    * Toggles the pause state of a cron job.
    */
   function pauseToggle(cronId, button) {
+
     $.ajax({
       url: `/api/crons/${cronId}/`,
       type: 'GET',
+      headers: {
+        'Authorization': `Bearer ${access_token}`
+      },
       success: function (response) {
         const newIsPaused = !response.is_paused;
         updateCronStatus(button, cronId, newIsPaused);
@@ -130,10 +144,12 @@ $(document).ready(function () {
    * @param {boolean} is_paused - Indicates whether the crons should be paused or not.
    */
   function pauseMultipleCrons(cronIds, is_paused) {
+
     $.ajax({
       url: '/api/pause-multiple/',
       type: 'POST',
       headers: {
+        'Authorization': `Bearer ${access_token}`,
         'X-CSRFToken': csrfTokenInput.val()
       },
       data: JSON.stringify({ ids: Object.keys(cronIds), is_paused: is_paused }),
@@ -162,7 +178,7 @@ $(document).ready(function () {
   }
 
     // =======================  Event Listeners  =======================
-    
+
   // Handling pause-selected button click
   $('.pause-selected').click(function () {
     togglePauseButton(true);
