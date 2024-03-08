@@ -29,9 +29,9 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiY
 
 ###
 
-GET http://localhost:8000/api/crons/53/
+GET http://localhost:8000/api/crons/14/
 Content-Type: application/json
-Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5ODk1MzIxLCJpYXQiOjE3MDk4OTUyNjEsImp0aSI6Ijg0ZDE4Y2U0NGU4YTRiMmFhM2M3NTAwMTg4MzcxNmMzIiwidXNlcl9pZCI6MX0.5aW9aAUF6MsNFErOVJbE5vpgROGrDEnCSI2R3suoUvQ
 
 {}
 
@@ -39,7 +39,7 @@ Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
 
 POST http://localhost:8000/api/crons/create/
 Content-Type: application/json
-Authorization: Token 6f2559adb4f3e4f02fc5197463b69e02e080897c
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5ODk1MzIxLCJpYXQiOjE3MDk4OTUyNjEsImp0aSI6Ijg0ZDE4Y2U0NGU4YTRiMmFhM2M3NTAwMTg4MzcxNmMzIiwidXNlcl9pZCI6MX0.5aW9aAUF6MsNFErOVJbE5vpgROGrDEnCSI2R3suoUvQ
 
 {
   "minutes": "30",
@@ -55,9 +55,9 @@ Authorization: Token 6f2559adb4f3e4f02fc5197463b69e02e080897c
 
 ###
 
-PUT http://localhost:8000/api/crons/269/update/
+PUT http://localhost:8000/api/crons/14/update/
 Content-Type: application/json
-Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5ODk1MzIxLCJpYXQiOjE3MDk4OTUyNjEsImp0aSI6Ijg0ZDE4Y2U0NGU4YTRiMmFhM2M3NTAwMTg4MzcxNmMzIiwidXNlcl9pZCI6MX0.5aW9aAUF6MsNFErOVJbE5vpgROGrDEnCSI2R3suoUvQ
 
 {
   "minutes": "*",
@@ -65,15 +65,15 @@ Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
   "day_of_month": "*",
   "months": "mar",
   "day_of_week": "mon",
-  "command": "pwd",
+  "command": "cal",
   "is_paused": true,
   "validated" : false
 }
 
 ###
 
-DELETE http://localhost:8000/api/crons/683/delete/
+DELETE http://localhost:8000/api/crons/14/delete/
 Content-Type: application/json
-Authorization: Token 6863d9c35569d486310c3c706a306158e2a57dc9
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5ODk1NDAzLCJpYXQiOjE3MDk4OTUzNDMsImp0aSI6IjQ1NmViMjFkZmI1ZjRkN2NiN2VjZWUyYWNjNjM2YjliIiwidXNlcl9pZCI6MX0.eflvqnvB3MT3Bx8Z7T7krZTtuOUqirSUJs06zVn-z_M
 
 {}
