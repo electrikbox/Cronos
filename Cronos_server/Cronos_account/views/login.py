@@ -29,8 +29,12 @@ def login_user(request):
             login(request, user)
             tokens = create_jwt_token(user)
             access_token = tokens['access']
+            refresh_token = tokens['refresh']
+
             response = HttpResponseRedirect(request.GET.get('next', '/home'))
-            response.set_cookie("user_token", access_token)
+
+            response.set_cookie("access", access_token)
+            response.set_cookie("refresh", refresh_token)
             return response
 
         messages.error(
