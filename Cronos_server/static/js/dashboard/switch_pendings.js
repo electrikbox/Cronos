@@ -44,9 +44,16 @@ $(document).ready(function () {
    * If there are no more pending crons, the interval for checking pending status is cleared.
    */
   function switchPendingStatus() {
+    const cookies = document.cookie.split('; ');
+    const accessToken = cookies[4].split(':')[2];
+    const accessTokenWithoutLastThree = accessToken.substring(2, accessToken.length - 3);
+
     $.ajax({
       url: `/api/crons/`,
       type: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessTokenWithoutLastThree}`
+      },
       success: function (response) {
         const crons = getPendingsCrons();
         const filteredResponse = response.filter(cron => crons.includes(cron.id));
