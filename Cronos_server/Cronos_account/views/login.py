@@ -27,10 +27,10 @@ def login_user(request):
 
         if user.is_active:
             login(request, user)
-            # token = Token.objects.get_or_create(user=user)
             tokens = create_jwt_token(user)
             response = HttpResponseRedirect(request.GET.get('next', '/home'))
-            response.set_cookie("user_token", tokens, httponly=True)
+            # response.set_cookie("user_token", tokens, httponly=True)
+            response.set_cookie("user_token", tokens, secure=True)
             return response
 
         messages.error(
@@ -47,10 +47,5 @@ def login_user(request):
 
 def logout_user(request):
     """ Logout user """
-    # token = Token.objects.get(user=request.user)
-    # tokens = create_jwt_token(user)
-    # token.delete()
-
     logout(request)
-
     return redirect('/')
