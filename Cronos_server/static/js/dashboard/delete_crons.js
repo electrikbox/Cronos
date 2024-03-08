@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+  const cookieValue = document.cookie.split("access")[1].split("}")[0];
+  const access_token = cookieValue.substring(4, cookieValue.length -1);
+  console.log(access_token);
+
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   /**
@@ -21,9 +25,6 @@ $(document).ready(function () {
     const confirmation = confirm('Are you sure you want to delete this cron?');
     const row = $(this).closest('.cron-full');
     $('.loader').show();
-
-    const cookieValue = document.cookie.split(':')[3].split(';')[0];
-    const access_token = cookieValue.substring(2, cookieValue.length - 3);
 
     if (confirmation) {
       $.ajax({
@@ -52,8 +53,6 @@ $(document).ready(function () {
    * @param {Object} cronIds - The cron IDs to be deleted.
    */
   function deleteMultipleCrons(cronIds) {
-    const cookieValue = document.cookie.split(':')[3].split(';')[0];
-    const access_token = cookieValue.substring(2, cookieValue.length - 3);
 
     $.ajax({
       url: '/api/delete-multiple/',
