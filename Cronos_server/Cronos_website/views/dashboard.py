@@ -192,8 +192,8 @@ def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
 
     if crons.status_code == 401:
         response = HttpResponseRedirect('/dashboard')
-        access = renew_access_token(request.user)
-        response.set_cookie("access", access)
+        access_token = renew_access_token(request.user)
+        response.set_cookie("access", access_token)
         return response
 
     crons = crons.json()
