@@ -7,6 +7,7 @@ from Cronos_API.views.tokens import create_jwt_token
 
 def login_user(request):
     """ Render login page and authenticate user """
+
     if request.user.is_authenticated:
         return redirect('Cronos_website:home')
 
@@ -49,7 +50,16 @@ def login_user(request):
 # LOGOUT USER
 # =============================================================================
 
+# def logout_user(request):
+#     """ Logout user """
+
+#     logout(request)
+#     return redirect('/accounts/login/')
+
 def logout_user(request):
-    """ Logout user """
+    next_url = request.GET.get('next', '')
+    if not next_url:
+        next_url = '/home'
+    request.session['next_url'] = next_url
     logout(request)
-    return redirect('/')
+    return redirect(f"{reverse('Cronos_account:login')}?next={next_url}")
