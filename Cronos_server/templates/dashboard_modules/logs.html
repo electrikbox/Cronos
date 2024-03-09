@@ -1,8 +1,8 @@
 <div class="logs">
   {% if logs %}
 
-  {% for log in logs|slice:":5" %}
-  <p>{{ log.create_date|date:"d M y H:i" }} : {{ log.log }}</p>
+  {% for log in logs|slice:":5"%}
+  <p>{{ log.create_date|date:"d M y H:i" | escapejs }} : {{ log.log | escapejs }}</p>
   {% endfor %}
 
   {% else %}

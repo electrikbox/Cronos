@@ -4,33 +4,33 @@
   <input type="checkbox" class="ui-checkbox">
   <div class="cron">
 
-    <div id="cron_id"><p>{{ cron.id }}</p></div>
+    <div id="cron_id"><p>{{ cron.id | escapejs }}</p></div>
 
     <div class="cron-line">
 
       <div class="cron-infos" id="dom">
         <p>Month's day</p>
-        <p class="info">{{ cron.day_of_month | to_date}}</p>
+        <p class="info">{{ cron.day_of_month | to_date | escapejs }}</p>
       </div>
 
       <div class="cron-infos" id="month">
         <p>Month</p>
-        <p class="info">{{ cron.months | to_date}}</p>
+        <p class="info">{{ cron.months | to_date | escapejs }}</p>
       </div>
 
       <div class="cron-infos" id="dow">
         <p>Week's day</p>
-        <p class="info">{{ cron.day_of_week | to_date}}</p>
+        <p class="info">{{ cron.day_of_week | to_date | escapejs }}</p>
       </div>
 
       <div class="cron-infos" id="time">
         <p>Time</p>
-        <p class="info">{{ cron.hours | to_double_digit }}:{{ cron.minutes | to_double_digit}}</p>
+        <p class="info">{{ cron.hours | to_double_digit | escapejs }}:{{ cron.minutes | to_double_digit | escapejs }}</p>
       </div>
 
       <div class="cron-infos" id="command">
         <p>Command</p>
-        <p class="info">{{ cron.command | rm_http | truncatechars:25}}</p>
+        <p class="info">{{ cron.command | rm_http | truncatechars:25 | escapejs }}</p>
       </div>
     </div>
 
@@ -43,7 +43,7 @@
     {% endif %}
 
     <div class="cron-option">
-      <div class="pause-cron" data-cron-id="{{ cron.id }}">
+      <div class="pause-cron" data-cron-id="{{ cron.id | escapejs }}">
         {% if cron.is_paused %}
         <ion-icon name="play-circle-outline"></ion-icon>
       </div>
@@ -51,7 +51,7 @@
         <ion-icon name="pause-circle-outline"></ion-icon>
       </div>
         {% endif %}
-      <div class="delete-cron" data-cron-id="{{ cron.id }}">
+      <div class="delete-cron" data-cron-id="{{ cron.id | escapejs }}">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M112 112l20 320c.95 18.49 14.4 32 32 32h184c17.67 0 30.87-13.51 32-32l20-320" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 112h352"/><path d="M192 112V72h0a23.93 23.93 0 0124-24h80a23.93 23.93 0 0124 24h0v40M256 176v224M184 176l8 224M328 176l-8 224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
       </div>
 

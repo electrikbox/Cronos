@@ -14,9 +14,9 @@
 <link rel="stylesheet" href="{% static '/css/dashboard/list.css' %}">
 <link rel="stylesheet" href="{% static '/css/dashboard/cron.css' %}">
 <script src="{% static '/js/dashboard/choice_field_handler.js' %}"></script>
-<script src="{% static '/js/dashboard/delete_crons.js' %}"></script>
+{% comment %} <script src="{% static '/js/dashboard/delete_crons.js' %}"></script> {% endcomment %}
 <script src="{% static '/js/dashboard/pause_handler.js' %}"></script>
-<script src="{% static '/js/dashboard/switch_pendings.js' %}"></script>
+{% comment %} <script src="{% static '/js/dashboard/switch_pendings.js' %}"></script> {% endcomment %}
 <script src="{% static '/js/dashboard/utils.js' %}"></script>
 {% endblock %}
 
@@ -97,6 +97,12 @@
   </ul>
 </div>
 
+<script>
+  $(document).ready(function() {
+    const accessToken = "{{ access_token }}";
+    localStorage.setItem("access_token", accessToken);
+  });
+</script>
 
 
 {% endblock %}

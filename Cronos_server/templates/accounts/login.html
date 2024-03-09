@@ -40,9 +40,9 @@
           {% csrf_token %}
 
           <label for="username">Username</label>
-          {{ login_form.username }}
+          {{ login_form.username | escape }}
           <label for="password">Password</label>
-          {{ login_form.password }}
+          {{ login_form.password | escape }}
 
       <p class="pwd_forget">
         <a href="{% url 'Cronos_account:forget_password' %}">
