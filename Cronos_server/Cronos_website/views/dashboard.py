@@ -1,7 +1,6 @@
 from Cronos_website.views import *
 from django.core.paginator import Paginator
 from django.core.handlers.wsgi import WSGIRequest
-from Cronos_API.views.tokens import renew_access_token
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
@@ -23,7 +22,6 @@ def dashboard(request: WSGIRequest) -> HttpResponseRedirect | HttpResponse:
 
     tokens = RefreshToken.for_user(request.user)
     access_token = str(tokens.access_token)
-    # request.COOKIES["access_token"] = access_token
 
     message = request.GET.get("message", None)
     if message:
@@ -38,7 +36,7 @@ def dashboard(request: WSGIRequest) -> HttpResponseRedirect | HttpResponse:
         return handle_post_request(request, HEADER)
     else:
         response = render_dashboard_page(request, HEADER, access_token)
-        response.set_cookie("access_token", access_token, httponly=True)
+        # response.set_cookie("access_token", access_token, httponly=True)
         return response
 
 
@@ -214,5 +212,5 @@ def render_dashboard_page(request: WSGIRequest, header: dict, access_token) -> H
         "page_obj": page_obj,
         "access_token": access_token,
     }
-    print(context["access_token"])
+    # print(context)
     return render(request, "dashboard.html", context)
