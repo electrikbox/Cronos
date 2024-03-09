@@ -2,6 +2,7 @@ from Cronos_website.views import *
 from django.core.paginator import Paginator
 from django.core.handlers.wsgi import WSGIRequest
 from Cronos_API.views.tokens import renew_access_token
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 URL_ERROR_MSG = "URL field is required for this command."
@@ -20,11 +21,13 @@ COMMAND_COOKIE_NAME = "previous_command"
 def dashboard(request: WSGIRequest) -> HttpResponseRedirect | HttpResponse:
     """Render the dashboard page"""
 
+    tokens = RefreshToken.for_user(request.user)
+    access_token = str(tokens.access_token)
+    # request.COOKIES["access_token"] = access_token
+
     message = request.GET.get("message", None)
     if message:
         messages.success(request, message)
-
-    access_token = request.COOKIES.get("access")
 
     HEADER = {
         "Content-Type": "application/json",
@@ -34,7 +37,9 @@ def dashboard(request: WSGIRequest) -> HttpResponseRedirect | HttpResponse:
     if request.method == "POST":
         return handle_post_request(request, HEADER)
     else:
-        return render_dashboard_page(request, HEADER)
+        response = render_dashboard_page(request, HEADER, access_token)
+        response.set_cookie("access_token", access_token, httponly=True)
+        return response
 
 
 # Handle the POST request to create a cron job
@@ -160,7 +165,7 @@ def handle_invalid_form(request: WSGIRequest, cron_create_form: CronForm) -> Htt
 # ==============================================================================
 
 
-def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
+def render_dashboard_page(request: WSGIRequest, header: dict, access_token) -> HttpResponse:
     """Render the dashboard page"""
 
     previous_command = request.COOKIES.get(COMMAND_COOKIE_NAME, "")
@@ -190,12 +195,6 @@ def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
     cron_create_form = CronForm(initial=set_initial)
     crons = requests.get(CRON_LIST_API_URL, headers=header)
 
-    if crons.status_code == 401:
-        response = HttpResponseRedirect('/dashboard')
-        access_token = renew_access_token(request.user)
-        response.set_cookie("access", access_token)
-        return response
-
     crons = crons.json()
     paginator = Paginator(crons, 7)
     page_number = request.GET.get("page")
@@ -213,5 +212,7 @@ def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
         "logs": logs,
         "image_url": image_url,
         "page_obj": page_obj,
+        "access_token": access_token,
     }
+    print(context["access_token"])
     return render(request, "dashboard.html", context)

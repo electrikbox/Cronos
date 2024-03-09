@@ -1,7 +1,9 @@
 $(document).ready(function () {
 
-  const access_token = $.cookie('access');
+  // const access_token = $.cookie('access_token');
+  const access_token = localStorage.getItem('access_token');
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
+  console.log('Access Token:', access_token);
 
   /**
    * Updates the pause buttons on page load.
@@ -45,7 +47,7 @@ $(document).ready(function () {
       alert('Please select at least 1 cron.');
       return;
     }
-    pauseMultipleCrons(selectedCronIds, is_paused);
+    // pauseMultipleCrons(selectedCronIds, is_paused);
     // Deselect all checkboxes after operation
     $('.cron-full input[type="checkbox"]').prop('checked', false);
     updateSelectedButtonState();
@@ -156,7 +158,7 @@ $(document).ready(function () {
         console.log('Crons have been paused successfully.');
         Object.values(cronIds).forEach(function (row) {
           $('.select-all').prop('checked', false);
-          // updateSelectedButtonState();
+          updateSelectedButtonState();
           // updatePauseButtonsOnLoad(); // <------- à remplacer pour eviter les multiples requetes
         });
         window.location.href = "/dashboard?pause=true"; // <------- reload page
@@ -175,7 +177,7 @@ $(document).ready(function () {
     $('.logs-div').load(currentUrl + ' .logs');
   }
 
-    // =======================  Event Listeners  =======================
+  // =======================  Event Listeners  =======================
 
   // Handling pause-selected button click
   $('.pause-selected').click(function () {
@@ -195,7 +197,7 @@ $(document).ready(function () {
     console.log('cronId:', cronId);
 
     pauseToggle(cronId, button);
-    // $('.loader').show();
+    $('.loader').show();
   });
 
   updatePauseButtonsOnLoad();
