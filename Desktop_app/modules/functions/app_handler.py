@@ -328,7 +328,12 @@ class AppHandler:
     def auto_fetch_loop(self):
         """ Auto-fetch remote crons """
         while self.auto_fetch:
-            self.add_remote_crons_to_local()
-            self.del_local_crons()
-            self.toggle_pause_local_crons()
-            time.sleep(5)
+            try:
+                self.add_remote_crons_to_local()
+                self.del_local_crons()
+                self.toggle_pause_local_crons()
+                time.sleep(5)
+            except Exception as e:
+                self.cron_scraper = CronScraper(self.username, self.password)
+                self.token = self.cron_scraper.user_auth()
+                print("reconnecting to get new token...")

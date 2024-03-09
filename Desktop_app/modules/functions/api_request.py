@@ -12,6 +12,7 @@ class CronScraper:
         self.password = password
         self.authenticated = False
         self.token = None
+        self.refresh_token = None
 
     # Function to login and get the token
     # =========================================================================
@@ -26,9 +27,15 @@ class CronScraper:
         )
 
         if login_response.status_code == 200:
-            self.token = login_response.headers.get("Authorization", "").split(" ")[1]
-            self.authenticated = True
-            return self.token
+
+            response_data = login_response.json()
+            access_token = login_response.cookies.get('access_token')
+            refresh_token = login_response.cookies.get('refresh_token')
+            if access_token:
+                self.token = access_token
+                self.refresh_token = refresh_token
+                self.authenticated = True
+                return self.token
         else:
             print(
                 f"Connection failed. Status code: {login_response.status_code}"
