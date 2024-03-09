@@ -43,7 +43,7 @@
 	width: 20rem;
 	height: 20rem;
 	border-radius: 20rem;
-	border: 4px solid var(--main-color);
+	/* border: 4px solid var(--main-color); */
 	background-color: rgba(140, 140, 140, 0.74);
 	box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.4);
 	margin-bottom: 10px;
