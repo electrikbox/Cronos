@@ -7,8 +7,9 @@
 	align-items: center;
 
 	background-color: rgb(235, 235, 235);
-	background-image: url('../img/cronos-back2-rev.png');
+	background-image: url('../img/cronos-back3-rev.png');
 	background-attachment: fixed;
+	/* background-position-x: center; */
     background-repeat: no-repeat;
 	background-size: cover;
 }
