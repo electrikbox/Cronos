@@ -9,7 +9,31 @@
 $(document).ready(function () {
   let intervalId;
 
-  const access_token = $.cookie('access');
+  const access_token = localStorage.getItem('access_token');
+
+  function refreshAccessToken() {
+    const refreshToken = localStorage.getItem('refresh_token');
+
+    if (!refreshToken) {
+      console.error('No refresh token found in local storage');
+      return;
+    }
+
+    $.ajax({
+      url: '/api/token/refresh/',
+      type: 'POST',
+      data: { refresh: refreshToken },
+      success: function (response) {
+        const newAccessToken = response.access;
+        localStorage.setItem('access_token', newAccessToken);
+        console.log('New access token obtained:', newAccessToken);
+      },
+      error: function (xhr, status, error) {
+        alert('Please login again.');
+        window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
+      }
+    });
+  }
 
   /**
    * Validates and updates the status of a pending item.
@@ -73,7 +97,8 @@ $(document).ready(function () {
         }
       },
       error: function (xhr) {
-        console.error('Failed to get users status:', xhr.status, xhr.responseText);
+        alert('Please login again.');
+        window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
       }
     });
   }

@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
-  const access_token = $.cookie('access');
-  const refresh_token = $.cookie('refresh');
+  // const access_token = $.cookie('access');
+  const access_token = localStorage.getItem('access_token');
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   /**
@@ -39,13 +39,8 @@ $(document).ready(function () {
           window.location.href = "/dashboard?delete=true";
         },
         error: function (xhr) {
-          if (xhr.status === 401) {
-            window.location.href = "/dashboard";
-          } else {
-            console.log(`${xhr.status}: ${xhr.responseText}`);
-            window.location.href = "/dashboard";
-            alert('Failed to delete cron');
-          }
+          alert('Please login again.');
+          window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
         }
       });
     }
@@ -76,7 +71,8 @@ $(document).ready(function () {
         });
       },
       error: function (xhr, status, error) {
-        console.error('Delete crons error:', error);
+        alert('Please login again.');
+        window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
       }
     });
   }

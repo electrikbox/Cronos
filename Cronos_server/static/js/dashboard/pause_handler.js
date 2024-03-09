@@ -3,7 +3,6 @@ $(document).ready(function () {
   // const access_token = $.cookie('access_token');
   const access_token = localStorage.getItem('access_token');
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
-  console.log('Access Token:', access_token);
 
   /**
    * Updates the pause buttons on page load.
@@ -47,13 +46,19 @@ $(document).ready(function () {
       alert('Please select at least 1 cron.');
       return;
     }
-    // pauseMultipleCrons(selectedCronIds, is_paused);
+    pauseMultipleCrons(selectedCronIds, is_paused);
     // Deselect all checkboxes after operation
     $('.cron-full input[type="checkbox"]').prop('checked', false);
     updateSelectedButtonState();
   }
 
-  function updateCronStatus(button, cronId, isPaused) {
+  function pauseToggle(cronId, button) {
+    const currentIcon = button.find('ion-icon').attr('name');
+    const isCurrentlyPaused = currentIcon === 'play-circle-outline';
+    console.log('currentIcon:', currentIcon);
+    console.log('isCurrentlyPaused:', isCurrentlyPaused);
+
+    const newIsPaused = !isCurrentlyPaused;
 
     $.ajax({
       url: `/api/crons/${cronId}/update/`,
@@ -61,37 +66,15 @@ $(document).ready(function () {
       headers: {
         'Authorization': `Bearer ${access_token}`
       },
-      data: { csrfmiddlewaretoken: csrfTokenInput.val(), is_paused: isPaused },
+      data: { csrfmiddlewaretoken: csrfTokenInput.val(), is_paused: newIsPaused },
       success: function (response) {
-        console.log('Cron status updated successfully, is_paused:', isPaused);
-      },
-      error: function (xhr) {
-        console.error('Failed to update cron status:', xhr.status, xhr.responseText);
-        alert('Failed to update cron status');
-      }
-    });
-  }
-
-  /**
-   * Toggles the pause state of a cron job.
-   */
-  function pauseToggle(cronId, button) {
-
-    $.ajax({
-      url: `/api/crons/${cronId}/`,
-      type: 'GET',
-      headers: {
-        'Authorization': `Bearer ${access_token}`
-      },
-      success: function (response) {
-        const newIsPaused = !response.is_paused;
-        updateCronStatus(button, cronId, newIsPaused);
+        $('.loader').hide();
         updateButtonIcon(button, newIsPaused);
         setTimeout(reloadCronFormLogs, 500);
       },
       error: function (xhr) {
-        console.error('AJAX request failed:', xhr.status, xhr.responseText);
-        alert('Failed to perform the operation. Please try again.');
+        alert('Please login again.');
+        window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
       }
     });
   }
@@ -144,7 +127,6 @@ $(document).ready(function () {
    * @param {boolean} is_paused - Indicates whether the crons should be paused or not.
    */
   function pauseMultipleCrons(cronIds, is_paused) {
-
     $.ajax({
       url: '/api/pause-multiple/',
       type: 'POST',
@@ -159,12 +141,12 @@ $(document).ready(function () {
         Object.values(cronIds).forEach(function (row) {
           $('.select-all').prop('checked', false);
           updateSelectedButtonState();
-          // updatePauseButtonsOnLoad(); // <------- à remplacer pour eviter les multiples requetes
         });
         window.location.href = "/dashboard?pause=true"; // <------- reload page
       },
       error: function (xhr, status, error) {
-        console.error('Error pausing crons:', error);
+        alert('Please login again.');
+        window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
       }
     });
   }
