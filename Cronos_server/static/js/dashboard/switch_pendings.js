@@ -9,7 +9,7 @@
 $(document).ready(function () {
   let intervalId;
 
-  const access_token = $.cookie('access')
+  const access_token = $.cookie('access');
 
   /**
    * Validates and updates the status of a pending item.

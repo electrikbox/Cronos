@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-  const access_token = $.cookie('access')
+  const access_token = $.cookie('access');
+  const refresh_token = $.cookie('refresh');
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   /**
@@ -17,7 +18,7 @@ $(document).ready(function () {
   /**
    * Deletes a cron.
    */
-  function deleteCron () {
+  function deleteCron() {
     const cronId = $(this).data('cron-id');
     const confirmation = confirm('Are you sure you want to delete this cron?');
     const row = $(this).closest('.cron-full');
@@ -38,8 +39,13 @@ $(document).ready(function () {
           window.location.href = "/dashboard?delete=true";
         },
         error: function (xhr) {
-          console.log(`${xhr.status}: ${xhr.responseText}`);
-          alert('Failed to delete cron');
+          if (xhr.status === 401) {
+            window.location.href = "/dashboard";
+          } else {
+            console.log(`${xhr.status}: ${xhr.responseText}`);
+            window.location.href = "/dashboard";
+            alert('Failed to delete cron');
+          }
         }
       });
     }
@@ -99,7 +105,7 @@ $(document).ready(function () {
       const confirmation = confirm('Are you shure you want to delete cron ?');
       if (confirmation) {
         $('.loader').show();
-        // deleteMultipleCrons(selectedCronIds);
+        deleteMultipleCrons(selectedCronIds);
       }
     } else {
       alert('Please select at least 1 cron.');
@@ -117,7 +123,7 @@ $(document).ready(function () {
   $('.cron-full input[type="checkbox"]').change(updateDeleteSelectedButtonState);
 
   // delete 1 cron
-  // $('.delete-cron').click(deleteCron);
+  $('.delete-cron').click(deleteCron);
 
   // select all crons
   $('.select-all').click(function () {

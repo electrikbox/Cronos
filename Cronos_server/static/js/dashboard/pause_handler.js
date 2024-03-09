@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  const access_token = $.cookie('access')
+  const access_token = $.cookie('access');
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   /**
