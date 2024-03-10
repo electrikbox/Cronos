@@ -4,6 +4,10 @@
 
 Cronos_connect application designed to work with Cronos website.
 
+<p align="center">
+  <img src="https://i.imgur.com/giCk6b9.png" alt="Texte alternatif">
+</p>
+
 ## ⚙️ Installation
 
 To install Cronos-Connect, follow these steps:
