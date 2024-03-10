@@ -146,9 +146,31 @@ input[type="submit"]:hover,
 }
 
 main {
-	background-image: url('../img/cronos-back2-low.png');
+	background-image: url('../img/cronos-back3.png');
 	background-attachment:fixed;
 	background-position: bottom;
     background-repeat: no-repeat;
 	background-size: contain;
+}
+/* ==================== scrollbar ===================== */
+
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #9985a1;
+	border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #6d5377;
 }
