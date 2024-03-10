@@ -4,6 +4,7 @@
 
 Cronos_connect application designed to work with Cronos website.
 
+## 🛠 How it work
 <p align="center">
   <img src="https://i.imgur.com/giCk6b9.png" alt="Texte alternatif">
 </p>
