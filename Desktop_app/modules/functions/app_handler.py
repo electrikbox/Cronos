@@ -72,9 +72,9 @@ class AppHandler:
     # ADD CRON
     # =========================================================================
 
-    def add_remote_crons_to_local(self) -> None:
+    def add_remote_crons_to_local(self, remote_crons, local_crons) -> None:
         """ Add remote crons to local crontab """
-        remote_crons, local_crons = self.crons_lists()
+        # remote_crons, local_crons = self.crons_lists()
 
         for r_cron in remote_crons:
             id = r_cron["id"]
@@ -128,9 +128,9 @@ class AppHandler:
     # DEL CRON
     # =========================================================================
 
-    def del_local_crons(self) -> None:
+    def del_local_crons(self, remote_crons, local_crons) -> None:
         """ Delete local crons that are not in remote crontab """
-        remote_crons, local_crons = self.crons_lists()
+        # remote_crons, local_crons = self.crons_lists()
         crons_to_remove = []
 
         for l_cron in local_crons:
@@ -175,9 +175,9 @@ class AppHandler:
     # PAUSE CRON
     # =========================================================================
 
-    def toggle_pause_local_crons(self) -> None:
+    def toggle_pause_local_crons(self, remote_crons, local_crons) -> None:
         """ Toggle pause/enable on local crons """
-        remote_crons, local_crons = self.crons_lists()
+        # remote_crons, local_crons = self.crons_lists()
 
         local_crons_dict = {
             cron.comment.split("-")[1]: cron for cron in local_crons
@@ -329,11 +329,13 @@ class AppHandler:
         """ Auto-fetch remote crons """
         while self.auto_fetch:
             try:
-                self.add_remote_crons_to_local()
-                self.del_local_crons()
-                self.toggle_pause_local_crons()
+                remote_crons, local_crons = self.crons_lists()
+                self.add_remote_crons_to_local(remote_crons, local_crons)
+                self.del_local_crons(remote_crons, local_crons)
+                self.toggle_pause_local_crons(remote_crons, local_crons)
                 time.sleep(5)
             except Exception as e:
+                print("reconnecting to get new token...")
                 self.cron_scraper = CronScraper(self.username, self.password)
                 self.token = self.cron_scraper.user_auth()
-                print("reconnecting to get new token...")
+                print("reconnected.")
