@@ -1,6 +1,13 @@
+# python3 -m unittest tests/test_modules/test_functions/test_api_request.py
+# python3 -m unittest discover tests
+# coverage run -m unittest discover
+# coverage run --source=modules,modules/functions -m unittest discover --omit='**/__init__.py'
+# coverage report
+# coverage html
+
 import unittest
-from io import StringIO
 from unittest.mock import patch
+from io import StringIO
 from modules.functions.api_request import CronScraper
 
 
@@ -95,7 +102,3 @@ class TestCronScraper(unittest.TestCase):
             printed_output,
             "Unable to obtain list of crons. Status code: 401"
         )
-
-
-# python3 -m unittest tests/test_modules/test_functions/test_api_request.py
-# python3 -m unittest discover tests
