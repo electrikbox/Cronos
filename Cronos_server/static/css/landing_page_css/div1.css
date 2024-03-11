@@ -120,6 +120,9 @@
     animation-duration: 30s;
     animation-iteration-count: infinite;
 }
+.messages_list li {
+	padding-bottom: 10px;
+}
 
 @keyframes trans {
     0%, 14.66%{transform:translateY(0%)}
