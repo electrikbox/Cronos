@@ -65,6 +65,7 @@ class AppHandler:
             return
 
         print("Successful authentication")
+        self.auto_fetch = True
         self.page.clean()
         self.page.add(self.app_pages.logout_page)
         self.page.update()
