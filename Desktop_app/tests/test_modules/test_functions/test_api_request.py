@@ -1,7 +1,7 @@
 # python3 -m unittest tests/test_modules/test_functions/test_api_request.py
 # python3 -m unittest discover tests
+
 # coverage run -m unittest discover
-# coverage run --source=modules,modules/functions -m unittest discover --omit='**/__init__.py'
 # coverage report
 # coverage html
 
