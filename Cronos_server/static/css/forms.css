@@ -13,6 +13,9 @@
 	border-radius: 10px;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 }
+.signup_form {
+	gap: 7px;
+}
 
 label {
 	padding-top: 10px;
