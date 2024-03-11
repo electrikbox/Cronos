@@ -97,5 +97,5 @@ class TestCronScraper(unittest.TestCase):
         )
 
 
-if __name__ == "__main__":
-    unittest.main()
+# python3 -m unittest tests/test_modules/test_functions/test_api_request.py
+# python3 -m unittest discover tests
