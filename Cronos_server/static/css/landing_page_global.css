@@ -40,3 +40,8 @@
 	width: 100%;
 	height: 6vh;
 }
+.description {
+	padding: 20px;
+	width: 50%;
+	font-size: 2rem;
+}
