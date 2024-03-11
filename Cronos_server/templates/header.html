@@ -4,6 +4,8 @@
   <div class="logo-menu">
     {% if user.is_authenticated %}
     <a href="{% url 'Cronos_website:home' %}"><img src="{% static '/img/CronOs_logo.png' %}" alt="logo"></a>
+    {% elif request.path == '/accounts/login/' or request.path == '/accounts/signup/'%}
+    <a href="/"><img src="{% static '/img/CronOs_logo.png' %}" alt="logo"></a>
     {% else %}
     <ul id="landing-menu">
       <li class="menu-inactive"><a href="#landing-web">Web</a></li>
