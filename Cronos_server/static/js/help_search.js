@@ -11,7 +11,19 @@ $(document).ready(function () {
       const answerText = $(this).find('.answer').text().toLowerCase();
 
       if (questionText.includes(query) || answerText.includes(query)) {
-        $(this).closest('.faq-block, .tuto-block, .about-us-block').show();
+        const block = $(this).closest('.faq-block, .tuto-block, .about-us-block');
+        block.show();
+
+        // Open block if its answer contains the query
+        if (answerText.includes(query)) {
+          block.find('.collapse').slideDown();
+          block.find('.toggle-collapse').addClass('open');
+          block.find('.toggle-collapse-button').html('▽');
+
+          $(this).find('.answer').slideDown();
+          $(this).find('.toggle-answer').addClass('open').html('▽');
+        }
+
         $(this).show();
       } else {
         $(this).hide();
