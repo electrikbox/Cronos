@@ -4,7 +4,7 @@ $(document).ready(function () {
   $('#searchInput').on('input', function () {
     const query = $(this).val().toLowerCase();
     // Hide all questions and tutorials
-    $('.question, .tuto').each(function () {
+    $('.question, .tuto, .about-us-faq').each(function () {
       // Check if the question or answer contains the query
       const questionText = $(this).find('h3, h4').text().toLowerCase();
       const answerText = $(this).find('.answer').text().toLowerCase();
