@@ -18,10 +18,20 @@
 .logo-menu ul {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     list-style: none;
     padding: 0px;
     margin: 0px;
     gap: 2rem;
+}
+.home-icon {
+    padding-top: 2px;
+}
+.ionicon-home {
+    position: bottom;
+    height: 25px;
+    width: 25px;
 }
 .menu-active a {
     color: var(--link-color);
