@@ -17,10 +17,13 @@
 .scrolled .main-landing {
 	background-position: center calc(50% + 100px);
 }
-
 .main-block p {
 	text-align: center;
 	font-family: var(--main-font-family);
+}
+.main-block h1 {
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 .div-title {
