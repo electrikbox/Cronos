@@ -27,12 +27,21 @@
 	width: 100%;
 }
 
+.div-title h1,
 .div-title h2 {
 	text-align: center;
 	color: var(--main-color);
 	font-weight: normal;
+}
+
+.div-title h2 {
 	font-size: 3rem;
 }
+
+.div-title h1 {
+	font-size: 4rem;
+}
+
 .diagonal-gradient,
 .diagonal-gradient-div2,
 .diagonal-gradient-div3,

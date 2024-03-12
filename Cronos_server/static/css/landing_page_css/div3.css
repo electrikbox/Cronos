@@ -19,12 +19,20 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	/* gap: 20px; */
+}
+.prez-app-txt {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: start;
+	gap: 10px;
+	padding: 20px;
+	width: 50%;
 }
 .prez-app-txt {
 	font-size: 2rem;
 	width: 50%;
-	padding-left: 50px;
+	padding-left: 150px;
 }
 .prez-app-txt h3 {
 	font-family: var(--main-font-family);
