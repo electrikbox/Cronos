@@ -27,9 +27,10 @@ $(document).ready(function () {
     collapse.slideToggle();
 
     $(this).toggleClass('open');
+    const isOpen = $(this).hasClass('open');
 
     const button = $(this).closest('.block-title').find('.toggle-collapse-button');
-    button.toggleClass('open');
+    button.toggleClass('open').html(isOpen ? '▽' : '◀︎');
 
     if (button.hasClass('open')) {
       button.html('▽');
