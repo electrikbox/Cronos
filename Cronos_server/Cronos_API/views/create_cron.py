@@ -1,8 +1,6 @@
 from Cronos_API.views import *
 
-# @throttle_classes([UserRateThrottle])
 @api_view(["POST"])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def add_cron(request) -> Response:
     """Add a new cron to database"""

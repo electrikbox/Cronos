@@ -1,7 +1,7 @@
 from Cronos_API.views import *
 
 @api_view(["GET"])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
+# @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def list_logs(request) -> Response:
     """List all user's crons"""

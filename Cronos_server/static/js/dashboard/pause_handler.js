@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  // const access_token = $.cookie('access_token');
+  const access_token = localStorage.getItem('access_token');
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   /**
@@ -13,6 +15,9 @@ $(document).ready(function () {
       $.ajax({
         url: `/api/crons/${cronId}/`,
         type: 'GET',
+        headers: {
+          'Authorization': `Bearer ${access_token}`
+        },
         success: function (response) {
           updateButtonIcon(button, response.is_paused);
         },
@@ -47,37 +52,29 @@ $(document).ready(function () {
     updateSelectedButtonState();
   }
 
-  function updateCronStatus(button, cronId, isPaused) {
+  function pauseToggle(cronId, button) {
+    const currentIcon = button.find('ion-icon').attr('name');
+    const isCurrentlyPaused = currentIcon === 'play-circle-outline';
+    console.log('currentIcon:', currentIcon);
+    console.log('isCurrentlyPaused:', isCurrentlyPaused);
+
+    const newIsPaused = !isCurrentlyPaused;
+
     $.ajax({
       url: `/api/crons/${cronId}/update/`,
       type: 'POST',
-      data: { csrfmiddlewaretoken: csrfTokenInput.val(), is_paused: isPaused },
-      success: function (response) {
-        console.log('Cron status updated successfully, is_paused:', isPaused);
+      headers: {
+        'Authorization': `Bearer ${access_token}`
       },
-      error: function (xhr) {
-        console.error('Failed to update cron status:', xhr.status, xhr.responseText);
-        alert('Failed to update cron status');
-      }
-    });
-  }
-
-  /**
-   * Toggles the pause state of a cron job.
-   */
-  function pauseToggle(cronId, button) {
-    $.ajax({
-      url: `/api/crons/${cronId}/`,
-      type: 'GET',
+      data: { csrfmiddlewaretoken: csrfTokenInput.val(), is_paused: newIsPaused },
       success: function (response) {
-        const newIsPaused = !response.is_paused;
-        updateCronStatus(button, cronId, newIsPaused);
+        $('.loader').hide();
         updateButtonIcon(button, newIsPaused);
         setTimeout(reloadCronFormLogs, 500);
       },
       error: function (xhr) {
-        console.error('AJAX request failed:', xhr.status, xhr.responseText);
-        alert('Failed to perform the operation. Please try again.');
+        alert('Please login again.');
+        window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
       }
     });
   }
@@ -134,6 +131,7 @@ $(document).ready(function () {
       url: '/api/pause-multiple/',
       type: 'POST',
       headers: {
+        'Authorization': `Bearer ${access_token}`,
         'X-CSRFToken': csrfTokenInput.val()
       },
       data: JSON.stringify({ ids: Object.keys(cronIds), is_paused: is_paused }),
@@ -142,13 +140,13 @@ $(document).ready(function () {
         console.log('Crons have been paused successfully.');
         Object.values(cronIds).forEach(function (row) {
           $('.select-all').prop('checked', false);
-          // updateSelectedButtonState();
-          // updatePauseButtonsOnLoad(); // <------- à remplacer pour eviter les multiples requetes
+          updateSelectedButtonState();
         });
         window.location.href = "/dashboard?pause=true"; // <------- reload page
       },
       error: function (xhr, status, error) {
-        console.error('Error pausing crons:', error);
+        alert('Please login again.');
+        window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
       }
     });
   }
@@ -161,8 +159,8 @@ $(document).ready(function () {
     $('.logs-div').load(currentUrl + ' .logs');
   }
 
-    // =======================  Event Listeners  =======================
-    
+  // =======================  Event Listeners  =======================
+
   // Handling pause-selected button click
   $('.pause-selected').click(function () {
     togglePauseButton(true);
@@ -181,7 +179,7 @@ $(document).ready(function () {
     console.log('cronId:', cronId);
 
     pauseToggle(cronId, button);
-    // $('.loader').show();
+    $('.loader').show();
   });
 
   updatePauseButtonsOnLoad();

@@ -1,21 +1,28 @@
 {% load static %}
 
-<div class="div-title">
-	<h2>About US</h2>
-</div>
-<div class="about-us">
-	<div class="olive">
-		<img class="about_us_pic" src="{% static '/img/landing_img/olive.jpeg' %}" alt="olive">
-		<h3 class="about-name">Olive</h3>
-		<div class="about-text">
-			<p>{% lorem 10 w random %}</p>
-		</div>
+<div class="about-content">
+	<div class="div-title">
+		<h1>About US</h1>
 	</div>
-	<div class="valentine">
-		<img class="about_us_pic" src="{% static '/img/landing_img/valentine.png' %}" alt="valentine">
-		<h3 class="about-name">Valentine</h3>
-		<div class="about-text">
-			<p>{% lorem 10 w random %}</p>
+
+	<div class="description">
+		<p>{% lorem 20 w random %}</p>
+	</div>
+
+	<div class="about-us">
+		<div class="olive">
+			<img class="about_us_pic" src="{% static '/img/landing_img/olive.jpeg' %}" alt="olive">
+			<h3 class="about-name">Olive</h3>
+			<div class="about-text">
+				<p>{% lorem 10 w random %}</p>
+			</div>
+		</div>
+		<div class="valentine">
+			<img class="about_us_pic" src="{% static '/img/landing_img/valentine.png' %}" alt="valentine">
+			<h3 class="about-name">Valentine</h3>
+			<div class="about-text">
+				<p>{% lorem 10 w random %}</p>
+			</div>
 		</div>
 	</div>
 </div>

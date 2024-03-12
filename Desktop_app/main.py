@@ -1,6 +1,6 @@
 import flet as ft
-from modules import Elements, AppPages, logout, validate
-from modules.functions.login_button_handle import AppHandler
+from modules import Elements, AppPages, validate
+from modules.functions.app_handler import AppHandler
 
 
 def main(page: ft.Page) -> None:
@@ -40,8 +40,7 @@ def main(page: ft.Page) -> None:
     elements.login_button.on_click = lambda e: app_logic.login()
     elements.clear_button.on_click = lambda e: app_logic.clear_msg()
     elements.fetch_button.on_click = lambda e: app_logic.auto_fetch_on_off()
-    elements.logout_button.on_click = lambda e: logout(
-        elements, page, app_pages)
+    elements.logout_button.on_click = lambda e: app_logic.logout()
 
     page.add(app_pages.login_page)
 

@@ -76,16 +76,10 @@ footer a{
 	text-decoration: none;
 	color: var(--text-color);
 }
-h1, h2, h3 {
-	/* font-family: var(--main-font-family); */
-	font-family: 'mustica', sans-serif;
-	margin: 0;
-	color: var(--title-color);
-	width: 100%;
-}
 h1 {
 	font-size: 4rem;
 	text-align: center;
+	margin-bottom: 20px;
 }
 h2 {
 	font-size: 2.6rem;
@@ -97,6 +91,13 @@ h3 {
 	color: var(--text-color);
 	font-size: 2rem;
 	text-align: left;
+}
+h1, h2, h3 {
+	/* font-family: var(--main-font-family); */
+	font-family: 'mustica', sans-serif;
+	margin: 0;
+	color: var(--title-color);
+	width: 100%;
 }
 .success_msg, .error_msg {
 	font-family: var(--main-font-family);
@@ -155,22 +156,22 @@ main {
 /* ==================== scrollbar ===================== */
 
 /* width */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
 	width: 5px;
-}
+} */
 
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
 	border-radius: 5px;
-}
+} */
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
 	background: #9985a1;
 	border-radius: 5px;
-}
+} */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
 	background: #6d5377;
-}
+} */

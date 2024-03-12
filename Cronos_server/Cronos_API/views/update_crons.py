@@ -1,7 +1,7 @@
 from Cronos_API.views import *
 
 @api_view(["PUT", "POST"])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
+# @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def update_cron(request: WSGIRequest, cron_id) -> Response:
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
@@ -21,7 +21,7 @@ def update_cron(request: WSGIRequest, cron_id) -> Response:
 
 
 @api_view(["PUT", "POST"])
-@authentication_classes([TokenAuthentication, SessionAuthentication])
+# @authentication_classes([TokenAuthentication, SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def pause_multiple_elements(request: WSGIRequest) -> Response:
     data = request.data.get("ids", [])

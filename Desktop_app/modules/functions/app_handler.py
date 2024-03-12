@@ -12,9 +12,10 @@ WRONG_CREDENTIALS_MSG = "Wrong username or password"
 NOT_ENOUGH_ELEMENTS_MSG = "Not enough elements in cron data to check"
 INFOS_TEXT_COLOR = "red"
 
+COMMENT = "Cronos"
+
 
 class AppHandler:
-    COMMENT = "Cronos"
 
     def __init__(self, elements: Elements, page: ft.Page, app_pages: AppPages) -> None:
         """ Init app handler"""
@@ -25,6 +26,7 @@ class AppHandler:
         self.username = ""
         self.password = ""
         self.token = None
+        self.cron_scraper = None
 
         self.cron_script_path = ""
 
@@ -32,54 +34,6 @@ class AppHandler:
         self.all_msg_in_app = []
         self.unvalid_found = False
         self.auto_fetch = True
-
-    # UTILS
-    # =========================================================================
-
-    def remote_cron_to_str(self, cron: dict) -> str:
-        """ Convert remote cron to string """
-        cmd = cron["command"]
-        schedule = " ".join(
-            [
-                cron["minutes"],
-                cron["hours"],
-                cron["day_of_month"],
-                cron["months"],
-                cron["day_of_week"],
-            ]
-        )
-        remote_cron_str = f"{schedule} {cmd} # {self.COMMENT}"
-        return remote_cron_str
-
-    def local_cron_to_str(self, cron: CronItem) -> str:
-        """ Convert local cron to string """
-        cmd = cron.command
-        schedule = " ".join(
-            [
-                str(cron.minute),
-                str(cron.hour),
-                str(cron.dom),
-                str(cron.month),
-                str(cron.dow),
-            ]
-        )
-        local_cron_str = f"{schedule} {cmd} # {cron.comment}"
-        return local_cron_str
-
-    def crons_lists(self) -> tuple[list[dict], CronTab]:
-        """ Get remote and local crons """
-        remote_crons = CronScraper(
-            self.username,
-            self.password
-        ).get_remote_crons(self.token)
-        local_crons = CronTab(user=True)
-        return remote_crons, local_crons
-
-    def update_page(self) -> None:
-        """ Update the page """
-        self.page.clean()
-        self.page.add(self.app_pages.logout_page)
-        self.page.update()
 
     # AUTHENTICATION
     # =========================================================================
@@ -89,13 +43,14 @@ class AppHandler:
         self.username = self.elements.username_field.value
         self.password = self.elements.password_field.value
 
+        self.cron_scraper = CronScraper(self.username, self.password)
+
         self.elements.login_button.disabled = True
         self.elements.username_field.value = ""
         self.elements.password_field.value = ""
 
         try:
-            cron_scraper = CronScraper(self.username, self.password)
-            self.token = cron_scraper.user_auth()
+            self.token = self.cron_scraper.user_auth()
         except Exception as e:
             print(e)
             self.elements.login_info_text.value = "server offline"
@@ -103,21 +58,24 @@ class AppHandler:
             self.page.update()
             return
 
-        if not cron_scraper.authenticated:
+        if not self.cron_scraper.authenticated:
             self.elements.login_info_text.value = WRONG_CREDENTIALS_MSG
             self.elements.login_info_text.color = INFOS_TEXT_COLOR
             self.page.update()
             return
 
         print("Successful authentication")
-        self.update_page()
+        self.auto_fetch = True
+        self.page.clean()
+        self.page.add(self.app_pages.logout_page)
+        self.page.update()
 
     # ADD CRON
     # =========================================================================
 
-    def add_remote_crons_to_local(self) -> None:
+    def add_remote_crons_to_local(self, remote_crons, local_crons) -> None:
         """ Add remote crons to local crontab """
-        remote_crons, local_crons = self.crons_lists()
+        # remote_crons, local_crons = self.crons_lists()
 
         for r_cron in remote_crons:
             id = r_cron["id"]
@@ -127,7 +85,7 @@ class AppHandler:
             if any(
                 id == int(cron.comment.split("-")[1])
                 for cron in local_crons
-                if cron.comment and self.COMMENT in cron.comment
+                if cron.comment and COMMENT in cron.comment
             ):
                 continue
 
@@ -135,16 +93,16 @@ class AppHandler:
             command = str(cmd).split(" ")[0]
             cmd_validated = CheckCommand.is_command_available_unix(command)
 
-            checked_cron = CronScraper(self.username, self.password)
-
             if not cmd_validated:
-                self.cron_action_text.value += (f"\nCommand {command} not available")
+                self.cron_action_text.value += (
+                    f"\nCommand {command} not available"
+                )
                 self.page.update()
-                deleted_cron = checked_cron.unvalidated_cron_delete(id)
+                deleted_cron = self.cron_scraper.unvalidated_cron_delete(id)
                 self.unvalid_found = True
                 continue
 
-            checked_cron.send_cron_validation(id)
+            self.cron_scraper.send_cron_validation(id)
 
             # create cron script
             new_cron_script = CronosScript(id)
@@ -155,7 +113,7 @@ class AppHandler:
             # add cron to local crontab
             new_cron = local_crons.new(
                 command=self.cron_script_path,
-                comment=f"{self.COMMENT}-{id}"
+                comment=f"{COMMENT}-{id}"
             )
             r_cron_str = self.remote_cron_to_str(r_cron)
             new_cron.setall(r_cron_str.split(" ")[:5])
@@ -171,16 +129,16 @@ class AppHandler:
     # DEL CRON
     # =========================================================================
 
-    def del_local_crons(self) -> None:
+    def del_local_crons(self, remote_crons, local_crons) -> None:
         """ Delete local crons that are not in remote crontab """
-        remote_crons, local_crons = self.crons_lists()
+        # remote_crons, local_crons = self.crons_lists()
         crons_to_remove = []
 
         for l_cron in local_crons:
             if not l_cron.comment:
                 continue
 
-            if self.COMMENT not in l_cron.comment:
+            if COMMENT not in l_cron.comment:
                 continue
 
             l_cron_id = l_cron.comment.split("-")[1]
@@ -218,13 +176,13 @@ class AppHandler:
     # PAUSE CRON
     # =========================================================================
 
-    def toggle_pause_local_crons(self) -> None:
+    def toggle_pause_local_crons(self, remote_crons, local_crons) -> None:
         """ Toggle pause/enable on local crons """
-        remote_crons, local_crons = self.crons_lists()
+        # remote_crons, local_crons = self.crons_lists()
 
         local_crons_dict = {
             cron.comment.split("-")[1]: cron for cron in local_crons
-            if cron.comment.split("-")[0] == self.COMMENT
+            if cron.comment.split("-")[0] == COMMENT
         }
 
         for r_cron in remote_crons:
@@ -241,7 +199,9 @@ class AppHandler:
 
                     self.all_msg_in_app.append(cron)
 
-                    self.cron_action_text.value += (f"\nCron n°{cron.comment.split('-')[1]} : paused")
+                    self.cron_action_text.value += (
+                        f"\nCron n°{cron.comment.split('-')[1]} : paused"
+                    )
                     self.page.update()
 
                 elif not is_paused and not is_enabled:
@@ -250,7 +210,9 @@ class AppHandler:
 
                     self.all_msg_in_app.append(cron)
 
-                    self.cron_action_text.value += (f"\nCron n°{cron.comment.split('-')[1]} : enabled")
+                    self.cron_action_text.value += (
+                        f"\nCron n°{cron.comment.split('-')[1]} : enabled"
+                    )
                     self.page.update()
 
         local_crons.write()
@@ -270,6 +232,22 @@ class AppHandler:
 
         self.auto_fetch_loop()
         self.all_msg_in_app.clear()
+
+    # LOGOUT
+    # =========================================================================
+
+    def logout(self) -> None:
+        """ Logout function call """
+
+        # self.cron_scraper.user_logout(self.token)
+        self.auto_fetch = False
+
+        self.elements.login_info_text.value = "Please login"
+        self.elements.login_info_text.color = ft.colors.TEAL_400
+        self.elements.login_button.disabled = True
+        self.page.clean()
+        self.page.add(self.app_pages.login_page)
+        self.page.update()
 
     # AUTO FETCH
     # =========================================================================
@@ -300,8 +278,45 @@ class AppHandler:
         self.all_msg_in_app.clear()
         self.unvalid_found = False
 
-    # CLEAR MSG
+    # UTILS
     # =========================================================================
+
+    def remote_cron_to_str(self, cron: dict) -> str:
+        """ Convert remote cron to string """
+        cmd = cron["command"]
+        schedule = " ".join(
+            [
+                cron["minutes"],
+                cron["hours"],
+                cron["day_of_month"],
+                cron["months"],
+                cron["day_of_week"],
+            ]
+        )
+        remote_cron_str = f"{schedule} {cmd} # {COMMENT}"
+        return remote_cron_str
+
+    def local_cron_to_str(self, cron: CronItem) -> str:
+        """ Convert local cron to string """
+        cmd = cron.command
+        schedule = " ".join(
+            [
+                str(cron.minute),
+                str(cron.hour),
+                str(cron.dom),
+                str(cron.month),
+                str(cron.dow),
+            ]
+        )
+        local_cron_str = f"{schedule} {cmd} # {cron.comment}"
+        return local_cron_str
+
+    def crons_lists(self) -> tuple[list[dict], CronTab]:
+        """ Get remote and local crons """
+        remote_crons = self.cron_scraper.get_remote_crons(self.token)
+
+        local_crons = CronTab(user=True)
+        return remote_crons, local_crons
 
     def clear_msg(self):
         """ Clear all messages in app """
@@ -311,13 +326,17 @@ class AppHandler:
         self.cron_action_text.value = ""
         self.page.update()
 
-    # AUTO FETCH LOOP
-    # =========================================================================
-
     def auto_fetch_loop(self):
         """ Auto-fetch remote crons """
         while self.auto_fetch:
-            self.add_remote_crons_to_local()
-            self.del_local_crons()
-            self.toggle_pause_local_crons()
-            time.sleep(5)
+            try:
+                remote_crons, local_crons = self.crons_lists()
+                self.add_remote_crons_to_local(remote_crons, local_crons)
+                self.del_local_crons(remote_crons, local_crons)
+                self.toggle_pause_local_crons(remote_crons, local_crons)
+                time.sleep(5)
+            except Exception as e:
+                print("reconnecting to get new token...")
+                self.cron_scraper = CronScraper(self.username, self.password)
+                self.token = self.cron_scraper.user_auth()
+                print("reconnected.")

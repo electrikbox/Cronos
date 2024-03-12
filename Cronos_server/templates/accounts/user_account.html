@@ -51,16 +51,16 @@
 		<form class="user_account_form" method="POST">
 			{% csrf_token %}
 			<label for="username">Your username</label>
-			{{ user_account_form.username }}
+			{{ user_account_form.username | escape }}
 
 			<label for="email">Your email</label>
-			{{ user_account_form.email }}
+			{{ user_account_form.email | escape }}
 
 			<label for="first_name">Your first name</label>
-			{{ user_account_form.first_name }}
+			{{ user_account_form.first_name | escape }}
 
 			<label for="last_name">Your last name</label>
-			{{ user_account_form.last_name }}
+			{{ user_account_form.last_name | escape }}
 
 			<input type="submit" value="Save your changes">
 		</form>
@@ -76,13 +76,13 @@
 		<form class="user_pwd_form" method="POST">
 			{% csrf_token %}
 			<label for="old_password">Your old password</label>
-			{{ user_pwd_form.old_password }}
+			{{ user_pwd_form.old_password | escape }}
 
 			<label for="new_password">Your new password</label>
-			{{ user_pwd_form.new_password }}
+			{{ user_pwd_form.new_password | escape }}
 
 			<label for="new_password2">Confirm your new password</label>
-			{{ user_pwd_form.new_password2 }}
+			{{ user_pwd_form.new_password2 | escape }}
 
 			<input type="submit" value="Change your password">
 		</form>

@@ -14,15 +14,22 @@
 <link rel="stylesheet" href="{% static '/css/dashboard/list.css' %}">
 <link rel="stylesheet" href="{% static '/css/dashboard/cron.css' %}">
 <script src="{% static '/js/dashboard/choice_field_handler.js' %}"></script>
-<script src="{% static '/js/dashboard/delete_crons.js' %}"></script>
-<script src="{% static '/js/dashboard/pause_handler.js' %}"></script>
-<script src="{% static '/js/dashboard/switch_pendings.js' %}"></script>
 <script src="{% static '/js/dashboard/utils.js' %}"></script>
 {% endblock %}
 
 <!-- ================= SECTION ================= -->
 
 {% block section %}
+<script>
+  $(document).ready(function() {
+    const accessToken = "{{ access_token }}";
+    localStorage.setItem("access_token", accessToken);
+  });
+</script>
+<script src="{% static '/js/dashboard/pause_handler.js' %}"></script>
+<script src="{% static '/js/dashboard/delete_crons.js' %}"></script>
+<script src="{% static '/js/dashboard/switch_pendings.js' %}"></script>
+
 <h2>Dashboard</h2>
 
 <div class="success_msg">
@@ -96,7 +103,5 @@
     {% endfor %}
   </ul>
 </div>
-
-
 
 {% endblock %}

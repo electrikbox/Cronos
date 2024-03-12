@@ -2,11 +2,11 @@ POST http://localhost:8000/api/signup/
 Content-Type: application/json
 
 {
-  "username": "",
-  "password": "",
-  "email": "",
-  "first_name": "",
-  "last_name": ""
+  "username": "olive",
+  "password": "Azertylilivier59!",
+  "email": "electrikbox@icloud.com",
+  "first_name": "olive",
+  "last_name": "electrik"
 }
 
 ###
@@ -15,23 +15,32 @@ POST http://localhost:8000/api/login/
 Content-Type: application/json
 
 {
-  "username": "",
-  "password": ""
+  "username": "electrik",
+  "password": "olive"
+}
+
+###
+
+POST http://localhost:8000/api/token/refresh/
+Content-Type: application/json
+
+{
+  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwOTk4Njg4OCwiaWF0IjoxNzA5OTAwNDg4LCJqdGkiOiJiNjQzNDIzNDNlMDU0ZWU2OGI5NGExYWZkZDc1NWRmMiIsInVzZXJfaWQiOjF9.SGkcMk254uxH0OoK4YvsivroXRavGnBufZBMLPAxTd8"
 }
 
 ###
 
 GET http://localhost:8000/api/crons/
 Content-Type: application/json
-Authorization: Token 6863d9c35569d486310c3c706a306158e2a57dc9
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5OTQ0MDU3LCJpYXQiOjE3MDk4NTc2NTcsImp0aSI6IjQ1ZmIzZjE5ZTIzNTQ1OWFhMDNiYjA5MmIyZTM1MmIzIiwidXNlcl9pZCI6MX0.BtqQKOxh3I3xHd0wrAEHsLTbN9A1d5-hQr-UH8wmlEk
 
 {}
 
 ###
 
-GET http://localhost:8000/api/crons/53/
+GET http://localhost:8000/api/crons/14/
 Content-Type: application/json
-Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5ODk1MzIxLCJpYXQiOjE3MDk4OTUyNjEsImp0aSI6Ijg0ZDE4Y2U0NGU4YTRiMmFhM2M3NTAwMTg4MzcxNmMzIiwidXNlcl9pZCI6MX0.5aW9aAUF6MsNFErOVJbE5vpgROGrDEnCSI2R3suoUvQ
 
 {}
 
@@ -39,7 +48,7 @@ Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
 
 POST http://localhost:8000/api/crons/create/
 Content-Type: application/json
-Authorization: Token 30a45936e5a1a6ba629568a2674748a2a27e87d2
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5ODk1MzIxLCJpYXQiOjE3MDk4OTUyNjEsImp0aSI6Ijg0ZDE4Y2U0NGU4YTRiMmFhM2M3NTAwMTg4MzcxNmMzIiwidXNlcl9pZCI6MX0.5aW9aAUF6MsNFErOVJbE5vpgROGrDEnCSI2R3suoUvQ
 
 {
   "minutes": "30",
@@ -55,9 +64,9 @@ Authorization: Token 30a45936e5a1a6ba629568a2674748a2a27e87d2
 
 ###
 
-PUT http://localhost:8000/api/crons/269/update/
+PUT http://localhost:8000/api/crons/14/update/
 Content-Type: application/json
-Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5ODk1MzIxLCJpYXQiOjE3MDk4OTUyNjEsImp0aSI6Ijg0ZDE4Y2U0NGU4YTRiMmFhM2M3NTAwMTg4MzcxNmMzIiwidXNlcl9pZCI6MX0.5aW9aAUF6MsNFErOVJbE5vpgROGrDEnCSI2R3suoUvQ
 
 {
   "minutes": "*",
@@ -65,15 +74,15 @@ Authorization: Token 073e46ad11d972448ff465765ff1f5bf44249495
   "day_of_month": "*",
   "months": "mar",
   "day_of_week": "mon",
-  "command": "pwd",
+  "command": "cal",
   "is_paused": true,
   "validated" : false
 }
 
 ###
 
-DELETE http://localhost:8000/api/crons/683/delete/
+DELETE http://localhost:8000/api/crons/14/delete/
 Content-Type: application/json
-Authorization: Token 6863d9c35569d486310c3c706a306158e2a57dc9
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5ODk1NDAzLCJpYXQiOjE3MDk4OTUzNDMsImp0aSI6IjQ1NmViMjFkZmI1ZjRkN2NiN2VjZWUyYWNjNjM2YjliIiwidXNlcl9pZCI6MX0.eflvqnvB3MT3Bx8Z7T7krZTtuOUqirSUJs06zVn-z_M
 
 {}

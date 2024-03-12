@@ -5,6 +5,7 @@
 	justify-content: center;
 	background-color: rgba(76, 62, 85, 0.3);
 	width: 100%;
+	padding-bottom: 60px;
 }
 
 .div2-content {
@@ -16,13 +17,28 @@
 }
 
 .prez-web-txt {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: start;
+	gap: 10px;
 	padding: 20px;
+	padding-left: 80px;
 	width: 50%;
 }
 
 .prez-web-txt p {
 	font-size: 2rem;
-	text-align: justify;
+	text-align: center;
+}
+
+.prez-web-txt h3 {
+	font-family: var(--main-font-family);
+	color: var(--main-color);
+	font-weight: normal;
+	font-size: 2.5rem;
+	text-align: center;
+	padding-bottom: 20px;
 }
 
 /* ==================== Carousel ====================*/
@@ -97,6 +113,7 @@
 	}
 	.prez-web-txt {
 		width: 100%;
+		padding-left: 20px;
 	}
 	.carousel-slide {
 		width: 90%;

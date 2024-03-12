@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  // const access_token = $.cookie('access');
+  const access_token = localStorage.getItem('access_token');
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   /**
@@ -16,7 +18,7 @@ $(document).ready(function () {
   /**
    * Deletes a cron.
    */
-  function deleteCron () {
+  function deleteCron() {
     const cronId = $(this).data('cron-id');
     const confirmation = confirm('Are you sure you want to delete this cron?');
     const row = $(this).closest('.cron-full');
@@ -26,6 +28,9 @@ $(document).ready(function () {
       $.ajax({
         url: `/api/crons/${cronId}/delete/`,
         type: 'POST',
+        headers: {
+          'Authorization': `Bearer ${access_token}`
+        },
         data: {
           csrfmiddlewaretoken: csrfTokenInput.val()
         },
@@ -34,8 +39,8 @@ $(document).ready(function () {
           window.location.href = "/dashboard?delete=true";
         },
         error: function (xhr) {
-          console.log(`${xhr.status}: ${xhr.responseText}`);
-          alert('Failed to delete cron');
+          alert('Please login again.');
+          window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
         }
       });
     }
@@ -46,10 +51,12 @@ $(document).ready(function () {
    * @param {Object} cronIds - The cron IDs to be deleted.
    */
   function deleteMultipleCrons(cronIds) {
+
     $.ajax({
       url: '/api/delete-multiple/',
       type: 'POST',
       headers: {
+        'Authorization': `Bearer ${access_token}`,
         'X-CSRFToken': csrfTokenInput.val()
       },
       data: JSON.stringify({ ids: Object.keys(cronIds) }),
@@ -64,7 +71,8 @@ $(document).ready(function () {
         });
       },
       error: function (xhr, status, error) {
-        console.error('Delete crons error:', error);
+        alert('Please login again.');
+        window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
       }
     });
   }

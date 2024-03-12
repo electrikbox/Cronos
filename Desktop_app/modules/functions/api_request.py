@@ -1,9 +1,10 @@
-import sys
 import requests
+import json
 
 
 class CronScraper:
     LOGIN_URL = "http://localhost:8000/api/login/"
+    LOGOUT_URL = "http://localhost:8000/api/logout/"
     CRONS_URL = "http://localhost:8000/api/crons/"
 
     def __init__(self, username, password) -> None:
@@ -11,8 +12,9 @@ class CronScraper:
         self.password = password
         self.authenticated = False
         self.token = None
+        self.refresh_token = None
 
-    # Function to log in and get the token
+    # Function to login and get the token
     # =========================================================================
 
     def user_auth(self) -> str | None:
@@ -25,15 +27,39 @@ class CronScraper:
         )
 
         if login_response.status_code == 200:
-            self.token = login_response.headers.get("Authorization", "").split(" ")[1]
-            self.authenticated = True
-            return self.token
+
+            response_data = login_response.json()
+            access_token = login_response.cookies.get('access_token')
+            refresh_token = login_response.cookies.get('refresh_token')
+            if access_token:
+                self.token = access_token
+                self.refresh_token = refresh_token
+                self.authenticated = True
+                return self.token
         else:
             print(
                 f"Connection failed. Status code: {login_response.status_code}"
             )
             self.authenticated = False
             return None
+
+    # Function to logout
+    # =========================================================================
+
+    def user_logout(self, token) -> None:
+        """ User logout """
+        logout_headers = {"Content-Type": "application/json"}
+        data = {"key": token}
+        json_data = json.dumps(data)
+
+        logout_response = requests.post(self.LOGOUT_URL, headers=logout_headers, data=json_data)
+
+        if logout_response.status_code == 200:
+            print("Logout successful")
+            self.authenticated = False
+        else:
+            print(f"Logout failed: {logout_response.status_code}")
+            self.authenticated = True
 
     # Get user crons list
     # =========================================================================
@@ -44,7 +70,7 @@ class CronScraper:
 
         crons_headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Token {self.token}",
+            "Authorization": f"Bearer {self.token}",
         }
 
         response = requests.get(self.CRONS_URL, headers=crons_headers)
@@ -62,12 +88,12 @@ class CronScraper:
 
     def send_cron_validation(self, cron_id):
         """ Send cron validation to the server """
-        self.user_auth()
+        # self.user_auth()
 
         cron_data = {"validated": True}
         crons_headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Token {self.token}",
+            "Authorization": f"Bearer {self.token}",
         }
 
         validation_url = f"{self.CRONS_URL}{cron_id}/update/"
@@ -92,7 +118,7 @@ class CronScraper:
 
         crons_headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Token {self.token}",
+            "Authorization": f"Bearer {self.token}",
         }
 
         validation_url = f"{self.CRONS_URL}{cron_id}/delete/"

@@ -1,4 +1,5 @@
 from Cronos_account.views import *
+from Cronos_API.views.tokens import create_jwt_token
 
 
 # LOGIN USER
@@ -6,6 +7,7 @@ from Cronos_account.views import *
 
 def login_user(request):
     """ Render login page and authenticate user """
+
     if request.user.is_authenticated:
         return redirect('Cronos_website:home')
 
@@ -26,9 +28,14 @@ def login_user(request):
 
         if user.is_active:
             login(request, user)
-            token = Token.objects.get(user=request.user).key
+            tokens = create_jwt_token(user)
+            access_token = tokens['access']
+            refresh_token = tokens['refresh']
+
             response = HttpResponseRedirect(request.GET.get('next', '/home'))
-            response.set_cookie('user_token', token, httponly=True)
+
+            response.set_cookie("access", access_token)
+            response.set_cookie("refresh", refresh_token)
             return response
 
         messages.error(
@@ -43,7 +50,16 @@ def login_user(request):
 # LOGOUT USER
 # =============================================================================
 
+# def logout_user(request):
+#     """ Logout user """
+
+#     logout(request)
+#     return redirect('/accounts/login/')
+
 def logout_user(request):
-    """ Logout user """
+    next_url = request.GET.get('next', '')
+    if not next_url:
+        next_url = '/home'
+    request.session['next_url'] = next_url
     logout(request)
-    return redirect('/')
+    return redirect(f"{reverse('Cronos_account:login')}?next={next_url}")

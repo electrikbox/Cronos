@@ -30,13 +30,13 @@
 
   </div>
   <div class="url_field" style="display: none;">
-    <div class="select url_field hidden">{{ cron_create_form.url }}</div>
+    <div class="select url_field hidden">{{ cron_create_form.url | escape }}</div>
   </div>
 
   <div class="copy_field" style="display: none;">
   {% comment %} <input class="select copy_field hidden" id="source" type="file" name="name" accept="*" class="form-source"> {% endcomment %}
-    <div class="select copy_field hidden">{{ cron_create_form.source }}</div>
-    <div class="select copy_field hidden">{{ cron_create_form.destination }}</div>
+    <div class="select copy_field hidden">{{ cron_create_form.source | escape }}</div>
+    <div class="select copy_field hidden">{{ cron_create_form.destination | escape }}</div>
   </div>
 
   <div class="help_create_text" style="display: none;">

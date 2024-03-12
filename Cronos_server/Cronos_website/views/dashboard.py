@@ -1,6 +1,7 @@
 from Cronos_website.views import *
 from django.core.paginator import Paginator
 from django.core.handlers.wsgi import WSGIRequest
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 URL_ERROR_MSG = "URL field is required for this command."
@@ -18,20 +19,25 @@ COMMAND_COOKIE_NAME = "previous_command"
 @login_required
 def dashboard(request: WSGIRequest) -> HttpResponseRedirect | HttpResponse:
     """Render the dashboard page"""
+
+    tokens = RefreshToken.for_user(request.user)
+    access_token = str(tokens.access_token)
+
     message = request.GET.get("message", None)
     if message:
         messages.success(request, message)
 
-    TOKEN = request.COOKIES.get("user_token")
     HEADER = {
         "Content-Type": "application/json",
-        "Authorization": f"Token {TOKEN}",
+        "Authorization": f"Bearer {access_token}",
     }
 
     if request.method == "POST":
         return handle_post_request(request, HEADER)
     else:
-        return render_dashboard_page(request, HEADER)
+        response = render_dashboard_page(request, HEADER, access_token)
+        # response.set_cookie("access_token", access_token, httponly=True)
+        return response
 
 
 # Handle the POST request to create a cron job
@@ -157,7 +163,7 @@ def handle_invalid_form(request: WSGIRequest, cron_create_form: CronForm) -> Htt
 # ==============================================================================
 
 
-def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
+def render_dashboard_page(request: WSGIRequest, header: dict, access_token) -> HttpResponse:
     """Render the dashboard page"""
 
     previous_command = request.COOKIES.get(COMMAND_COOKIE_NAME, "")
@@ -185,7 +191,9 @@ def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
 
     # Use previous command as initial value for the form
     cron_create_form = CronForm(initial=set_initial)
-    crons = requests.get(CRON_LIST_API_URL, headers=header).json()
+    crons = requests.get(CRON_LIST_API_URL, headers=header)
+
+    crons = crons.json()
     paginator = Paginator(crons, 7)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -202,5 +210,7 @@ def render_dashboard_page(request: WSGIRequest, header: dict) -> HttpResponse:
         "logs": logs,
         "image_url": image_url,
         "page_obj": page_obj,
+        "access_token": access_token,
     }
+    # print(context)
     return render(request, "dashboard.html", context)
