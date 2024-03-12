@@ -31,12 +31,7 @@ $(document).ready(function () {
 
     const button = $(this).closest('.block-title').find('.toggle-collapse-button');
     button.toggleClass('open').html(isOpen ? '▽' : '◀︎');
-
-    if (button.hasClass('open')) {
-      button.html('▽');
-    } else {
-      button.html('◀︎');
-    }
+    
   });
 
   $('.toggle-collapse-button').click(function (event) {
