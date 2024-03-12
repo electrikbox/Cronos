@@ -1,17 +1,30 @@
 // Search bar for the help page
 
 $(document).ready(function () {
+  // Function to handle search
   function handleSearch(query) {
-    // Hide all sections
+    // If the query is empty, close all blocks and their answers
+    if (query === '') {
+      $('.collapse').slideUp();
+      $('.toggle-collapse').removeClass('open');
+      $('.toggle-collapse-button').html('◀︎');
+      $('.answer').slideUp();
+      $('.toggle-answer').removeClass('open').html('▶︎');
+      return; // Exit the function early if the query is empty
+    }
+
+    // Hide all blocks initially
     $('.faq-block, .tuto-block, .about-us-block').hide();
 
-    // Show only sections containing the query
+    // Show only sections containing the query and open blocks if their answers contain the query
     $('.question, .tuto, .about-us-faq').each(function () {
       const questionText = $(this).find('h3, h4').text().toLowerCase();
       const answerText = $(this).find('.answer').text().toLowerCase();
 
       if (questionText.includes(query) || answerText.includes(query)) {
-        const block = $(this).closest('.faq-block, .tuto-block, .about-us-block');
+        const block = $(this).closest(
+          '.faq-block, .tuto-block, .about-us-block'
+        );
         block.show();
 
         // Open block if its answer contains the query
@@ -20,6 +33,7 @@ $(document).ready(function () {
           block.find('.toggle-collapse').addClass('open');
           block.find('.toggle-collapse-button').html('▽');
 
+          // Open answer
           $(this).find('.answer').slideDown();
           $(this).find('.toggle-answer').addClass('open').html('▽');
         }
