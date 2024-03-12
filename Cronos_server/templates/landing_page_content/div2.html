@@ -1,0 +1,50 @@
+{% load static %}
+
+<script>
+	$(document).ready(function() {
+		var splide = new Splide('.splide', {
+			type: 'loop',
+			perPage: 1,
+			autoplay: true,
+			speed: 1000
+		});
+		splide.mount();
+	});
+</script>
+
+<div class="div-title"><h1>Our Website</h1></div>
+
+<div class="div2-content">
+	<section id="image-carousel" class="splide" aria-label="Beautiful Images">
+		<div class="splide__track">
+			<ul class="splide__list">
+				<li class="splide__slide">
+					<img class="carousel-slide" src="{% static '/img/landing_img/landing-dashboard.png' %}" alt="Image 1">
+				</li>
+				<li class="splide__slide">
+					<img class="carousel-slide" src="{% static '/img/landing_img/landing-download.png' %}" alt="Image 2">
+				</li>
+				<li class="splide__slide">
+					<img class="carousel-slide" src="{% static '/img/landing_img/landing-home.png' %}" alt="Image 3">
+				</li>
+				<li class="splide__slide">
+					<img class="carousel-slide" src="{% static '/img/landing_img/landing-faq.png' %}" alt="Image 4">
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<div class="prez-web-txt">
+		<h3>Create, delete, or pause cron jobs from anywhere.</h3>
+<p>Are you away from home and need to pause an automation, create a new one, or delete an existing one on your home computer?</p>
+<p>No problem. Simply log in to our website, navigate to the dashboard, pause your automation, and our application will handle the rest for you.</p>
+<p>Our website provides everything you need to manage your personalized automations on your computer.</p>
+	</div>
+</div>
+
+<div id="lightbox" style="display: none;">
+	<div id="lightbox-content">
+		<img id="lightbox-img" src="" alt="Lightbox Image">
+		<span id="close-lightbox">&times;</span>
+	</div>
+</div>

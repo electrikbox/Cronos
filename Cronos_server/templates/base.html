@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>{% block title %}Default title{% endblock %}</title>
+
+    <link rel="icon" href="{% static '/img/CronOs_logo_Rond.ico' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}"/>
+    <link rel="stylesheet" href="{% static '/css/header_auth.css' %}"/>
+    {% block css_landing_page %}{% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    {% block js_landing_page %}{% endblock %}
+
+    {% block head %}{% endblock %}
+  </head>
+
+  <body class="dark-mode">
+
+    <header class="header">{% include 'header.html'%}</header>
+    <div id="blurBackground"></div>
+
+    <main>
+      {% block main %}
+      <h2>main</h2>
+      {% endblock %}
+    </main>
+
+    <footer>
+      <p>
+        © Valentine & Olive |
+        <a href="https://www.holbertonschool.fr/" target="_blank">
+          HolbertonSchool
+        </a> 2024
+      </p>
+    </footer>
+
+  </body>
+</html>

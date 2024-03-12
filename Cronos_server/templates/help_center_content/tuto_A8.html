@@ -1,0 +1,35 @@
+{% load static %}
+<div class="title-help">
+	<button class="toggle-answer">▶︎</button>
+	<h4 class="h4-help">How to fill in the LS command fields</h4>
+</div>
+
+<article class="answer">
+	<p>
+		As a reminder, the LS command will list all files founded with the name you entered
+		in a file (with the .txt extension) inside Cronos folder (in your home directory)
+	</p>
+	<div class="ls-cmd">
+		<img src="{% static 'img/help_center_img/ls_cmd00.png' %}" alt="list command">
+
+		<div class="tuto-text">
+			<p>
+				<strong>In the first field</strong>, enter the name of the file or folder you wish to list
+			</p>
+			<br>
+			<p>
+				<strong>In the second field</strong>, enter the name of the destination folder
+			</p>
+			<br>
+			<p>
+				💡<strong>TIPS</strong>: the special character "*" <em>(asterik)</em> can be used to select all files with the given extension
+			</p>
+			<br>
+			<ul>
+				<p>Here are a few examples :</p>
+				<li><strong>*.gif</strong> : if you only want to list all files in a folder with the gif extension</li>
+				<li><strong>cronos.*</strong> : if you want to list all files in a folder with the name cronos, regardless of their extension</li>
+			</ul>
+		</div>
+	</div>
+</article>

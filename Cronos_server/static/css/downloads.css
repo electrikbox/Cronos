@@ -1,0 +1,80 @@
+@import url('variables.css');
+
+
+.download-block {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 50px;
+	margin-top: 70px;
+	max-width: 800px;
+}
+.download-section {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+	background-color: rgb(226, 226, 226);
+	border-radius: 10px;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+	padding: 30px;
+}
+.h3-dl {
+	font-size: 3rem;
+	text-align: center;
+}
+.logo {
+	width: 100px;
+	height: 100px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.windows-alert {
+	font-family: var(--main-font-family);
+	font-size: 1.4rem;
+	text-align: center;
+	margin-top: 2px;
+}
+.dl-link {
+	font-family: var(--main-font-family);
+	font-size: 1.4rem;
+	text-decoration: none;
+	color: var(--main-color);
+	margin-top: 10px;
+}
+.dl-link:hover {
+	color: var(--link-color);
+}
+.ionicon-dl {
+	height: 30px;
+	text-align: center;
+	margin-bottom: 5px;
+	color: var(--main-color);
+}
+.ionicon-dl:hover {
+	color: var(--link-color);
+}
+.help-dl-block, .msg-help-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	margin-top: 40px;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+	background-color: #C5C5C5;
+	border-radius: 8px;
+}
+.help-dl, .msg-help {
+	font-family: var(--main-font-family);
+	color: rgb(78, 78, 78);
+	font-size: 2rem;
+	text-align: center;
+}
+.msg-help a {
+	text-decoration: none;
+	color: var(--main-color);
+}
+.msg-help a:hover {
+	color: var(--link-color);
+}

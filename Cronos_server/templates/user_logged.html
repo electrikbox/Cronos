@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<script src="{% static '/js/menu.js' %}"></script>
+<script src="{% static '/js/toggle_show_pwd.js' %}"></script>
+<script src="{% static '/js/file_name.js' %}"></script>
+<script src="{% static '/js/help_toggle.js' %}"></script>
+<script src="{% static '/js/help_search.js' %}"></script>
+<script src="{% static '/js/dl_wip.js' %}"></script>
+
+<link rel="stylesheet" href="{% static '/css/user_account_form.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/menu.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/contact.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/help_center.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/downloads.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/home.css' %}"/>
+{% block head_dashboard %}{% endblock %}
+{% endblock %}
+
+
+{% block main %}
+<div class="user_logged">
+
+  <aside>
+    {% include "menu.html" %}
+  </aside>
+
+  <section class="section-content">
+    {% block section %}{% endblock %}
+  </section>
+
+</div>
+{% endblock %}

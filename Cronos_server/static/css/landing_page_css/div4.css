@@ -1,0 +1,61 @@
+.div4 {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: rgba(76, 62, 85, 0.3);
+	width: 100%;
+	padding-bottom: 25px;
+}
+.about-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.about-us {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: start;
+	justify-content: center;
+	gap: 5rem;
+	margin-top: 40px;
+	margin-bottom: 60px;
+}
+
+.about-name {
+	font-size: 2rem;
+	font-weight: bold;
+	color: var(--main-color);
+	text-align: center;
+}
+
+.olive,
+.valentine {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 40rem;
+}
+
+.olive h3,
+.valentine h3 {
+	font-size: 2.5rem;
+}
+
+.about_us_pic {
+	width: 20rem;
+	height: 20rem;
+	border-radius: 20rem;
+	/* border: 4px solid var(--main-color); */
+	background-color: rgba(140, 140, 140, 0.74);
+	box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.4);
+	margin-bottom: 10px;
+}
+
+.about-text {
+	font-size: 2rem;
+	width: 20rem;
+	width: 100%;
+}

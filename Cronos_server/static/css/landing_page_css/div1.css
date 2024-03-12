@@ -1,0 +1,140 @@
+.div1 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 13rem;
+	width: 100%;
+	z-index: 1;
+}
+
+.logo-img {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 6rem;
+	padding-top: 10rem;
+}
+#landing_logo {
+	width: 100%;
+}
+
+.logo-msg {
+	width: 100%;
+}
+
+.logo-log {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.log-info-text {
+	width: 50%;
+}
+
+.log-info-text p {
+	font-size: 2rem;
+}
+
+.log-register_login_div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+	width: 60%;
+}
+
+.log-btn {
+	position: relative;
+	background-color: rgba(51, 106, 132, 0.9);
+	border-radius: 5px;
+	box-shadow: rgb(22, 31, 48) 0px 2px 0px 0px;
+	padding: 15px;
+	cursor: pointer;
+	width: 154px;
+	height: 49px;
+	color: #fff;
+	border: none;
+	font-size: 20px;
+	transition: all 0.3s ease-in-out;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.log-btn::before {
+	content: "";
+	background-color: rgb(34, 82, 104);
+	width: 0;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	transition: width 300ms ease-in-out;
+	display: inline-block;
+  }
+
+.log-btn:hover::before {
+	/* background-color: rgb(34, 82, 104); */
+	width: 100%;
+}
+
+.diagonal-gradient {
+    background: linear-gradient(to bottom right, transparent 49.5%, rgba(76, 62, 85, 0.3) 50.5%);
+}
+
+/* ================= animation ================= */
+
+
+.messages_container {
+    position: relative;
+    height: 4.5rem;
+    width: 100%;
+    overflow: hidden;
+    color: var(--main-color);
+	font-family: mustica, sans-serif;
+	font-size: 3.5rem;
+	text-align: center;
+}
+
+.messages_list {
+    list-style-type: none;
+    animation-name: trans;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+}
+.messages_list li {
+	padding-bottom: 10px;
+}
+
+@keyframes trans {
+    0%, 14.66%{transform:translateY(0%)}
+    16.66%, 31.32% {transform:translateY(-25%)}
+    33.32%,47.98% {transform:translateY(-50%)}
+    49.98%,64.64% {transform:translateY(-75%)}
+    66.64%,81.30% {transform:translateY(-50%)}
+    83.30%,97.96% {transform:translateY(-25%)}
+}
+
+@media only screen and (max-width: 660px) {
+    .messages_container {
+        display: none;
+    }
+    .header_auth {
+        align-items: end;
+    }
+}
+
+@media screen and (max-width: 768px) {
+	.log-info-text {
+		width: 90%;
+	}
+	.logo-img {
+		padding-bottom: 0;
+	}
+}

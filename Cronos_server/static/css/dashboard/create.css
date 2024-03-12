@@ -1,0 +1,95 @@
+.cron_form-create {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 5px;
+	min-width: 250px;
+	width: 100%;
+}
+.cron_form-create > * {
+	width: 100%;
+}
+.cron_form_date_cmd {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 5px;
+}
+.create-field {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	width: 100%;
+	background-color: rgb(240, 240, 240);
+	border-radius: 3px;
+}
+.cron_form-create label {
+	font-family: var(--main-font-family);
+	font-size: 1.6rem;
+	color: rgb(78, 78, 78);
+	padding-left: 7px;
+	padding-top: 1px;
+}
+.copy_field,
+.url_field {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+#id_url {
+	padding: 4px;
+	width: 100%;
+	border: none;
+	border-radius: 4px;
+	outline: none;
+	font-family: var(--main-font-family);
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+.cron_form-create select:focus {
+	border-color: #66afe9;
+}
+.cron_form-create input,
+.cron_form-create select {
+	padding: 5px;
+	font-family: var(--main-font-family);
+	font-size: 1.6rem;
+	outline: none;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+	background-color: rgb(255, 255, 255);
+}
+.cron_form-create button[type="submit"] {
+	padding: 5px;
+	margin-top: 5px;
+	font-size: 1.6rem;
+    height: 32px;
+	font-weight: bold;
+	text-align: center;
+	background-color: rgb(51, 106, 132);
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.help_create_text {
+	font-size: 1.5rem;
+	font-family: var(--main-font-family);
+	color: rgb(78, 78, 78);
+	background-color: rgb(240, 240, 240);
+	padding: 5px;
+	border-radius: 3px;
+	text-align: justify;
+}
+#id_time,
+select {
+	min-width: 122px;
+}
+.hidden {
+    display: block;
+}

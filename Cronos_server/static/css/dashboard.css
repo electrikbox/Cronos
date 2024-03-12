@@ -1,0 +1,63 @@
+@import url('variables.css');
+
+/* global ===============================================*/
+
+.container-dashboard {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 20px;
+	width: 90%;
+	padding-bottom: 5em;
+	/* padding-left: 7em;
+	padding-right: 7em; */
+}
+.create_and_logs {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 470px;
+	flex-grow: 1;
+	gap: 20px;
+}
+.cron_form_create-div,
+.cron_form_logs-div,
+.cron_form_list-div {
+	padding: 20px;
+	width: 100%;
+	background-color: rgb(226, 226, 226);
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+}
+.cron_form_list-div button[type="submit"] {
+	padding: 5px;
+	font-size: 1.2rem;
+	min-width: 10rem;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+}
+.dashboard_titles {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid rgb(185, 185, 185);
+	gap: 10px;
+}
+.dashboard_titles ion-icon {
+    position: relative;
+    font-size: 2.5rem;
+	color: var(--main-color);
+}
+
+@media screen and (max-width: 768px) {
+	.container-dashboard {
+		flex-direction: column;
+	}
+}

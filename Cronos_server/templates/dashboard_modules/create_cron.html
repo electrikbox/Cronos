@@ -1,0 +1,46 @@
+<form class="cron_form-create" method="post" enctype="multipart/form-data">
+
+  <div class="cron_form_date_cmd">
+    {% csrf_token %}
+
+    <div class="create-field">
+      <label for="time">{{ cron_create_form.time.label }}</label>
+      <div class="select">{{ cron_create_form.time }}</div>
+    </div>
+
+    <div class="create-field">
+      <label for="dom">{{ cron_create_form.day_of_month.label }}</label>
+      <div class="select">{{ cron_create_form.day_of_month }}</div>
+    </div>
+
+    <div class="create-field">
+      <label for="months">{{ cron_create_form.months.label }}</label>
+      <div class="select">{{ cron_create_form.months }}</div>
+    </div>
+
+    <div class="create-field">
+      <label for="dow">{{ cron_create_form.day_of_week.label }}</label>
+      <div class="select">{{ cron_create_form.day_of_week }}</div>
+    </div>
+
+    <div class="create-field">
+      <label for="command">{{ cron_create_form.command.label }}</label>
+      <div class="select">{{ cron_create_form.command }}</div>
+    </div>
+
+  </div>
+  <div class="url_field" style="display: none;">
+    <div class="select url_field hidden">{{ cron_create_form.url | escape }}</div>
+  </div>
+
+  <div class="copy_field" style="display: none;">
+  {% comment %} <input class="select copy_field hidden" id="source" type="file" name="name" accept="*" class="form-source"> {% endcomment %}
+    <div class="select copy_field hidden">{{ cron_create_form.source | escape }}</div>
+    <div class="select copy_field hidden">{{ cron_create_form.destination | escape }}</div>
+  </div>
+
+  <div class="help_create_text" style="display: none;">
+    <p class="help_create_text"></p>
+  </div>
+  <button type="submit">Create</button>
+</form>

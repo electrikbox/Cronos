@@ -1,0 +1,90 @@
+.signup_form,
+.login_form,
+.forget_password_form,
+.change_pwd_form {
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	gap: 8px;
+	margin: 0 auto;
+	margin-top: 40px;
+	background-color: rgb(226, 226, 226);
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.signup_form {
+	gap: 7px;
+}
+
+label {
+	padding-top: 10px;
+	font-family: var(--main-font-family);
+	font-size: 1.6rem;
+	color: rgb(78, 78, 78);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 5px;
+		box-sizing: border-box;
+		font-family: Arial, sans-serif;
+		font-size: 1.6rem;
+		outline: none;
+		border-radius: 4px;
+		border: 1px solid #ccc;
+}
+
+
+input[type="submit"] {
+	padding: 15px 20px;
+	font-size: 1.8rem;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px 0 10px 0;
+	background-color: rgb(51, 106, 132);
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+	border-color: #66afe9;
+}
+.showPwd {
+	font-family: var(--main-font-family);
+	color: var(--text-color);
+	width: auto;
+	font-weight: bold;
+	font-size: 1.1rem;
+	cursor: pointer;
+	margin-right: 10px;
+	margin-top: -40px;
+	margin-left: auto;
+	margin-bottom: 15px;
+
+}
+.showPwd:hover {
+	color: var(--link-color);
+}
+
+.pwd_forget, .pwd_forget a {
+	font-family: var(--main-font-family);
+	font-size: 1.2rem;
+	text-align: right;
+	margin-top: 0;
+	margin-bottom: 0;
+	color: var(--text-color);
+	text-decoration: none;
+}
+.pwd_forget a:hover {
+	color: var(--link-color);
+	font-weight: bold;
+}

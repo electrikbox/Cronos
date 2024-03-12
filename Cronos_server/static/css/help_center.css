@@ -1,0 +1,192 @@
+@import url('variables.css');
+
+.search-container {
+  	position: absolute;
+  	top: 8em;
+  	right: 20px;
+	width: 15%;
+}
+.search-container input[type=text] {
+  	background: #f1f1f1;
+	padding: 10px 10px 10px 8px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	margin-bottom: 12px;
+	font-size: 1.4rem;
+}
+.search-container input[type=text]::placeholder {
+	color: rgba(114, 114, 114, 0.5);
+}
+.h3-title {
+	font-size: 2.4rem;
+}
+.collapse {
+	display: none;
+}
+.answer {
+	display: none;
+	overflow: hidden;
+	padding: 20px;
+	margin-left: 50px;
+	margin-right: 50px;
+	font-family: var(--main-font-family);
+	font-size: 1.7rem;
+	text-align: justify;
+}
+.answer p {
+	margin-bottom: 10px;
+}
+.answer h4 {
+	font-size: 1.8rem;
+	margin-bottom: 5px;
+	font-weight: 500;
+	font-family: var(--main-font-family);
+}
+.answer h5 {
+	font-size: 1.8rem;
+	margin-top: 8px;
+	margin-bottom: 15px;
+}
+.answer ul {
+	margin-top: 10px;
+}
+.answer li {
+	list-style: none;
+	margin-left: 30px;
+	margin-bottom: 10px;
+	font-size: 1.7rem;
+}
+.answer a {
+	text-decoration: none;
+	color: var(--main-color);
+}
+.answer a:hover {
+	color: var(--link-color);
+}
+.faq-block,
+.tuto-block,
+.about-us-block {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	background-color: rgb(226, 226, 226);
+	padding: 30px;
+	border-radius: 10px;
+	width: 90%;
+	height: fit-content;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.block-title {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: right;
+	gap: 5px;
+	width: 100%;
+	padding-bottom: 5px;
+	cursor: pointer;
+}
+.tuto-block, .about-us-block {
+	margin-top: 40px;
+}
+.about-us-block {
+	margin-bottom: 50px;
+}
+.h4-help {
+	color: rgb(78, 78, 78);
+	margin: 15px;
+	font-family: var(--main-font-family);
+	cursor: pointer;
+}
+.title-help {
+	display: flex;
+	flex-direction: row;
+	font-size: 2rem;
+	font-weight: 600;
+	width: 100%;
+	border-bottom: 1px solid rgb(185, 185, 185);
+}
+.toggle-collapse-button {
+	background-color: transparent;
+	color: var(--main-color);
+	border: none;
+	margin-right: 5px;
+	font-size: 2.5rem;
+}
+.toggle-answer {
+	background-color: transparent;
+	color: var(--main-color);
+	border: none;
+	margin-right: 5px;
+	font-size: 2rem;
+}
+.cmd-na {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+.tuto-app-block {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: center;
+	max-width: 100%;
+	gap: 20px;
+}
+.tuto-app {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex: 1;
+	text-align: center;
+}
+.tuto-app p {
+	font-size: 1.6rem;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.tuto-app img {
+	height: 100%;
+	max-width: 100%;
+}
+.pause-cron,
+.del-cron {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.open_cmd, .cp-cmd, .ls-cmd {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+.create-img {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	margin-top: 20px;
+	width: 100%;
+	height: 100%;
+}
+.create-img img, .pause-cron img,
+.del-cron img,
+.open_cmd img,
+.cp-cmd img,
+.ls-cmd img {
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	margin: 20px;
+}
+.open_cmd img, .cp-cmd img, .ls-cmd img {
+	width: 300px;
+}
+.create-text {
+	padding: 10px 40px 0 40px;
+}

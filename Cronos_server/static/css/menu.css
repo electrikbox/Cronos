@@ -1,0 +1,80 @@
+@import url('variables.css');
+
+:root {
+    --background-secondary: rgb(27, 27, 27);
+    --background-secondary-dark: rgb(0, 0, 0);
+    --background-secondary-light: rgb(44, 44, 44);
+
+    --black: 0, 0%, 0%;
+    --white: 0, 0%, 100%;
+    --quite-gray: 0, 0%, 50%;
+
+    --navbar-buttons: 3.5rem;
+
+    --transition-main: .175, .685, .32;
+}
+.flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.link-text {
+    padding-left: .7em;
+}
+.flexbox-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+}
+.flexbox-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#navbar {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0px 0px 7px;
+    width: 11em;
+    background-color: var(--background-secondary);
+    height: 100%;
+    font-size: 1.6rem;
+}
+.navbar-items {
+    list-style-type: none;
+    width: 100%;
+}
+.navbar-item {
+    width: 100%;
+    cursor: pointer;
+}
+.navbar-item-inner {
+    padding: 1em;
+    padding-left: .5em;
+    width: 100%;
+    position: relative;
+    color: hsl(var(--quite-gray));
+    border-radius: .25em;
+    text-decoration: none;
+    font-family: var(--main-font-family);
+}
+.navbar-item-inner:hover {
+    color: var(--link-color);
+    background: var(--background-secondary-light);
+    box-shadow: 0 17px 30px -10px hsla(var(--black), .25);
+}
+.navbar-item-inner-icon-wrapper {
+    width: calc(5rem - 1em - 8px);
+    position: relative;
+}
+.navbar-item-inner-icon-wrapper ion-icon {
+    position: absolute;
+    font-size: calc(var(--navbar-buttons) - 1rem);
+}
+.ionicon-menu {
+    height: 20px;
+}
+path :hover {
+    color: var(--link-color);
+}

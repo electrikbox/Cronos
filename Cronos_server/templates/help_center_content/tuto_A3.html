@@ -1,0 +1,50 @@
+{% load static %}
+
+<div class="title-help">
+	<button class="toggle-answer">▶︎</button>
+	<h4 class="h4-help">How to create a cron</h4>
+</div>
+
+<article class="answer">
+	<p>
+		To create a cron, you need to specify several fields in the creation form to define the time,
+		month, day of the month, day of the week and command to be executed.
+		For more detailed command specifications, please refer to the tutorials below.
+	</p>
+	<div class="create-cron-tuto">
+		<div class="create-img">
+			<img src="{% static 'img/help_center_img/create_cron00.png' %}" alt="create a cron">
+			<img src="{% static 'img/help_center_img/create_cron01.png' %}" alt="create a cron">
+			<img src="{% static 'img/help_center_img/create_cron02.png' %}" alt="create a cron">
+		</div>
+		<div class="create-text">
+			<p>
+				The required fields are as follows :
+			</p>
+			<br>
+			<p>
+				<ul>
+					<li><strong>Time</strong> : In this field, you can enter the exact time (to the minute) when you want your cron job to run</li>
+					<li><strong>Day</strong> : Here, it represents <em>"Day of the month"</em>.
+						For example, if you select "11", then the month of January, your command will run every January 11</li>
+					<li><strong>Month</strong>: This field specifies the month of the year in which the task is to be executed</li>
+					<li><strong>Week's day</strong> : This field allows you to specify the day of the week when the command will be executed</li>
+				</ul>
+			</p>
+			<br>
+			<p>
+				The astériks <strong>(*)</strong> is a wildcard character that means <strong>"each / every"</strong>
+				Take a look at the examples above to understand how to use it :
+				<ul>
+				<br>
+				<li> &#9312; : The asterisk in <em>"Week's day"</em> means that your command will run every January 11th, regardless of which day of the week it falls on</li>
+				<br>
+				<li> &#9313; : The asterisk in <em>"Day"</em> means that your command will run every day of the month, regardless of the month or day of the week
+					(here, your command will run every friday of january, regardless of the day of the month it falls on)</li>
+				<br>
+				<li> &#9314; : The asterik in <em>"Month"</em> and <em>"Day"</em> means that your command will run every friday (for this example) of the month, regardless of the month or the day of the week</li>
+				</ul>
+			</p>
+		</div>
+	</div>
+</article>

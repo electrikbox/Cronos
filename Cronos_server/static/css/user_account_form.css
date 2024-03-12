@@ -1,0 +1,192 @@
+@import url('variables.css');
+
+.user_form_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 20px;
+	width: 90%;
+}
+.profile_pic {
+	display: flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 10px;
+	/* margin-right: 20px; */
+	margin-top: -40px;
+	/* background-color: rgb(226, 226, 226); */
+	padding: 20px;
+	border-radius: 4px;
+}
+.pic {
+	text-align: center;
+	margin-top: 20px;
+}
+.profile_pic img {
+	border-radius: 50%;
+	overflow: hidden;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.pic_button {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+/* Hide default button */
+.user_pic_form input[type="file"] {
+	display: none;
+}
+/* Style label that remplace button */
+.user_pic_form label {
+	display: flex;
+	font-weight: bold;
+	flex-direction: row;
+	background-color: #97989a;
+	color: #fffefe;
+	padding: 8px 40px;
+	width: 90%;
+	font-family: var(--main-font-family);
+	font-size: 1.6rem;
+	margin: 10px 0;
+	cursor: pointer;
+	border-radius: 4px;
+	border: none;
+	display: inline-block;
+	text-align: center;
+}
+.user_pic_form label:hover {
+	background-color: #67696c;
+}
+.help-text {
+	font-family: var(--main-font-family);
+	font-size: 1.2rem;
+	color: rgb(78, 78, 78);
+	text-align: right;
+}
+.user_pic_form input[type="submit"] {
+	display: flex;
+	flex-direction: row;
+	width: 100px;
+	background-color: #97989a;
+	color: #fffefe;
+	font-size: 1.3rem;
+	padding: 8px 8px;
+	margin: 10px 0;
+	cursor: pointer;
+	border-radius: 4px;
+	border: none;
+	display: inline-block;
+	text-align: center;
+}
+#file-name-display {
+	font-family: var(--main-font-family);
+	font-size: 1.2rem;
+	color: rgb(78, 78, 78);
+	text-align: left;
+}
+#file-name-display.file-selected {
+	color: #2e8b57;
+}
+.personal,
+.security {
+	margin: 0;
+	margin-bottom: 40px;
+	background-color: rgb(226, 226, 226);
+	width: fit-content;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.user_account_form {
+	width: 440px;
+}
+.user_pwd_form {
+	width: 320px;
+}
+.user_account_form,
+.user_pwd_form {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0;
+	background-color: rgb(226, 226, 226);
+	padding: 15px;
+	border-radius: 4px;
+}
+.user_account_form label,
+.user_pwd_form label{
+	padding-top: 10px;
+	font-family: var(--main-font-family);
+	font-size: 1.6rem;
+	color: rgb(78, 78, 78);
+	display: inherit;
+}
+.account_title {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-family: var(--main-font-family);
+	font-size: 2.4rem;
+	color: var(--main-color);
+	padding-bottom: 5px;
+	border-bottom: 1px solid rgb(185, 185, 185);
+	gap: 10px;
+}
+.account_title ion-icon {
+	position: relative;
+	font-size: 2rem;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 5px;
+	box-sizing: border-box;
+	font-family: var(--main-font-family);
+	font-size: 1.6em;
+	outline: none;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+}
+input[type="submit"] {
+	padding: 15px 20px;
+	font-size: 1.8rem;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px 0 10px 0;
+	background-color: rgb(51, 106, 132);
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+	border-color: #66afe9;
+}
+
+h3 {
+	/* font-family: var(--main-font-family); */
+	font-family: 'mustica', sans-serif;
+	color: var(--main-color);
+}
+.showPwd {
+	font-family: var(--main-font-family);
+	color: var(--text-color);
+	width: auto;
+	display: block;
+	font-weight: bold;
+	font-size: 1.1rem;
+	cursor: pointer;
+	margin-right: 10px;
+	margin-top: -40px;
+	margin-left: auto;
+	margin-bottom: 15px;
+}
+.showPwd:hover {
+	color: var(--link-color);
+}

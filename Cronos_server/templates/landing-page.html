@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_landing_page %}
+<link rel="stylesheet" href="{% static '/css/landing_page_global.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/landing_page_css/div1.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/landing_page_css/div2.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/landing_page_css/div3.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/landing_page_css/div4.css' %}"/>
+<link rel="stylesheet" href="{% static '/css/landing_page_css/div5.css' %}"/>
+<link href=" https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css " rel="stylesheet">
+{% endblock %}
+
+{% block js_landing_page %}
+<script src="{% static '/js/landing_page.js' %}"></script>
+<script src="{% static '/js/landing_page_js/gallery_app.js' %}"></script>
+<script src="{% static '/js/landing_page_js/gallery_web.js' %}"></script>
+<script src="{% static '/js/landing_page_js/scroll_background.js' %}"></script>
+<script src="{% static '/js/landing_page_js/header-behavior.js' %}"></script>
+<script src="{% static '/js/landing_page_js/menu-link.js' %}"></script>
+<script src=" https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js "></script>
+{% endblock %}
+
+{% block title %}Cronos Landing Page{% endblock %}
+
+{% block main %}
+
+<div class="main-landing">
+	<div class="main-block div1" id="landing-top">
+		{% include 'landing_page_content/div1.html' %}
+	</div>
+
+	<div class="main-block div2" id="landing-web">
+		{% include 'landing_page_content/div2.html' %}
+	</div>
+
+	<div class="main-block div3" id="landing-app">
+		{% include 'landing_page_content/div3.html' %}
+	</div>
+
+	<div class="main-block div4" id="landing-about">
+		{% include 'landing_page_content/div4.html' %}
+	</div>
+
+	<div class="main-block div5" id="landing-reviews">
+		{% include 'landing_page_content/div5.html' %}
+	</div>
+</div>
+
+{% endblock %}

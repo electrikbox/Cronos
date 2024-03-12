@@ -1,0 +1,146 @@
+@import url('variables.css');
+
+.home-block {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 80%;
+	/* background-color: rgb(226, 226, 226); */
+	/* margin-top: 70px; */
+}
+.home-section-full-width {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	width: 70%;
+	background-color: rgb(226, 226, 226);
+	border-radius: 10px;
+	padding: 20px;
+	margin-bottom: 50px;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.home-info {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 5px;
+}
+.ionicon-home-account {
+	height: 60px;
+	width: 60px;
+	margin-right: 20px;
+	color: var(--main-color);
+}
+.ionicon-home-account :hover {
+	color: var(--link-color);
+}
+.home-info h4 {
+	font-family: var(--main-font-family);
+	color: rgb(78, 78, 78);
+	font-size: 1.8rem;
+	margin-bottom: 8px;
+}
+.home-name {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+#home-account {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+#home-account h3 {
+	font-family: var(--main-font-family);
+	font-size: 2.6rem;
+}
+#home-account p {
+	font-family: var(--main-font-family);
+	color: rgb(78, 78, 78);
+	text-align: center;
+	font-size: 1.2rem;
+}
+#home-account a {
+	text-decoration: none;
+	color: var(--main-color);
+}
+#home-account a:hover {
+	font-weight: bold;
+	color: var(--link-color);
+}
+.cron-info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+.home-cron-active,
+.home-cron-pending {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--main-font-family);
+	color: #4E4E4E;
+}
+.home-cron-active p,
+.home-cron-pending p {
+	font-size: 1.6rem;
+}
+.ionicon-info-cron {
+	height: 20px;
+	margin-right: 5px;
+}
+.home-link-all {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 30px;
+}
+.home-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 30px;
+	/* margin: 15px; */
+	border-radius: 10px;
+	height: 250px;
+	width: 250px;
+	background-color: rgb(226, 226, 226);
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.home-block a {
+	text-decoration: none;
+	color: var(--main-color);
+}
+.home-link :hover {
+	outline: 2px solid var(--link-color);
+	cursor: pointer;
+}
+.home-section :hover {
+	outline: none;
+	cursor: pointer;
+}
+.home-section h3 {
+	/* font-family: var(--main-font-family); */
+	font-size: 2.5rem;
+	text-align: center;
+}
+.home-section p {
+	font-family: var(--main-font-family);
+	color: rgb(78, 78, 78);
+	margin-top: 20px;
+	text-align: center;
+}
+.ionicon-home {
+	height: 150px;
+	text-align: center;
+	margin-bottom: 5px;
+	padding-top: 15px;
+	color: var(--main-color);
+}
