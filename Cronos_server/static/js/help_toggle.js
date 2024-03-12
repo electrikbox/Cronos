@@ -1,19 +1,19 @@
 // Toggle the answer when clicking on the question
 
 $(document).ready(function () {
-  $('.toggle-answer').click(function () {
+  $('.toggle-answer, .h4-help').click(function () {
     // Find the closest question or tutorial
     const question = $(this).closest('.question, .tuto, .about-us-faq');
     const answer = question.find('.answer');
     // Toggle the answer
     answer.slideToggle();
     // Change the arrow
-    $(this).toggleClass('open');
+    question.find('.toggle-answer').toggleClass('open');
 
-    if ($(this).hasClass('open')) {
-      $(this).html('▽');
+    if (question.find('.toggle-answer').hasClass('open')) {
+      question.find('.toggle-answer').html('▽');
     } else {
-      $(this).html('▶︎');
+      question.find('.toggle-answer').html('▶︎');
     }
   });
 });

@@ -93,6 +93,7 @@
 	color: rgb(78, 78, 78);
 	margin: 15px;
 	font-family: var(--main-font-family);
+	cursor: pointer;
 }
 .title-help {
 	display: flex;
