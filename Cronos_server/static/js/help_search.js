@@ -10,6 +10,7 @@ $(document).ready(function () {
       $('.toggle-collapse-button').html('◀︎');
       $('.answer').slideUp();
       $('.toggle-answer').removeClass('open').html('▶︎');
+      $('.faq-block, .tuto-block, .about-us-block').show(); // Show all blocks
       return; // Exit the function early if the query is empty
     }
 
