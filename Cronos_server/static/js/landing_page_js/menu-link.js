@@ -13,11 +13,11 @@ $(document).ready(function () {
     var scrollPosition = $(window).scrollTop();
 
     $('.main-block').each(function () {
-      var sectionTop = $(this).offset().top - 200;
-      var sectionBottom = sectionTop + $(this).innerHeight();
+      const sectionTop = $(this).offset().top - 170;
+      const sectionBottom = scrollPosition + 68;
 
       if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
-        var currentSectionId = $(this).attr('id');
+        const currentSectionId = $(this).attr('id');
 
         $('#landing-menu li').removeClass('menu-active');
         $('#landing-menu li').addClass('menu-inactive');

@@ -21,7 +21,7 @@
     list-style: none;
     padding: 0px;
     margin: 0px;
-    gap: 3rem;
+    gap: 2rem;
 }
 .menu-active a {
     color: var(--link-color);
