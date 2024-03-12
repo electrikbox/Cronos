@@ -17,6 +17,9 @@
 .search-container input[type=text]::placeholder {
 	color: rgba(114, 114, 114, 0.5);
 }
+.h3-title {
+	font-size: 2.4rem;
+}
 .collapse {
 	display: none;
 }
