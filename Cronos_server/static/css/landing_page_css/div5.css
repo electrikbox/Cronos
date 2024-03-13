@@ -27,8 +27,8 @@
 	gap: 50px;
 }
 .all-reviews img {
-	width: 50%;
-	height: 50%;
+	width: 13rem;
+	height: 13rem;
 	border-radius: 50%;
 	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
 }
