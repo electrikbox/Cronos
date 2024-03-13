@@ -52,6 +52,11 @@
 	width: 350px;
 	height: 350px;
 }
+.review-name {
+	color: var(--main-color);
+	text-align: center;
+	padding-bottom: 10px;
+}
 .review-stars {
 	margin-top: 10px;
 	font-size: 2.6rem;
