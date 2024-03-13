@@ -40,6 +40,13 @@ header {
 	align-items: center;
 	width: 100%;
 }
+.header-mobile {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
 main {
 	display: flex;
 	flex-direction: column;
