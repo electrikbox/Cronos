@@ -50,4 +50,4 @@ if __name__ == "__main__":
 
 # compliation :
 # export PATH=$PATH:~/.local/bin
-# flet pack main.py --add-data "assets:assets"
+# flet pack main.py --add-data "assets:assets" --product-name Cronos-Connect -n Cronos-Connect --icon icon.png
