@@ -35,7 +35,19 @@ class AppPages(ft.UserControl):
                     [self.elements.login_button],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
-            ]
+                ft.Container(
+                    content=ft.Column(
+                        [self.elements.copyright],
+                        alignment=ft.MainAxisAlignment.END,
+                    ),
+                    alignment=ft.alignment.center,
+                    width=350,
+                    height=50,
+                    expand=True,
+                ),
+            ],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            expand=True,
         )
 
         # logout page elements
@@ -88,6 +100,17 @@ class AppPages(ft.UserControl):
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
+                ft.Container(
+                    content=ft.Column(
+                        [self.elements.copyright],
+                        alignment=ft.MainAxisAlignment.END,
+                    ),
+                    alignment=ft.alignment.center,
+                    width=350,
+                    height=50,
+                    expand=True,
+                ),
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            expand=True,
         )
