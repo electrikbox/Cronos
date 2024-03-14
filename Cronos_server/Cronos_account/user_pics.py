@@ -18,10 +18,10 @@ class UserPic():
         _, file_extension = os.path.splitext(pic.name)
 
         filename = f"{self.user.id}{file_extension.lower()}"
-        filepath = os.path.join(settings.MEDIA_ROOT, filename)
+        filepath = os.path.join(settings.MEDIA_ROOT + '/user_pic/', filename)
 
         filename_no_ext = f"{self.user.id}"
-        existing_files = glob.glob(f"{settings.MEDIA_ROOT}/{filename_no_ext}.*")
+        existing_files = glob.glob(f"{settings.MEDIA_ROOT}'/user_pic'/{filename_no_ext}.*")
 
         for existing_file in existing_files:
             os.remove(existing_file)
@@ -38,12 +38,12 @@ class UserPic():
 
     def show_pic(self):
         """ Show user profile picture """
-        filepath = os.path.join(settings.MEDIA_ROOT)
+        filepath = os.path.join(settings.MEDIA_ROOT + '/user_pic')
         search_file = f"{filepath}/{self.user.id}".split('.')[0]
 
         if not any(glob.glob(f"{search_file}.*")):
             pic = 'default_pic.png'
-            return settings.MEDIA_URL + pic
+            return settings.MEDIA_URL + 'user_pic/' + pic
 
         for file in os.listdir(filepath):
             user_id = file.split('.')[0]
@@ -53,7 +53,7 @@ class UserPic():
                 pic = f"{user_id}.{ext}"
                 break
 
-        image_url = settings.MEDIA_URL + pic
+        image_url = settings.MEDIA_URL + 'user_pic/' + pic
 
         return image_url
 
