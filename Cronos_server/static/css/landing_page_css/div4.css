@@ -24,7 +24,7 @@
 }
 .description p {
 	padding-bottom: 15px;
-	line-height: 27px;
+	line-height: 1.6;
 }
 .team-title {
 	color: var(--main-color);

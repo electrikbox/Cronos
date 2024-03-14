@@ -35,7 +35,7 @@
 	padding-left: 150px;
 }
 .prez-app-txt p {
-	line-height: 27px;
+	line-height: 1.6;
 }
 .prez-app-txt h3 {
 	font-family: var(--main-font-family);
