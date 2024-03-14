@@ -94,6 +94,7 @@ class AppHandler:
             cmd_validated = CheckCommand.is_command_available_unix(command)
 
             if not cmd_validated:
+                self.all_msg_in_app.append(cmd_validated)
                 self.cron_action_text.value += (
                     f"\nCommand {command} not available"
                 )
@@ -224,6 +225,12 @@ class AppHandler:
         """ Login and fetch remote crons """
         self.elements.fetch_button.text = "Stop Auto-fetch"
         self.authenticate()
+
+        remote_crons, local_crons = self.crons_lists()
+        self.add_remote_crons_to_local(remote_crons, local_crons)
+        self.del_local_crons(remote_crons, local_crons)
+        self.toggle_pause_local_crons(remote_crons, local_crons)
+
         messages_user = self.all_msg_in_app
 
         if len(messages_user) == 0:
@@ -330,11 +337,11 @@ class AppHandler:
         """ Auto-fetch remote crons """
         while self.auto_fetch:
             try:
+                time.sleep(5)
                 remote_crons, local_crons = self.crons_lists()
                 self.add_remote_crons_to_local(remote_crons, local_crons)
                 self.del_local_crons(remote_crons, local_crons)
                 self.toggle_pause_local_crons(remote_crons, local_crons)
-                time.sleep(5)
             except Exception as e:
                 print("reconnecting to get new token...")
                 self.cron_scraper = CronScraper(self.username, self.password)

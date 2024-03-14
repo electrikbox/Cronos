@@ -95,3 +95,12 @@ class Elements(ft.UserControl):
             "",
             color=ft.colors.TEAL_400,
         )
+
+        # COPYRIGHT
+        # =====================================================================
+
+        self.copyright = ft.Text(
+            value="© Valentine & Olive | HolbertonSchool 2024",
+            text_align="center",
+            color=ft.colors.GREY_800,
+        )

@@ -14,7 +14,7 @@ def main(page: ft.Page) -> None:
     page.vertical_alignment = ft.CrossAxisAlignment.START
     page.window_width = 400
     page.window_min_width = 500
-    page.window_height = 550
+    page.window_height = 570
     page.window_min_height = 550
     page.scroll = False
     page.update()
@@ -50,4 +50,4 @@ if __name__ == "__main__":
 
 # compliation :
 # export PATH=$PATH:~/.local/bin
-# flet pack main.py --add-data "assets:assets"
+# flet pack main.py --add-data "assets:assets" --product-name Cronos-Connect -n Cronos-Connect --icon icon.png

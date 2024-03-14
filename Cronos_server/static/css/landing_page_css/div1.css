@@ -80,7 +80,6 @@
   }
 
 .log-btn:hover::before {
-	/* background-color: rgb(34, 82, 104); */
 	width: 100%;
 }
 
@@ -92,14 +91,18 @@
 
 
 .messages_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
     position: relative;
-    height: 4.5rem;
+    height: 6rem;
     width: 100%;
     overflow: hidden;
     color: var(--main-color);
 	font-family: mustica, sans-serif;
-	font-size: 3.5rem;
+	font-size: 3.4rem;
 	text-align: center;
+	padding: 10px;
 }
 
 .messages_list {
@@ -107,9 +110,11 @@
     animation-name: trans;
     animation-duration: 30s;
     animation-iteration-count: infinite;
+	width: 100rem;
 }
 .messages_list li {
 	padding-bottom: 10px;
+	align-self: center;
 }
 
 @keyframes trans {
@@ -121,20 +126,33 @@
     83.30%,97.96% {transform:translateY(-25%)}
 }
 
-@media only screen and (max-width: 660px) {
-    .messages_container {
-        display: none;
-    }
-    .header_auth {
-        align-items: end;
-    }
+@media only screen and (max-width: 1200px) {
+	.messages_container {
+		font-size: 2.8rem;
+	}
 }
 
 @media screen and (max-width: 768px) {
+	.div1 {
+		gap: 8rem;
+	}
 	.log-info-text {
 		width: 90%;
 	}
 	.logo-img {
 		padding-bottom: 0;
+	}
+	.log-btn {
+		font-size: 17px;
+	}
+	.header_auth {
+        align-items: end;
+    }
+	.messages_container {
+		height: 7.5rem;
+		font-size: 2.3rem;
+	}
+	.messages_list {
+		width: 40rem;
 	}
 }

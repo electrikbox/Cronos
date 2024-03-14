@@ -40,6 +40,13 @@ header {
 	align-items: center;
 	width: 100%;
 }
+.header-mobile {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
 main {
 	display: flex;
 	flex-direction: column;
@@ -147,7 +154,7 @@ input[type="submit"]:hover,
 }
 
 main {
-	background-image: url('../img/cronos-back3.png');
+	background-image: url('../img/background/cronos-back3.png');
 	background-attachment:fixed;
 	background-position: bottom;
     background-repeat: no-repeat;
