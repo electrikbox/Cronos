@@ -84,12 +84,12 @@ footer a{
 	color: var(--text-color);
 }
 h1 {
-	font-size: 4rem;
+	font-size: 4.5rem;
 	text-align: center;
 	margin-bottom: 20px;
 }
 h2 {
-	font-size: 2.6rem;
+	font-size: 4rem;
 	text-align: center;
 	padding-top: 2rem;
 	padding-bottom: 1rem;
@@ -103,7 +103,7 @@ h1, h2, h3 {
 	/* font-family: var(--main-font-family); */
 	font-family: 'mustica', sans-serif;
 	margin: 0;
-	color: var(--title-color);
+	color: var(--main-color);
 	width: 100%;
 }
 .success_msg, .error_msg {

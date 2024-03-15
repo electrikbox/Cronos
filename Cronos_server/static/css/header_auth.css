@@ -75,7 +75,7 @@
     margin: 0%;
     text-decoration: none;
     text-align: end;
-    font-size: 1.7rem;
+    font-size: 2rem;
 }
 
 #username {
@@ -87,8 +87,8 @@
     color: var(--link-color);
 }
 .profile_pic_header {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 4.7rem;
+    height: 4.7rem;
     border-radius: 50%;
 }
 
@@ -103,7 +103,7 @@
     padding-right: 20px;
     margin: 0px;
     width: 100%;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
 }
 .logo-menu-mobile {
     padding-top: 20px;
@@ -154,6 +154,6 @@
 }
 @media screen and (min-width: 2500px) {
     .user_auth a {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 }
