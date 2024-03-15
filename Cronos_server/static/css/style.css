@@ -33,7 +33,7 @@ header {
 	z-index: 999;
 }
 .header {
-	height: 50px;
+	height: 7rem;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
