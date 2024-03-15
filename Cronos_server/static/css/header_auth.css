@@ -50,7 +50,7 @@
 }
 
 .logo-menu img {
-    width: 20rem;
+    width: 12em;
     padding-left: 5px;
     padding-top: 3px;
 }
@@ -150,5 +150,10 @@
     }
     .header {
         display: none;
+    }
+}
+@media screen and (min-width: 2500px) {
+    .user_auth a {
+        font-size: 2rem;
     }
 }

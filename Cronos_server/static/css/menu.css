@@ -66,7 +66,8 @@
     box-shadow: 0 17px 30px -10px hsla(var(--black), .25);
 }
 .navbar-item-inner-icon-wrapper {
-    width: calc(5rem - 1em - 8px);
+    /* width: calc(5rem - 1em - 8px); */
+    width: 4rem;
     position: relative;
 }
 .navbar-item-inner-icon-wrapper ion-icon {
@@ -74,8 +75,14 @@
     font-size: calc(var(--navbar-buttons) - 1rem);
 }
 .ionicon-menu {
-    height: 25px;
+    height: 1.5em;
 }
 path :hover {
     color: var(--link-color);
+}
+
+@media screen and (min-width: 2500px) {
+    #navbar {
+        font-size: 2rem;
+    }
 }
