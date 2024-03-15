@@ -7,8 +7,6 @@ from modules.functions.check_command import CheckCommand
 from modules.functions.cron_script_handle import CronosScript
 from crontab import CronTab, CronItem
 
-import datetime
-
 
 WRONG_CREDENTIALS_MSG = "Wrong username or password"
 NOT_ENOUGH_ELEMENTS_MSG = "Not enough elements in cron data to check"
