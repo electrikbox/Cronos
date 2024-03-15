@@ -134,6 +134,7 @@ class CronosScript:
             f.write(script_content)
 
         os.chmod(script, stat.S_IRWXU | stat.S_IRGRP | stat.S_IROTH)
+        # os.chmod(script, stat.S_IXUSR)
         self.script_path = script
 
     # remove script
