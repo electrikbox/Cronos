@@ -65,7 +65,7 @@
     align-items: center;
     padding: 10px;
     padding-right: 15px;
-    gap: 7px;
+    gap: 1rem;
 }
 
 .user_auth p,
@@ -90,6 +90,7 @@
     width: 4.7rem;
     height: 4.7rem;
     border-radius: 50%;
+    margin-right: 5px;
 }
 
 
