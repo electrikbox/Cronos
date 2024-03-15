@@ -7,6 +7,8 @@ from modules.functions.check_command import CheckCommand
 from modules.functions.cron_script_handle import CronosScript
 from crontab import CronTab, CronItem
 
+import datetime
+
 
 WRONG_CREDENTIALS_MSG = "Wrong username or password"
 NOT_ENOUGH_ELEMENTS_MSG = "Not enough elements in cron data to check"
@@ -337,7 +339,7 @@ class AppHandler:
         """ Auto-fetch remote crons """
         while self.auto_fetch:
             try:
-                time.sleep(5)
+                time.sleep(2)
                 remote_crons, local_crons = self.crons_lists()
                 self.add_remote_crons_to_local(remote_crons, local_crons)
                 self.del_local_crons(remote_crons, local_crons)
