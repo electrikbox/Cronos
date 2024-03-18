@@ -47,7 +47,7 @@ First of all, check that all the requirements are met. If not, you can install t
 ```
 pip install -r requirements.txt
 ```
-You can then go the `utils` directoy and launch this command in your terminal :
+You can then go the `utils` directoy and launch the server by using this command in your terminal :
 ```
 ./server_launch.sh
 ```
