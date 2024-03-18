@@ -3,13 +3,13 @@
 <h2 align="center">Portfolio Project 2024</h2>
 
 # 🏛️ Architecture
-<img src="https://i.imgur.com/svogM1s.jpg" width="100%"/>
+<img src="https://i.imgur.com/K1ktNsX.png" width="100%"/>
 
-# 🔗 API
-<img src="https://i.imgur.com/iAQIm1E.jpg" width="100%"/>
+# 🔗 API Endpoints
+<img src="https://i.imgur.com/0tlSWi0.png" width="100%"/>
 
 # 📊 Diagram SQL
-<img src="https://i.imgur.com/e0EK267.png" width="100%"/>
+<img src="https://i.imgur.com/ZzVO1KW.png" width="100%"/>
 
 # 👥 Team
 

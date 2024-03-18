@@ -14,7 +14,7 @@ Our team set about designing and developing this platform with the mission of si
 
 ## 🌏 How does it works
 
-<img src="https://i.imgur.com/eNshLrm.jpg" width="100%"/>
+<img src="https://i.imgur.com/zzrQ7In.png" width="100%"/>
 
 # 📡 Technologies used
 ## ➡️ Website
