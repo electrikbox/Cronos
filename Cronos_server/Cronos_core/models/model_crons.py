@@ -18,7 +18,7 @@ class Crons(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     separator = ('separator', '-------------')
-    each_any = ('*', '*')
+    each_any = ('*', 'every')
 
     def __str__(self) -> str:
         return str(
