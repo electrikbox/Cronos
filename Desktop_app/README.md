@@ -2,7 +2,7 @@
 
 ## 📋 Description
 
-Cronos_connect application designed to work with Cronos website.
+Cronos_Connect application designed to work with Cronos website.
 
 ## 🛠 How it work
 <p align="center">
@@ -19,7 +19,7 @@ To install Cronos-Connect, follow these steps:
 
 ## 🖥 Usage
 
-To use Cronos-Connect, follow these instructions:
+To use Cronos-Connect Client, follow these instructions:
 
 - Simply launch the app then enter you credentials.
 - The app will auto fetch your data from our api, you can turn off the auto fetch when you want, sitch back to auto will start fetch again your data.
