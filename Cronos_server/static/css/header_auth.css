@@ -8,7 +8,7 @@
     padding: 0px;
     margin: 0px;
     width: 100%;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 }
 
 .logo-menu {
@@ -50,7 +50,9 @@
 }
 
 .logo-menu img {
-    width: 10rem;
+    width: 12em;
+    padding-left: 5px;
+    padding-top: 3px;
 }
 
 #logo-small {
@@ -63,7 +65,7 @@
     align-items: center;
     padding: 10px;
     padding-right: 15px;
-    gap: 7px;
+    gap: 1rem;
 }
 
 .user_auth p,
@@ -73,7 +75,7 @@
     margin: 0%;
     text-decoration: none;
     text-align: end;
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 #username {
@@ -85,9 +87,10 @@
     color: var(--link-color);
 }
 .profile_pic_header {
-    width: 30px;
-    height: 30px;
+    width: 4.7rem;
+    height: 4.7rem;
     border-radius: 50%;
+    margin-right: 5px;
 }
 
 
@@ -101,7 +104,7 @@
     padding-right: 20px;
     margin: 0px;
     width: 100%;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
 }
 .logo-menu-mobile {
     padding-top: 20px;
@@ -148,5 +151,10 @@
     }
     .header {
         display: none;
+    }
+}
+@media screen and (min-width: 2500px) {
+    .user_auth a {
+        font-size: 2.2rem;
     }
 }
