@@ -14,7 +14,7 @@ Our team set about designing and developing this platform with the mission of si
 
 ## 🌏 How does it works
 
-<img src="https://i.imgur.com/CVs8biR.png" style="background-color:#c6c6c6"/>
+<img src="https://i.imgur.com/eNshLrm.jpg" width="100%"/>
 
 # 📡 Technologies used
 ## ➡️ Website
@@ -51,20 +51,20 @@ You can then go the `utils` directoy and launch this command in your terminal :
 ```
 ./server_launch.sh
 ```
-and finally go to your **[http://localhost:8000/]([http://localhost:8000/])**
+and finally go to your **[http://localhost:8000/](http://localhost:8000/)**
 
 ### Usage
 
 Once you're on the landing page, you can register. Be sure to check your e-mail to finalize your registration. Once you've completed these steps, you can log in and take advantage of our service
 
 # 🏛️ Architecture
-<img src="https://i.imgur.com/mCKv2c9.png" style="background-color:#c6c6c6"/>
+<img src="https://i.imgur.com/svogM1s.jpg" width="100%"/>
 
 # 🔗 API
-<img src="https://i.imgur.com/C3YNSXc.png" title="source: imgur.com" style="background-color:#c6c6c6"/>
+<img src="https://i.imgur.com/iAQIm1E.jpg" width="100%"/>
 
 # 📊 Diagram SQL
-<img src="https://i.imgur.com/e0EK267.png" title="source: imgur.com" style="background-color:#c6c6c6"/>
+<img src="https://i.imgur.com/e0EK267.png" width="100%"/>
 
 # 🔎 Landing Page
 
