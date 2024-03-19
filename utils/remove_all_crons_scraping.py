@@ -6,8 +6,8 @@ import time
 
 url = "http://localhost:8000/accounts/login/"
 
-username = "olive"
-password = "Azertylilivier59!"
+username = ""
+password = ""
 
 username_path = '//*[@id="id_username"]'
 password_path = '//*[@id="id_password"]'

@@ -163,7 +163,7 @@ class ActivationTemporaryTokenTestCase(TestCase):
         self.assertIsNotNone(self.token.expires_at)
 
     def test_expiration_date(self):
-        expected_expiration_date = timezone.now() + timedelta(days=7)
+        expected_expiration_date = timezone.now() + timedelta(hours=2)
         self.assertEqual(self.token.expires_at.date(), expected_expiration_date.date())
 
     def test_token_validity(self):
