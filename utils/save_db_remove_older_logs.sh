@@ -2,7 +2,7 @@
 
 backup_dir="$HOME/Bureau/Portfolio/backup"
 backup_file="$backup_dir/Cronos_backup.sql"
-CNF="$HOME/Bureau/Portfolio/.my.cnf"
+CNF="$HOME/Bureau/Portfolio/Cronos.my.cnf"
 
 # Check if the backup directory exists, create it if it doesn't
 if [ ! -d "$backup_dir" ]; then
