@@ -3,7 +3,7 @@ from Cronos_website.views import *
 
 @login_required
 def home(request) -> HttpResponse:
-    """Render home page"""
+    """ Render home page """
 
     active_crons_count = Crons.objects.filter(user=request.user, validated=True, is_paused=False).count()
     pending_crons_count = Crons.objects.filter(user=request.user, validated=False).count()

@@ -36,11 +36,6 @@ class CronForm(forms.Form):
         required=False,
         widget=forms.URLInput(attrs={"placeholder": "https://www.example.com"}),
     )
-    # source = forms.FileField(
-    #     label="Select",
-    #     required=False,
-    #     widget=forms.FileInput(attrs={"placeholder": "Source"}),
-    # )
     source = forms.CharField(
         label="Source",
         required=False,
@@ -53,7 +48,7 @@ class CronForm(forms.Form):
     )
 
     def clean(self):
-
+        """ Clean method for the form """
         cleaned_data = super().clean()
         command = cleaned_data.get("command")
         url = cleaned_data.get("url")
@@ -72,6 +67,7 @@ class CronForm(forms.Form):
                 self.add_error("source", "space")
             if ' ' in destination:
                 self.add_error("destination", "space")
+
         return cleaned_data
 
     class Meta:
@@ -86,4 +82,3 @@ class CronForm(forms.Form):
             'source',
             'destination'
         ]
-

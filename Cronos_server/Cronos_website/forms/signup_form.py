@@ -1,5 +1,6 @@
 from Cronos_website.forms import *
 
+
 # CLASS SIGNUP FORM
 # =============================================================================
 
@@ -7,7 +8,7 @@ class SignUpForm(UserCreationForm):
     """ Sign up form class """
     username = forms.CharField(
         label="Username",
-        max_length=15,
+        max_length=30,
         widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
     )
     first_name = forms.CharField(

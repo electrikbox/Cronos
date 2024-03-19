@@ -2,13 +2,13 @@ from django.forms import ClearableFileInput
 from Cronos_website.forms import *
 
 
-# USER ACCOUNT PERSONNAL INFO FORM
+# USER ACCOUNT PERSONAL INFO FORM
 # =============================================================================
 class UserAccountForm(forms.ModelForm):
     """ User account form """
     username = forms.CharField(
         label="Username",
-        max_length=15,
+        max_length=30,
     )
     first_name = forms.CharField(
         label="First_name",
@@ -51,6 +51,7 @@ class ProfileImgForm(forms.Form):
     )
 
     def clean_profile_img(self):
+        """ Clean profile_img method """
         profile_img = self.cleaned_data.get('profile_img')
 
         if profile_img:

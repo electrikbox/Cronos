@@ -1,3 +1,5 @@
+""" This file is used to import all the views from the website """
+
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
