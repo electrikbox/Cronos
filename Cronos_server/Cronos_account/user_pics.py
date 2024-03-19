@@ -18,11 +18,15 @@ class UserPic():
         _, file_extension = os.path.splitext(pic.name)
 
         filename = f"{self.user.id}{file_extension.lower()}"
+
+        # Dir when user profile pictures are stored
         filepath = os.path.join(settings.MEDIA_ROOT + '/user_pic/', filename)
 
+        # Rename pic with user id
         filename_no_ext = f"{self.user.id}"
         existing_files = glob.glob(f"{settings.MEDIA_ROOT}'/user_pic'/{filename_no_ext}.*")
 
+        # Replace file if already exists
         for existing_file in existing_files:
             os.remove(existing_file)
 
@@ -41,6 +45,7 @@ class UserPic():
         filepath = os.path.join(settings.MEDIA_ROOT + '/user_pic')
         search_file = f"{filepath}/{self.user.id}".split('.')[0]
 
+        # Display default pic if user has not uploaded any
         if not any(glob.glob(f"{search_file}.*")):
             pic = 'default_pic.png'
             return settings.MEDIA_URL + 'user_pic/' + pic
