@@ -265,10 +265,12 @@ class AppHandler:
 
         if self.auto_fetch:
             self.elements.fetch_button.text = "Stop Auto-fetch"
-            self.cron_action_text.value += "\nAuto fetch crons : ON"
+            self.elements.autofetch_txt.value = "ON"
+            self.elements.autofetch_txt.color = "green"
         else:
             self.elements.fetch_button.text = "Start Auto-fetch"
-            self.cron_action_text.value += "\nAuto fetch crons : OFF"
+            self.elements.autofetch_txt.value = "OFF"
+            self.elements.autofetch_txt.color = "red"
 
         messages_user = self.all_msg_in_app
 

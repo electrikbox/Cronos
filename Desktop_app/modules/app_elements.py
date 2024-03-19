@@ -96,6 +96,8 @@ class Elements(ft.UserControl):
             color=ft.colors.TEAL_400,
         )
 
+        self.autofetch_txt = Text("ON", color="green")
+
         # COPYRIGHT
         # =====================================================================
 
