@@ -1,9 +1,10 @@
 from Cronos_API.views import *
 
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def add_cron(request) -> Response:
-    """Add a new cron to database"""
+    """ Add a new cron to database """
     cron_serializer = CronsSerializer(data=request.data)
 
     if not cron_serializer.is_valid():
@@ -13,6 +14,7 @@ def add_cron(request) -> Response:
 
     cron_instance = cron_serializer.save()
 
+    # Create logs (creation)
     log_data = {
         "log": f"({cron_instance.id}) Created",
         "create_date": timezone.now(),
@@ -28,4 +30,5 @@ def add_cron(request) -> Response:
         )
 
     log_serializer.save()
+
     return Response(cron_serializer.data, status=status.HTTP_201_CREATED)

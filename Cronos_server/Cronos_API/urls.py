@@ -1,5 +1,6 @@
 """ URLs for Cronos_API """
 
+
 from django.urls import path
 from .views import (
     list_crons,
@@ -8,7 +9,6 @@ from .views import (
     update_cron,
     delete_cron,
     login,
-    logout,
     signup,
     list_logs,
     delete_multiple_elements,
@@ -18,6 +18,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+
 
 app_name = 'Cronos_API'
 
@@ -29,13 +30,9 @@ urlpatterns = [
     path('crons/<cron_id>/delete/', delete_cron, name='delete_cron'),
     path('logs/', list_logs, name='logs'),
     path('login/', login, name='login'),
-    path('logout/', logout, name='logout'),
     path('signup/', signup, name='signup'),
     path('delete-multiple/', delete_multiple_elements, name='delete_multiple_elements'),
     path('pause-multiple/', pause_multiple_elements, name='pause_multiple_elements'),
-
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
-
 ]

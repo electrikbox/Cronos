@@ -1,7 +1,8 @@
+""" Urls for user account management """
+
 from django.urls import path
 from . import views
 
-""" Urls for user account management """
 
 app_name = "Cronos_account"
 
