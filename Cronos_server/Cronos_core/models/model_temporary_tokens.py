@@ -1,6 +1,9 @@
 from Cronos_core.models import *
 
 
+# ! TO BE REMOVED FOR JWT AUTHENTICATION
+
+
 # TEMPORARY TOKEN (reset pwd + activation)
 # =============================================================================
 
