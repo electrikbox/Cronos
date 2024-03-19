@@ -9,32 +9,34 @@ CRONOS_SCRIPT_PATH = f"{CRONOS_PATH}/.cronos_scripts"
 CRONOS_COPY_FOLDER = f"{CRONOS_PATH}/Cronos_copy"
 CRONOS_LIST_FOLDER = f"{CRONOS_PATH}/Cronos_list"
 
-SCRIPT_SHIBANG = "#!/bin/bash\n"
+SCRIPT_SHEBANG = "#!/bin/bash\n"
 SCRIPT_PREVENT_SUDO = ('\nif [ $(id -u) -eq 0 ];\n\tthen echo "sudo forbiden."\n\texit 1\nfi\n')
 
 
 class CronosScript:
-    """ Represents a cron script handler. """
+    """ Represents a cron script handler """
 
     def __init__(self, cron_id: int) -> None:
-        """ Initialize the cron script handler. """
+        """ Initialize the cron script handler """
         self.cron_id = cron_id
         self.script_path = ""
 
-    # utils ls cp
+    # TOOLS for cmd (ls + cp)
     # =========================================================================
 
     def utils_ls_cp(self, cmd: str, folder: str) -> dict[str, str]:
-        """Return option, exclude, search_file and destination_path."""
+        """ Return option, exclude, search_file and destination_path """
         source = cmd.split(" ")[1]
         destination = cmd.split(" ")[2]
 
         destination_path = os.path.join(folder, destination)
         var_dest = f'destination="{destination_path}"'
 
+        # Create destination if not exists
         check_dest = (f'if [ ! -d "$destination" ]; then\n\tmkdir -p "$destination"\nfi\n')
         option = f"{var_dest}\n{check_dest}\n"
 
+        # Exclude destinatin folder from search
         exclude = f'-path "{CRONOS_PATH}" -prune -o'
         search_file = f'-iname "{source}"'
 
@@ -45,23 +47,24 @@ class CronosScript:
             "destination_path": destination_path,
         }
 
-    # open command
+    # Open command
     # =========================================================================
 
     def open_command(self, cmd: str) -> tuple[str, str]:
-        """returns the option and the command for the open command."""
+        """ Returns the option and the command for the open command """
         os_name = platform.system()
         option = ""
+
         if os_name == "Linux":
             option = "export DISPLAY=:0\n"
 
         return (option, cmd)
 
-    # copy command
+    # Copy command
     # =========================================================================
 
     def copy_command(self, cmd: str) -> tuple[str, str]:
-        """returns the option and the command for the copy command."""
+        """ Returns the option and the command for the copy command """
         utils = self.utils_ls_cp(cmd, CRONOS_COPY_FOLDER)
         option = utils["option"]
         exclude = utils["exclude"]
@@ -73,11 +76,11 @@ class CronosScript:
 
         return (option, cmd)
 
-    # list command
+    # List command
     # =========================================================================
 
     def list_command(self, cmd: str) -> tuple[str, str]:
-        """returns the option and the command for the copy command."""
+        """ Returns the option and the command for the copy command """
         file = cmd.split(" ")[1].split(".")[0]
 
         utils = self.utils_ls_cp(cmd, CRONOS_LIST_FOLDER)
@@ -95,11 +98,11 @@ class CronosScript:
 
         return (option, cmd)
 
-    # build script
+    # Build script
     # =========================================================================
 
     def build_script(self, cmd: str) -> str:
-        """Builds a script content based on the given command."""
+        """ Builds a script content based on the given command """
         option = ""
         cmd_name = cmd.split(" ")[0]
 
@@ -112,22 +115,25 @@ class CronosScript:
         elif cmd_name == "ls":
             option, cmd = self.list_command(cmd)
 
-        script_content = f"{SCRIPT_SHIBANG}{SCRIPT_PREVENT_SUDO}{option}{cmd}"
+        script_content = f"{SCRIPT_SHEBANG}{SCRIPT_PREVENT_SUDO}{option}{cmd}"
 
         return script_content
 
-    # create script
+    # Create script
     # =========================================================================
 
     def create_script(self, cmd: str) -> None:
-        """Creates a cron script file with the given command."""
+        """ Creates a cron script file with the given command """
         folder_path = os.path.expanduser(CRONOS_SCRIPT_PATH)
         cmd_name = cmd.split(" ")[0]
 
+        # Create folder if not exists
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
+        # Script name
         script = os.path.join(folder_path, f"cron_{self.cron_id}-{cmd_name}-script.sh")
+        # Script content
         script_content = self.build_script(cmd)
 
         with open(script, "w") as f:
@@ -137,15 +143,17 @@ class CronosScript:
         # os.chmod(script, stat.S_IXUSR)
         self.script_path = script
 
-    # remove script
+    # Remove script
     # =========================================================================
 
     def remove_script(self) -> None:
-        """Removes the script file associated with the cron job."""
+        """ Removes the script file associated with the cron job """
         folder_path = os.path.expanduser(CRONOS_SCRIPT_PATH)
+
         for filename in os.listdir(folder_path):
             if str(self.cron_id) in filename:
                 script = os.path.join(folder_path, filename)
+                
         self.script_path = script
 
         if os.path.exists(script):

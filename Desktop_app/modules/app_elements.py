@@ -56,7 +56,7 @@ class Elements(ft.UserControl):
             color=ft.colors.TEAL_400,
         )
 
-        # MSG
+        # MSG / Logs
         # =====================================================================
 
         self.cron_action_text = ft.Text(
@@ -95,6 +95,9 @@ class Elements(ft.UserControl):
             "",
             color=ft.colors.TEAL_400,
         )
+
+        # Autofetch indicator
+        # =====================================================================
 
         self.autofetch_txt = Text("ON", color="green")
 

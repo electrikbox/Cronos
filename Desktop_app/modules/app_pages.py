@@ -9,7 +9,7 @@ class AppPages(ft.UserControl):
         """ Initialize the pages """
         self.elements = elements
 
-        # login page elements
+        # Login page elements
         # =====================================================================
 
         self.login_page = ft.Column(
@@ -50,7 +50,7 @@ class AppPages(ft.UserControl):
             expand=True,
         )
 
-        # logout page elements
+        # Logout page elements
         # =====================================================================
 
         self.logout_page = ft.Column(
