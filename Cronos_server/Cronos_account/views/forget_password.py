@@ -16,6 +16,7 @@ def forget_password(request):
                 user = User.objects.get(email=email)
                 username = user.username
 
+                # to be changed to JWT
                 token_temp = PasswordTemporaryToken.objects.create(user=user)
                 token_temp.save()
                 uidb64 = urlsafe_base64_encode(force_bytes(user.pk))

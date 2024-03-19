@@ -39,7 +39,8 @@ def login_user(request):
             return response
 
         messages.error(
-            request, "Your account is not active. Please, check your email for activation link.")
+            request, "Your account is not active. Please, check your email for activation link"
+        )
 
     else:
         form = LoginFormCustom()
@@ -50,16 +51,15 @@ def login_user(request):
 # LOGOUT USER
 # =============================================================================
 
-# def logout_user(request):
-#     """ Logout user """
-
-#     logout(request)
-#     return redirect('/accounts/login/')
-
 def logout_user(request):
+    """ Logout user and redirect to login page or dashboard """
     next_url = request.GET.get('next', '')
+
     if not next_url:
         next_url = '/home'
+
+    # Save the last page user visited being logging out (JWT reload)
     request.session['next_url'] = next_url
     logout(request)
+
     return redirect(f"{reverse('Cronos_account:login')}?next={next_url}")
