@@ -1,11 +1,12 @@
+// Used to delete crons from the dashboard
+
 $(document).ready(function () {
 
-  // const access_token = $.cookie('access');
   const access_token = localStorage.getItem('access_token');
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   /**
-   * Updates the state of the delete selected button based on the number of checked crons.
+   * Updates the state of the delete selected button based on the number of checked crons
    */
   function updateDeleteSelectedButtonState() {
     const checkedCrons = $('.cron-full input[type="checkbox"]:checked');
@@ -16,11 +17,11 @@ $(document).ready(function () {
   }
 
   /**
-   * Deletes a cron.
+   * Deletes a cron
    */
   function deleteCron() {
     const cronId = $(this).data('cron-id');
-    const confirmation = confirm('Are you sure you want to delete this cron?');
+    const confirmation = confirm('Are you sure you want to delete this cron ?');
     const row = $(this).closest('.cron-full');
     $('.loader').show();
 
@@ -39,7 +40,7 @@ $(document).ready(function () {
           window.location.href = "/dashboard?delete=true";
         },
         error: function (xhr) {
-          alert('Please login again.');
+          alert('Please login again');
           window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
         }
       });
@@ -47,8 +48,8 @@ $(document).ready(function () {
   }
 
   /**
-   * Deletes multiple crons.
-   * @param {Object} cronIds - The cron IDs to be deleted.
+   * Deletes multiple crons
+   * @param {Object} cronIds - The cron IDs to be deleted
    */
   function deleteMultipleCrons(cronIds) {
 
@@ -62,7 +63,7 @@ $(document).ready(function () {
       data: JSON.stringify({ ids: Object.keys(cronIds) }),
       contentType: 'application/json',
       success: function (response) {
-        console.log('Crons deleted successfully.');
+        console.log('Crons deleted successfully');
         Object.values(cronIds).forEach(function (row) {
           row.remove();
           $('.select-all').prop('checked', false);
@@ -71,15 +72,15 @@ $(document).ready(function () {
         });
       },
       error: function (xhr, status, error) {
-        alert('Please login again.');
+        alert('Please login again');
         window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
       }
     });
   }
 
   /**
-   * Retrieves the selected cron IDs and their corresponding rows.
-   * @returns {Object} An object containing the selected cron IDs as keys and their corresponding rows as values.
+   * Retrieves the selected cron IDs and their corresponding rows
+   * @returns {Object} An object containing the selected cron IDs as keys and their corresponding rows as values
    */
   function getSelectedCronIds() {
     const selectedCronIds = {};
@@ -92,19 +93,19 @@ $(document).ready(function () {
   }
 
   /**
-   * Deletes the selected cron jobs.
+   * Deletes the selected cron jobs
    */
   function deleteSelected() {
     const selectedCronIds = getSelectedCronIds();
     const numSelectedCrons = Object.keys(selectedCronIds).length;
     if (numSelectedCrons > 0) {
-      const confirmation = confirm('Are you shure you want to delete cron ?');
+      const confirmation = confirm('Are you sure you want to delete this cron ?');
       if (confirmation) {
         $('.loader').show();
         deleteMultipleCrons(selectedCronIds);
       }
     } else {
-      alert('Please select at least 1 cron.');
+      alert('Please select at least 1 cron');
     }
   }
 
@@ -112,10 +113,10 @@ $(document).ready(function () {
 
   updateDeleteSelectedButtonState();
 
-  // delect selected crons
+  // delete selected crons
   $('.delete-selected').click(deleteSelected);
 
-  //change state of buttons
+  // change state of buttons
   $('.cron-full input[type="checkbox"]').change(updateDeleteSelectedButtonState);
 
   // delete 1 cron

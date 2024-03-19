@@ -1,3 +1,5 @@
+// Switch day of week and day of month fields depending on the selected value
+
 $(document).ready(function () {
 
   $('#id_day_of_week, #id_day_of_month').change(function () {

@@ -1,11 +1,12 @@
+// Pauses and resumes crons on the dashboard
+
 $(document).ready(function () {
 
-  // const access_token = $.cookie('access_token');
   const access_token = localStorage.getItem('access_token');
   const csrfTokenInput = $('input[name=csrfmiddlewaretoken]');
 
   /**
-   * Updates the pause buttons on page load.
+   * Updates the pause buttons on page load
    */
   function updatePauseButtonsOnLoad() {
     $('.pause-cron').each(function () {
@@ -33,9 +34,9 @@ $(document).ready(function () {
   }
 
   /**
-   * Toggles the pause button for selected crons.
+   * Toggles the pause button for selected crons
    *
-   * @param {boolean} is_paused - Indicates whether the crons should be paused or resumed.
+   * @param {boolean} is_paused - Indicates whether the crons should be paused or resumed
    * @returns {void}
    */
   function togglePauseButton(is_paused) {
@@ -43,7 +44,7 @@ $(document).ready(function () {
     const numSelectedCrons = Object.keys(selectedCronIds).length;
 
     if (numSelectedCrons <= 0) {
-      alert('Please select at least 1 cron.');
+      alert('Please select at least 1 cron');
       return;
     }
     pauseMultipleCrons(selectedCronIds, is_paused);
@@ -52,6 +53,12 @@ $(document).ready(function () {
     updateSelectedButtonState();
   }
 
+  /**
+   * Toggles the pause state of a cron job
+   *
+   * @param {string} cronId - The ID of the cron job
+   * @param {jQuery} button - The button element that triggered the pause toggle
+   */
   function pauseToggle(cronId, button) {
     const currentIcon = button.find('ion-icon').attr('name');
     const isCurrentlyPaused = currentIcon === 'play-circle-outline';
@@ -73,16 +80,16 @@ $(document).ready(function () {
         setTimeout(reloadCronFormLogs, 500);
       },
       error: function (xhr) {
-        alert('Please login again.');
+        alert('Please login again');
         window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
       }
     });
   }
 
   /**
-   * Updates the button icon and styling based on the pause state.
-   * @param {jQuery} button - The button element.
-   * @param {boolean} isPaused - The pause state.
+   * Updates the button icon and styling based on the pause state
+   * @param {jQuery} button - The button element to update
+   * @param {boolean} isPaused - The pause state
    */
   function updateButtonIcon(button, isPaused) {
     const icon = button.find('ion-icon');
@@ -96,8 +103,8 @@ $(document).ready(function () {
   }
 
   /**
-   * Retrieves the selected pause cron IDs along with their corresponding rows.
-   * @returns {Object} An object containing the selected cron IDs as keys and their corresponding rows as values.
+   * Retrieves the selected pause cron IDs along with their corresponding rows
+   * @returns {Object} An object containing the selected cron IDs as keys and their corresponding rows as values
    */
   function getSelectedPauseCronIds() {
     const selectedCronIds = {};
@@ -110,7 +117,7 @@ $(document).ready(function () {
   }
 
   /**
-   * Updates the state of the selected buttons based on the number of checked cron checkboxes.
+   * Updates the state of the selected buttons based on the number of checked cron checkboxes
    */
   function updateSelectedButtonState() {
     const checkedCrons = $('.cron-full input[type="checkbox"]:checked');
@@ -121,10 +128,10 @@ $(document).ready(function () {
   }
 
   /**
-   * Pauses multiple crons.
+   * Pauses multiple crons
    *
-   * @param {Object} cronIds - The cron IDs to pause.
-   * @param {boolean} is_paused - Indicates whether the crons should be paused or not.
+   * @param {Object} cronIds - The cron IDs to pause
+   * @param {boolean} is_paused - Indicates whether the crons should be paused or not
    */
   function pauseMultipleCrons(cronIds, is_paused) {
     $.ajax({
@@ -137,7 +144,7 @@ $(document).ready(function () {
       data: JSON.stringify({ ids: Object.keys(cronIds), is_paused: is_paused }),
       contentType: 'application/json',
       success: function (response) {
-        console.log('Crons have been paused successfully.');
+        console.log('Crons have been paused successfully');
         Object.values(cronIds).forEach(function (row) {
           $('.select-all').prop('checked', false);
           updateSelectedButtonState();
@@ -145,14 +152,14 @@ $(document).ready(function () {
         window.location.href = "/dashboard?pause=true"; // <------- reload page
       },
       error: function (xhr, status, error) {
-        alert('Please login again.');
+        alert('Please login again');
         window.location.href = "/accounts/logout/?next=/dashboard/"; // <------- redirect to login page
       }
     });
   }
 
   /**
-   * Reloads the cron form logs by fetching the current URL and updating the logs section.
+   * Reloads the cron form logs by fetching the current URL and updating the logs section
    */
   function reloadCronFormLogs() {
     var currentUrl = window.location.href;

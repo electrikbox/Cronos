@@ -1,3 +1,5 @@
+// Login & Register buttons (landing page center)
+
 $(document).ready(function () {
   $('#log-login').click(function () {
     window.location.href = 'http://localhost:8000/accounts/login'

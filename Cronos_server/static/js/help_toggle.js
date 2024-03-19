@@ -18,7 +18,6 @@ $(document).ready(function () {
   });
 });
 
-
 // Toggle the block when clicking on the title
 
 $(document).ready(function () {
@@ -31,7 +30,7 @@ $(document).ready(function () {
 
     const button = $(this).closest('.block-title').find('.toggle-collapse-button');
     button.toggleClass('open').html(isOpen ? '▽' : '◀︎');
-    
+
   });
 
   $('.toggle-collapse-button').click(function (event) {

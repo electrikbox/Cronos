@@ -1,6 +1,8 @@
+// Landing menu behavior on click and scroll
+
 $(document).ready(function () {
   $('a[href^="#"]').on('click', function (event) {
-    var target = $(this.getAttribute('href'));
+    const target = $(this.getAttribute('href'));
     if (target.length) {
       event.preventDefault();
       $('html, body').animate({
@@ -10,7 +12,7 @@ $(document).ready(function () {
   });
 
   $(window).on('scroll', function () {
-    var scrollPosition = $(window).scrollTop();
+    const scrollPosition = $(window).scrollTop();
 
     $('.main-block').each(function () {
       const sectionTop = $(this).offset().top - 170;

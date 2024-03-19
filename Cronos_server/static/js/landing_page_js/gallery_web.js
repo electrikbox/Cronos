@@ -1,8 +1,11 @@
+// Slider for website (landing page)
+
 $(document).ready(function() {
   const carouselSlides = $(".carousel-slide");
   const lightbox = $("#lightbox");
   const lightboxImg = $("#lightbox-img");
 
+  // Center the lightbox when it appears (when click on img)
   function centerLightbox() {
     const windowWidth = $(window).width();
     const windowHeight = $(window).height();
@@ -26,7 +29,7 @@ $(document).ready(function() {
     centerLightbox();
   });
 
-  // Close the lightbox when clicking on the close button or outside the lightbox
+  // Close the lightbox when clicking on the close button or anywhere else
   $('#close-lightbox, #lightbox').on('click', function() {
     lightbox.fadeOut(300);
   });
