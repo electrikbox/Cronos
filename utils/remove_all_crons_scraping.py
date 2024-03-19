@@ -3,12 +3,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-import sys
+import os
+import dotenv
+
+dotenv.load_dotenv()
 
 url = "http://localhost:8000/accounts/login/"
 
-username = sys.argv[1]
-password = sys.argv[2]
+username = os.getenv('SCRAP_USERNAME')
+password = os.getenv('SCRAP_PASSWORD')
 
 username_path = '//*[@id="id_username"]'
 password_path = '//*[@id="id_password"]'
