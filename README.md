@@ -12,6 +12,8 @@ Very briefly, **CronOS** aims to simplify the management of crons in order to op
 
 Our team set about designing and developing this platform with the mission of simplifying IT processes for everyone, while guaranteeing a fluid and secure user experience.
 
+We're already thinking about some next features, update some part and make this project even better in the futur.
+
 ## 🌏 How does it works
 
 <img src="https://i.imgur.com/zzrQ7In.png" width="100%"/>
@@ -42,10 +44,45 @@ Our team set about designing and developing this platform with the mission of si
 
 # How to install
 
-First of all, check that all the requirements are met. If not, you can install them with
-
+First of all, create a viryual env and call it '.venv'
+```
+python3 -m venv .venv
+```
+Go to Cronos dir and activate the new virtual env
+```
+source .venv/bin/activate
+```
+Install the requirements
 ```
 pip install -r requirements.txt
+```
+Deactivate venv (the launch script will activate it automatically)
+```
+deactivate
+```
+Before starting the server you will need to create 2 files:
+- .env
+- .my.cnf
+
+### .env
+First create a Django secret key with this tool : https://djecrety.ir/<br>
+.env content
+```
+DJANGO_TOKEN='your django secret key'
+DB_NAME='your database name'
+DB_USER='your mysql user name'
+DB_PASS='your mysql password'
+DB_LOGS_TABLE='your sql cronos_logs table'
+MAIL_CRONOS = 'your_email@mail.com'
+MAIL_PASS = 'your email password'
+```
+### .my.cnf
+.my.cnf content
+```
+[client]
+host=your_host_name (localhost or 127.0.0.1 for local)
+user=yourmysql_user_name
+password=your mysql user_passwword
 ```
 You can then go the `utils` directoy and launch the server by using this command in your terminal :
 ```
