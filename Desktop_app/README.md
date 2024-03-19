@@ -50,6 +50,11 @@ git push origin feature/your-feature
 ```
 - Create a new Pull Request
 
+### compilation
+```
+flet pack main.py --add-data "assets:assets" --product-name Cronos-Connect -n Cronos-Connect --icon icon.png
+```
+
 ## 🧾 License
 
 [License GPL v3](LICENSE)
