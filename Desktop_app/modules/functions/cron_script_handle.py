@@ -37,7 +37,8 @@ class CronosScript:
         option = f"{var_dest}\n{check_dest}\n"
 
         # Exclude destinatin folder from search
-        exclude = f'-path "{CRONOS_PATH}" -prune -o'
+        # exclude = f'-path "{CRONOS_PATH}" -prune -o'
+        exclude = f'-path "{CRONOS_PATH}" -o'
         search_file = f'-iname "{source}"'
 
         return {
