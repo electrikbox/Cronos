@@ -56,7 +56,7 @@ class Elements(ft.UserControl):
             color=ft.colors.TEAL_400,
         )
 
-        # MSG
+        # MSG / Logs
         # =====================================================================
 
         self.cron_action_text = ft.Text(
@@ -94,4 +94,18 @@ class Elements(ft.UserControl):
         self.logged_text = Text(
             "",
             color=ft.colors.TEAL_400,
+        )
+
+        # Autofetch indicator
+        # =====================================================================
+
+        self.autofetch_txt = Text("ON", color="green")
+
+        # COPYRIGHT
+        # =====================================================================
+
+        self.copyright = ft.Text(
+            value="© Valentine & Olive | HolbertonSchool 2024",
+            text_align="center",
+            color=ft.colors.GREY_800,
         )

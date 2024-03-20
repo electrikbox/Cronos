@@ -1,6 +1,9 @@
 from Cronos_core.models import *
 
 
+# ! TO BE REMOVED FOR JWT AUTHENTICATION
+
+
 # TEMPORARY TOKEN (reset pwd + activation)
 # =============================================================================
 
@@ -17,7 +20,7 @@ class PasswordTemporaryToken(models.Model):
             self.change_pwd_token = secrets.token_urlsafe(32)
 
         if not self.expires_at:
-            self.expires_at = timezone.now() + datetime.timedelta(hours=1)  # modif ici le délai
+            self.expires_at = timezone.now() + datetime.timedelta(minutes=2)  # modif ici le délai
         super().save(*args, **kwargs)
 
     def is_valid(self):
@@ -41,7 +44,7 @@ class ActivationTemporaryToken(models.Model):
             self.activation_token = secrets.token_urlsafe(32)
 
         if not self.expires_at:
-            self.expires_at = timezone.now() + datetime.timedelta(days=1)  # modif ici le délai
+            self.expires_at = timezone.now() + datetime.timedelta(hours=2)  # modif ici le délai
         super().save(*args, **kwargs)
 
     def is_valid(self):

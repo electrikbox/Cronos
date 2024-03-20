@@ -3,7 +3,7 @@ from Cronos_website.views import *
 
 @login_required
 def contact(request) -> HttpResponse:
-    """Render contact page"""
+    """ Render contact page and send mail """
     if request.method == 'POST':
         form = ContactForm(request.POST)
 
@@ -18,6 +18,7 @@ def contact(request) -> HttpResponse:
                 from_email=email,
                 recipient_list=[settings.MAIL_CRONOS]
             )
+
             return HttpResponseRedirect("/contact" + "?send=true")
 
     else:
@@ -26,6 +27,7 @@ def contact(request) -> HttpResponse:
             try:
                 profile = Profiles.objects.get(user=user)
 
+                # Format the initial data for contact form
                 if profile.first_name and profile.last_name:
                     initial_data = {
                         'name': f"{profile.first_name} {profile.last_name}",
@@ -51,4 +53,5 @@ def contact(request) -> HttpResponse:
         "image_url": image_url,
         "contact_form": form
     }
+
     return render(request, "contact.html", context)

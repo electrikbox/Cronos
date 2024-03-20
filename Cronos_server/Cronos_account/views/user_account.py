@@ -54,6 +54,7 @@ def user_account(request):
             return HttpResponseRedirect(reverse('Cronos_account:user_account'))
 
     else:
+        # Initial data for personal info form
         initial_data = {
             'username': user.username,
             'email': user.email,

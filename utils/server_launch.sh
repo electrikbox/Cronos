@@ -12,7 +12,7 @@ echo " | |    | '__/ _ \| '_ \| |  | |\___ \\"
 echo " | |____| | | (_) | | | | |__| |____) |"
 echo "  \_____|_|  \___/|_| |_|\____/|_____/"
 
-#function to run the script after a delay of 5 seconds
+# Function to run the script after a delay of 5 seconds
 run_after_delay() {
     echo ""
     for ((i = 5; i >= 1; i--)); do
@@ -36,7 +36,7 @@ run_after_delay() {
     python ../Cronos_server/manage.py runserver
 }
 
-# check if the argument "auto" has been passed as a parameter
+# Check if the argument "auto" has been passed as a parameter
 if [[ "$1" == "auto" ]]; then
     while true; do
         run_after_delay

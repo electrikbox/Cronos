@@ -9,7 +9,7 @@ class AppPages(ft.UserControl):
         """ Initialize the pages """
         self.elements = elements
 
-        # login page elements
+        # Login page elements
         # =====================================================================
 
         self.login_page = ft.Column(
@@ -35,10 +35,22 @@ class AppPages(ft.UserControl):
                     [self.elements.login_button],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
-            ]
+                ft.Container(
+                    content=ft.Column(
+                        [self.elements.copyright],
+                        alignment=ft.MainAxisAlignment.END,
+                    ),
+                    alignment=ft.alignment.center,
+                    width=350,
+                    height=50,
+                    expand=True,
+                ),
+            ],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            expand=True,
         )
 
-        # logout page elements
+        # Logout page elements
         # =====================================================================
 
         self.logout_page = ft.Column(
@@ -67,7 +79,9 @@ class AppPages(ft.UserControl):
                     [
                         ft.Row(
                             controls=[
-                                ft.Text(value="Connected", color="green")],
+                                ft.Text(value="Auto fetch : ", color="white"),
+                                self.elements.autofetch_txt,
+                            ],
                             alignment=ft.MainAxisAlignment.CENTER,
                         ),
                         ft.Container(
@@ -88,6 +102,17 @@ class AppPages(ft.UserControl):
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                 ),
+                ft.Container(
+                    content=ft.Column(
+                        [self.elements.copyright],
+                        alignment=ft.MainAxisAlignment.END,
+                    ),
+                    alignment=ft.alignment.center,
+                    width=350,
+                    height=50,
+                    expand=True,
+                ),
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            expand=True,
         )

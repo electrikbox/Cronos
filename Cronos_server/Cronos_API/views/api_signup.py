@@ -1,8 +1,9 @@
 from Cronos_API.views import *
 
+
 @api_view(["POST"])
 def signup(request) -> Response:
-    """User Signup"""
+    """ User Signup """
     user_serializer = UserSerializer(data=request.data)
 
     if not user_serializer.is_valid():
@@ -17,9 +18,9 @@ def signup(request) -> Response:
     if profile_serializer.is_valid():
         profile_serializer.save(user=user_instance)
 
+    # To be changed to JWT
     token, created = Token.objects.get_or_create(user=user_instance)
 
-    # return Response({"token": token.key, "user": user_serializer.data})
     return Response(
         {"message": "Signup successful"},
         headers={"Authorization": f"Token {token.key}"},

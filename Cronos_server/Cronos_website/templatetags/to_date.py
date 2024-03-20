@@ -1,9 +1,13 @@
+""" Custom tags for the templates """
+
 from django import template
+
 
 register = template.Library()
 
 @register.filter
 def to_date(value):
+    """ Format day and month """
     mappings = {
         "*": "every",
         "mon": "Monday",
@@ -26,17 +30,19 @@ def to_date(value):
         "nov": "November",
         "dec": "December",
     }
+
     return mappings.get(value, value)
 
 
 @register.filter
 def to_double_digit(value):
+    """ Add a leading zero to single digit """
     return str(value).zfill(2)
 
 
 @register.filter
 def rm_http(value: str):
-
+    """ Remove http(s) and www from the url """
     new_value = value.split(" ")[-1]
 
     if new_value.startswith("http://www."):

@@ -8,7 +8,7 @@ class LoginFormCustom(forms.Form):
     """ Login form """
     username = forms.CharField(
         label="username",
-        max_length=15,
+        max_length=30,
         widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
     )
     password = forms.CharField(

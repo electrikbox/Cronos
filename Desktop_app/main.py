@@ -6,7 +6,7 @@ from modules.functions.app_handler import AppHandler
 def main(page: ft.Page) -> None:
     """ Main function """
 
-    # init app windows
+    # Init app windows
     # =========================================================================
 
     page.title = "Cronos-Connect"
@@ -14,19 +14,19 @@ def main(page: ft.Page) -> None:
     page.vertical_alignment = ft.CrossAxisAlignment.START
     page.window_width = 400
     page.window_min_width = 500
-    page.window_height = 550
+    page.window_height = 570
     page.window_min_height = 550
     page.scroll = False
     page.update()
 
-    # init elements and pages
+    # Init elements and pages
     # =========================================================================
 
     elements = Elements()
     elements.login_button.disabled = True
     app_pages = AppPages(elements)
 
-    # Validate there's something in username and password fields
+    # Validate if there's something in username and password fields
     # =========================================================================
 
     elements.username_field.on_change = lambda e: validate(elements, page)
@@ -48,6 +48,6 @@ def main(page: ft.Page) -> None:
 if __name__ == "__main__":
     ft.app(target=main, assets_dir="assets")
 
-# compliation :
+# Compliation :
 # export PATH=$PATH:~/.local/bin
-# flet pack main.py --add-data "assets:assets"
+# flet pack main.py --add-data "assets:assets" --product-name Cronos-Connect -n Cronos-Connect --icon icon.png

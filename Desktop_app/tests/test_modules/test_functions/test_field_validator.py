@@ -20,3 +20,4 @@ class TestFieldValidator(unittest.TestCase):
 
         # Assert that the page is updated
         page.update.assert_called_once()
+        

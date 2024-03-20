@@ -1,3 +1,5 @@
+// Menu when scrolling
+
 $(document).ready(function() {
   $(window).scroll(function() {
     const scrollPosition = $(this).scrollTop();

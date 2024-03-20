@@ -1,3 +1,5 @@
+// Slider for applicaion (landing page)
+
 $(document).ready(function () {
   let slideIndex = 0;
   let $slides = $('.gallery-app-img');
@@ -5,10 +7,11 @@ $(document).ready(function () {
   carousel();
 
   function carousel() {
-    $slides.eq(slideIndex).fadeIn(2000);
+    $slides.eq(slideIndex).fadeIn(2000); // apparition = 2 seconds
 
     setTimeout(function () {
       $slides.eq(slideIndex).fadeOut(1000, function() {
+        // disparition = 1 second
         $(this).css('display', 'none');
 
         slideIndex++;
@@ -16,11 +19,10 @@ $(document).ready(function () {
           slideIndex = 0;
         }
 
-        $slides.eq(slideIndex).fadeIn(2000);
+        $slides.eq(slideIndex).fadeIn(2000); // apparition = 2 seconds
 
         carousel();
       });
-    }, 5000);
+    }, 5000); // stop after 5 seconds
   }
 });
-

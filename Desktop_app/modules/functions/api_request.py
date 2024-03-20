@@ -3,11 +3,13 @@ import json
 
 
 class CronScraper:
+    """ Class to handle API requests """
     LOGIN_URL = "http://localhost:8000/api/login/"
-    LOGOUT_URL = "http://localhost:8000/api/logout/"
+    # LOGOUT_URL = "http://localhost:8000/api/logout/"
     CRONS_URL = "http://localhost:8000/api/crons/"
 
     def __init__(self, username, password) -> None:
+        """ Initialize the class """
         self.username = username
         self.password = password
         self.authenticated = False
@@ -35,37 +37,39 @@ class CronScraper:
                 self.token = access_token
                 self.refresh_token = refresh_token
                 self.authenticated = True
+
                 return self.token
         else:
             print(
                 f"Connection failed. Status code: {login_response.status_code}"
             )
             self.authenticated = False
+
             return None
 
     # Function to logout
     # =========================================================================
 
-    def user_logout(self, token) -> None:
-        """ User logout """
-        logout_headers = {"Content-Type": "application/json"}
-        data = {"key": token}
-        json_data = json.dumps(data)
+    # def user_logout(self, token) -> None:
+    #     """ User logout """
+    #     logout_headers = {"Content-Type": "application/json"}
+    #     data = {"key": token}
+    #     json_data = json.dumps(data)
 
-        logout_response = requests.post(self.LOGOUT_URL, headers=logout_headers, data=json_data)
+    #     logout_response = requests.post(self.LOGOUT_URL, headers=logout_headers, data=json_data)
 
-        if logout_response.status_code == 200:
-            print("Logout successful")
-            self.authenticated = False
-        else:
-            print(f"Logout failed: {logout_response.status_code}")
-            self.authenticated = True
+    #     if logout_response.status_code == 200:
+    #         print("Logout successful")
+    #         self.authenticated = False
+    #     else:
+    #         print(f"Logout failed: {logout_response.status_code}")
+    #         self.authenticated = True
 
     # Get user crons list
     # =========================================================================
 
     def get_remote_crons(self, token):
-        """ Get list of crons from the server """
+        """ Get user list of crons from the server """
         self.token = token
 
         crons_headers = {
@@ -88,9 +92,8 @@ class CronScraper:
 
     def send_cron_validation(self, cron_id):
         """ Send cron validation to the server """
-        # self.user_auth()
-
         cron_data = {"validated": True}
+
         crons_headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {self.token}",
@@ -126,7 +129,10 @@ class CronScraper:
 
         if response.status_code == 204:
             print(f"{cron_id} deleted : not executable on this computer")
+
             return f"{cron_id} deleted : not executable on this computer"
         else:
             print(f"Failed to delete {cron_id}. {response.status_code}")
+
             return None
+        

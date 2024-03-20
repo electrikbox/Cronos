@@ -7,6 +7,7 @@ class CheckCommand:
         """ Initialize the command """
         self.command = command
 
+
     @staticmethod
     def is_command_available_unix(command) -> bool:
         """ Check if the command is available on Unix systems """

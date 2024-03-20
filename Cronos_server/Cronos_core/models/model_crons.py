@@ -18,9 +18,10 @@ class Crons(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     separator = ('separator', '-------------')
-    each_any = ('*', '*')
+    each_any = ('*', 'every')
 
     def __str__(self) -> str:
+        """ String representation of crons """
         return str(
             self.minutes + ' ' +
             self.hours + ' ' +
@@ -36,6 +37,7 @@ class Crons(models.Model):
         choices = [(str(minutes), str(minutes).zfill(2))
                    for minutes in range(0, 60)]
         choices.append(('*', 'each/any'))
+
         return choices
 
     @classmethod
@@ -43,6 +45,7 @@ class Crons(models.Model):
         """ Hours choices for cron creation """
         choices = [(str(hours), str(hours).zfill(2)) for hours in range(0, 24)]
         choices.append(('*', 'each/any'))
+
         return choices
 
     @classmethod
@@ -51,6 +54,7 @@ class Crons(models.Model):
         choices = [(str(day), str(day).zfill(2)) for day in range(1, 32)]
         choices.append(cls.separator)
         choices.append(cls.each_any)
+
         return choices
 
     @classmethod
@@ -63,6 +67,7 @@ class Crons(models.Model):
         choices = [(str(month[:3].lower()), month) for month in MONTH_NAME]
         choices.append(cls.separator)
         choices.append(cls.each_any)
+
         return choices
 
     @classmethod
@@ -75,10 +80,12 @@ class Crons(models.Model):
         choices = [(str(day[:3].lower()), day) for day in DAYS_OF_WEEK]
         choices.append(cls.separator)
         choices.append(cls.each_any)
+
         return choices
 
     @classmethod
     def get_command_choices(cls):
         """ Command choices for cron creation """
         choices = [(cmd, cmd_form) for cmd, cmd_form in COMMANDS.items()]
+        
         return choices

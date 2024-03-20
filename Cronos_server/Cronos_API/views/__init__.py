@@ -1,3 +1,5 @@
+""" This file is used to import all the views from the API """
+
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
@@ -27,7 +29,6 @@ from ..serializers import (
 )
 
 from Cronos_API.views.api_login import login
-from Cronos_API.views.api_logout import logout
 from Cronos_API.views.api_signup import signup
 from Cronos_API.views.get_all_crons import list_crons
 from Cronos_API.views.get_one_cron_by_id import show_cron

@@ -1,3 +1,5 @@
+""" This module contains the tests for the Cronos_core app models """
+
 from django.test import TestCase
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -7,7 +9,9 @@ from datetime import timedelta
 
 
 class CronsTestCase(TestCase):
+    """ Test cases for crons models """
     def setUp(self):
+        """ Create a user and a cron """
         self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.cron = Crons.objects.create(
             minutes='30',
@@ -71,7 +75,9 @@ class CronsTestCase(TestCase):
 
 
 class LogsTestCase(TestCase):
+    """ Test cases for logs models """
     def setUp(self):
+        """ Create a user and a cron """
         self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.cron = Crons.objects.create(
             minutes='30',
@@ -82,7 +88,9 @@ class LogsTestCase(TestCase):
             command='open',
             user=self.user
         )
+
     def test_logs_creation(self):
+        """ Test the creation of a log """
         log = Logs.objects.create(log='test log', user=self.user, cron=self.cron)
         self.assertEqual(log.log, 'test log')
         self.assertEqual(log.create_date.date(), timezone.now().date())
@@ -91,7 +99,9 @@ class LogsTestCase(TestCase):
 
 
 class ProfilesModelTest(TestCase):
+    """ Test cases for profiles models """
     def setUp(self):
+        """ Create a user and a profile """
         self.user = User.objects.create(username='testuser')
         self.profile = Profiles.objects.create(
             first_name='John',
@@ -122,7 +132,9 @@ class ProfilesModelTest(TestCase):
 
 
 class PasswordTemporaryTokenTests(TestCase):
+    """ Test cases for password temporary token """
     def setUp(self):
+        """ Create a user and a password temporary token """
         self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.token = PasswordTemporaryToken.objects.create(user=self.user)
 
@@ -140,7 +152,9 @@ class PasswordTemporaryTokenTests(TestCase):
 
 
 class ActivationTemporaryTokenTestCase(TestCase):
+    """ Test cases for activation temporary token """
     def setUp(self):
+        """ Create a user and a activation temporary token """
         self.user = User.objects.create(username='testuser')
         self.token = ActivationTemporaryToken.objects.create(user=self.user)
 
@@ -149,7 +163,7 @@ class ActivationTemporaryTokenTestCase(TestCase):
         self.assertIsNotNone(self.token.expires_at)
 
     def test_expiration_date(self):
-        expected_expiration_date = timezone.now() + timedelta(days=7)
+        expected_expiration_date = timezone.now() + timedelta(hours=2)
         self.assertEqual(self.token.expires_at.date(), expected_expiration_date.date())
 
     def test_token_validity(self):

@@ -1,4 +1,5 @@
 // Used to display the name of the file selected in the input field
+
 $(document).ready(function () {
   const inputFile = document.getElementById('input_profile_img');
   const fileNameDisplay = $('#file-name-display');

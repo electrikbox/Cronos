@@ -1,8 +1,9 @@
+// HELP CENTER directly in create form (dashboard)
+
 $(document).ready(function () {
   updateCopyField();
 
   $('select option[value="separator"]').prop('disabled', true);
-  // $('.copy_field').css('display', 'none');
 
   function updateCopyField() {
     const command = $('#id_command').val();
@@ -19,6 +20,7 @@ $(document).ready(function () {
       $('.copy_field').css('display', 'none');
     }
 
+    // Display help text corresponding to the selected command
     if (command === 'ls') {
       $('.help_create_text').html(
         "ℹ️ This command will <strong>list all files</strong> founded with the name you entered in a txt file inside Cronos folder in your home directory. Special character <strong>'*'</strong> can be used to select all file names with the given extension (ex: *.gif)"

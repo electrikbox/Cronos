@@ -1,3 +1,5 @@
+// Menu navigation
+
 $(document).ready(function () {
   const navbarItems = document.querySelectorAll('.navbar-item');
 
