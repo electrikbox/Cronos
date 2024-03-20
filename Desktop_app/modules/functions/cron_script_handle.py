@@ -65,12 +65,17 @@ class CronosScript:
 
     def copy_command(self, cmd: str) -> tuple[str, str]:
         """ Returns the option and the command for the copy command """
+        os_name = platform.system()
+
         utils = self.utils_ls_cp(cmd, CRONOS_COPY_FOLDER)
         option = utils["option"]
         exclude = utils["exclude"]
         search_file = utils["search_file"]
 
-        exec_copy = f'-exec cp -t "$destination" -r {{}} +'
+        if os_name == "Linux":
+            exec_copy = f'-exec cp -t "$destination" -r {{}} +'
+        else:
+            exec_copy = f'-exec cp -R {{}} "$destination" \;'
 
         cmd = f"find {USER_PATH} {exclude} {search_file} {exec_copy}"
 
@@ -153,7 +158,7 @@ class CronosScript:
         for filename in os.listdir(folder_path):
             if str(self.cron_id) in filename:
                 script = os.path.join(folder_path, filename)
-                
+
         self.script_path = script
 
         if os.path.exists(script):
