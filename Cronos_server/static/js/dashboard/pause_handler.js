@@ -69,7 +69,7 @@ $(document).ready(function () {
 
     $.ajax({
       url: `/api/crons/${cronId}/update/`,
-      type: 'POST',
+      type: 'PUT',
       headers: {
         'Authorization': `Bearer ${access_token}`
       },
@@ -136,7 +136,7 @@ $(document).ready(function () {
   function pauseMultipleCrons(cronIds, is_paused) {
     $.ajax({
       url: '/api/pause-multiple/',
-      type: 'POST',
+      type: 'PUT',
       headers: {
         'Authorization': `Bearer ${access_token}`,
         'X-CSRFToken': csrfTokenInput.val()
