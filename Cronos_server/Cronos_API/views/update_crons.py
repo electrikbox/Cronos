@@ -1,7 +1,7 @@
 from Cronos_API.views import *
 
 
-@api_view(["PUT", "POST"])
+@api_view(["PUT"])
 @permission_classes([IsAuthenticated])
 def update_cron(request: WSGIRequest, cron_id) -> Response:
     """ Update a cron by its id """
@@ -28,7 +28,7 @@ def update_cron(request: WSGIRequest, cron_id) -> Response:
     return Response(cron_serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(["PUT", "POST"])
+@api_view(["PUT"])
 @permission_classes([IsAuthenticated])
 def pause_multiple_elements(request: WSGIRequest) -> Response:
     """ Pause multiple crons by their ids """

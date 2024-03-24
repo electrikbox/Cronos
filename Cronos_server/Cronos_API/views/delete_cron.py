@@ -1,7 +1,7 @@
 from Cronos_API.views import *
 
 
-@api_view(["DELETE", "POST"])
+@api_view(["DELETE"])
 @permission_classes([IsAuthenticated])
 def delete_cron(request: WSGIRequest, cron_id) -> Response:
     """ Delete a cron by its id """
@@ -38,7 +38,7 @@ def delete_cron(request: WSGIRequest, cron_id) -> Response:
         )
 
 
-@api_view(["DELETE", "POST"])
+@api_view(["DELETE"])
 @permission_classes([IsAuthenticated])
 def delete_multiple_elements(request: WSGIRequest) -> Response:
     """ Delete multiple crons by their ids """
