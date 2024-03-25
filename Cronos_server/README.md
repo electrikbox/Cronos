@@ -6,7 +6,7 @@
 <img src="https://i.imgur.com/K1ktNsX.png" width="100%"/>
 
 # 🔗 API Endpoints
-<img src="https://i.imgur.com/0tlSWi0.png" width="100%"/>
+<img src="https://i.imgur.com/DwCIWG6.png" width="100%"/>
 
 # 📊 Diagram SQL
 <img src="https://i.imgur.com/ZzVO1KW.png" width="100%"/>
