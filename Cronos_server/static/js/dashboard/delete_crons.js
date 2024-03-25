@@ -28,10 +28,11 @@ $(document).ready(function () {
     if (confirmation) {
       $.ajax({
         url: `/api/crons/${cronId}/delete/`,
-        type: 'POST',
+        type: 'DELETE',
         headers: {
           'Authorization': `Bearer ${access_token}`
         },
+        contentType: 'application/json',
         data: {
           csrfmiddlewaretoken: csrfTokenInput.val()
         },
@@ -55,7 +56,7 @@ $(document).ready(function () {
 
     $.ajax({
       url: '/api/delete-multiple/',
-      type: 'POST',
+      type: 'DELETE',
       headers: {
         'Authorization': `Bearer ${access_token}`,
         'X-CSRFToken': csrfTokenInput.val()
