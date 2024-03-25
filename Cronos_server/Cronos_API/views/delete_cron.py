@@ -7,7 +7,7 @@ def delete_cron(request: WSGIRequest, cron_id) -> Response:
     """ Delete a cron by its id """
     cron_instance = get_object_or_404(models.Crons, pk=cron_id)
 
-    if request.method == "DELETE" or request.method == "POST":
+    if request.method == "DELETE":
 
         # Create logs (deletion)
         log_data = {
@@ -42,7 +42,7 @@ def delete_cron(request: WSGIRequest, cron_id) -> Response:
 @permission_classes([IsAuthenticated])
 def delete_multiple_elements(request: WSGIRequest) -> Response:
     """ Delete multiple crons by their ids """
-    if request.method == "DELETE" or request.method == "POST":
+    if request.method == "DELETE":
         data = request.data
         ids_to_delete = data.get("ids", [])
 
